@@ -7,7 +7,7 @@ health:
   deadline: 15000
 session:
   secret: 'local'
-  name: 'fis_ds_update'
+  name: 'sptribs_dss_update_case_web'
   PORT: 6380
   TLS: true
   CONNECTION_TIMEOUT: 15000
@@ -17,7 +17,6 @@ session:
     key:
   secureCookie: 'false'
 api:
-  cos: 'http://fis-cos-api-demo.service.core-compute-demo.internal'
   serviceAuth: 'http://rpe-service-auth-provider-demo.service.core-compute-demo.internal'
 uploadPolicy:
   documentSize: 20
@@ -30,7 +29,7 @@ e2e:
 appInsights:
   instrumentationKey:
 s2s:
-  microservice: 'fis_ds_update_web'
+  microservice: 'sptribs_dss_update_case_web'
 documentManagement:
   uploadSizeinMB: 30
 cookies:

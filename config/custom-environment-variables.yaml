@@ -26,5 +26,4 @@ e2e:
 appInsights:
   instrumentationKey: APPINSIGHTS_KEY
 api:
-  cos: FIS_COS_API
   serviceAuth: RPE_API

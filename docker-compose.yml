@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  fis-ds-update-web:
+  dss-update-case-web:
     build:
       context: .
       args:

@@ -264,7 +264,7 @@ describe('PostController', () => {
     expect(res.end).not.toHaveBeenCalled();
   });
 
-  test('whether the citizen update api call is made with correct user details fistname lastname update caseid', async () => {
+  test('whether the citizen update api call is made with correct user details firstname lastname update caseid', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const body = { applicant1FirstName: 'Testm', applicant1LastName: 'Testn', applicant1Email: 'abc@gmail.com' };
     const controller = new PostController(mockFormContent.fields);

@@ -12,7 +12,7 @@ export class AppInsights {
         .setAutoCollectExceptions(true)
         .start();
 
-      appInsights.defaultClient.context.tags[appInsights.defaultClient.context.keys.cloudRole] = 'fis-ds-update-web';
+      appInsights.defaultClient.context.tags[appInsights.defaultClient.context.keys.cloudRole] = 'sptribs-dss-update-case-web';
       appInsights.defaultClient.trackTrace({ message: 'App insights activated' });
     }
   }

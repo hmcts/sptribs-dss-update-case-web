@@ -15,7 +15,7 @@ export class SessionStorage {
 
     app.use(
       session({
-        name: 'fis-ds-update-web-session',
+        name: 'sptribs-dss-update-case-web-session',
         resave: false,
         saveUninitialized: false,
         secret: config.get('session.secret'),

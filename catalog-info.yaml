@@ -1,16 +1,16 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: 'fis-ds-update-web'
+  name: 'sptribs-dss-update-case-web'
   annotations:
     # This must match folder-name/job-name in Jenkins.
-    jenkins.io/job-full-name: cft:HMCTS_d_to_i/fis-ds-update-web
-    github.com/project-slug: hmcts/fis-ds-update-web
+    jenkins.io/job-full-name: cft:HMCTS_j_to_z/sptribs-dss-update-case-web
+    github.com/project-slug: hmcts/sptribs-dss-update-case-web
   tags:
     - nodejs
   links:
-    - url: https://hmcts-reform.slack.com/app_redirect?channel=family-integration-devs
-      title: '#family-integration-devs on Slack'
+    - url: https://hmcts-reform.slack.com/app_redirect?channel=special-tribunals-builds
+      title: '#special-tribunals-builds on Slack'
       icon: chat
 spec:
   type: service
