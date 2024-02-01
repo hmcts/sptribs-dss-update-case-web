@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnyObject } from '../controller/PostController';
 
 export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;

@@ -14,10 +14,7 @@ import { TermsAndConditionsGetController } from './steps/terms-and-conditions/ge
 import { ACCESSIBILITY_STATEMENT, COOKIES_PAGE, HOME_URL, PRIVACY_POLICY, TERMS_AND_CONDITIONS } from './steps/urls';
 
 export class Routes {
-  /**
-   *
-   * @param app
-   */
+
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
     const errorController = new ErrorController();
@@ -46,10 +43,6 @@ export class Routes {
         app.post(step.url, errorHandler(new postController(step.form.fields).post));
       }
     }
-
-    /**
-     * @POST_ROUTES
-     */
 
     app.use(errorController.notFound as unknown as RequestHandler);
   }

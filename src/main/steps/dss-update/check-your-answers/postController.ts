@@ -42,7 +42,7 @@ export default class CheckYourAnswersController extends PostController<AnyObject
     };
 
     const caseId = req.session['caseRefId'];
-    const baseURL = `${config.get('api.cos')}/case/dss-orchestration/dss/${caseId}/update?event=UPDATE`;
+    const baseURL = `${config.get('services.sptribs.url')}/case/dss-orchestration/dss/${caseId}/update?event=UPDATE`;
     const seviceAuthToken = await RpeApi.getRpeToken();
     const s2sToken = seviceAuthToken.data;
     const updateRequest = await axios.put(baseURL, data, {

@@ -47,11 +47,6 @@ export class SessionStorage {
       client.connect();
 
       app.locals.redisClient = client;
-      console.log('inside redis client ');
-      console.log(client);
-      console.log('after client console');
-      console.log('config.get("session.redis.key")');
-      console.log(config.get('session.redis.key'));
       return new RedisStore({ client });
     }
 

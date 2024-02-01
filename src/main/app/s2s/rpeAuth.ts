@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 

@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */
 import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';
@@ -70,12 +67,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     return false;
   };
 
-  //eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public checkFileCondition(
     req: AppRequest<AnyObject>,
     res: Response<any, Record<string, any>>,
     redirectUrl: string,
-    //eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     files: any
   ) {
     if (req.session['caseDocuments'] && this.checkIfMaxDocumentUploaded(req.session['caseDocuments'])) {
@@ -91,9 +86,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public async checkFileValidation(
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     files: any,
     req: AppRequest<AnyObject>,
     res: Response<any, Record<string, any>>,
@@ -171,7 +164,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
    * @param files
    * @returns
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public fileNullCheck = (files: any): boolean => {
     return !!(isNull(files) || files === undefined);
   };

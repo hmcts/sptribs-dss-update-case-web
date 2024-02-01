@@ -34,3 +34,5 @@ public/
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
+
+.swc

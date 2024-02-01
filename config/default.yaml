@@ -38,12 +38,14 @@ cookies:
   cookieName: 'sptribs-dss-update-case-web-cookie-preferences'
 loggedInUsers: ['legalRep', 'police']
 services:
+  sptribs:
+    url: 'http://sptribs-case-api-aat.service.core-compute-aat.internal'
   case:
     url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
   idam:
     authorizationURL: 'https://idam-web-public.aat.platform.hmcts.net/login'
     tokenURL: 'https://idam-api.aat.platform.hmcts.net/o/token'
-    clientID: 'sptribs-case-api'
+    clientID: 'sptribs-dss-update-case-web'
     clientSecret: 'DUMMY_VALUE_REPLACE'
     systemUsername: 'DUMMY_VALUE_REPLACE'
     systemPassword: 'DUMMY_VALUE_REPLACE'

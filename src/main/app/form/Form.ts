@@ -257,6 +257,5 @@ interface CaseWithFormData extends CaseWithId {
 }
 export interface GenerateDynamicFormFields {
   fields: FormContent['fields'];
-  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   errors: Record<string, any>;
 }

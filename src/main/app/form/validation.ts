@@ -8,7 +8,6 @@ dayjs.extend(customParseFormat);
 export type Validator = (value: string | string[] | CaseDate | Partial<Case> | File | undefined) => void | string;
 export type DateValidator = (value: CaseDate | undefined) => void | string;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 export type AnyType = any;
 export const enum ValidationError {
   REQUIRED = 'required',
@@ -88,7 +87,7 @@ export const isAlphaNumeric: Validator = value => {
   }
 };
 
-export const isNumeric: Validator = value => {
+export const isNotNumeric: Validator = value => {
   if (value && !(value as string).match(/^\d+$/)) {
     return ValidationError.NOT_NUMERIC;
   }

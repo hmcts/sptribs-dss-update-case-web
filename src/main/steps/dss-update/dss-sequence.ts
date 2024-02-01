@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 import { Sections, Step } from '../constants';
 import { APPLICATION_CONFIRMATION, CASE_SEARCH_URL, CHECK_YOUR_ANSWERS, DATA_VERIFICATION, START_HOME } from '../urls';
 
