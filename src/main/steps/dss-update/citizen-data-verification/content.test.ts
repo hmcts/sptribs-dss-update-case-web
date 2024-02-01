@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { AnyType } from '../../../app/form/validation';
 
-import { DateFields, InputFields, cy, en, generateContent } from './content';
+import { cy, en, generateContent } from './content';
 
 const englishContent = () => ({
   serviceName: 'DSS Update Case',
@@ -46,22 +46,6 @@ describe('Matching Language content', () => {
 
   test('matching welsh content', () => {
     expect(cy()).toEqual(welshContent());
-  });
-});
-
-describe('Date field and Input Field', () => {
-  test('matching output of DateField', () => {
-    expect(DateFields('dateOfJoining', 'What is the joining date', true, '27-12-2020')).not.toBe({});
-  });
-  test('matching output of DateField - sad scenario(data toggled as false', () => {
-    expect(DateFields('dateOfJoining', 'What is the joining date', false)).not.toBe({});
-  });
-
-  test('matching output of InputField', () => {
-    expect(InputFields('dateOfJoining', 'What is the name', true, 'john Doe')).not.toBe({});
-  });
-  test('matching output of InputField - sad scenario(data toggled as false', () => {
-    expect(InputFields('dateOfJoining', 'What is the joining date', false)).not.toBe({});
   });
 });
 
