@@ -3239,6 +3239,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/retry@npm:0.12.2":
+  version: 0.12.2
+  resolution: "@types/retry@npm:0.12.2"
+  checksum: e5675035717b39ce4f42f339657cae9637cf0c0051cf54314a6a2c44d38d91f6544be9ddc0280587789b6afd056be5d99dbe3e9f4df68c286c36321579b1bf4a
+  languageName: node
+  linkType: hard
+
 "@types/semver@npm:^7.3.12":
   version: 7.5.4
   resolution: "@types/semver@npm:7.5.4"
@@ -3508,13 +3515,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/companion-client@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "@uppy/companion-client@npm:3.5.0"
+"@uppy/companion-client@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "@uppy/companion-client@npm:3.7.0"
   dependencies:
-    "@uppy/utils": ^5.5.2
+    "@uppy/utils": ^5.7.0
     namespace-emitter: ^2.0.1
-  checksum: 78a3253b9d7a3e0f771fb8a3d867e3c7133f9e931334ae64f28e3895ff673b9640ba1f80fb85e9d49c56338b25e399962659547c945b08b40eb0bd389a586213
+    p-retry: ^6.1.0
+  checksum: 0192dc9fa041acbfc027e1e938d68629deb53adc96fb859fb3862e9479a3e2b4bdadf05ac08e3160354e4b6850f8c0b0f8c07b6e8d8024e9bc8a3e165fed75ea
   languageName: node
   linkType: hard
 
@@ -3586,16 +3594,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/xhr-upload@npm:^3.3.2":
-  version: 3.4.2
-  resolution: "@uppy/xhr-upload@npm:3.4.2"
+"@uppy/utils@npm:^5.7.0":
+  version: 5.7.0
+  resolution: "@uppy/utils@npm:5.7.0"
   dependencies:
-    "@uppy/companion-client": ^3.5.0
-    "@uppy/utils": ^5.5.2
+    lodash: ^4.17.21
+    preact: ^10.5.13
+  checksum: 6182c2342b5f6618a8b96aa15afc67fc6e8288aaa35f309ef9d1b6f5e7eefb1b939faa34194d1a1c817448f7fd8616c33822c57276ac5020a456b038f1b9afbe
+  languageName: node
+  linkType: hard
+
+"@uppy/xhr-upload@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@uppy/xhr-upload@npm:3.6.0"
+  dependencies:
+    "@uppy/companion-client": ^3.7.0
+    "@uppy/utils": ^5.7.0
     nanoid: ^4.0.0
   peerDependencies:
-    "@uppy/core": ^3.6.0
-  checksum: 0ba73abf335391dc0884ba29095272525d4fa75c3fc496615e798edfe76b21177290488e4cd07bdf1bddb5a6278759be3b6e0599592630f68b88d6f66ec2fc54
+    "@uppy/core": ^3.8.0
+  checksum: cdf974c54e90a9074955e5ea77cacf2a55946bfa055863d5412a9074e7c85fd306ac9a4da16e5745a735448d3e3ef14c3d8d143584aa32bc845ec8613bb57f05
   languageName: node
   linkType: hard
 
@@ -9530,6 +9548,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-network-error@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "is-network-error@npm:1.0.1"
+  checksum: 165d61500c4186c62db5a3a693d6bfa14ca40fe9b471ef4cd4f27b20ef6760880faf5386dc01ca9867531631782941fedaa94521d09959edf71f046e393c7b91
+  languageName: node
+  linkType: hard
+
 "is-number-object@npm:^1.0.4":
   version: 1.0.7
   resolution: "is-number-object@npm:1.0.7"
@@ -12309,6 +12334,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"p-retry@npm:^6.1.0":
+  version: 6.2.0
+  resolution: "p-retry@npm:6.2.0"
+  dependencies:
+    "@types/retry": 0.12.2
+    is-network-error: ^1.0.0
+    retry: ^0.13.1
+  checksum: 6003573c559ee812329c9c3ede7ba12a783fdc8dd70602116646e850c920b4597dc502fe001c3f9526fca4e93275045db7a27341c458e51db179c1374a01ac44
+  languageName: node
+  linkType: hard
+
 "p-timeout@npm:~4.1.0":
   version: 4.1.0
   resolution: "p-timeout@npm:4.1.0"
@@ -13601,6 +13637,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"retry@npm:^0.13.1":
+  version: 0.13.1
+  resolution: "retry@npm:0.13.1"
+  checksum: 47c4d5be674f7c13eee4cfe927345023972197dbbdfba5d3af7e461d13b44de1bfd663bfc80d2f601f8ef3fc8164c16dd99655a221921954a65d044a2fc1233b
+  languageName: node
+  linkType: hard
+
 "reusify@npm:^1.0.4":
   version: 1.0.4
   resolution: "reusify@npm:1.0.4"
@@ -14399,7 +14442,7 @@ __metadata:
     "@uppy/drop-target": ^2.0.1
     "@uppy/file-input": ^3.0.3
     "@uppy/progress-bar": ^3.0.3
-    "@uppy/xhr-upload": ^3.3.2
+    "@uppy/xhr-upload": ^3.6.0
     "@wdio/sauce-service": ^8.15.9
     allure-commandline: ^2.24.0
     applicationinsights: ^2.7.3
