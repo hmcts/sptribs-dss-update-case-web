@@ -1,9 +1,10 @@
+import axios from 'axios';
+import config from 'config';
+
+import { getSystemUser } from '../auth/oidc';
 import { AppRequest } from '../controller/AppRequest';
 import { AnyObject } from '../controller/PostController';
-import config from 'config';
 import { RpeApi } from '../s2s/rpeAuth';
-import { getSystemUser } from '../auth/oidc';
-import axios from 'axios';
 
 export const getCase = async (req: AppRequest<AnyObject>) => {
   const baseURL = `${config.get('services.case.url')}/cases/${req.body.applicantCaseId}`;
@@ -20,4 +21,4 @@ export const getCase = async (req: AppRequest<AnyObject>) => {
       'Content-Type': 'application/json',
     },
   });
-}
+};

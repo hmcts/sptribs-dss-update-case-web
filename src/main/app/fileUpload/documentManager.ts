@@ -26,7 +26,8 @@ export const uploadDocument = async (formData, s2sToken) => {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const deleteDocument = async (s2sToken, documentID) => {
   const doucmentRemovalendpoint =
-    config.get('services.sptribs.url') + DOCUMENT_MANAGEMENT_CONFIGURATIONS.REMOVE_URL.split('{documentId}').join(documentID);
+    config.get('services.sptribs.url') +
+    DOCUMENT_MANAGEMENT_CONFIGURATIONS.REMOVE_URL.split('{documentId}').join(documentID);
   const response = await axios.delete(doucmentRemovalendpoint, {
     headers: {
       ServiceAuthorization: `Bearer ${s2sToken}`,

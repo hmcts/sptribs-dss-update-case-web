@@ -1,17 +1,15 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { getCase } from '../../../app/case/api';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form, FormFields } from '../../../app/form/Form';
 import { DATA_VERIFICATION } from '../../urls';
-import { getCase } from '../../../app/case/api';
 
 @autobind
 export default class UploadDocumentController extends PostController<AnyObject> {
-
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-
     const form = new Form(<FormFields>this.fields);
     const { ...formData } = form.getParsedBody(req.body);
     req.session.errors = form.getErrors(formData);

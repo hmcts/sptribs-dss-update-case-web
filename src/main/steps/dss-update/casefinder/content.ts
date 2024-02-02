@@ -3,7 +3,6 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isNotNumeric } from '../../../app/form/validation';
 
-
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
   serviceName: 'DSS Update Case',
