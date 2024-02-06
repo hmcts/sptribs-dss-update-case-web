@@ -4,7 +4,7 @@ import { CommonContent } from '../../common/common.content';
 import { generateContent } from './content';
 
 const en = {
-  serviceName: 'Update an Appeal to the First-tier Tribunal',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Update an existing First-tier Tribunal case',
   paragraph1: 'Use this service to update a case that has already been submitted to the First-tier Tribunal.',
   paragraph2:
@@ -13,7 +13,7 @@ const en = {
 };
 
 const cy = {
-  serviceName: 'Update an Appeal to the First-tier Tribunal - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
   title: 'Update an existing First-tier Tribunal case - welsh',
   paragraph1: 'Use this service to update a case that has already been submitted to the First-tier Tribunal. - welsh',
   paragraph2:
