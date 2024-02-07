@@ -28,12 +28,12 @@ module "sptribs-dss-update-case-web-session-storage" {
 
 resource "azurerm_key_vault_secret" "redis_access_key" {
   name         = "redis-access-key"
-  value        = module.sptribs-frontend-session-storage.access_key
+  value        = module.sptribs-dss-update-case-web-session-storage.access_key
   content_type = "terraform-managed"
 
   tags = merge(var.common_tags, {
-    "source" : "redis ${module.sptribs-frontend-session-storage.host_name}"
+    "source" : "redis ${module.sptribs-dss-update-case-web-session-storage.host_name}"
   })
 
-  key_vault_id = data.azurerm_key_vault.sptribs_key_vault.id
+  key_vault_id = data.azurerm_key_vault.key_vault.id
 }
