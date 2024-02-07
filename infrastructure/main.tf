@@ -13,6 +13,7 @@ data "azurerm_key_vault" "key_vault" {
 
 module "sptribs-dss-update-case-web-session-storage" {
   source                        = "git@github.com:hmcts/cnp-module-redis?ref=master"
+  name                          = "${var.product}-${var.component}-${var.env}"
   product                       = var.product
   location                      = var.location
   env                           = var.env
