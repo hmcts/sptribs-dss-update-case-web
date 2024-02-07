@@ -8,7 +8,7 @@ locals {
 
 data "azurerm_key_vault" "key_vault" {
   name = local.vaultName
-  resource_group_name = "${var.product}-${var.env}"
+  resource_group_name = "sptribs-${var.env}"
 }
 
 module "sptribs-dss-update-case-web-session-storage" {
