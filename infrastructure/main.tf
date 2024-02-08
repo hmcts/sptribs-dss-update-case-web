@@ -3,37 +3,24 @@ provider "azurerm" {
 }
 
 locals {
-  vaultName = "${var.product}-kv-${var.env}"
+  vaultName = "${var.product}-${var.env}"
 }
 
 data "azurerm_key_vault" "key_vault" {
   name = local.vaultName
-  resource_group_name = "${var.product}-${var.env}"
+  resource_group_name = "sptribs-${var.env}"
 }
 
-module "sptribs-dss-update-case-web-session-storage" {
-  source                        = "git@github.com:hmcts/cnp-module-redis?ref=master"
-  product                       = var.product
-  location                      = var.location
-  env                           = var.env
-  common_tags                   = var.common_tags
-  redis_version                 = "6"
-  business_area                 = "cft"
-  private_endpoint_enabled      = true
-  public_network_access_enabled = false
-  sku_name                      = var.sku_name
-  family                        = var.family
-  capacity                      = var.capacity
+data "azurerm_redis_cache" "sptribs_dss_update_case_web_session_storage" {
+  name                = "sptribs-${var.env}"
+  resource_group_name = "sptribs-cache-${var.env}"
 }
 
-resource "azurerm_key_vault_secret" "redis_access_key" {
-  name         = "redis-access-key"
-  value        = module.sptribs-frontend-session-storage.access_key
-  content_type = "terraform-managed"
+output "primary_access_key" {
+  value     = data.azurerm_redis_cache.sptribs_dss_update_case_web_session_storage.primary_access_key
+  sensitive = true
+}
 
-  tags = merge(var.common_tags, {
-    "source" : "redis ${module.sptribs-frontend-session-storage.host_name}"
-  })
-
-  key_vault_id = data.azurerm_key_vault.sptribs_key_vault.id
+output "hostname" {
+  value = data.azurerm_redis_cache.sptribs_dss_update_case_web_session_storage.hostname
 }
