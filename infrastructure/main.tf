@@ -17,7 +17,8 @@ data "azurerm_redis_cache" "sptribs_dss_update_case_web_session_storage" {
 }
 
 output "primary_access_key" {
-  value = data.azurerm_redis_cache.sptribs_dss_update_case_web_session_storage.primary_access_key
+  value     = data.azurerm_redis_cache.sptribs_dss_update_case_web_session_storage.primary_access_key
+  sensitive = true
 }
 
 output "hostname" {
