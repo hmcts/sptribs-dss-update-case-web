@@ -12,7 +12,7 @@ data "azurerm_key_vault" "key_vault" {
 }
 
 data "azurerm_redis_cache" "sptribs_dss_update_case_web_session_storage" {
-  name                = "sptribs-cache-${var.env}"
+  name                = "sptribs-${var.env}"
   resource_group_name = "sptribs-cache-${var.env}"
 }
 
