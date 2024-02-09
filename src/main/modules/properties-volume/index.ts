@@ -13,7 +13,7 @@ export class PropertiesVolume {
       this.setSecret('secrets.sptribs.redis-access-key', 'session.secret');
       this.setSecret('secrets.sptribs.idam-systemupdate-username', 'services.idam.systemUsername');
       this.setSecret('secrets.sptribs.idam-systemupdate-password', 'services.idam.systemPassword');
-      this.setSecret('secrets.sptribs.idam-secret', 'services.idam.clientSecret');
+      this.setSecret('secrets.sptribs.idam-dss-update-ui-secret', 'services.idam.clientSecret');
     }
   }
 
