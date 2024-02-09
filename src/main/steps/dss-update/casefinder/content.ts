@@ -5,10 +5,11 @@ import { isFieldFilledIn, isNotNumeric } from '../../../app/form/validation';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
-  serviceName: 'DSS Update Case',
+  serviceName: 'Update an existing First-tier Tribunal case',
   title: 'Existing case details',
+  line1: 'You can find this information in the email you received after submitting your tribunal forms.',
   subtitle: 'Case reference number',
-  caseNameHint: 'This number will be 16 digits long.',
+  caseNumberHint: 'This number will be 16 digits long.',
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
@@ -23,10 +24,12 @@ export const en = () => ({
 });
 
 export const cy = () => ({
-  serviceName: 'DSS Update Case',
+  serviceName: 'Update an existing First-tier Tribunal case - welsh',
   title: 'Existing case details - welsh',
+  line1:
+    'You can find this information in the email you received after submitting your tribunal forms. - welsh',
   subtitle: 'Case reference number - welsh',
-  caseNameHint: 'This number will be 16 digits long - welsh.',
+  caseNumberHint: 'This number will be 16 digits long - welsh.',
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
@@ -45,12 +48,13 @@ export const form: FormContent = {
     applicantCaseId: {
       type: 'text',
       classes: 'govuk-input--width-20',
-      label: 'Enter your case reference',
+      label: l => l.subtitle,
+      hint: l => l.caseNumberHint,
       validator: value => isFieldFilledIn(value) || isNotNumeric(value),
     },
   },
   submit: {
-    text: l => l.continue,
+    text: l => l.onlyContinue,
   },
 };
 

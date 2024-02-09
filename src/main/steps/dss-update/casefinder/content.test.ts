@@ -2,10 +2,11 @@
 import { cy, en } from './content';
 
 const enContent = {
-  serviceName: 'DSS Update Case',
+  serviceName: 'Update an existing First-tier Tribunal case',
   title: 'Existing case details',
+  line1: 'You can find this information in the email you received after submitting your tribunal forms.',
   subtitle: 'Case reference number',
-  caseNameHint: 'This number will be 16 digits long.',
+  caseNumberHint: 'This number will be 16 digits long.',
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
@@ -20,10 +21,12 @@ const enContent = {
 };
 
 const cyContent = {
-  serviceName: 'DSS Update Case',
+  serviceName: 'Update an existing First-tier Tribunal case - welsh',
   title: 'Existing case details - welsh',
+  line1:
+    'You can find this information in the email you received after submitting your tribunal forms. - welsh',
   subtitle: 'Case reference number - welsh',
-  caseNameHint: 'This number will be 16 digits long - welsh.',
+  caseNumberHint: 'This number will be 16 digits long - welsh.',
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
