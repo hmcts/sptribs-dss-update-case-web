@@ -13,8 +13,12 @@ export const en = () => ({
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
-      required: 'Please enter a reference number',
-      invalid: 'Please enter a valid reference number',
+      required: 'There is a problem. Please enter a case reference number',
+      notNumeric: 'There is a problem. Please enter numeric case reference number of upto 16 digits',
+    },
+    caseNotFound: {
+      required:
+        "Some of the information you have given doesn't match our records. Please enter the right value and retry.",
     },
   },
 });
@@ -26,11 +30,15 @@ export const cy = () => ({
     'You can find this information in the email you received after submitting your tribunal forms. - welsh',
   subtitle: 'Case reference number - welsh',
   caseNumberHint: 'This number will be 16 digits long - welsh.',
-  errorSummaryMessage: 'There is a problem - welsh',
+  errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
-      required: 'Please enter a reference number - welsh',
-      invalid: 'Please enter a valid reference number - welsh',
+      required: 'There is a problem. Please enter a case reference number - welsh',
+      notNumeric: 'There is a problem. Please enter numeric case reference number of upto 16 digits - welsh',
+    },
+    caseNotFound: {
+      required:
+        "Some of the information you have given doesn't match our records. Please enter the right value and retry - welsh",
     },
   },
 });
