@@ -4,7 +4,8 @@
 import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isDateInputInvalid, isFieldFilledIn } from '../../../app/form/validation';
+import { isDateInputInvalid, isDateInputNotFilled, isFieldFilledIn } from '../../../app/form/validation';
+import { covertToDateObject } from '../../../app/form/parser';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
@@ -12,33 +13,39 @@ export const en = () => ({
   title: '[title]',
   errorSummaryMessage: 'There is a problem',
   errors: {
-    dataNotMatched: {
-      required:
-        "Some of the information you have given doesn't match our records. Please enter the right value and retry.",
+    subjectFullName: {
+      required: 'Some of the form fields are empty. Please enter the values and retry',
     },
-    isEmptyFields: {
-      required: 'Some of the form fields are empty. Please enter the values and retry.',
+    subjectDOB: {
+      required: 'Some of the date fields are empty. Please enter the values and retry.',
+      invalid: 'Invalid date'
     },
     inputFields: {
-      notAlphaNumeric: 'Some of the form fields have a invalid character. Please enter letters and numbers only.',
+      required: 'Data entered doesn\'t match'
+    },
+    caseError: {
+      required: 'Error verifying case'
     },
   },
 });
 
 export const cy = () => ({
-  serviceName: 'DSS Update Case',
-  title: '[title]',
-  errorSummaryMessage: 'There is a problem',
+  serviceName: 'DSS Update Case - welsh',
+  title: '[title] - welsh',
+  errorSummaryMessage: 'There is a problem - welsh',
   errors: {
-    dataNotMatched: {
+    subjectFullName: {
       required: 'Some of the form fields are empty. Please enter the values and retry - welsh',
     },
-    isEmptyFields: {
-      required: 'Some of the form fields are empty. Please enter the values and retry.',
+    subjectDOB: {
+      required: 'Some of the date fields are empty. Please enter the values and retry. - welsh',
+      invalid: 'Invalid date - welsh'
     },
     inputFields: {
-      notAlphaNumeric:
-        'Some of the form fields have a invalid character. Please enter letters and numbers only. - welsh',
+      required: 'Data entered doesn\'t match - welsh'
+    },
+    caseError: {
+      required: 'Error verifying case - welsh'
     },
   },
 });
@@ -75,7 +82,15 @@ export const form: FormContent = {
           attributes: { maxLength: 4, pattern: '[0-9]*', inputMode: 'numeric' },
         },
       ],
-      validator: (value, formData) => (formData['DOB'] === '' ? isDateInputInvalid(value as CaseDate) : ''),
+      parser: body => covertToDateObject('subjectDOB', body as Record<string, unknown>),
+      validator: value => {
+        if (isDateInputNotFilled(value as CaseDate)) {
+          return 'required';
+        }
+        if (isDateInputInvalid(value as CaseDate)) {
+          return 'invalid';
+        }
+      },
     },
   },
   submit: {

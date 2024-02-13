@@ -7,62 +7,59 @@ import { Response } from 'express';
 
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { Form, FormFields } from '../../../app/form/Form';
+import { Form } from '../../../app/form/Form';
 import { UPLOAD_DOCUMENT } from '../../urls';
 import { getCase } from '../../../app/case/api';
+import { CaseDate } from '../../../app/case/case';
 
-/* The UploadDocumentController class extends the PostController class and overrides the
-PostDocumentUploader method */
 @autobind
 export default class CitizenDataVerificationPostController extends PostController<AnyObject> {
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
+    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
+    const form = new Form(fields);
 
-    const form = new Form(<FormFields>this.fields);
     const { ...formData } = form.getParsedBody(req.body);
     req.session.errors = form.getErrors(formData);
 
     let nextUrl: string;
-    console.log(req.body.applicantCaseId);
 
-    if (req.session.errors.length === 0) {
-      try {
-        const responseFromServerCall = await getCase(req);
-        if (responseFromServerCall.status === 200) {
+    if (req.session.isDataVerified) {
+      nextUrl = UPLOAD_DOCUMENT;
+    } else {
+      if (req.session.errors.length === 0) {
+        try {
+          const responseFromServerCall = await getCase(req, req.session.userCase.id);
+          if (responseFromServerCall.status === 200) {
 
-          const cicCaseFullName = responseFromServerCall.data.data.cicCaseFullName.trim();
-          const cicCaseDateOfBirth = responseFromServerCall.data.data.cicCaseDateOfBirth;
+            const cicCaseFullName = responseFromServerCall.data.data.cicCaseFullName.trim();
+            const cicCaseDateOfBirth = responseFromServerCall.data.data.cicCaseDateOfBirth;
 
-          const subjectFullNameToVerify = String(req.body.subjectFullName).trim();
-          const dateToVerify =
-            `${String(req.body['subjectDOB-year'])}-${String(req.body['subjectDOB-month']).padStart(2, '0')}-${String(req.body['subjectDOB-day']).padStart(2, '0')}`;
+            const subjectFullNameToVerify = String(req.body.subjectFullName).trim();
+            const dateToVerify =
+              `${formData.subjectDOB?.year}-${formData.subjectDOB?.month?.padStart(2, '0')}-${formData.subjectDOB?.day?.padStart(2, '0')}`;
 
-          if (cicCaseFullName === subjectFullNameToVerify && cicCaseDateOfBirth === dateToVerify) {
-            nextUrl = UPLOAD_DOCUMENT;
-          } else {
-            nextUrl = req.originalUrl;
-            //TODO: Add error below related to incorrect data having been entered
-            req.session.errors.push({ propertyName: 'subjectFullName', errorType: 'required' });
+            if (cicCaseFullName === subjectFullNameToVerify && cicCaseDateOfBirth === dateToVerify) {
+              req.session.isDataVerified = true;
+              req.session.userCase.subjectFullName = subjectFullNameToVerify;
+              req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
+              nextUrl = UPLOAD_DOCUMENT;
+            } else {
+              req.session.errors.push({ propertyName: 'inputFields', errorType: 'required' });
+              nextUrl = req.originalUrl;
+            }
           }
+        } catch (error) {
+          req.session.errors.push({ propertyName: 'caseError', errorType: 'required' });
+          nextUrl = req.originalUrl;
         }
-      } catch (error) {
-        //TODO: Add error below related to error fetching case
-        req.session.errors.push({ propertyName: 'caseNotFound', errorType: 'required' });
-
-        req.session.subjectFullName = <string>req.body['subjectFullName'];
-        req.session.subjectDOB = <string>req.body['subjectDOB'];
-
+      } else {
         nextUrl = req.originalUrl;
       }
-    } else {
-      req.session.subjectFullName = <string>req.body['subjectFullName'];
-      req.session.subjectDOB = <string>req.body['subjectDOB'];
-      nextUrl = req.originalUrl;
     }
 
     req.session.save(err => {
       if (err) {
-        console.log(err);
         throw err;
       }
       res.redirect(nextUrl);

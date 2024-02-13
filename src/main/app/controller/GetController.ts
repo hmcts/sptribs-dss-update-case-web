@@ -32,7 +32,7 @@ export class GetController {
 
     if (req.query.hasOwnProperty('logged-in')) {
       req.session.verificationData = {};
-      req.session['caseRefId'] = '';
+      req.session['applicantCaseId'] = '';
       req.session['caseTypeId'] = '';
       req.session.isDataVerified = false;
       req.session['jurisdiction'] = '';
@@ -79,8 +79,8 @@ export class GetController {
         const viewData = {
           ...content,
           ...renderableContents,
-          sessionError: req.session.hasOwnProperty('errors') ? req.session.errors : [],
-          caseId: req.session['caseRefId'],
+          sessionErrors: req.session.hasOwnProperty('errors') ? req.session.errors : [],
+          caseId: req.session.userCase?.id,
         };
 
         if (req.session?.errors) {

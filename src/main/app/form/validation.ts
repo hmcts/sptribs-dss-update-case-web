@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import { Case, CaseDate } from '../case/case';
+import { isEmpty } from 'lodash';
 
 dayjs.extend(customParseFormat);
 
@@ -90,5 +91,24 @@ export const isAlphaNumeric: Validator = value => {
 export const isNotNumeric: Validator = value => {
   if (value && !(value as string).match(/^\d+$/)) {
     return ValidationError.NOT_NUMERIC;
+  }
+};
+
+export const isDateInputNotFilled: DateValidator = date => {
+  const invalid = 'invalidDate';
+  if (!date) {
+    return invalid;
+  }
+
+  for (const value in date) {
+    if (isNaN(+date[value])) {
+      return invalid;
+    }
+  }
+
+  if (isEmpty(date.day || date.month || date.year)) {
+    return invalid;
+  } else {
+    return;
   }
 };

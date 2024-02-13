@@ -3,12 +3,14 @@ import { AnyObject } from '../controller/PostController';
 export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
-  /*********All information related to the Case */
-  namedApplicant: string;
+  applicantCaseId: string;
+  subjectFullName: string;
+  subjectDOB: CaseDate;
 }
 
 export interface CaseWithId extends Case {
-  caseId: string;
+  id: string;
+  state: any;
 }
 
 export enum Checkbox {

@@ -41,7 +41,7 @@ export default class CheckYourAnswersController extends PostController<AnyObject
       dssDocumentInfoList: alldocuments,
     };
 
-    const caseId = req.session['caseRefId'];
+    const caseId = req.session.userCase.id;
     const baseURL = `${config.get('services.sptribs.url')}/case/dss-orchestration/dss/${caseId}/update?event=UPDATE`;
     const seviceAuthToken = await RpeApi.getRpeToken();
     const s2sToken = seviceAuthToken.data;
@@ -67,7 +67,6 @@ export default class CheckYourAnswersController extends PostController<AnyObject
         super.redirect(req, res, APPLICATION_CONFIRMATION);
       }
     } catch (error) {
-      console.log(error);
       req.session.errors?.push({
         propertyName: 'submissionError',
         errorType: 'required',

@@ -119,7 +119,7 @@ export class Nunjucks {
     app.use((req, res, next) => {
       res.locals.host = req.headers['x-forwarded-host'] || req.hostname;
       res.locals.pagePath = req.path;
-      res.locals.serviceType = 'PRLAPPS';
+      res.locals.serviceType = 'ST_CIC';
       next();
     });
   }

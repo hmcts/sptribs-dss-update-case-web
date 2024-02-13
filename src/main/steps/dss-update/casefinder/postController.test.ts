@@ -28,7 +28,9 @@ describe('Testing the post controller', () => {
         applicantCaseId: '1675676483319900',
       },
       session: {
-        applicantCaseId: 'caseRefId',
+        userCase: {
+          id: 'caseRefId'
+        }
       },
     });
     const caseData = {};
@@ -44,7 +46,9 @@ describe('Testing the post controller', () => {
         applicantCaseId: '1675676483319900',
       },
       session: {
-        applicantCaseId: 'caseRefId',
+        userCase: {
+          id: 'applicantCaseId'
+        },
         save: () => '',
       },
     });
@@ -62,7 +66,9 @@ describe('Testing the post controller', () => {
         applicantCaseId: '',
       },
       session: {
-        applicantCaseId: 'caseRefId',
+        userCase: {
+          id: 'applicantCaseId'
+        }
       },
     });
     const newController = new UploadDocumentController(mockFormContent.fields);
