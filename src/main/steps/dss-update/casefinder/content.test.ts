@@ -11,7 +11,7 @@ const enContent = {
   errors: {
     applicantCaseId: {
       required: 'Please enter a reference number',
-      invalid: 'Please enter a valid reference number',
+      notNumeric: 'Please enter a valid reference number',
     },
     caseNotFound: {
       required:
