@@ -45,19 +45,13 @@ export const cy = () => ({
 
 export const form: FormContent = {
   fields: {
-    applicantFirstName: {
+    subjectFullName: {
       type: 'text',
       classes: 'govuk-input--width-20',
-      label: 'Enter your first name',
+      label: 'Enter your name',
       validator: value => isFieldFilledIn(value),
     },
-    applicantSurname: {
-      type: 'text',
-      classes: 'govuk-input--width-20',
-      label: 'Enter your surname',
-      validator: value => isFieldFilledIn(value),
-    },
-    applicantDateOfBirth: {
+    subjectDOB: {
       type: 'date',
       classes: 'govuk-date-input',
       label: 'Enter your date of birth',

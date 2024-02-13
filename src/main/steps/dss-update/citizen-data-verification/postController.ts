@@ -7,139 +7,65 @@ import { Response } from 'express';
 
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
-import { AnyType, isAlphaNumeric } from '../../../app/form/validation';
+import { Form, FormFields } from '../../../app/form/Form';
 import { UPLOAD_DOCUMENT } from '../../urls';
+import { getCase } from '../../../app/case/api';
 
 /* The UploadDocumentController class extends the PostController class and overrides the
 PostDocumentUploader method */
 @autobind
 export default class CitizenDataVerificationPostController extends PostController<AnyObject> {
-  constructor(protected readonly fields: FormFields | FormFieldsFn) {
-    super(fields);
-  }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    // console.log(req.body);
-    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
-    const form = new Form(fields);
+
+    const form = new Form(<FormFields>this.fields);
     const { ...formData } = form.getParsedBody(req.body);
-
     req.session.errors = form.getErrors(formData);
-    if (req.session.errors && req.session.errors.length) {
-      return super.redirect(req, res, req.originalUrl);
-    }
 
-    const newFormData: AnyType = formData;
-    delete newFormData['_csrf'];
-    delete newFormData['saveAndContinue'];
+    let nextUrl: string;
+    console.log(req.body.applicantCaseId);
 
-    const dssQuestionAnswerPairs = req.session.verificationData['dssQuestionAnswerPairs'];
-    const dssQuestionAnswerDatePairs = req.session.verificationData['dssQuestionAnswerDatePairs'];
+    if (req.session.errors.length === 0) {
+      try {
+        const responseFromServerCall = await getCase(req);
+        if (responseFromServerCall.status === 200) {
 
-    const datePairs = {};
-    dssQuestionAnswerDatePairs.forEach((question, index) => {
-      const date = question['answer'];
-      const parsedDate = date.split('-');
-      const calendarDate = parsedDate['2'].startsWith('0', 0) ? parsedDate['2'].slice(1, 2) : parsedDate['2'];
-      const calendarMonth = parsedDate['1'].startsWith('0', 0) ? parsedDate['2'].slice(1, 2) : parsedDate['2'];
-      const calendarYear = parsedDate['0'];
-      datePairs[`DateFields_${index}-day`] = calendarDate;
-      datePairs[`DateFields_${index}-month`] = calendarMonth;
-      datePairs[`DateFields_${index}-year`] = calendarYear;
-    });
+          const cicCaseFullName = responseFromServerCall.data.data.cicCaseFullName.trim();
+          const cicCaseDateOfBirth = responseFromServerCall.data.data.cicCaseDateOfBirth;
 
-    const InputFieldPairs = {};
+          const subjectFullNameToVerify = String(req.body.subjectFullName).trim();
+          const dateToVerify =
+            `${String(req.body['subjectDOB-year'])}-${String(req.body['subjectDOB-month']).padStart(2, '0')}-${String(req.body['subjectDOB-day']).padStart(2, '0')}`;
 
-    dssQuestionAnswerPairs.forEach((question, index) => {
-      const field = question['answer'];
-      if (field !== null) {
-        const answerField = field
-          .replace(/^\s+|\s+$/gm, '')
-          .split(' ')
-          .join('')
-          .toLowerCase();
-        InputFieldPairs[`InputFields_${index}`] = answerField;
-      } else {
-        dssQuestionAnswerPairs.splice(index, 1);
+          if (cicCaseFullName === subjectFullNameToVerify && cicCaseDateOfBirth === dateToVerify) {
+            nextUrl = UPLOAD_DOCUMENT;
+          } else {
+            nextUrl = req.originalUrl;
+            //TODO: Add error below related to incorrect data having been entered
+            req.session.errors.push({ propertyName: 'subjectFullName', errorType: 'required' });
+          }
+        }
+      } catch (error) {
+        //TODO: Add error below related to error fetching case
+        req.session.errors.push({ propertyName: 'caseNotFound', errorType: 'required' });
+
+        req.session.subjectFullName = <string>req.body['subjectFullName'];
+        req.session.subjectDOB = <string>req.body['subjectDOB'];
+
+        nextUrl = req.originalUrl;
       }
-    });
-    const matcherData = { ...datePairs, ...InputFieldPairs };
-    const transformedFormData = Object.fromEntries(
-      Object.entries(formData).map(([key, value]: AnyType) => [
-        key,
-        value.startsWith('0', 0)
-          ? value
-              .replace(/^\s+|\s+$/gm, '')
-              .split(' ')
-              .join('')
-              .slice(1, 2)
-          : value
-              .replace(/^\s+|\s+$/gm, '')
-              .split(' ')
-              .join('')
-              .toLowerCase(),
-      ])
-    );
-    const checkIfDataMatched = JSON.stringify(matcherData) === JSON.stringify(transformedFormData);
-    if (checkIfDataMatched) {
-      req.session['isDataVerified'] = true;
-      req.session.tempValidationData = {};
-      req.session.errors = undefined;
-      return super.redirect(req, res, UPLOAD_DOCUMENT);
     } else {
-      const formDataToSessionValue = Object.fromEntries(
-        Object.entries(formData).map(([key, value]: AnyType) => [key, value])
-      );
-
-      const verificationDataForForm: AnyType = req.session['verificationData'];
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      const { caseId } = verificationDataForForm;
-
-      const mapped_dssQuestionAnswerPairs = dssQuestionAnswerPairs.map((item, index) => {
-        let { answer } = item;
-        if (answer !== null) {
-          answer = formDataToSessionValue[`InputFields_${index}`];
-          return { ...item, answer };
-        }
-      });
-
-      const mapped_dssQuestionAnswerDatePairs = dssQuestionAnswerDatePairs.map((item, index) => {
-        let { answer } = item;
-        const day = formDataToSessionValue[`DateFields_${index}-day`];
-        const month = formDataToSessionValue[`DateFields_${index}-month`];
-        const year = formDataToSessionValue[`DateFields_${index}-year`];
-        const parsedDate = `${year}-${month}-${day}`;
-        answer = parsedDate;
-        return { ...item, answer };
-      });
-      const filledFormDataWithErrors = {
-        caseId,
-        dssQuestionAnswerPairs: mapped_dssQuestionAnswerPairs,
-        dssQuestionAnswerDatePairs: mapped_dssQuestionAnswerDatePairs,
-      };
-
-      req.session.tempValidationData = filledFormDataWithErrors;
-      req.session['isDataVerified'] = false;
-      if (!req.session.hasOwnProperty('errors')) {
-        req.session['errors'] = [];
-      }
-      const isFieldEmpty = Object.values(formData).includes('');
-      if (isFieldEmpty) {
-        if (req.session.errors) {
-          req.session['errors'] = [{ propertyName: 'isEmptyFields', errorType: 'required' }];
-          return super.redirect(req, res, req.originalUrl);
-        }
-      } else {
-        if (isAlphaNumeric(formData['InputFields_0']) || isAlphaNumeric(formData['InputFields_1'])) {
-          req.session['errors'] = [{ propertyName: 'inputFields', errorType: 'notAlphaNumeric' }];
-          return super.redirect(req, res, req.originalUrl);
-        }
-        if (req.session.errors) {
-          req.session['errors'] = [{ propertyName: 'dataNotMatched', errorType: 'required' }];
-        }
-        return super.redirect(req, res, req.originalUrl);
-      }
+      req.session.subjectFullName = <string>req.body['subjectFullName'];
+      req.session.subjectDOB = <string>req.body['subjectDOB'];
+      nextUrl = req.originalUrl;
     }
+
+    req.session.save(err => {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+      res.redirect(nextUrl);
+    });
   }
 }
