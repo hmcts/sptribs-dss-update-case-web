@@ -13,12 +13,12 @@ export const en = () => ({
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
-      required: 'There is a problem. Please enter a case reference number',
-      notNumeric: 'There is a problem. Please enter numeric case reference number of upto 16 digits',
+      required: 'Please enter a reference number',
+      notNumeric: 'Please enter a valid reference number',
     },
     caseNotFound: {
       required:
-        "Some of the information you have given doesn't match our records. Please enter the right value and retry.",
+        "Please enter a valid reference number",
     },
   },
 });
@@ -33,12 +33,12 @@ export const cy = () => ({
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
-      required: 'There is a problem. Please enter a case reference number - welsh',
-      notNumeric: 'There is a problem. Please enter numeric case reference number of upto 16 digits - welsh',
+      required: 'Please enter a reference number - welsh',
+      notNumeric: 'Please enter a valid reference number - welsh',
     },
     caseNotFound: {
       required:
-        "Some of the information you have given doesn't match our records. Please enter the right value and retry - welsh",
+        "Please enter a valid reference number - welsh",
     },
   },
 });
