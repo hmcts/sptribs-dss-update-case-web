@@ -50,6 +50,6 @@ export class SessionStorage {
       return new RedisStore({ client });
     }
 
-    return new FileStore({ path: '/tmp' });
+    return new FileStore({ path: '/tmp/sptribs-dss-update-case-web-session' });
   }
 }
