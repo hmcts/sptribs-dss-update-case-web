@@ -13,10 +13,6 @@ const enContent = {
       required: 'Please enter a reference number',
       notNumeric: 'Please enter a valid reference number',
     },
-    caseNotFound: {
-      required:
-        "Please enter a valid reference number",
-    },
   },
 };
 
@@ -32,10 +28,6 @@ const cyContent = {
     applicantCaseId: {
       required: 'Please enter a reference number - welsh',
       notNumeric: 'Please enter a valid reference number - welsh',
-    },
-    caseNotFound: {
-      required:
-        "Please enter a valid reference number - welsh",
     },
   },
 };
