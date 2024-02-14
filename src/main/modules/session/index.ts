@@ -23,7 +23,7 @@ export class SessionStorage {
           httpOnly: true,
           maxAge: config.get('session.maxAge'),
           sameSite: 'lax', // required for the oauth2 redirect
-          secure: true,
+          secure: false,
         },
         rolling: true, // Renew the cookie for another 20 minutes on each request
         store: this.getStore(app),
@@ -50,6 +50,6 @@ export class SessionStorage {
       return new RedisStore({ client });
     }
 
-    return new FileStore({ path: '/tmp' });
+    return new FileStore({ path: '/tmp/sptribs-dss-update-case-web-session' });
   }
 }
