@@ -3,7 +3,6 @@ import { AnyObject } from '../controller/PostController';
 export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
-  applicantCaseId: string;
   subjectFullName: string;
   subjectDOB: CaseDate;
 }

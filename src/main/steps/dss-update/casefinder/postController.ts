@@ -28,7 +28,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         const responseFromServerCall = await getCase(req, String(req.body.applicantCaseId));
         if (responseFromServerCall.status === 200) {
           req.session.userCase.id = responseFromServerCall.data.id;
-          req.session.userCase.applicantCaseId = responseFromServerCall.data.id;
           nextUrl = DATA_VERIFICATION;
         }
       } catch (error) {
