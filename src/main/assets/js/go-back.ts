@@ -1,18 +1,12 @@
-import {
-  START_HOME,
-  CASE_SEARCH_URL,
-  DATA_VERIFICATION,
-  UPLOAD_DOCUMENT,
-  CHECK_YOUR_ANSWERS,
-} from '../../steps/urls';
+import { CASE_SEARCH_URL, CHECK_YOUR_ANSWERS, DATA_VERIFICATION, START_HOME, UPLOAD_DOCUMENT } from '../../steps/urls';
 
 const backLink: HTMLAnchorElement | null = document.querySelector('.govuk-back-link');
 if (backLink) {
   backLink.onclick = function (e) {
-    console.log("TEST")
+    console.log('TEST');
     e.preventDefault();
     if (location.pathname === CASE_SEARCH_URL) {
-      console.log("HERE")
+      console.log('HERE');
       location.pathname = START_HOME;
     } else if (location.pathname === DATA_VERIFICATION) {
       location.pathname = CASE_SEARCH_URL;
