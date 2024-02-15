@@ -4,19 +4,21 @@ import { CommonContent } from '../../common/common.content';
 import { generateContent } from './content';
 
 const en = {
-  serviceName: 'DSS Update Case',
-  title: 'Update a case',
-  paragraph1: 'Use this service to update a case that has already been submitted.',
-  paragraph2: 'You can upload additional evidences and documents.',
-  paragraph3: 'You will need the case reference number to start.',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
+  title: 'Update an existing First-tier Tribunal case',
+  paragraph1: 'Use this service to update a case that has already been submitted to the First-tier Tribunal.',
+  paragraph2:
+    'You may want to send the Tribunal some extra paperwork that was not available at the time you initially submitted your tribunal form. Or you may want to give the Tribunal some extra details about aspects of your case.',
+  paragraph3: 'To update an existing case, you will need the case reference number.',
 };
 
 const cy = {
-  serviceName: 'DSS Update Case',
-  title: 'Update a case - welsh',
-  paragraph1: 'Use this service to update a case that has already been submitted. - welsh',
-  paragraph2: 'You can upload additional evidences and documents. - welsh',
-  paragraph3: 'You will need the case reference number to start. - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
+  title: 'Update an existing First-tier Tribunal case - welsh',
+  paragraph1: 'Use this service to update a case that has already been submitted to the First-tier Tribunal. - welsh',
+  paragraph2:
+    'You may want to send the Tribunal some extra paperwork that was not available at the time you initially submitted your tribunal form. Or you may want to give the Tribunal some extra details about aspects of your case. - welsh',
+  paragraph3: 'To update an existing case, you will need the case reference number. - welsh',
 };
 
 /* eslint-disable @typescript-eslint/ban-types */

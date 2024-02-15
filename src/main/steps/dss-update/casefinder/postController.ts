@@ -32,6 +32,7 @@ export default class CaseFinderController extends PostController<AnyObject> {
         }
       } catch (error) {
         req.session.errors.push({ propertyName: 'caseNotFound', errorType: 'required' });
+        req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'notNumeric' });
       }
     }
 
