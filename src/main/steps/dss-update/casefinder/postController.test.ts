@@ -109,7 +109,7 @@ describe('case finder post controller test cases', () => {
     mockedAxios.get.mockImplementation(() => Promise.reject(new Error('invalid case reference')));
 
     await controller.post(req, res);
-    expect(req.session.errors).toStrictEqual([{ propertyName: 'caseNotFound', errorType: 'required' }]);
+    expect(req.session.errors).toStrictEqual([{ propertyName: 'applicantCaseId', errorType: 'notNumeric' }]);
     expect(res.redirect).toHaveBeenCalledWith(CASE_SEARCH_URL);
   });
 
