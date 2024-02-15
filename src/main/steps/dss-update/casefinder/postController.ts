@@ -23,7 +23,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           nextUrl = DATA_VERIFICATION;
         }
       } catch (error) {
-        req.session.errors.push({ propertyName: 'caseNotFound', errorType: 'required' });
+        req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'notNumeric' });
         req.session.caseRefId = <string>req.body['applicantCaseId'];
         nextUrl = req.originalUrl;
       }

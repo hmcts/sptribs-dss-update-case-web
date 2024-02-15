@@ -79,7 +79,7 @@ export class GetController {
         const viewData = {
           ...content,
           ...renderableContents,
-          sessionError: req.session.hasOwnProperty('errors') ? req.session.errors : [],
+          sessionErrors: req.session.hasOwnProperty('errors') ? req.session.errors : [],
           caseId: req.session['caseRefId'],
         };
 
