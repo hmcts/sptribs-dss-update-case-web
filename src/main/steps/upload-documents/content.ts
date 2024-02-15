@@ -37,17 +37,15 @@ export const en = () => ({
   fileuploaded: 'Files uploaded',
   errorSummaryMessage: 'There is a problem',
   uploadAFile: 'Upload a file',
+  uploadFileHint: 'Once you have selected the file click "Upload file" to upload it.',
   errors: {
     documentUpload: {
-      noDocumentUploaded: 'Please choose a file.',
+      noInput: 'You cannot continue without providing additional information or a document',
       fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 30MB (multimedia files)`,
-      multimediaFileSize: 'The file you uploaded is too large. Maximum file size allowed is 500MB for multimedia files',
-      fileFormat: `The file you uploaded is in the wrong format.
-            Upload your file again in the correct format`,
+      fileFormat: `This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3`,
       selectFileToUpload: 'Select a file to upload',
       uploadError: 'The selected file could not be uploaded – try again',
       maxFileError: 'You can only select up to 10 files at the same time',
-      fileDescriptionRequired: 'Enter a description for the file selected for upload',
     },
     documentDetail: {
       notAlphaNumeric: 'You have entered an invalid character. Please enter letters and numbers only.',
@@ -86,24 +84,21 @@ export const cy = () => ({
   titleForFile: 'Select documents to upload - welsh',
   uploadButton: 'Upload file - welsh',
   documentListLabel:
-    'Please explain why you feel this document is relevant to your case. - welsh"',
+    'Please explain why you feel this document is relevant to your case. - welsh',
   delete: 'Delete - welsh',
   documentInLanguage: 'Document - welsh',
   fileuploaded: 'Files uploaded - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
   uploadAFile: 'Upload a file - welsh',
+  uploadFileHint: 'Once you have selected the file click "Upload file" to upload it. - welsh',
   errors: {
     documentUpload: {
-      noDocumentUploaded: 'Please choose a file. - welsh',
+      noInput: 'You cannot continue without providing additional information or a document - welsh',
       fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 30MB (multimedia files) - welsh`,
-      multimediaFileSize:
-        'The file you uploaded is too large. Maximum file size allowed is 500MB for multimedia files - welsh',
-      fileFormat: `The file you uploaded is in the wrong format.
-            Upload your file again in the correct format - welsh`,
+      fileFormat: `This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh`,
       selectFileToUpload: 'Select a file to upload - welsh',
       uploadError: 'The selected file could not be uploaded – try again - welsh',
       maxFileError: 'You can only select up to 10 files at the same time - welsh',
-      fileDescriptionRequired: 'Enter a description for the file selected for upload - welsh',
     },
     documentDetail: {
       notAlphaNumeric: 'You have entered an invalid character. Please enter letters and numbers only. - welsh',

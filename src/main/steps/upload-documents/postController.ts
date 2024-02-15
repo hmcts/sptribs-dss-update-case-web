@@ -47,9 +47,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       return super.redirect(req, res, req.originalUrl);
     }
     if (ContinueFromPage) {
-      if (!req.session.hasOwnProperty('caseDocuments') || req.session['caseDocuments'].length === 0) {
+      const numDocsUploaded:number = req.session.hasOwnProperty('caseDocuments') ? req.session['caseDocuments'].length : 0;
+      if (numDocsUploaded == 0 && req.session['documentDetail'] == '') {
         this.uploadFileError(req, res, req.originalUrl, {
-          propertyName: 'noDocumentUploaded',
+          propertyName: 'noInput',
           errorType: 'required',
         });
       } else {
@@ -94,33 +95,19 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   ) {
     if (req.files) {
       const { documents } = files;
-      const extension = documents.name.toLowerCase().split('.')[documents.name.split('.').length - 1];
       if (this.fileNullCheck(files)) {
         this.uploadFileError(req, res, redirectUrl, {
           propertyName: 'selectFileToUpload',
           errorType: 'required',
         });
-        // Uncomment below checks, once there are validations in place
       } else if (!this.isValidFileFormat(files)) {
         this.uploadFileError(req, res, redirectUrl, {
           propertyName: 'fileValidation',
           errorType: 'required',
         });
       } else if (this.isFileSizeGreaterThanMaxAllowed(files)) {
-        if (multimediaExtensions().includes(extension)) {
-          this.uploadFileError(req, res, redirectUrl, {
-            propertyName: 'multimediaFileSize',
-            errorType: 'required',
-          });
-        } else {
-          this.uploadFileError(req, res, redirectUrl, {
-            propertyName: 'fileSize',
-            errorType: 'required',
-          });
-        }
-      } else if (req.body['eventName'] === '') {
         this.uploadFileError(req, res, redirectUrl, {
-          propertyName: 'fileDescriptionRequired',
+          propertyName: 'fileSize',
           errorType: 'required',
         });
       } else {
