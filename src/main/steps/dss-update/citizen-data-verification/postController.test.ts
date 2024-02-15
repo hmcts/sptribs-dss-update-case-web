@@ -3,9 +3,37 @@ import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../../app/form/Form';
 
 import CitizenDataVerificationPostController from './postController';
+import { DATA_VERIFICATION, UPLOAD_DOCUMENT } from '../../urls';
+import axios from 'axios';
 
 jest.mock('axios');
 let req, res;
+
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyJ9.KaDIFSDdD3ZIYCl_qavvYbQ3a4abk47iBOZhB1-9mUQ';
+
+const caseData = {
+  status: 200,
+  data: {
+    data: {
+      cicCaseFullName: 'subject name',
+      cicCaseDateOfBirth: '2000-01-01'
+    }
+  }
+};
+
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+mockedAxios.post.mockImplementation((url) => {
+  switch (url) {
+    case 'https://idam-api.aat.platform.hmcts.net/o/token':
+      return Promise.resolve({data: {id_token: token, access_token: token}}
+      )
+    case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
+      return Promise.resolve({ data: 'TOKEN'})
+    default:
+      return Promise.reject(new Error('not found'))
+  }
+});
 
 describe('citizenDataVerification test cases', () => {
   beforeEach(() => {
@@ -17,118 +45,135 @@ describe('citizenDataVerification test cases', () => {
     fields: {},
   } as unknown as FormContent;
 
-  test('Should submit the case and navigate to confirmation page', async () => {
+  test('Should navigate to upload document page if data entered matched those stored on case', async () => {
+
     const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+
     req = mockRequest({
       body: {
         saveAndContinue: true,
-        'DateFields_0-day': '01',
-        'DateFields_0-month': '01',
-        'DateFields_0-year': '2020',
-        InputFields_0: 'childfirstname',
-        InputFields_1: 'childlastname',
+        'subjectDOB-day': '01',
+        'subjectDOB-month': '01',
+        'subjectDOB-year': '2000',
+        subjectDOB: {
+          year: '2000',
+          month: '01',
+          day: '01'
+        },
+        subjectFullName: 'subject name'
       },
       session: {
-        verificationData: {
-          caseId: 1678371510528100,
-          dssHeaderDetails: 'Child Details',
-          dssQuestionAnswerPairs: [
-            {
-              question: 'First Name',
-              answer: 'ChildFirstName',
-            },
-            {
-              question: 'Last Name',
-              answer: 'ChildLastName',
-            },
-          ],
-          dssQuestionAnswerDatePairs: [
-            {
-              question: 'Date of Birth',
-              answer: '2020-01-01',
-            },
-          ],
-        },
+        isDataVerified: false,
+        errors: []
       },
     });
+
+    mockedAxios.get.mockImplementation(() => Promise.resolve(caseData));
+
     await controller.post(req, res);
-    expect(res.redirect).toHaveBeenCalled();
-  });
-  test('Testing content with error', async () => {
-    req = mockRequest({
-      body: {
-        saveAndContinue: true,
-        'DateFields_0-day': '1',
-        'DateFields_0-month': '1',
-        'DateFields_0-year': '2020',
-        InputFields_0: 'childfirstname',
-        InputFields_1: 'childlastname',
-      },
-      session: {
-        verificationData: {
-          caseId: 1678371510528100,
-          dssHeaderDetails: 'Child Details',
-          dssQuestionAnswerPairs: [
-            {
-              question: 'First Name',
-              answer: 'ChildFirstName',
-            },
-            {
-              question: 'Last Name',
-              answer: 'ChildLastName',
-            },
-          ],
-          dssQuestionAnswerDatePairs: [
-            {
-              question: 'Date of Birth',
-              answer: '2020-01-01',
-            },
-          ],
-        },
-      },
-    });
-    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
-    await controller.post(req, res);
-    expect(req.session.errors).not.toBe(null);
-    expect(res.redirect).toHaveBeenCalled();
+    expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
   });
 
-  test('Testing content with error data not matching', async () => {
+  test('Should navigate to original url if data does not match and return errors', async () => {
+
+    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+
     req = mockRequest({
       body: {
         saveAndContinue: true,
-        'DateFields_0-day': '11',
-        'DateFields_0-month': '12',
-        'DateFields_0-year': '2019',
-        InputFields_0: 'john',
-        InputFields_1: 'doe',
+        'subjectDOB-day': '02',
+        'subjectDOB-month': '02',
+        'subjectDOB-year': '1990',
+        subjectDOB: {
+          year: '1990',
+          month: '02',
+          day: '02'
+        },
+        subjectFullName: 'bob smith'
       },
       session: {
-        verificationData: {
-          caseId: 1678371510528100,
-          dssHeaderDetails: 'Child Details',
-          dssQuestionAnswerPairs: [
-            {
-              question: 'First Name',
-              answer: 'ChildFirstName',
-            },
-            {
-              question: 'Last Name',
-              answer: 'ChildLastName',
-            },
-          ],
-          dssQuestionAnswerDatePairs: [
-            {
-              question: 'Date of Birth',
-              answer: '2020-01-01',
-            },
-          ],
-        },
+        isDataVerified: false,
+        errors: []
       },
     });
-    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+    req.originalUrl = DATA_VERIFICATION;
+
+    mockedAxios.get.mockImplementation(() => Promise.resolve(caseData));
+
     await controller.post(req, res);
-    expect(req.session.errors).not.toBe(null);
-    expect(res.redirect).toHaveBeenCalled();
+    expect(req.session.errors).toStrictEqual([{ propertyName: 'inputFields', errorType: 'required' }]);
+    expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
+  });
+
+  test('Should navigate to original url and return errors if exception thrown from http request', async () => {
+
+    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        'subjectDOB-day': '02',
+        'subjectDOB-month': '02',
+        'subjectDOB-year': '1990',
+        subjectDOB: {
+          year: '1990',
+          month: '02',
+          day: '02'
+        },
+        subjectFullName: 'bob smith'
+      },
+      session: {
+        isDataVerified: false,
+        errors: []
+      },
+    });
+    req.originalUrl = DATA_VERIFICATION;
+
+    mockedAxios.get.mockImplementation(() => Promise.reject(new Error('case not found')));
+
+    await controller.post(req, res);
+    expect(req.session.errors).toStrictEqual([{ propertyName: 'caseError', errorType: 'required' }]);
+    expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
+  });
+
+  test('Should navigate to upload document page if data is verified and no errors', async () => {
+    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        'subjectDOB-day': '01',
+        'subjectDOB-month': '01',
+        'subjectDOB-year': '2020',
+        subjectFullName: 'subject name'
+      },
+      session: {
+        isDataVerified: true,
+        errors: []
+      },
+    });
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
+  });
+
+  test('Should navigate to original url if session errors is not empty', async () => {
+    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        'subjectDOB-day': '01',
+        'subjectDOB-month': '01',
+        'subjectDOB-year': '2020',
+        subjectFullName: ''
+      },
+      session: {
+        errors: [
+          { propertyName: 'subjectFullName', errorType: 'required' }
+        ]
+      },
+    });
+    req.originalUrl = DATA_VERIFICATION;
+
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
   });
 });
