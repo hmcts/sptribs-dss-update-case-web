@@ -52,7 +52,6 @@ new ErrorHandler().enableFor(app, logger);
 new ErrorHandler().handleNextErrorsFor(app);
 new Nunjucks().enableFor(app);
 new Webpack().enableFor(app);
-app.locals.developmentMode = process.env.NODE_ENV !== 'production';
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
 app.use(bodyParser.json() as RequestHandler);
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
