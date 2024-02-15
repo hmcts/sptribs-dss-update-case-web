@@ -22,7 +22,7 @@ export default class CitizenDataVerificationPostController extends PostControlle
     const { ...formData } = form.getParsedBody(req.body);
     req.session.errors = form.getErrors(formData);
 
-    let nextUrl: string;
+    let nextUrl = req.originalUrl;
 
     if (req.session.errors.length === 0) {
       if (req.session.isDataVerified) {
@@ -46,18 +46,13 @@ export default class CitizenDataVerificationPostController extends PostControlle
               nextUrl = UPLOAD_DOCUMENT;
             } else {
               req.session.errors.push({ propertyName: 'inputFields', errorType: 'required' });
-              nextUrl = req.originalUrl;
             }
           }
         } catch (error) {
           req.session.errors.push({ propertyName: 'caseError', errorType: 'required' });
-          nextUrl = req.originalUrl;
         }
       }
-    } else {
-      nextUrl = req.originalUrl;
     }
-
 
     req.session.save(err => {
       if (err) {

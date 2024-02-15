@@ -5,45 +5,62 @@ import { FormContent } from '../../../app/form/Form';
 import CitizenDataVerificationPostController from './postController';
 import { DATA_VERIFICATION, UPLOAD_DOCUMENT } from '../../urls';
 import axios from 'axios';
+import { isDateInputNotFilled, isFieldFilledIn } from '../../../app/form/validation';
+import { covertToDateObject } from '../../../app/form/parser';
 
 jest.mock('axios');
 let req, res;
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyJ9.KaDIFSDdD3ZIYCl_qavvYbQ3a4abk47iBOZhB1-9mUQ';
-
-const caseData = {
-  status: 200,
-  data: {
-    data: {
-      cicCaseFullName: 'subject name',
-      cicCaseDateOfBirth: '2000-01-01'
-    }
-  }
-};
-
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-mockedAxios.post.mockImplementation((url) => {
-  switch (url) {
-    case 'https://idam-api.aat.platform.hmcts.net/o/token':
-      return Promise.resolve({data: {id_token: token, access_token: token}}
-      )
-    case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
-      return Promise.resolve({ data: 'TOKEN'})
-    default:
-      return Promise.reject(new Error('not found'))
-  }
-});
-
-describe('citizenDataVerification test cases', () => {
+describe('citizenDataVerification post controller test cases', () => {
   beforeEach(() => {
     req = mockRequest();
     res = mockResponse();
   });
 
   const mockFormContent = {
-    fields: {},
+    fields: {
+      subjectFullName: {
+        type: 'text',
+        validator: isFieldFilledIn,
+      },
+      subjectDOB: {
+        type: 'date',
+        values: [
+          { label: l => l.dateFormat['day'], name: 'day' },
+          { label: l => l.dateFormat['month'], name: 'month' },
+          { label: l => l.dateFormat['year'], name: 'year' },
+        ],
+        parser: body => covertToDateObject('subjectDOB', body as Record<string, unknown>),
+        validator: isDateInputNotFilled,
+      }
+    },
   } as unknown as FormContent;
+
+  const token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyJ9.KaDIFSDdD3ZIYCl_qavvYbQ3a4abk47iBOZhB1-9mUQ';
+
+  const caseData = {
+    status: 200,
+    data: {
+      data: {
+        cicCaseFullName: 'subject name',
+        cicCaseDateOfBirth: '2000-01-01'
+      }
+    }
+  };
+
+  const mockedAxios = axios as jest.Mocked<typeof axios>;
+  mockedAxios.post.mockImplementation((url) => {
+    switch (url) {
+      case 'https://idam-api.aat.platform.hmcts.net/o/token':
+        return Promise.resolve({data: {id_token: token, access_token: token}}
+        )
+      case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
+        return Promise.resolve({ data: 'TOKEN'})
+      default:
+        return Promise.reject(new Error('not found'))
+    }
+  });
 
   test('Should navigate to upload document page if data entered matched those stored on case', async () => {
 
@@ -165,15 +182,12 @@ describe('citizenDataVerification test cases', () => {
         'subjectDOB-year': '2020',
         subjectFullName: ''
       },
-      session: {
-        errors: [
-          { propertyName: 'subjectFullName', errorType: 'required' }
-        ]
-      },
+      session: {},
     });
     req.originalUrl = DATA_VERIFICATION;
 
     await controller.post(req, res);
+    expect(req.session.errors).toStrictEqual([{ propertyName: 'subjectFullName', errorType: 'required' }]);
     expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
   });
 });
