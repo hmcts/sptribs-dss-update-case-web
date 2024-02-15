@@ -78,12 +78,14 @@
   label: {
     text: paragraph1,
     classes: "govuk-label-s",
-    isPageHeading: true
+    isPageHeading: false
   }
 }) }}
 </div>
+<h2 class="govuk-heading-m">{{additionalDocumentsHeading}}</h2>
 
-<p class="govuk-body">{{uploadedDocumentsSubTitle}}</p>
+<p class="govuk-body">{{paragraph2}}</p>
+<p class="govuk-body">{{paragraph3}}</p>
 <ul class="govuk-list govuk-list--bullet">
 {% for item in uploadDocumentsBullets %}
         <li>{{item | safe}}</li>
