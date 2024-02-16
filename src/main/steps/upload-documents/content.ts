@@ -133,7 +133,7 @@ export const generateContent: TranslationFn = content => {
   };
 };         
 
-export function getErrors(language) {
+export function getErrors(language: string) {
   let errors: any
   switch (language) {
     case 'cy':
@@ -142,8 +142,8 @@ export function getErrors(language) {
     case 'en':
     default:
       errors = en().errors;
-
-  return errors;
   }
+  
+  return errors;
 }
 

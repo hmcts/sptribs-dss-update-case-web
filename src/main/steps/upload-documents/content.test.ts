@@ -1,4 +1,4 @@
-import { cy, en, form, generateContent } from './content';
+import { cy, en, form, generateContent, getErrors } from './content';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const englishContent = () => ({
@@ -137,5 +137,18 @@ describe('generateContent() function Test', () => {
     // const genCON: ANYTYPE = generateContent;
     expect(generateContent(content)).not.toEqual({});
     expect(generateContent(content).form).toBe(form);
+  });
+});
+
+describe('getErrors() function Test', () => {
+  test('getErrors English', () => {
+    const englishErrors = getErrors('en');
+    expect(englishErrors).toEqual(en().errors);
+  });
+
+  test('getErrors Welsh', () => {
+    const welshErrors = getErrors('cy');
+    console.log("3")
+    expect(welshErrors).toEqual(cy().errors);
   });
 });
