@@ -165,6 +165,9 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       case 'maxFileError':
         errorMessage = documentUploadErrors.documentUpload.maxFileError;
         break;
+      case 'fileFormat':
+        errorMessage = documentUploadErrors.documentUpload.fileFormat;
+        break;
       default:
         errorMessage = '';
     }
