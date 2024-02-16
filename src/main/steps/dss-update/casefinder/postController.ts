@@ -9,12 +9,12 @@ import { DATA_VERIFICATION } from '../../urls';
 import { CaseWithId } from '../../../app/case/case';
 
 @autobind
-export default class UploadDocumentController extends PostController<AnyObject> {
+export default class CaseFinderController extends PostController<AnyObject> {
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
-
+    //19,29-31,38,43
     if (!req.session.userCase) {
       req.session.userCase = {} as CaseWithId;
     }
@@ -22,7 +22,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     const { ...formData } = form.getParsedBody(req.body);
     req.session.errors = form.getErrors(formData);
 
-    let nextUrl: string;
+    let nextUrl = req.originalUrl;
     if (req.session.errors.length === 0) {
       try {
         const responseFromServerCall = await getCase(req, String(req.body.applicantCaseId));
@@ -35,8 +35,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         req.session.caseRefId = <string>req.body['applicantCaseId'];
         nextUrl = req.originalUrl;
       }
-    } else {
-      nextUrl = req.originalUrl;
     }
 
     req.session.save(err => {

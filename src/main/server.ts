@@ -40,6 +40,7 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again later.',
 });
 app.locals.ENV = env;
+app.locals.developmentMode = process.env.NODE_ENV !== 'production';
 app.use(CASE_SEARCH_URL, limiter); //PRL-4123 - Apply the rate limiting middleware to case-finder
 app.disable('x-powered-by'); //PRL-4121
 new PropertiesVolume().enableFor(app);
@@ -51,7 +52,6 @@ new ErrorHandler().enableFor(app, logger);
 new ErrorHandler().handleNextErrorsFor(app);
 new Nunjucks().enableFor(app);
 new Webpack().enableFor(app);
-app.locals.developmentMode = process.env.NODE_ENV !== 'production';
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
 app.use(bodyParser.json() as RequestHandler);
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
