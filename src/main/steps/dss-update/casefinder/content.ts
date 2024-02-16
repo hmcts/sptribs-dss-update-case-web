@@ -9,12 +9,13 @@ export const en = () => ({
   title: 'Existing case details',
   line1: 'You can find this information in the email you received after submitting your tribunal forms.',
   subtitle: 'Case reference number',
-  caseNumberHint: 'This number will be 16 digits long.',
+  caseNumberHint: 'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ;',
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
       required: 'Please enter a reference number',
-      notNumeric: 'Please enter a valid reference number',
+      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /',
+      caseNotFound: 'Please enter a valid reference number',
     },
   },
 });
@@ -25,12 +26,13 @@ export const cy = () => ({
   line1:
     'You can find this information in the email you received after submitting your tribunal forms. - welsh',
   subtitle: 'Case reference number - welsh',
-  caseNumberHint: 'This number will be 16 digits long - welsh.',
+  caseNumberHint: 'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ; - welsh.',
   errorSummaryMessage: 'There is a problem - welsh',
   errors: {
     applicantCaseId: {
       required: 'Please enter a reference number - welsh',
-      notNumeric: 'Please enter a valid reference number - welsh',
+      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! / - welsh',
+      caseNotFound: 'Please enter a valid reference number - welsh',
     },
   },
 });
