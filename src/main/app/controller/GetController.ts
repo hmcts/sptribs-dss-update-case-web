@@ -30,61 +30,74 @@ export class GetController {
       return;
     }
 
-    try {
-      const name = this.getName(req) as string;
-      const language = this.getPreferredLanguage(req) as Language;
-      const captionValue = this.getCaption(req) as string;
-      const document_type = this.getDocumentType(req) as string;
-      const byApplicant = req.query['byApplicant'] as string;
-      const addresses = req.session?.addresses;
-      const content = generatePageContent({
-        language,
-        pageContent: this.content,
-        userCase: req.session?.userCase,
-        userEmail: req.session?.user?.email,
-        caption: captionValue,
-        document_type,
-        userCaseList: req.session?.userCaseList,
-        addresses,
-        name,
-        userIdamId: req.session?.user?.id,
-        byApplicant,
-        additionalData: {
-          req,
-        },
-      });
+    if (req.query.hasOwnProperty('logged-in')) {
+      req.session.verificationData = {};
+      req.session['caseRefId'] = '';
+      req.session['caseTypeId'] = '';
+      req.session.isDataVerified = false;
+      req.session['jurisdiction'] = '';
+      req.session['caseDocuments'] = [];
+      //req.session.cookie. = '';
 
-      if (req.originalUrl === UPLOAD_DOCUMENT || req.originalUrl === DATA_VERIFICATION) {
-        logger.info(`${req.originalUrl} is being called`);
-      } else {
-        req.session['isDataVerified'] = false;
-        req.session['tempValidationData'] = undefined;
-      }
+      req.session.loggedInSystemUserType = req.query['logged-in'] as string;
+      return res.redirect(Urls.START_HOME);
+    } else {
+      try {
+        const name = this.getName(req) as string;
+        const language = this.getPreferredLanguage(req) as Language;
+        const captionValue = this.getCaption(req) as string;
+        const document_type = this.getDocumentType(req) as string;
+        const byApplicant = req.query['byApplicant'] as string;
+        const addresses = req.session?.addresses;
+        const content = generatePageContent({
+          language,
+          pageContent: this.content,
+          userCase: req.session?.userCase,
+          userEmail: req.session?.user?.email,
+          caption: captionValue,
+          document_type,
+          userCaseList: req.session?.userCaseList,
+          addresses,
+          name,
+          userIdamId: req.session?.user?.id,
+          byApplicant,
+          additionalData: {
+            req,
+          },
+        });
 
-      /**
-       * Handled scenario where caption is not present as query param
-       */
-      const viewData = {
-        ...content,
-        ...renderableContents,
-        sessionErrors: req.session.hasOwnProperty('errors') ? req.session.errors : [],
-        FileErrors: req.session.fileErrors || [],
-        caseId: req.session.userCase?.id,
-      };
+        if (req.originalUrl === UPLOAD_DOCUMENT || req.originalUrl === DATA_VERIFICATION) {
+          logger.info(`${req.originalUrl} is being called`);
+        } else {
+          req.session['isDataVerified'] = false;
+          req.session['tempValidationData'] = undefined;
+        }
 
-      if (req.session?.errors) {
-        req.session.errors = undefined;
+        /**
+         * Handled scenario where caption is not present as query param
+         */
+        const viewData = {
+          ...content,
+          ...renderableContents,
+          sessionErrors: req.session.hasOwnProperty('errors') ? req.session.errors : [],
+          FileErrors: req.session.fileErrors || [],
+          caseId: req.session['caseRefId'],
+        };
+
+        if (req.session?.errors) {
+          req.session.errors = undefined;
+        }
+        if (req.session?.fileErrors) {
+          req.session.fileErrors = [];
+        }
+        //Add caption only if it exists else it will be rendered by specific page
+        if (captionValue) {
+          Object.assign(viewData, { caption: captionValue });
+        }
+        res.render(this.view, viewData);
+      } catch (error) {
+        res.redirect('/error');
       }
-      if (req.session?.fileErrors) {
-        req.session.fileErrors = [];
-      }
-      //Add caption only if it exists else it will be rendered by specific page
-      if (captionValue) {
-        Object.assign(viewData, { caption: captionValue });
-      }
-      res.render(this.view, viewData);
-    } catch (error) {
-      res.redirect('/error');
     }
   }
 
