@@ -12,6 +12,7 @@ import { FormFields, FormFieldsFn } from '../../app/form/Form';
 import { isAlphaNumeric } from '../../app/form/validation';
 import { RpeApi } from '../../app/s2s/rpeAuth';
 import { CHECK_YOUR_ANSWERS } from '../urls';
+import { getErrors } from './content';
 /* The UploadDocumentController class extends the PostController class and overrides the
 PostDocumentUploader method */
 
@@ -30,29 +31,29 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const { files }: AppRequest<AnyObject> = req;
     const ContinueFromPage = req['body'].hasOwnProperty('continue');
+
     if (req.session) {
       req.session.errors = [];
+      req.session.fileErrors = [];
     }
+    const documentUploadErrors = getErrors(req.session['lang']);
     req.session['documentDetail'] = req.body['documentDetail'];
     req.session.save();
 
     if (isAlphaNumeric(req.body['documentDetail'] as string)) {
-      req.session.errors?.push({ propertyName: 'documentDetail', errorType: 'notAlphaNumeric' });
+      req.session.fileErrors?.push({ text: documentUploadErrors.documentDetail.notAlphaNumeric, href: '#documentDetail' });
       req.session['documentDetail'] = '';
       return super.redirect(req, res, req.originalUrl);
     }
     if (isAlphaNumeric(req.body['eventName'] as string)) {
-      req.session.errors?.push({ propertyName: 'eventName', errorType: 'notAlphaNumeric' });
+      req.session.fileErrors?.push({ text: documentUploadErrors.eventName.notAlphaNumeric, href: '#eventName' });
       req.session['eventName'] = '';
       return super.redirect(req, res, req.originalUrl);
     }
     if (ContinueFromPage) {
       const numDocsUploaded:number = req.session.hasOwnProperty('caseDocuments') ? req.session['caseDocuments'].length : 0;
       if (numDocsUploaded == 0 && req.session['documentDetail'] == '') {
-        this.uploadFileError(req, res, req.originalUrl, {
-          propertyName: 'noInput',
-          errorType: 'required',
-        });
+        this.uploadFileError(req, res, req.originalUrl, 'noInput');
       } else {
         super.redirect(req, res, CHECK_YOUR_ANSWERS);
       }
@@ -96,20 +97,11 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     if (req.files) {
       const { documents } = files;
       if (this.fileNullCheck(files)) {
-        this.uploadFileError(req, res, redirectUrl, {
-          propertyName: 'selectFileToUpload',
-          errorType: 'required',
-        });
+        this.uploadFileError(req, res, redirectUrl, 'selectFileToUpload');
       } else if (!this.isValidFileFormat(files)) {
-        this.uploadFileError(req, res, redirectUrl, {
-          propertyName: 'fileValidation',
-          errorType: 'required',
-        });
+        this.uploadFileError(req, res, redirectUrl, 'fileValidation');
       } else if (this.isFileSizeGreaterThanMaxAllowed(files)) {
-        this.uploadFileError(req, res, redirectUrl, {
-          propertyName: 'fileSize',
-          errorType: 'required',
-        });
+        this.uploadFileError(req, res, redirectUrl, 'fileSize');
       } else {
         const formData: FormData = new FormData();
         formData.append('file', documents.data, {
@@ -132,17 +124,11 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           });
           req.session.save(() => res.redirect(redirectUrl));
         } catch (error) {
-          this.uploadFileError(req, res, redirectUrl, {
-            propertyName: 'uploadError',
-            errorType: 'required',
-          });
+          this.uploadFileError(req, res, redirectUrl, 'uploadError');
         }
       }
     } else {
-      this.uploadFileError(req, res, redirectUrl, {
-        propertyName: 'selectFileToUpload',
-        errorType: 'required',
-      });
+      this.uploadFileError(req, res, redirectUrl, 'selectFileToUpload');
     }
   }
 
@@ -159,9 +145,30 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     req: AppRequest<AnyObject>,
     res: Response<any, Record<string, any>>,
     redirectUrl: string,
-    errObj: any
+    errorCode: string
   ) {
-    req.session.errors = [errObj];
+    const documentUploadErrors = getErrors(req.session['lang']);
+    let errorMessage:string
+    switch (errorCode) {
+      case 'noInput':
+        errorMessage = documentUploadErrors.documentUpload.noInput;
+        break;
+      case 'fileSize':
+        errorMessage = documentUploadErrors.documentUpload.fileSize;
+        break;
+      case 'selectFileToUpload':
+        errorMessage = documentUploadErrors.documentUpload.selectFileToUpload;
+        break;
+      case 'uploadError':
+        errorMessage = documentUploadErrors.documentUpload.uploadError;
+        break;
+      case 'maxFileError':
+        errorMessage = documentUploadErrors.documentUpload.maxFileError;
+        break;
+      default:
+        errorMessage = '';
+    }
+    req.session.fileErrors = [{text: errorMessage, href: "#file-upload-1"}];
     req.session.save(err => {
       if (err) {
         throw err;

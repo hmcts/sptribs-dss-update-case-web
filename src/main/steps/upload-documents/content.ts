@@ -131,4 +131,19 @@ export const generateContent: TranslationFn = content => {
     ...translations,
     form,
   };
-};
+};         
+
+export function getErrors(language) {
+  let errors: any
+  switch (language) {
+    case 'cy':
+      errors = cy().errors;
+      break;
+    case 'en':
+    default:
+      errors = en().errors;
+
+  return errors;
+  }
+}
+
