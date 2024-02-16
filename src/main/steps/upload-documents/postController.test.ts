@@ -131,7 +131,7 @@ describe('Testing the post controller', () => {
       ''
     );
     expect(res.redirect).not.toHaveBeenCalled();
-    expect(req.session?.errors).toHaveLength(1);
+    expect(req.session?.fileErrors).toHaveLength(1);
   });
 
   test('File validations - file uploading successfull', async () => {
@@ -157,16 +157,13 @@ describe('Testing the post controller', () => {
       ''
     );
     expect(res.redirect).not.toHaveBeenCalled();
-    expect(req.session?.errors).toHaveLength(1);
+    expect(req.session?.fileErrors).toHaveLength(1);
   });
 
   test('uploadFileError', () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
-    controller.uploadFileError(newRequest, res, '', {
-      propertyName: 'fileValidation',
-      errorType: 'required',
-    });
+    controller.uploadFileError(newRequest, res, '', 'fileValidation');
     expect(res.redirect).not.toHaveBeenCalled();
   });
 
