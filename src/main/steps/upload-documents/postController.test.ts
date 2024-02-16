@@ -29,10 +29,12 @@ describe('Testing the post controller', () => {
         files: { documents: {} },
       },
       session: {
-        applicantCaseId: 'caseRefId',
         caseDocuments: [],
         caseTypeId: 'caseRefId',
         jurisdiction: 'ADOPTION',
+        userCase: {
+          id: 'caseRefId'
+        }
       },
     });
     const data = {

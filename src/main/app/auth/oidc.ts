@@ -49,7 +49,6 @@ export const getIdamToken = async (
 };
 
 const createIdamToken = (params: Record<string, string>): Promise<AxiosResponse<OidcResponse>> => {
-  //TODO: verify these secrets
   const id: string = config.get('services.idam.clientID');
   const secret: string = config.get('services.idam.clientSecret');
   const tokenUrl: string = config.get('services.idam.tokenURL');
