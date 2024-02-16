@@ -54,7 +54,6 @@ export default class DocumentUpload extends GetController {
       });
     } catch (err) {
       res.redirect('/error');
-      console.log(err);
     }
   };
 }

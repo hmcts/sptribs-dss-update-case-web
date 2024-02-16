@@ -9,32 +9,38 @@ const englishContent = () => ({
   title: '[title]',
   errorSummaryMessage: 'There is a problem',
   errors: {
-    dataNotMatched: {
-      required:
-        "Some of the information you have given doesn't match our records. Please enter the right value and retry.",
+    subjectFullName: {
+      required: 'Some of the form fields are empty. Please enter the values and retry',
     },
-    isEmptyFields: {
-      required: 'Some of the form fields are empty. Please enter the values and retry.',
+    subjectDOB: {
+      required: 'Some of the date fields are empty. Please enter the values and retry.',
+      invalid: 'Invalid date'
     },
     inputFields: {
-      notAlphaNumeric: 'Some of the form fields have a invalid character. Please enter letters and numbers only.',
+      required: 'Data entered doesn\'t match'
+    },
+    caseError: {
+      required: 'Error verifying case'
     },
   },
 });
 const welshContent = () => ({
-  serviceName: 'DSS Update Case',
-  title: '[title]',
-  errorSummaryMessage: 'There is a problem',
+  serviceName: 'DSS Update Case - welsh',
+  title: '[title] - welsh',
+  errorSummaryMessage: 'There is a problem - welsh',
   errors: {
-    dataNotMatched: {
+    subjectFullName: {
       required: 'Some of the form fields are empty. Please enter the values and retry - welsh',
     },
-    isEmptyFields: {
-      required: 'Some of the form fields are empty. Please enter the values and retry.',
+    subjectDOB: {
+      required: 'Some of the date fields are empty. Please enter the values and retry. - welsh',
+      invalid: 'Invalid date - welsh'
     },
     inputFields: {
-      notAlphaNumeric:
-        'Some of the form fields have a invalid character. Please enter letters and numbers only. - welsh',
+      required: 'Data entered doesn\'t match - welsh'
+    },
+    caseError: {
+      required: 'Error verifying case - welsh'
     },
   },
 });
