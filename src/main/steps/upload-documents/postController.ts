@@ -76,7 +76,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     files: any
   ) {
     if (req.session['caseDocuments'] && this.checkIfMaxDocumentUploaded(req.session['caseDocuments'])) {
-      req.session.errors = [{ propertyName: 'maxFileError', errorType: 'required' }];
+      const documentUploadErrors = getErrors(req.session['lang']);
+      req.session.fileErrors = [{text: documentUploadErrors.documentUpload.maxFileError, href: "#file-upload-1"}];
       req.session.save(err => {
         if (err) {
           throw err;
