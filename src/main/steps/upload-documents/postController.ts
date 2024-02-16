@@ -99,7 +99,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       if (this.fileNullCheck(files)) {
         this.uploadFileError(req, res, redirectUrl, 'selectFileToUpload');
       } else if (!this.isValidFileFormat(files)) {
-        this.uploadFileError(req, res, redirectUrl, 'fileValidation');
+        this.uploadFileError(req, res, redirectUrl, 'fileFormat');
       } else if (this.isFileSizeGreaterThanMaxAllowed(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileSize');
       } else {
