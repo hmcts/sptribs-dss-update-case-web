@@ -5,19 +5,22 @@ import { AnyType } from '../../../app/form/validation';
 import { cy, en, generateContent } from './content';
 
 const englishContent = () => ({
-  serviceName: 'DSS Update Case',
-  title: '[title]',
+  serviceName: 'Update an existing First-tier Tribunal case',
+  title: 'Subject of this case',
   errorSummaryMessage: 'There is a problem',
+  subjectFullNameLabel: "Full name",
+  subjectDOBLabel: "Date of birth",
   errors: {
     subjectFullName: {
-      required: 'Some of the form fields are empty. Please enter the values and retry',
+      required: 'Please enter full name',
+      invalid: 'Please enter a valid name',
     },
     subjectDOB: {
-      required: 'Some of the date fields are empty. Please enter the values and retry.',
-      invalid: 'Invalid date'
+      required: 'Please enter date of birth',
+      invalid: 'Please enter valid date of birth'
     },
     inputFields: {
-      required: 'Data entered doesn\'t match'
+      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again.'
     },
     caseError: {
       required: 'Error verifying case'
@@ -25,19 +28,22 @@ const englishContent = () => ({
   },
 });
 const welshContent = () => ({
-  serviceName: 'DSS Update Case - welsh',
-  title: '[title] - welsh',
+  serviceName: 'Update an existing First-tier Tribunal case - welsh',
+  title: 'Subject of this case - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
+  subjectFullNameLabel: "Full name - welsh",
+  subjectDOBLabel: "Date of birth - welsh",
   errors: {
     subjectFullName: {
-      required: 'Some of the form fields are empty. Please enter the values and retry - welsh',
+      required: 'Please enter full name - welsh',
+      invalid: 'Please enter a valid name - welsh',
     },
     subjectDOB: {
-      required: 'Some of the date fields are empty. Please enter the values and retry. - welsh',
-      invalid: 'Invalid date - welsh'
+      required: 'Please enter date of birth - welsh',
+      invalid: 'Please enter valid date of birth - welsh'
     },
     inputFields: {
-      required: 'Data entered doesn\'t match - welsh'
+      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again. - welsh'
     },
     caseError: {
       required: 'Error verifying case - welsh'
