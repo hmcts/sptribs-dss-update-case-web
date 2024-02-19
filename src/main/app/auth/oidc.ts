@@ -58,8 +58,16 @@ const createIdamToken = (params: Record<string, string>): Promise<AxiosResponse<
   if (params.username && params.password) {
     data = `grant_type=password&username=${params.username}&password=${params.password}&client_id=${id}&client_secret=${secret}&scope=openid%20profile%20roles%20openid%20roles%20profile`;
   } else {
+    logger.error('Missing data for createIdamToken');
     throw new Error('Missing data for createIdamToken.');
   }
+
+  logger.info('client id: ' + id);
+  logger.info('client secret: ' + secret);
+  logger.info('tokenUrl: ' + tokenUrl);
+  logger.info('params username: ' + params.username);
+  logger.info('params password: ' + params.password);
+
   return axios.post(tokenUrl, data, { headers });
 };
 
