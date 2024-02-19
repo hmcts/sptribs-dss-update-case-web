@@ -24,6 +24,9 @@ export default class CitizenDataVerificationPostController extends PostControlle
 
     let nextUrl = req.originalUrl;
 
+    req.session.userCase.subjectFullName = formData.subjectFullName as string;
+    req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
+
     if (req.session.errors.length === 0) {
       if (req.session.isDataVerified) {
         nextUrl = UPLOAD_DOCUMENT;
@@ -41,8 +44,6 @@ export default class CitizenDataVerificationPostController extends PostControlle
 
             if (cicCaseFullName === subjectFullNameToVerify && cicCaseDateOfBirth === dateToVerify) {
               req.session.isDataVerified = true;
-              req.session.userCase.subjectFullName = subjectFullNameToVerify;
-              req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
               nextUrl = UPLOAD_DOCUMENT;
             } else {
               req.session.errors.push({ propertyName: 'inputFields', errorType: 'required' });
