@@ -14,7 +14,7 @@ export const en = () => ({
   errors: {
     applicantCaseId: {
       required: 'Please enter a reference number',
-      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /',
+      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
       caseNotFound: 'Please enter a valid reference number',
     },
   },
@@ -31,7 +31,7 @@ export const cy = () => ({
   errors: {
     applicantCaseId: {
       required: 'Please enter a reference number - welsh',
-      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! / - welsh',
+      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ; - welsh',
       caseNotFound: 'Please enter a valid reference number - welsh',
     },
   },
