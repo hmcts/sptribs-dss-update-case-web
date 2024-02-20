@@ -5,19 +5,17 @@ import { CommonContent, generatePageContent } from '../../common/common.content'
 import { generateContent } from './content';
 
 const enContent = {
-  serviceName: 'DSS Update Case',
-  title: 'Check your Answers',
-  change: 'Edit',
+  serviceName: 'Update an existing First-tier Tribunal case',
+  title: 'Check answers before submitting your update',
+  change: 'Change',
   continue: 'Accept and continue',
-  statementOfTruth: 'I beleive that the facts stated in this case are true.',
+  statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
   submitApplicationText: 'Now submit your Application',
-  listOfDocuments: 'List of documents uploaded',
   errorSummaryMessage: 'There is a problem',
-  declarationText:
-    'I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest beleif in its truth.',
   keys: {
-    fileName: 'File name',
-    description: 'Description',
+    infomation: 'Additional information',
+    fileName: 'Additional documents',
+    description: 'Why is this relevant to the case?',
   },
   errors: {
     submissionError: {
@@ -27,19 +25,17 @@ const enContent = {
 };
 
 const cyContent = {
-  serviceName: 'DSS Update Case - welsh',
-  title: 'Check your Answers - welsh',
-  change: 'Edit - welsh',
-  statementOfTruth: 'I beleive that the facts stated in this case are true. - welsh',
+  serviceName: 'Update an existing First-tier Tribunal case - welsh',
+  title: 'Check answers before submitting your update - welsh',
+  change: 'Change - welsh',
+  continue: 'Accept and send - welsh',
+  statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct. - welsh',
   submitApplicationText: 'Now submit your Application - welsh',
-  listOfDocuments: 'List of documents uploaded - welsh',
-  continue: 'Accept and continue - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
-  declarationText:
-    'I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest beleif in its truth. - welsh',
   keys: {
-    fileName: 'File name - welsh',
-    description: 'Description - welsh',
+    infomation: 'Additional information',
+    fileName: 'Additional documents - welsh',
+    description: 'Why is this relevant to the case? - welsh',
   },
   errors: {
     submissionError: {

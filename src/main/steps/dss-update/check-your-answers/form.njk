@@ -6,7 +6,6 @@
   {% if sections %}
     {% for item in sections %}
       {% if item %}
-        <h2 class="govuk-heading-m govuk-!-margin-top-7">{{listOfDocuments}}</h2>
         {{ govukSummaryList({
           classes: 'govuk-!-margin-bottom-9 govuk-!-margin-top-0',
           rows: item.rows
@@ -18,9 +17,5 @@
       <h1 class="govuk-heading-m">{{submitApplicationText}}</h1>
       <p class="govuk-body-m">{{statementOfTruth}}</p>
   {% endif %}
-{% endblock %}
-
-{% block after_fields %}
- <p class="govuk-body-m">{{declarationText}}</p>
 {% endblock %}
 

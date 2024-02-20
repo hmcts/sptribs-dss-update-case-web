@@ -74,7 +74,7 @@ export const UploadFormSummary = (
   caseInformation: string
 ): SummaryList | undefined => {
   const extraCaseInformation = {
-    key: 'Information',
+    key: keys.infomation,
     value: caseInformation,
     changeUrl: Urls['UPLOAD_DOCUMENT'],
   };
