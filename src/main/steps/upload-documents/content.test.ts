@@ -2,7 +2,7 @@ import { cy, en, form, generateContent, getErrors } from './content';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const englishContent = () => ({
-  serviceName: 'Update an existing First-tier Tribunal case',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Add information to a case',
   paragraph1:
     'Please provide any additional relevant information that you would like to add to this case. Don\'t include any personal financial information, such as your banking details.',
@@ -56,7 +56,7 @@ const englishContent = () => ({
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const welshContent = () => ({
-  serviceName: 'Update an existing First-tier Tribunal case - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
   title: 'Add information to a case - welsh',
   paragraph1:
     'Please provide any additional relevant information that you would like to add to this case. Don\'t include any personal financial information, such as your banking details. - welsh',
