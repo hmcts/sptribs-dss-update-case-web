@@ -148,7 +148,6 @@ describe('getErrors() function Test', () => {
 
   test('getErrors Welsh', () => {
     const welshErrors = getErrors('cy');
-    console.log("3")
     expect(welshErrors).toEqual(cy().errors);
   });
 });
