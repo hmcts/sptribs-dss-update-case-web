@@ -9,7 +9,7 @@ import { covertToDateObject } from '../../../app/form/parser';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
-  serviceName: 'Update an existing First-tier Tribunal case',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Subject of this case',
   errorSummaryMessage: 'There is a problem',
   subjectFullNameLabel: "Full name",
@@ -33,7 +33,7 @@ export const en = () => ({
 });
 
 export const cy = () => ({
-  serviceName: 'Update an existing First-tier Tribunal case - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
   title: 'Subject of this case - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
   subjectFullNameLabel: "Full name - welsh",

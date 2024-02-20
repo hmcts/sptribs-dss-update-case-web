@@ -5,7 +5,7 @@ import { AnyType } from '../../../app/form/validation';
 import { cy, en, generateContent } from './content';
 
 const englishContent = () => ({
-  serviceName: 'Update an existing First-tier Tribunal case',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Subject of this case',
   errorSummaryMessage: 'There is a problem',
   subjectFullNameLabel: "Full name",
@@ -28,7 +28,7 @@ const englishContent = () => ({
   },
 });
 const welshContent = () => ({
-  serviceName: 'Update an existing First-tier Tribunal case - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
   title: 'Subject of this case - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
   subjectFullNameLabel: "Full name - welsh",
