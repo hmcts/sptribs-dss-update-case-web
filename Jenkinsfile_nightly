@@ -34,14 +34,10 @@ static Map<String, Object> secret(String secretName, String envVariable) {
 }
 
 def secrets = [
-  'sptribs-${env}'    :[
-    secret('idam-ui-secret', 'IDAM_SECRET'),
-    secret('idam-system-user-password', 'TEST_PASSWORD'),
-    secret('citizen-user', 'CITIZEN_USERNAME'),
-    secret('citizen-password', 'CITIZEN_PASSWORD')
-  ],
-  's2s-${env}': [
-    secret('microservicekey-ds-ui', 'SERVICE_AUTH_SECRET')
+  'sptribs-${env}' :[
+    secret('idam-dss-update-ui-secret', 'IDAM_SECRET'),
+    secret('idam-systemupdate-username', 'CITIZEN_USERNAME'),
+    secret('idam-systemupdate-password', 'CITIZEN_PASSWORD')
   ]
 ]
 
