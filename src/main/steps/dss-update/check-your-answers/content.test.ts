@@ -5,7 +5,7 @@ import { CommonContent, generatePageContent } from '../../common/common.content'
 import { generateContent } from './content';
 
 const enContent = {
-  serviceName: 'Update an existing First-tier Tribunal case',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Check answers before submitting your update',
   change: 'Change',
   continue: 'Accept and continue',
@@ -25,7 +25,7 @@ const enContent = {
 };
 
 const cyContent = {
-  serviceName: 'Update an existing First-tier Tribunal case - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
   title: 'Check answers before submitting your update - welsh',
   change: 'Change - welsh',
   continue: 'Accept and send - welsh',
