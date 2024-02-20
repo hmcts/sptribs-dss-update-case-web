@@ -15,7 +15,7 @@ export const enContent = {
   submitApplicationText: 'Now submit your Application',
   errorSummaryMessage: 'There is a problem',
   keys: {
-    infomation: 'Additional information',
+    information: 'Additional information',
     fileName: 'Additional documents',
     description: 'Why is this relevant to the case?',
   },
@@ -45,7 +45,7 @@ const cyContent: typeof enContent = {
   submitApplicationText: 'Now submit your Application - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
   keys: {
-    infomation: 'Additional information - welsh',
+    information: 'Additional information - welsh',
     fileName: 'Additional documents - welsh',
     description: 'Why is this relevant to the case? - welsh',
   },

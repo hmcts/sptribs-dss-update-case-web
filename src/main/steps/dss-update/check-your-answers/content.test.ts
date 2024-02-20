@@ -8,12 +8,12 @@ const enContent = {
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Check answers before submitting your update',
   change: 'Change',
-  continue: 'Accept and continue',
+  continue: 'Accept and send',
   statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
   submitApplicationText: 'Now submit your Application',
   errorSummaryMessage: 'There is a problem',
   keys: {
-    infomation: 'Additional information',
+    information: 'Additional information',
     fileName: 'Additional documents',
     description: 'Why is this relevant to the case?',
   },
@@ -33,7 +33,7 @@ const cyContent = {
   submitApplicationText: 'Now submit your Application - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
   keys: {
-    infomation: 'Additional information',
+    information: 'Additional information - welsh',
     fileName: 'Additional documents - welsh',
     description: 'Why is this relevant to the case? - welsh',
   },
