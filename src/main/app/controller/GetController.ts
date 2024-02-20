@@ -68,7 +68,7 @@ export class GetController {
         ...content,
         ...renderableContents,
         sessionErrors: req.session.hasOwnProperty('errors') ? req.session.errors : [],
-        FileErrors: req.session.hasOwnProperty('fileErrors') ? req.session.fileErrors : [],
+        fileErrors: req.session.hasOwnProperty('fileErrors') ? req.session.fileErrors : [],
         caseId: req.session.userCase?.id,
       };
 

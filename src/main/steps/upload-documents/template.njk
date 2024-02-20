@@ -13,10 +13,10 @@
 
 {% block page_content %}
 
-{% if FileErrors.length > 0 %}
+{% if fileErrors.length > 0 %}
 {{ govukErrorSummary({
   titleText: errorSummaryHeading,
-  errorList: FileErrors
+  errorList: fileErrors
 }) }}
 
 {%endif%}
@@ -93,9 +93,9 @@
 <div class="govuk-form-group govuk-inset-text">
 
  <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
-  <div class=" {% if (FileErrors.length > 0) and (textAreaErrorMsg === "")  %}govuk-form-group--error {%endif%}">
+  <div class=" {% if (fileErrors.length > 0) and (textAreaErrorMsg === "")  %}govuk-form-group--error {%endif%}">
  <p> {{uploadAFile}} </p>
- {%if FileErrors.length > 0  %}
+ {%if fileErrors.length > 0  %}
   <p id="passport-issued-error" class="govuk-error-message">
       <span class="govuk-visually-hidden"></span> {{errorMessage}}
     </p>
@@ -110,7 +110,7 @@
   classes: "govuk-!-margin-bottom-3"
 }) }}
 {% set errorForFileDescription = ""%}
-{% for error in FileErrors %}
+{% for error in fileErrors %}
 {% if error.propertyName !== 'fileDescriptionRequired' %}
 {% else %}
 {% set errorForFileDescription = "govuk-input--error"%}
@@ -121,7 +121,7 @@
 <input class="govuk-input {{errorForFileDescription}}" id="eventName" name="eventName" type="text" aria-describedby="" autocomplete="eventName">
 </div>
 </div>
-{% for error in FileErrors %}
+{% for error in fileErrors %}
 {% if error.propertyName === 'fileDescriptionRequired' %}
 {%endif%}
 {% endfor %}
