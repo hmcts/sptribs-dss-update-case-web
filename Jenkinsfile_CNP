@@ -8,6 +8,15 @@ def type = "nodejs"
 def product = "sptribs"
 def component = "dss-update-case-web"
 
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+  [ $class: 'AzureKeyVaultSecret',
+    secretType: 'Secret',
+    name: secretName,
+    version: '',
+    envVariable: envVar
+  ]
+}
+
 def secrets = [
   'sptribs-${env}' :[
     secret('idam-dss-update-ui-secret', 'IDAM_SECRET'),
