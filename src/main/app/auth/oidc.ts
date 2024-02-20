@@ -60,6 +60,7 @@ const createIdamToken = (params: Record<string, string>): Promise<AxiosResponse<
   } else {
     throw new Error('Missing data for createIdamToken.');
   }
+
   return axios.post(tokenUrl, data, { headers });
 };
 
