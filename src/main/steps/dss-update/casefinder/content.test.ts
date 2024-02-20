@@ -2,7 +2,7 @@
 import { cy, en } from './content';
 
 const enContent = {
-  serviceName: 'Update an existing First-tier Tribunal case',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Existing case details',
   line1: 'You can find this information in the email you received after submitting your tribunal forms.',
   subtitle: 'Case reference number',
@@ -18,7 +18,7 @@ const enContent = {
 };
 
 const cyContent = {
-  serviceName: 'Update an existing First-tier Tribunal case - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
   title: 'Existing case details - welsh',
   line1:
     'You can find this information in the email you received after submitting your tribunal forms. - welsh',

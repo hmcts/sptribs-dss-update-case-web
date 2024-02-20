@@ -5,7 +5,7 @@ import { isFieldFilledIn, isNotNumeric } from '../../../app/form/validation';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
-  serviceName: 'Update an existing First-tier Tribunal case',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Existing case details',
   line1: 'You can find this information in the email you received after submitting your tribunal forms.',
   subtitle: 'Case reference number',
@@ -21,7 +21,7 @@ export const en = () => ({
 });
 
 export const cy = () => ({
-  serviceName: 'Update an existing First-tier Tribunal case - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
   title: 'Existing case details - welsh',
   line1:
     'You can find this information in the email you received after submitting your tribunal forms. - welsh',
