@@ -36,10 +36,27 @@ describe('Form Summary > check-your-answers', () => {
                 ],
               },
               key: {
-                html: 'Additional documents<br><br>Why is this relevant to the case?',
+                html: 'Additional documents',
               },
               value: {
-                html: 'a.txt<br><br>testFile',
+                html: 'a.txt',
+              },
+            },
+            {
+              actions: {
+                items: [
+                  {
+                    href: '/upload-documents',
+                    text: 'Change',
+                    visuallyHiddenText: 'undefined',
+                  },
+                ],
+              },
+              key: {
+                html: 'Why is this relevant to the case?',
+              },
+              value: {
+                html: 'testFile',
               },
             },
           ],
