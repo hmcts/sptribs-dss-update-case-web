@@ -28,30 +28,28 @@ export default class CitizenDataVerificationPostController extends PostControlle
     req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
 
     if (req.session.errors.length === 0) {
-      if (req.session.isDataVerified) {
-        nextUrl = UPLOAD_DOCUMENT;
-      } else {
-        try {
-          const responseFromServerCall = await getCase(req, req.session.userCase.id);
-          if (responseFromServerCall.status === 200) {
+      try {
+        const responseFromServerCall = await getCase(req, req.session.userCase.id);
+        if (responseFromServerCall.status === 200) {
 
-            const cicCaseFullName = responseFromServerCall.data.data.cicCaseFullName.trim();
-            const cicCaseDateOfBirth = responseFromServerCall.data.data.cicCaseDateOfBirth;
+          const cicCaseFullName = responseFromServerCall.data.data.cicCaseFullName.trim();
+          const cicCaseDateOfBirth = responseFromServerCall.data.data.cicCaseDateOfBirth;
 
-            const subjectFullNameToVerify = String(req.body.subjectFullName).trim();
-            const dateToVerify =
-              `${formData.subjectDOB?.year}-${formData.subjectDOB?.month?.padStart(2, '0')}-${formData.subjectDOB?.day?.padStart(2, '0')}`;
+          const subjectFullNameToVerify = String(req.body.subjectFullName).trim();
+          const dateToVerify =
+            `${formData.subjectDOB?.year}-${formData.subjectDOB?.month?.padStart(2, '0')}-${formData.subjectDOB?.day?.padStart(2, '0')}`;
 
-            if (cicCaseFullName === subjectFullNameToVerify && cicCaseDateOfBirth === dateToVerify) {
-              req.session.isDataVerified = true;
-              nextUrl = UPLOAD_DOCUMENT;
-            } else {
-              req.session.errors.push({ propertyName: 'inputFields', errorType: 'required' });
-            }
+          if (cicCaseFullName === subjectFullNameToVerify && cicCaseDateOfBirth === dateToVerify) {
+            req.session.isDataVerified = true;
+            req.session.userCase.subjectFullName = subjectFullNameToVerify;
+            req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
+            nextUrl = UPLOAD_DOCUMENT;
+          } else {
+            req.session.errors.push({ propertyName: 'inputFields', errorType: 'required' });
           }
-        } catch (error) {
-          req.session.errors.push({ propertyName: 'caseError', errorType: 'required' });
         }
+      } catch (error) {
+        req.session.errors.push({ propertyName: 'caseError', errorType: 'required' });
       }
     }
 
