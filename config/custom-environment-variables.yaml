@@ -2,6 +2,7 @@ services:
   idam:
     authorizationURL: IDAM_WEB_URL
     tokenURL: IDAM_API_URL
+    clientSecret: IDAM_SECRET
   case:
     url: CCD_URL
   payments:
