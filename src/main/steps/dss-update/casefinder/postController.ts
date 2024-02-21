@@ -31,7 +31,7 @@ export default class CaseFinderController extends PostController<AnyObject> {
           nextUrl = DATA_VERIFICATION;
         }
       } catch (error) {
-        req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'notNumeric' });
+        req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'caseNotFound' });
       }
     }
 
