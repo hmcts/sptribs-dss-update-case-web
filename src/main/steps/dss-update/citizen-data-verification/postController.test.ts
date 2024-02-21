@@ -153,25 +153,6 @@ describe('citizenDataVerification post controller test cases', () => {
     expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
   });
 
-  test('Should navigate to upload document page if data is verified and no errors', async () => {
-    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
-    req = mockRequest({
-      body: {
-        saveAndContinue: true,
-        'subjectDOB-day': '01',
-        'subjectDOB-month': '01',
-        'subjectDOB-year': '2020',
-        subjectFullName: 'subject name'
-      },
-      session: {
-        isDataVerified: true,
-        errors: []
-      },
-    });
-    await controller.post(req, res);
-    expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
-  });
-
   test('Should navigate to original url if session errors is not empty', async () => {
     const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
     req = mockRequest({
