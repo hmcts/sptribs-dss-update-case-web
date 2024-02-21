@@ -9,45 +9,49 @@ import { Response } from 'express';
 
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
+import { Form } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/s2s/rpeAuth';
 import { APPLICATION_CONFIRMATION } from '../../urls';
+import { getSystemUser } from '../../../app/auth/oidc';
 /* The CheckYourAnswersController class extends the PostController class */
 @autobind
 export default class CheckYourAnswersController extends PostController<AnyObject> {
-  constructor(protected readonly fields: FormFields | FormFieldsFn) {
-    super(fields);
-  }
+
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public async serverCallForCaseSubmission(req: AppRequest<AnyObject>) {
-    const caseDocuments = req.session['caseDocuments'];
-
-    const alldocuments: DocumentRequest = caseDocuments.map(document => {
-      return {
-        id: document.documentId,
-        value: {
-          document: {
-            document_url: document.url,
-            document_binary_url: document.binaryUrl,
-            document_filename: document.fileName,
-          },
-          comment: document.description,
-        },
-      };
-    });
+    // const caseDocuments = req.session['caseDocuments'];
+    //
+    // const alldocuments: DocumentRequest = caseDocuments.map(document => {
+    //   return {
+    //     id: document.documentId,
+    //     value: {
+    //       document: {
+    //         document_url: document.url,
+    //         document_binary_url: document.binaryUrl,
+    //         document_filename: document.fileName,
+    //       },
+    //       comment: document.description,
+    //     },
+    //   };
+    // });
     const data = {
       dssAdditionalCaseInformation: req.session['documentDetail'],
       dssCaseUpdatedBy: req.session['loggedInSystemUserType'],
-      dssDocumentInfoList: alldocuments,
+      dssDocumentInfoList: [],//alldocuments,
     };
 
     const caseId = req.session.userCase.id;
+    //TODO: change to use UPDATE_CASE ?event=UPDATE_CASE
     const baseURL = `${config.get('services.sptribs.url')}/case/dss-orchestration/dss/${caseId}/update?event=UPDATE`;
     const seviceAuthToken = await RpeApi.getRpeToken();
     const s2sToken = seviceAuthToken.data;
+    const systemUserDetails = await getSystemUser();
     const updateRequest = await axios.put(baseURL, data, {
       headers: {
+        Authorization: 'Bearer ' + systemUserDetails.accessToken,
         ServiceAuthorization: `Bearer ${s2sToken}`,
+        Accept: '*/*',
+        'Content-Type': 'application/json'
       },
     });
     return updateRequest;
