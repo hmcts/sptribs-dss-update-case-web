@@ -98,12 +98,12 @@ export const UploadFormSummary = (
     changeUrl: Urls['UPLOAD_DOCUMENT'],
   },
   {
-    keyHtml: keys.fileName,
+    keyHtml: keys.documents,
     valueHtml: documentsList,
     changeUrl: Urls['UPLOAD_DOCUMENT'],
   },
   {
-    keyHtml: keys.description,
+    keyHtml: keys.documentDescription,
     valueHtml: documentDescriptionsList,
     changeUrl: Urls['UPLOAD_DOCUMENT'],
   }
