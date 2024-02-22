@@ -85,16 +85,15 @@
 </dl>
 {%endif%}
 
+<p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if uploadedDocuments|length %} hidden{% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
+
     <p class="govuk-body">
     {{ fileFormats }}<br>
     {{ fileSize }}
   </p>
-  
-<div class="govuk-form-group govuk-inset-text">
 
  <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
   <div class=" {% if (fileErrors.length > 0) and (textAreaErrorMsg === "")  %}govuk-form-group--error {%endif%}">
- <p> {{uploadAFile}} </p>
  {%if fileErrors.length > 0  %}
   <p id="passport-issued-error" class="govuk-error-message">
       <span class="govuk-visually-hidden"></span> {{errorMessage}}
@@ -104,10 +103,12 @@
   id: "file-upload-1",
   name: "documents",
      attributes: {
-            multiple: false,
             accept: selectedFileType
   },
-  classes: "govuk-!-margin-bottom-3"
+  classes: "govuk-!-margin-bottom-3",
+  label: {
+      text: uploadAFile
+    }
 }) }}
 {% set errorForFileDescription = ""%}
 {% for error in fileErrors %}
@@ -132,10 +133,7 @@
           classes: "govuk-button"
         }) }}
 
-
-</div>
-
-
+<br>
 {{ govukButton({
   text: onlycontinue,
   name: 'continue'
