@@ -21,7 +21,7 @@
 
 {%endif%}
 
-<h1 class="govuk-heading-xl govuk-!-margin-top-7">{{title}}</h1>
+<h1 class="govuk-heading-l govuk-!-margin-top-7">{{title}}</h1>
  <form action="{{postURL}}/upload-documents" method="post" enctype="multipart/form-data">
 <div class="{% if textAreaErrorMsg %}govuk-form-group--error {%endif%}">
   {%if textAreaErrorMsg %}
@@ -33,9 +33,9 @@
   name: "documentDetail",
   id: "documentDetail",
   value: documentDetail,
-  label: {
+  hint: {
     text: paragraph1,
-    classes: "govuk-label-s",
+    classes: "govuk-hint",
     isPageHeading: false
   }
 }) }}
@@ -44,25 +44,25 @@
 
 <p class="govuk-body">{{paragraph2}}</p>
 <p class="govuk-body">{{paragraph3}}</p>
-<ul class="govuk-list govuk-list--bullet">
-{% for item in uploadDocumentsBullets %}
-        <li>{{item | safe}}</li>
-{% endfor %}
-</ul>
+  <ul class="govuk-list govuk-list--bullet">
+    {% for item in uploadDocumentsBullets %}
+      <li>{{item | safe}}</li>
+    {% endfor %}
+  </ul>
 <p class="govuk-body">{{caseRelevancySubTitle}}</p>
 
 
-{% set uploadReqTest = ""%}
+{% set fileRequirements = ""%}
 {% for item in uploadHelpBullets %}
-    {% set uploadReqTest = uploadReqTest + "<li>" + item + "</li>"%}
+    {% set fileRequirements = fileRequirements + "<li>" + item + "</li>"%}
 {% endfor %}
-{% set requirementTest = "<ul class='govuk-list govuk-list--bullet'>" + uploadReqTest + "</ul>" %}
+{% set uploadRequirements = "<ul class='govuk-list govuk-list--bullet'><div class='govuk-body-s'>" + fileRequirements + "</div></ul><p class='govuk-body-s'>"+ guideText + "</p>" %}
 
 {{ govukDetails({
   summaryText: fileUploadRequirementsLabel,
-  text: requirementTest | safe
+  text: uploadRequirements | safe
 }) }}
-<p class="govuk-body">{{guideText}}</p>
+
          {% if uploadedDocuments.length > 0 %}
         <h2 class="govuk-heading-m"> {{fileuploaded}} </h2>
     <dl class="govuk-summary-list govuk-!-margin-bottom-9 govuk-!-margin-top-0">
@@ -116,10 +116,8 @@
 {% set errorForFileDescription = "govuk-input--error"%}
 {%endif%}
 {% endfor %}
-<div class="govuk-!-margin-top-3">
 <label class="govuk-label govuk-label-s" for="eventName">{{documentListLabel}}</label>
 <input class="govuk-input {{errorForFileDescription}}" id="eventName" name="eventName" type="text" aria-describedby="" autocomplete="eventName">
-</div>
 </div>
 {% for error in fileErrors %}
 {% if error.propertyName === 'fileDescriptionRequired' %}
