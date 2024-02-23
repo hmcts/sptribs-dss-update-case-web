@@ -2,7 +2,7 @@ import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
-import { generateContent } from './content';
+import { generateContent, getErrors } from './content';
 
 const enContent = {
   serviceName: 'Update an appeal to the First-tier Tribunal',
@@ -75,6 +75,18 @@ describe('check-your-answer > content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     expect((form.submit!.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  });
+});
+
+describe('getErrors() function Test', () => {
+  test('getErrors English', () => {
+    const englishErrors = getErrors('en');
+    expect(englishErrors).toEqual(enContent.errors);
+  });
+
+  test('getErrors Welsh', () => {
+    const welshErrors = getErrors('cy');
+    expect(welshErrors).toEqual(cyContent.errors);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

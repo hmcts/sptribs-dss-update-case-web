@@ -85,3 +85,17 @@ export const generateContent: TranslationFn = content => {
     form,
   };
 };
+
+export function getErrors(language: any) {
+  let errors: any
+  switch (language) {
+    case 'cy':
+      errors = cyContent.errors;
+      break;
+    case 'en':
+    default:
+      errors = enContent.errors;
+  }
+
+  return errors;
+}

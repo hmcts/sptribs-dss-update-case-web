@@ -18,17 +18,10 @@
       {% endblock %}
 
 
-{% if sessionErrors.length > 0 %}
-{% set errorList = []%}
-{% for error in sessionErrors %}
-{%if error.propertyName === 'submissionError' %}
-{% set errorList = (errorList.push({text: errors.submissionError.content , href: '#'}), errorList) %}
-{%else%}
-{%endif%}
-{%endfor%}
+{% if fileErrors.length > 0 %}
 {{ govukErrorSummary({
-  titleText: errorSummaryMessage,
-   errorList: errorList
+  titleText: errorSummaryHeading,
+  errorList: fileErrors
 }) }}
 {%endif%}
 
