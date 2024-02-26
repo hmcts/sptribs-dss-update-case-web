@@ -23,6 +23,7 @@ export class OidcMiddleware {
       errorHandler(async (req, res) => {
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
+          req.session.userCase = {} as CaseWithId;
           req.session.save(() => res.redirect(CASE_SEARCH_URL));
         } else {
           res.redirect(SIGN_IN_URL);
@@ -34,7 +35,6 @@ export class OidcMiddleware {
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
-          req.session.userCase = {} as CaseWithId;
           return next();
         }
         res.redirect(SIGN_IN_URL);
