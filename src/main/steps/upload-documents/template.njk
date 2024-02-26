@@ -44,11 +44,14 @@
 
 <p class="govuk-body">{{paragraph2}}</p>
 <p class="govuk-body">{{paragraph3}}</p>
-  <ul class="govuk-list govuk-list--bullet">
+<p class="govuk-body">{{uploadedDocumentsSubTitle}}</p>
+<div class="govuk-body">
+  <ul class="‘govuk-list govuk-list--bullet’">
     {% for item in uploadDocumentsBullets %}
       <li>{{item | safe}}</li>
     {% endfor %}
   </ul>
+</div>
 <p class="govuk-body">{{caseRelevancySubTitle}}</p>
 
 
@@ -56,7 +59,7 @@
 {% for item in uploadHelpBullets %}
     {% set fileRequirements = fileRequirements + "<li>" + item + "</li>"%}
 {% endfor %}
-{% set uploadRequirements = "<ul class='govuk-list govuk-list--bullet'><div class='govuk-body-s'>" + fileRequirements + "</div></ul><p class='govuk-body-s'>"+ guideText + "</p>" %}
+{% set uploadRequirements = "<ul class='‘govuk-list govuk-list--bullet’'><div class='govuk-body-s'>" + fileRequirements + "</div></ul><p class='govuk-body-s'>"+ guideText + "</p>" %}
 
 {{ govukDetails({
   summaryText: fileUploadRequirementsLabel,
