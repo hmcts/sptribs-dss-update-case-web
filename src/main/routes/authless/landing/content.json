@@ -7,7 +7,14 @@
       "paragraph2":
       "You may want to send the Tribunal some extra paperwork that was not available at the time you initially submitted your tribunal form. Or you may want to give the Tribunal some extra details about aspects of your case.",
       "paragraph3": "To update an existing case, you will need the case reference number.",
-      "button": "Start now"
+      "button": "Start now",
+      "ogl": "All content is available under the <a class=\"govuk-footer__link\" href=\"https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/\" rel=\"license\">Open Government Licence v3.0</a>, except where otherwise stated",
+      "copyright": "© Crown copyright",
+      "accessibility": "Accessibility statement",
+      "cookies": "Cookies",
+      "privacyPolicy": "Privacy policy",
+      "termsAndConditions": "Terms and conditions",
+      "contactUs": "Contact Us"
     },
     "cy": {
       "serviceName": "Update an appeal to the First-tier Tribunal - welsh",
@@ -16,7 +23,14 @@
       "paragraph2":
       "You may want to send the Tribunal some extra paperwork that was not available at the time you initially submitted your tribunal form. Or you may want to give the Tribunal some extra details about aspects of your case. - welsh",
       "paragraph3": "To update an existing case, you will need the case reference number. - welsh",
-      "button": "Start now - welsh"
+      "button": "Start now - welsh",
+      "ogl": "All content is available under the <a class=\"govuk-footer__link\" href=\"https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/\" rel=\"license\">Open Government Licence v3.0</a>, except where otherwise stated - welsh",
+      "copyright": "© Crown copyright - welsh",
+      "accessibility": "Accessibility statement - welsh",
+      "cookies": "Cookies - welsh",
+      "privacyPolicy": "Privacy policy - welsh",
+      "termsAndConditions": "Terms and conditions - welsh",
+      "contactUs": "Contact Us - welsh"
     }
   }
 }
