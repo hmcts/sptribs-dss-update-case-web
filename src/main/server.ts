@@ -16,11 +16,11 @@ import { HealthCheck } from './modules/health';
 import { Helmet } from './modules/helmet';
 import { LanguageToggle } from './modules/i18n';
 import { Nunjucks } from './modules/nunjucks';
+import { OidcMiddleware } from './modules/oidc';
 import { PropertiesVolume } from './modules/properties-volume';
 import { SessionStorage } from './modules/session';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
-import { OidcMiddleware } from './modules/oidc';
 import { PublicRoutes } from './routes/authless/routes';
 
 const { Logger } = require('@hmcts/nodejs-logging');

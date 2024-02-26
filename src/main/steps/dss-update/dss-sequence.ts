@@ -17,7 +17,7 @@ export const dss_update_steps: Step[] = [
   {
     url: DATA_VERIFICATION,
     showInSection: Sections.dss_update,
-    getNextStep: () => APPLICATION_CONFIRMATION,
+    getNextStep: () => UPLOAD_DOCUMENT,
   },
   {
     url: UPLOAD_DOCUMENT,

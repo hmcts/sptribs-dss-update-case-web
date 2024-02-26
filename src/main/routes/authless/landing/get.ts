@@ -1,16 +1,15 @@
 import { Response } from 'express';
 
-import content from './content.json';
-
-import { CASE_SEARCH_URL, SIGN_IN_URL } from '../../../steps/urls';
 import { AppRequest } from '../../../app/controller/AppRequest';
+import { CASE_SEARCH_URL, SIGN_IN_URL } from '../../../steps/urls';
+
+import content from './content.json';
 
 export class LandingGetController {
   public get(req: AppRequest, res: Response): void {
     if (req.session.hasOwnProperty('user')) {
       res.redirect(CASE_SEARCH_URL);
     } else {
-
       const Translations = content.translations;
 
       const en = Translations.en;
