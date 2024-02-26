@@ -4,7 +4,6 @@ import * as bodyParser from 'body-parser';
 import config = require('config');
 import cookies from 'cookie-parser';
 import express, { RequestHandler } from 'express';
-import rateLimit from 'express-rate-limit';
 import favicon from 'serve-favicon';
 import toobusy from 'toobusy-js';
 import type { LoggerInstance } from 'winston';
@@ -21,7 +20,8 @@ import { PropertiesVolume } from './modules/properties-volume';
 import { SessionStorage } from './modules/session';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
-import { CASE_SEARCH_URL } from './steps/urls';
+import { OidcMiddleware } from './modules/oidc';
+import { PublicRoutes } from './routes/authless/routes';
 
 const { Logger } = require('@hmcts/nodejs-logging');
 
@@ -34,24 +34,8 @@ const developmentMode = env === 'development';
 const logger: LoggerInstance = Logger.getLogger('server');
 export const app = express();
 
-const limiter = rateLimit({
-  windowMs: 60 * 1000, //1 minute
-  max: 40, //Limit each IP to 20 reqs/min (POST+GET)
-  message: 'Too many requests from this IP, please try again later.',
-});
 app.locals.ENV = env;
 app.locals.developmentMode = process.env.NODE_ENV !== 'production';
-app.use(CASE_SEARCH_URL, limiter); //PRL-4123 - Apply the rate limiting middleware to case-finder
-app.disable('x-powered-by'); //PRL-4121
-new PropertiesVolume().enableFor(app);
-new SessionStorage().enableFor(app);
-app.use(cookies());
-new AppInsights().enable();
-new HealthCheck().enableFor(app);
-new ErrorHandler().enableFor(app, logger);
-new ErrorHandler().handleNextErrorsFor(app);
-new Nunjucks().enableFor(app);
-new Webpack().enableFor(app);
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
 app.use(bodyParser.json() as RequestHandler);
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
@@ -60,27 +44,33 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
   next();
 });
+app.use(cookies());
+
+new PropertiesVolume().enableFor(app);
+new SessionStorage().enableFor(app);
+new AppInsights().enable();
+new HealthCheck().enableFor(app);
+new ErrorHandler().enableFor(app, logger);
+new Nunjucks().enableFor(app);
+new Webpack().enableFor(app);
 new FileUpload().enableFor(app);
 new Helmet(config.get('security')).enableFor(app);
 new LanguageToggle().enableFor(app);
-//api for session
 new TestApiRoutes().enableFor(app);
+new PublicRoutes().enableFor(app);
+new OidcMiddleware().enableFor(app);
 new Routes().enableFor(app);
+new ErrorHandler().handleNextErrorsFor(app);
 
 setupDev(app, developmentMode);
 
-const port: number = parseInt(process.env.PORT || '3100', 10);
-if (app.locals.ENV === 'development') {
-  const server = app.listen(port, () => {
-    logger.info(`Application started: http://localhost:${port}`);
-  });
-  process.on('SIGINT', function () {
-    server.close();
-    toobusy.shutdown();
-    process.exit();
-  });
-} else {
-  app.listen(port, () => {
-    logger.info(`Application started: http://localhost:${port}`);
-  });
-}
+const port = config.get('port');
+const server = app.listen(port, () => {
+  logger.info(`Application started: http://localhost:${port}`);
+});
+
+process.on('SIGINT', function () {
+  server.close();
+  toobusy.shutdown();
+  process.exit();
+});

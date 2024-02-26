@@ -1,11 +1,11 @@
-import { mockRequest } from '../../../test/unit/mocks/mockRequest';
-import { mockResponse } from '../../../test/unit/mocks/mockResponse';
-import { START_HOME } from '../urls';
+import { mockRequest } from '../../../../test/unit/mocks/mockRequest';
+import { mockResponse } from '../../../../test/unit/mocks/mockResponse';
+import { START_HOME } from '../../../steps/urls';
 
-import { HomeGetController } from './get';
+import { LandingGetController } from './get';
 
 describe('Test URL endpoints', () => {
-  const controller = new HomeGetController();
+  const controller = new LandingGetController();
 
   const res = mockResponse();
   const req = mockRequest();

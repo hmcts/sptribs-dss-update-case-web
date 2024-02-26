@@ -12,8 +12,9 @@ export class Nunjucks {
     const hmctsFrontendPath = path.join(__dirname, '..', '..', '..', '..', 'node_modules', '@hmcts', 'frontend');
     const commonForDss = path.join(__dirname, '..', '..', 'steps', 'dss-update', 'common');
     const generalViews = path.join(__dirname, '..', '..', 'views');
+    const authLessPath = path.join(__dirname, '..', '..', 'routes', 'authless', 'landing');
     const env = nunjucks.configure(
-      [path.join(__dirname, '..', '..', 'steps'), govUkFrontendPath, hmctsFrontendPath, commonForDss, generalViews],
+      [path.join(__dirname, '..', '..', 'steps'), govUkFrontendPath, hmctsFrontendPath, commonForDss, generalViews, authLessPath],
       {
         autoescape: true,
         watch: app.locals.developmentMode,
