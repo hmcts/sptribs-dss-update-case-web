@@ -1,8 +1,9 @@
+import { execSync } from 'child_process';
+
 import * as propertiesVolume from '@hmcts/properties-volume';
 import config from 'config';
 import { Application } from 'express';
 import { get, set } from 'lodash';
-import { execSync } from 'child_process';
 
 export class PropertiesVolume {
   enableFor(server: Application): void {
