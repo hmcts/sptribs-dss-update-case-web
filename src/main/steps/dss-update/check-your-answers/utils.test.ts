@@ -13,7 +13,7 @@ describe('Form Summary > check-your-answers', () => {
                 items: [
                   {
                     href: '/upload-documents',
-                    text: 'Change',
+                    text: 'change',
                     visuallyHiddenText: 'Additional information',
                   },
                 ],
@@ -30,7 +30,7 @@ describe('Form Summary > check-your-answers', () => {
                 items: [
                   {
                     href: '/upload-documents',
-                    text: 'Change',
+                    text: 'change',
                     visuallyHiddenText: 'undefined',
                   },
                 ],
@@ -47,7 +47,7 @@ describe('Form Summary > check-your-answers', () => {
                 items: [
                   {
                     href: '/upload-documents',
-                    text: 'Change',
+                    text: 'change',
                     visuallyHiddenText: 'undefined',
                   },
                 ],

@@ -9,10 +9,10 @@ import { UploadFormSummary } from './utils';
 export const enContent = {
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Check answers before submitting your update',
-  change: 'Change',
+  change: 'change',
   continue: 'Accept and send',
   statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
-  submitApplicationText: 'Now submit your Application',
+  submitApplicationText: 'Now update your case',
   errorSummaryMessage: 'There is a problem',
   keys: {
     information: 'Additional information',
@@ -39,10 +39,10 @@ const en = (content: any) => {
 const cyContent: typeof enContent = {
   serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
   title: 'Check answers before submitting your update - welsh',
-  change: 'Change - welsh',
+  change: 'change - welsh',
   continue: 'Accept and send - welsh',
   statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct. - welsh',
-  submitApplicationText: 'Now submit your Application - welsh',
+  submitApplicationText: 'Now update your case - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
   keys: {
     information: 'Additional information - welsh',
