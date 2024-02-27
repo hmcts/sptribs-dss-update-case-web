@@ -5,7 +5,6 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 export interface Case {
   subjectFullName: string;
   subjectDOB: CaseDate;
-
 }
 
 export interface CaseWithId extends Case {
@@ -35,11 +34,5 @@ export interface UploadedFile {
 }
 
 export enum FieldPrefix {
-  APPLICANT1 = 'applicant1',
   APPLICANT = 'applicant',
-  APPLICANT2 = 'applicant2',
-  CHILDREN = 'children',
-  BIRTH_FATHER = 'birthFather',
-  BIRTH_MOTHER = 'birthMother',
-  OTHER_PARENT = 'otherParent',
 }

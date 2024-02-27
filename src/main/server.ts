@@ -8,7 +8,6 @@ import favicon from 'serve-favicon';
 import toobusy from 'toobusy-js';
 import type { LoggerInstance } from 'winston';
 
-import { TestApiRoutes } from './api/endpoints';
 import { AppInsights } from './modules/appinsights';
 import { ErrorHandler } from './modules/error-handler';
 import { FileUpload } from './modules/fileupload';
@@ -56,7 +55,6 @@ new Webpack().enableFor(app);
 new FileUpload().enableFor(app);
 new Helmet(config.get('security')).enableFor(app);
 new LanguageToggle().enableFor(app);
-new TestApiRoutes().enableFor(app);
 new PublicRoutes().enableFor(app);
 new OidcMiddleware().enableFor(app);
 new Routes().enableFor(app);
