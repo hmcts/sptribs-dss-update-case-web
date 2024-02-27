@@ -43,7 +43,7 @@ const englishContent = () => ({
       fileFormat: `This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3`,
       selectFileToUpload: 'Select a file to upload',
       uploadError: 'The selected file could not be uploaded – try again',
-      maxFileError: 'You can only select up to 10 files at the same time',
+      maxFileError: 'You can only select up to 20 files at the same time',
     },
     documentDetail: {
       notAlphaNumeric: 'You have entered an invalid character. Please enter letters and numbers only.',
@@ -97,7 +97,7 @@ const welshContent = () => ({
       fileFormat: `This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh`,
       selectFileToUpload: 'Select a file to upload - welsh',
       uploadError: 'The selected file could not be uploaded – try again - welsh',
-      maxFileError: 'You can only select up to 10 files at the same time - welsh',
+      maxFileError: 'You can only select up to 20 files at the same time - welsh',
     },
     documentDetail: {
       notAlphaNumeric: 'You have entered an invalid character. Please enter letters and numbers only. - welsh',

@@ -21,7 +21,7 @@ export const documentExtensions = () => {
 };
 
 export const multimediaExtensions = () => {
-  return ['mp3', 'mp4', 'wav'];
+  return ['mp3', 'mp4'];
 };
 @autobind
 export default class UploadDocumentController extends PostController<AnyObject> {
