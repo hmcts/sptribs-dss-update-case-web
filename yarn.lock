@@ -2885,11 +2885,11 @@ __metadata:
   linkType: hard
 
 "@types/express-session@npm:*, @types/express-session@npm:^1.17.7":
-  version: 1.17.10
-  resolution: "@types/express-session@npm:1.17.10"
+  version: 1.18.0
+  resolution: "@types/express-session@npm:1.18.0"
   dependencies:
     "@types/express": "*"
-  checksum: 2fb63b53e164f615a538d4be292695789a7f3105ce3246b8d3816e78eca05c8cce43d703af55c4f675c99cfb6fa512ae70a787e536e2b064f001fda897e0d5ab
+  checksum: f624bc956d223eda618dc3ee5908cfc91d5cf67252aa83e667c1260b96c2d2ac302407d57d2a57b29728a21bf521f09c6409da5e727509c01a2b50d7a012f0a1
   languageName: node
   linkType: hard
 
@@ -7943,8 +7943,8 @@ __metadata:
   linkType: hard
 
 "html-webpack-plugin@npm:^5.5.3":
-  version: 5.5.3
-  resolution: "html-webpack-plugin@npm:5.5.3"
+  version: 5.6.0
+  resolution: "html-webpack-plugin@npm:5.6.0"
   dependencies:
     "@types/html-minifier-terser": ^6.0.0
     html-minifier-terser: ^6.0.2
@@ -7952,8 +7952,14 @@ __metadata:
     pretty-error: ^4.0.0
     tapable: ^2.0.0
   peerDependencies:
+    "@rspack/core": 0.x || 1.x
     webpack: ^5.20.0
-  checksum: ccf685195739c372ad641bbd0c9100a847904f34eedc7aff3ece7856cd6c78fd3746d2d615af1bb71e5727993fe711b89e9b744f033ed3fde646540bf5d5e954
+  peerDependenciesMeta:
+    "@rspack/core":
+      optional: true
+    webpack:
+      optional: true
+  checksum: 32a6e41da538e798fd0be476637d7611a5e8a98a3508f031996e9eb27804dcdc282cb01f847cf5d066f21b49cfb8e21627fcf977ffd0c9bea81cf80e5a65070d
   languageName: node
   linkType: hard
 
@@ -9941,13 +9947,14 @@ __metadata:
   linkType: hard
 
 "mini-css-extract-plugin@npm:*, mini-css-extract-plugin@npm:^2.7.6":
-  version: 2.7.7
-  resolution: "mini-css-extract-plugin@npm:2.7.7"
+  version: 2.8.0
+  resolution: "mini-css-extract-plugin@npm:2.8.0"
   dependencies:
     schema-utils: ^4.0.0
+    tapable: ^2.2.1
   peerDependencies:
     webpack: ^5.0.0
-  checksum: 04af0e7d8c1a4ff31c70ac2d0895837dae3d51cce3bfd90e3c1d90d50eef7de21778361a3064531df046d775d80b3bf056324dddea93831c7def2047c5aa8718
+  checksum: c1edc3ee0e1b3514c3323fa72ad38e993f357964e76737f1d7bb6cf50a0af1ac071080ec16b4e1a94688d23f78533944badad50cd0f00d2ae176f9c58c1f2029
   languageName: node
   linkType: hard
 
@@ -10497,8 +10504,8 @@ __metadata:
   linkType: hard
 
 "nodemon@npm:^3.0.1":
-  version: 3.0.3
-  resolution: "nodemon@npm:3.0.3"
+  version: 3.1.0
+  resolution: "nodemon@npm:3.1.0"
   dependencies:
     chokidar: ^3.5.2
     debug: ^4
@@ -10512,7 +10519,7 @@ __metadata:
     undefsafe: ^2.0.5
   bin:
     nodemon: bin/nodemon.js
-  checksum: 121ebb6349167d87cefd5767ec453ceb49ec5a8d50146134a54b0e25502c29ad01caaa41460e303b35728439012564782d278b3fef3c615f3c278979c2b7d586
+  checksum: 0b721f66ee60d9bf092f6101965bc65769698fa2921d0283d90bbf3f0906aa4f3ac77316682375bd7f09c91679fddb131aa39f9fc839fea57061bbc8e81b60e3
   languageName: node
   linkType: hard
 
@@ -11191,27 +11198,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright-core@npm:1.39.0":
-  version: 1.39.0
-  resolution: "playwright-core@npm:1.39.0"
+"playwright-core@npm:1.41.2":
+  version: 1.41.2
+  resolution: "playwright-core@npm:1.41.2"
   bin:
     playwright-core: cli.js
-  checksum: 556e78dee4f9890facf2af8249972e0d6e01a5ae98737b0f6b0166c660a95ffee4cb79350335b1ef96430a0ef01d3669daae9099fa46c8d403d11c623988238b
+  checksum: b41ede0db3fd3e3f7e0b0efbdfb2dbc4db345e113cf9c4451af21d1d5b5d9ab5e969f5662852925e37b2198ae5daab92aa48108fe3d4eb81c849ba8752aaf8cc
   languageName: node
   linkType: hard
 
 "playwright@npm:^1.37.1":
-  version: 1.39.0
-  resolution: "playwright@npm:1.39.0"
+  version: 1.41.2
+  resolution: "playwright@npm:1.41.2"
   dependencies:
     fsevents: 2.3.2
-    playwright-core: 1.39.0
+    playwright-core: 1.41.2
   dependenciesMeta:
     fsevents:
       optional: true
   bin:
     playwright: cli.js
-  checksum: 96d8ca5aa25465c1c5d554d0d6071981d55e22477800ff8f5d47a53ca75193d60ece2df538a01b7165b3277dd5493c67603a5acda713029df7fbd95ce2417bc9
+  checksum: acf166003ec42cd795f5fca096c5135880d78e84ec2d0a1911b2cab984cf75dc06e50d3aa24b56cbcbc5369ca8c61831e76c5f8674531a272fbd0f6e624fa387
   languageName: node
   linkType: hard
 
@@ -11311,11 +11318,11 @@ __metadata:
   linkType: hard
 
 "prettier@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "prettier@npm:3.0.3"
+  version: 3.2.5
+  resolution: "prettier@npm:3.2.5"
   bin:
     prettier: bin/prettier.cjs
-  checksum: e10b9af02b281f6c617362ebd2571b1d7fc9fb8a3bd17e371754428cda992e5e8d8b7a046e8f7d3e2da1dcd21aa001e2e3c797402ebb6111b5cd19609dd228e0
+  checksum: 2ee4e1417572372afb7a13bb446b34f20f1bf1747db77cf6ccaf57a9be005f2f15c40f903d41a6b79eec3f57fff14d32a20fb6dee1f126da48908926fe43c311
   languageName: node
   linkType: hard
 
@@ -13062,7 +13069,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tapable@npm:^2.0.0, tapable@npm:^2.1.1, tapable@npm:^2.2.0":
+"tapable@npm:^2.0.0, tapable@npm:^2.1.1, tapable@npm:^2.2.0, tapable@npm:^2.2.1":
   version: 2.2.1
   resolution: "tapable@npm:2.2.1"
   checksum: 3b7a1b4d86fa940aad46d9e73d1e8739335efd4c48322cb37d073eb6f80f5281889bf0320c6d8ffcfa1a0dd5bfdbd0f9d037e252ef972aca595330538aac4d51
