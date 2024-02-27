@@ -23,6 +23,9 @@ export default class CitizenDataVerificationPostController extends PostControlle
 
     let nextUrl = req.originalUrl;
 
+    req.session.userCase.subjectFullName = formData.subjectFullName as string;
+    req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
+
     if (req.session.errors.length === 0) {
       try {
         const responseFromServerCall = await getCase(req, req.session.userCase.id);
