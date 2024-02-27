@@ -131,7 +131,7 @@ describe('Testing the post controller', () => {
       ''
     );
     expect(res.redirect).not.toHaveBeenCalled();
-    expect(req.session?.errors).toHaveLength(1);
+    expect(req.session?.fileErrors).toHaveLength(1);
   });
 
   test('File validations - file uploading successfull', async () => {
@@ -157,18 +157,69 @@ describe('Testing the post controller', () => {
       ''
     );
     expect(res.redirect).not.toHaveBeenCalled();
-    expect(req.session?.errors).toHaveLength(1);
+    expect(req.session?.fileErrors).toHaveLength(1);
   });
 
-  test('uploadFileError', () => {
+  test('uploadFileError noInput', () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
-    controller.uploadFileError(newRequest, res, '', {
-      propertyName: 'fileValidation',
-      errorType: 'required',
-    });
+    controller.uploadFileError(newRequest, res, '', 'noInput');
     expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('You cannot continue without providing additional information or a document');
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
+
+  test('uploadFileError fileSize', () => {
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    controller.uploadFileError(newRequest, res, '', 'fileSize');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 30MB (multimedia files)');
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('uploadFileError selectFileToUpload', () => {
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    controller.uploadFileError(newRequest, res, '', 'selectFileToUpload');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('Select a file to upload');
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('uploadFileError uploadError', () => {
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    controller.uploadFileError(newRequest, res, '', 'uploadError');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('The selected file could not be uploaded – try again');
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('uploadFileError maxFileError', () => {
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    controller.uploadFileError(newRequest, res, '', 'maxFileError');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('You can only select up to 10 files at the same time');
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('uploadFileError fileFormat', () => {
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    controller.uploadFileError(newRequest, res, '', 'fileFormat');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3');
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
 
   test('checkFileCondition', () => {
     const newRequest = req;

@@ -32,7 +32,6 @@ export default class DocumentUpload extends GetController {
     } else {
       super.get(req, res, {
         uploadedDocuments: req.session['caseDocuments'],
-        FileErrors: req.session.errors,
         documentDetail: req.session?.['documentDetail'],
       });
     }
