@@ -25,20 +25,32 @@ describe('Test URL endpoints', () => {
     delete req.session.user;
     req.query.lang = 'en';
     await controller.get(req, res);
-    expect(res.render).toHaveBeenCalledWith('landing.njk', { loginURL: SIGN_IN_URL, content: expect.any(Object), ToggleLanguage: 'cy' });
+    expect(res.render).toHaveBeenCalledWith('landing.njk', {
+      loginURL: SIGN_IN_URL,
+      content: expect.any(Object),
+      ToggleLanguage: 'cy',
+    });
   });
 
   test('should set ToggleLanguage to en', async () => {
     delete req.session.user;
     req.query.lang = 'cy';
     await controller.get(req, res);
-    expect(res.render).toHaveBeenCalledWith('landing.njk', { loginURL: SIGN_IN_URL, content: expect.any(Object), ToggleLanguage: 'en' });
+    expect(res.render).toHaveBeenCalledWith('landing.njk', {
+      loginURL: SIGN_IN_URL,
+      content: expect.any(Object),
+      ToggleLanguage: 'en',
+    });
   });
 
   test('should set ToggleLanguage to default', async () => {
     delete req.session.user;
     req.query.lang = '';
     await controller.get(req, res);
-    expect(res.render).toHaveBeenCalledWith('landing.njk', { loginURL: SIGN_IN_URL, content: expect.any(Object), ToggleLanguage: 'cy' });
+    expect(res.render).toHaveBeenCalledWith('landing.njk', {
+      loginURL: SIGN_IN_URL,
+      content: expect.any(Object),
+      ToggleLanguage: 'cy',
+    });
   });
 });
