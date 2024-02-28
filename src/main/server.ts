@@ -11,6 +11,7 @@ import type { LoggerInstance } from 'winston';
 
 import { TestApiRoutes } from './api/endpoints';
 import { AppInsights } from './modules/appinsights';
+import { AuthProvider } from './modules/auth-provider';
 import { ErrorHandler } from './modules/error-handler';
 import { FileUpload } from './modules/fileupload';
 import { HealthCheck } from './modules/health';
@@ -47,6 +48,7 @@ new PropertiesVolume().enableFor(app);
 new SessionStorage().enableFor(app);
 app.use(cookies());
 new AppInsights().enable();
+new AuthProvider().enable();
 new HealthCheck().enableFor(app);
 new ErrorHandler().enableFor(app, logger);
 new ErrorHandler().handleNextErrorsFor(app);
