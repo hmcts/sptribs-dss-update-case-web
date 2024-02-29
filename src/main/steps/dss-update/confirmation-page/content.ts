@@ -4,6 +4,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 const en = () => ({
   serviceName: 'DSS Update Case',
   successMessage: 'Case updated',
+  feedback: "Feedback",
   subContent:
     'Thank you for updating your case. The information will now be sent to the court for review. They will be in touch if they need any additional information from you.',
 });
@@ -11,6 +12,7 @@ const en = () => ({
 const cy = () => ({
   serviceName: 'DSS Update Case',
   successMessage: 'Case updated - welsh',
+  feedback: "Adborth",
   subContent:
     'Thank you for updating your case. The information will now be sent to the court for review. They will be in touch if they need any additional information from you. - welsh',
 });

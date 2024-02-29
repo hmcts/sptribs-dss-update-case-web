@@ -10,7 +10,7 @@ const en = {
   applyForDissolution: 'DSS Update Case',
   dss_updateServiceName: 'DSS Update Case',
   feedback:
-    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> will help us to improve it.',
+    '<b>Help us improve this service</b><br>This is a new service.Help us for others to improve it by <a class=\'govuk-link\' href=\'https://www.smartsurvey.co.uk/s/Specials_Feedback/?pageurl=currentUrl\' target=_blank>giving your feedback</a>',
   languageToggle: '<a href="?lng=cy" class="govuk-link language">Cymraeg</a>',
   govUk: 'GOV.UK',
   back: 'Back',
