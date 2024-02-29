@@ -76,7 +76,14 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     files: any
   ) {
     if (req.session['caseDocuments'] && this.checkIfMaxDocumentUploaded(req.session['caseDocuments'])) {
-      this.uploadFileError(req, res, redirectUrl, 'maxFileError')
+      const documentUploadErrors = getErrors(req.session['lang']);
+      req.session.fileErrors = [{text: documentUploadErrors.documentUpload.maxFileError, href: "#file-upload-1"}];
+      req.session.save(err => {
+        if (err) {
+          throw err;
+        }
+        res.redirect(redirectUrl);
+      });
     } else {
       this.checkFileValidation(files, req, res, redirectUrl);
     }
@@ -102,10 +109,12 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           contentType: documents.mimetype,
           filename: `${documents.name}`,
         });
+        formData.append('caseTypeId', req.session['caseTypeId']);
+        formData.append('jurisdiction', req.session['jurisdiction']);
         try {
           const seviceAuthToken = await RpeApi.getRpeToken();
           const s2sToken = seviceAuthToken.data;
-          const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken, req);
+          const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken);
           const { url, fileName, documentId, binaryUrl } = uploadDocumentResponseBody['data']['document'];
           req.session['caseDocuments'].push({
             url,
@@ -116,7 +125,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           });
           req.session.save(() => res.redirect(redirectUrl));
         } catch (error) {
-          console.log(error)
           this.uploadFileError(req, res, redirectUrl, 'uploadError');
         }
       }

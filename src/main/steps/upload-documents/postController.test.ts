@@ -30,6 +30,8 @@ describe('Testing the post controller', () => {
       },
       session: {
         caseDocuments: [],
+        caseTypeId: 'caseRefId',
+        jurisdiction: 'ADOPTION',
         userCase: {
           id: 'caseRefId'
         }
@@ -122,6 +124,8 @@ describe('Testing the post controller', () => {
   test('File validations', async () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
+    newRequest.session['caseTypeId'] = 'caseTypeId';
+    newRequest.session['jurisdiction'] = 'jurisdiction';
     newRequest.files = { documents: { name: 'smple.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {
       status: 'Success',
@@ -145,6 +149,8 @@ describe('Testing the post controller', () => {
   test('checkFileValidation - file size error', async () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
+    newRequest.session['caseTypeId'] = 'caseTypeId';
+    newRequest.session['jurisdiction'] = 'jurisdiction';
     newRequest.files = { documents: { name: 'sample.mp3', size: 31, mimetype: 'audio/mpeg', data: '' } };
     const data = {};
     mockedAxios.post.mockRejectedValue({ data });
@@ -162,6 +168,8 @@ describe('Testing the post controller', () => {
   test('checkFileValidation - no file error', async () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
+    newRequest.session['caseTypeId'] = 'caseTypeId';
+    newRequest.session['jurisdiction'] = 'jurisdiction';
     newRequest.files = null;
     const data = {};
     mockedAxios.post.mockRejectedValue({ data });
@@ -178,6 +186,8 @@ describe('Testing the post controller', () => {
 
   test('File validations - file uploading successfull', async () => {
     const newRequest = req;
+    newRequest.session['caseTypeId'] = 'caseTypeId';
+    newRequest.session['jurisdiction'] = 'jurisdiction';
     newRequest.session['save'] = () => '';
     newRequest.files = { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {

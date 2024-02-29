@@ -1,7 +1,4 @@
 services:
-  authProvider:
-    url: RPE_API
-    secret: SERVICE_AUTH_SECRET
   idam:
     authorizationURL: IDAM_WEB_URL
     tokenURL: IDAM_API_URL
