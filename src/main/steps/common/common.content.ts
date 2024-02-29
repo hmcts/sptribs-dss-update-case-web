@@ -122,7 +122,7 @@ const cy: typeof en = {
   applyForDissolution: 'DSS Update Case"(in welsh)',
   dss_updateServiceName: 'DSS Update Case',
   feedback:
-    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> will help us to improve it.(in welsh)',
+    '<b>Helpwch ni i wella’r gwasanaeth hwn</b><br> Mae hwn yn wasanaeth newydd. Helpwch ni ei wella i bobl eraill trwy <a class=\'govuk-link\' href=\'https://www.smartsurvey.co.uk/s/Specials_Feedback/?pageurl=currentUrl\' target=_blank>roi eich adborth</a>',
   languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',
   govUk: 'GOV.UK',
   back: 'Yn ôl',
