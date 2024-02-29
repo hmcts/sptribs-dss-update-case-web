@@ -107,14 +107,12 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         const formData: FormData = new FormData();
         formData.append('file', documents.data, {
           contentType: documents.mimetype,
-          filename: `${documents.name}`,
+          filename: documents.name,
         });
-        formData.append('caseTypeId', req.session['caseTypeId']);
-        formData.append('jurisdiction', req.session['jurisdiction']);
         try {
           const seviceAuthToken = await RpeApi.getRpeToken();
           const s2sToken = seviceAuthToken.data;
-          const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken);
+          const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken, req);
           const { url, fileName, documentId, binaryUrl } = uploadDocumentResponseBody['data']['document'];
           req.session['caseDocuments'].push({
             url,
