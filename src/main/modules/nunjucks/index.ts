@@ -128,6 +128,7 @@ export class Nunjucks {
       res.locals.host = req.headers['x-forwarded-host'] || req.hostname;
       res.locals.pagePath = req.path;
       res.locals.serviceType = 'ST_CIC';
+      res.locals.currentUrl = req.originalUrl;
       next();
     });
   }

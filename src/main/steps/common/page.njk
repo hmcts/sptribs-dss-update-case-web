@@ -34,7 +34,7 @@
     tag: {
       text: phase
     },
-    html: feedback + languageToggle
+    html: feedback |replace("currentUrl",currentUrl)  + languageToggle
   }) }}
 
 {% endblock %}
