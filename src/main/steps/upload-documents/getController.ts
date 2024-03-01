@@ -41,7 +41,7 @@ export default class DocumentUpload extends GetController {
     try {
       const seviceAuthToken = await RpeApi.getRpeToken();
       const s2sToken = seviceAuthToken.data;
-      await deleteDocument(s2sToken, documentId);
+      await deleteDocument(s2sToken, documentId, req);
       req.session['caseDocuments'] = req.session['caseDocuments'].filter(
         document => document.documentId !== documentId
       );
