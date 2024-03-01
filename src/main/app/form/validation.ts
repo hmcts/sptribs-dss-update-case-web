@@ -112,3 +112,9 @@ export const isDateInputNotFilled: DateValidator = date => {
     return;
   }
 };
+
+export const isFieldLetters: Validator = value => {
+  if (!(value as string).match(/^[\p{Script=Latin}'’\-\s]*$/gu)) {
+    return 'invalid';
+  }
+};
