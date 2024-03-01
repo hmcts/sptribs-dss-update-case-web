@@ -1,16 +1,15 @@
 import { Application } from 'express';
 
-const healthcheck = require('@hmcts/nodejs-healthcheck');
+const healthCheck = require('@hmcts/nodejs-healthcheck');
 
-// Sets up the HMCTS info and health endpoints
 export class HealthCheck {
   public enableFor(app: Application): void {
     const healthCheckConfig = {
       checks: {
         // TODO: replace this sample check with proper checks for your application
-        sampleCheck: healthcheck.raw(() => healthcheck.up()),
+        sampleCheck: healthCheck.raw(() => healthCheck.up()),
       },
     };
-    healthcheck.addTo(app, healthCheckConfig);
+    healthCheck.addTo(app, healthCheckConfig);
   }
 }
