@@ -8,9 +8,9 @@ import { Response } from 'express';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { UPLOAD_DOCUMENT } from '../../urls';
 import { getCase } from '../../../app/case/api';
 import { CaseDate } from '../../../app/case/case';
+import { UPLOAD_DOCUMENT } from '../../urls';
 
 @autobind
 export default class CitizenDataVerificationPostController extends PostController<AnyObject> {
