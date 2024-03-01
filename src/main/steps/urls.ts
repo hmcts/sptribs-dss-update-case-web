@@ -21,7 +21,7 @@ export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
 export const CONTACT_US: PageLink = '/contact-us';
 
 export const UPLOAD_DOCUMENT: PageLink = '/upload-documents';
-export const DATA_VERIFICATION: PageLink = '/dss-update/citizen-data-verification';
+export const DATA_VERIFICATION: PageLink = '/dss-update/subject-details';
 export const START_HOME: PageLink = '/dss-update/start';
 export const APPLICATION_CONFIRMATION: PageLink = '/dss-update/confirmation-page';
 export const CHECK_YOUR_ANSWERS: PageLink = '/dss-update/check-your-answers';
