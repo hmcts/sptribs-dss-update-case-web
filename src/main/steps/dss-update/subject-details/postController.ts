@@ -8,9 +8,9 @@ import { Response } from 'express';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { UPLOAD_DOCUMENT } from '../../urls';
 import { getCase } from '../../../app/case/api';
 import { CaseDate } from '../../../app/case/case';
+import { UPLOAD_DOCUMENT } from '../../urls';
 
 @autobind
 export default class CitizenDataVerificationPostController extends PostController<AnyObject> {
@@ -23,6 +23,9 @@ export default class CitizenDataVerificationPostController extends PostControlle
     req.session.errors = form.getErrors(formData);
 
     let nextUrl = req.originalUrl;
+
+    req.session.userCase.subjectFullName = formData.subjectFullName as string;
+    req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
 
     if (req.session.errors.length === 0) {
       try {
@@ -38,8 +41,6 @@ export default class CitizenDataVerificationPostController extends PostControlle
 
           if (cicCaseFullName === subjectFullNameToVerify && cicCaseDateOfBirth === dateToVerify) {
             req.session.isDataVerified = true;
-            req.session.userCase.subjectFullName = subjectFullNameToVerify;
-            req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
             nextUrl = UPLOAD_DOCUMENT;
           } else {
             req.session.errors.push({ propertyName: 'inputFields', errorType: 'required' });
