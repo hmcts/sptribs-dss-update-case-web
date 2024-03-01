@@ -4,24 +4,27 @@
 import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isDateInputInvalid, isDateInputNotFilled, isFieldFilledIn } from '../../../app/form/validation';
+import { isDateInputInvalid, isDateInputNotFilled, isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 import { covertToDateObject } from '../../../app/form/parser';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
-  serviceName: 'DSS Update Case',
-  title: '[title]',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
+  title: 'Subject of this case',
   errorSummaryMessage: 'There is a problem',
+  subjectFullNameLabel: "Full name",
+  subjectDOBLabel: "Date of birth",
   errors: {
     subjectFullName: {
-      required: 'Some of the form fields are empty. Please enter the values and retry',
+      required: 'Please enter full name',
+      invalid: 'Please enter a valid name',
     },
     subjectDOB: {
-      required: 'Some of the date fields are empty. Please enter the values and retry.',
-      invalid: 'Invalid date'
+      required: 'Please enter date of birth',
+      invalid: 'Please enter valid date of birth'
     },
     inputFields: {
-      required: 'Data entered doesn\'t match'
+      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again.'
     },
     caseError: {
       required: 'Error verifying case'
@@ -30,19 +33,22 @@ export const en = () => ({
 });
 
 export const cy = () => ({
-  serviceName: 'DSS Update Case - welsh',
-  title: '[title] - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
+  title: 'Subject of this case - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
+  subjectFullNameLabel: "Full name - welsh",
+  subjectDOBLabel: "Date of birth - welsh",
   errors: {
     subjectFullName: {
-      required: 'Some of the form fields are empty. Please enter the values and retry - welsh',
+      required: 'Please enter full name - welsh',
+      invalid: 'Please enter a valid name - welsh',
     },
     subjectDOB: {
-      required: 'Some of the date fields are empty. Please enter the values and retry. - welsh',
-      invalid: 'Invalid date - welsh'
+      required: 'Please enter date of birth - welsh',
+      invalid: 'Please enter valid date of birth - welsh'
     },
     inputFields: {
-      required: 'Data entered doesn\'t match - welsh'
+      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again. - welsh'
     },
     caseError: {
       required: 'Error verifying case - welsh'
@@ -55,13 +61,13 @@ export const form: FormContent = {
     subjectFullName: {
       type: 'text',
       classes: 'govuk-input--width-20',
-      label: 'Enter your name',
-      validator: value => isFieldFilledIn(value),
+      label: l => l.subjectFullNameLabel,
+      validator: value => isFieldFilledIn(value) || isFieldLetters(value),
     },
     subjectDOB: {
       type: 'date',
       classes: 'govuk-date-input',
-      label: 'Enter your date of birth',
+      label: l => l.subjectDOBLabel,
       values: [
         {
           label: l => l.dateFormat['day'],
@@ -94,7 +100,7 @@ export const form: FormContent = {
     },
   },
   submit: {
-    text: l => l.continue,
+    text: l => l.onlyContinue,
   },
 };
 
