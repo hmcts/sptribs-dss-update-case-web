@@ -1,15 +1,29 @@
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
 {% extends "common/template.njk" %}
 
 {% block backLink %}{% endblock %}
 
-{% block page_content %}
-<main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
+{% block content %}
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+          {{  govukPanel({
+                  titleText: title,
+                  html: successMessage
+              })
+          }}
 
-          <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-6">
-            <h1 class="govuk-panel__title">
-              {{successMessage}}
-            </h1>
-          </div>
-          <p class="govuk-body-m">{{subContent}} </p>
-        </main>
+          <p class="govuk-body">{{ line1 }}</p>
+          <p class="govuk-body">{{ line2 }}</p>
+          <p class="govuk-body">{{ line3 }}</p>
+          {{  govukNotificationBanner({
+                titleText: feedback,
+                html: feedbackBody
+              })
+          }}
+          {% block form %}
+              {% include "common/form/form.njk"%}
+          {% endblock %}
+        </div>
+    </div>
 {% endblock %}
