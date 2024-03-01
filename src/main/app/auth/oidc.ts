@@ -3,10 +3,43 @@ import axios, { AxiosResponse } from 'axios';
 import config from 'config';
 import { jwtDecode } from 'jwt-decode';
 import NodeCache from 'node-cache';
+import { PageLink } from '../../steps/urls';
 
 export const idamTokenCache = new NodeCache({ stdTTL: 3600, checkperiod: 1800 });
 
 const logger = Logger.getLogger('oidc');
+
+export const getRedirectUrl = (serviceUrl: string, callbackUrlPageLink: PageLink): string => {
+  const id: string = config.get('services.idam.clientID');
+  const loginUrl: string = config.get('services.idam.authorizationURL');
+  const callbackUrl = encodeURI(serviceUrl + callbackUrlPageLink);
+
+  return `${loginUrl}?client_id=${id}&response_type=code&redirect_uri=${callbackUrl}`;
+};
+
+export const getUserDetails = async (
+  serviceUrl: string,
+  rawCode: string,
+  callbackUrlPageLink: PageLink
+): Promise<UserDetails> => {
+  const id: string = config.get('services.idam.clientID');
+  const secret: string = config.get('services.idam.clientSecret');
+  const tokenUrl: string = config.get('services.idam.tokenURL');
+  const callbackUrl = encodeURI(serviceUrl + callbackUrlPageLink);
+  const code = encodeURIComponent(rawCode);
+  const data = `client_id=${id}&client_secret=${secret}&grant_type=authorization_code&redirect_uri=${callbackUrl}&code=${code}`;
+  const headers = { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' };
+  const response: AxiosResponse<OidcResponse> = await axios.post(tokenUrl, data, { headers });
+  const jwt = jwtDecode(response.data.id_token) as IdTokenJwtPayload;
+
+  return {
+    accessToken: response.data.access_token,
+    id: jwt.uid,
+    email: jwt.sub,
+    givenName: jwt.given_name,
+    familyName: jwt.family_name,
+  };
+};
 
 export const getSystemUser = async (): Promise<UserDetails> => {
   const username: string = config.get('services.idam.systemUsername');
@@ -23,7 +56,6 @@ export const getSystemUser = async (): Promise<UserDetails> => {
     email: jwt.sub,
     givenName: jwt.given_name,
     familyName: jwt.family_name,
-    roles: jwt.roles,
   };
 };
 
@@ -83,5 +115,4 @@ export interface UserDetails {
   email: string;
   givenName: string;
   familyName: string;
-  roles: string[];
 }
