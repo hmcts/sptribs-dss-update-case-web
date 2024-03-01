@@ -2,7 +2,7 @@
   "translations": {
     "en": {
       "serviceName": "Update an appeal to the First-tier Tribunal",
-      "banner": "<b>Help us improve this service</b><br>This is a new service.Help us for others to improve it by <a class='govuk-link' href='https://www.smartsurvey.co.uk/s/Specials_Feedback/?pageurl=currentUrl' target=_blank>giving your feedback</a>",
+      "banner": "<b>Help us improve this service</b><br>This is a new service. Help us for others to improve it by <a class='govuk-link' href='https://www.smartsurvey.co.uk/s/Specials_Feedback/?pageurl=currentUrl' target=_blank>giving your feedback</a>",
       "title": "Update an existing First-tier Tribunal case",
       "paragraph1": "Use this service to update a case that has already been submitted to the First-tier Tribunal.",
       "paragraph2":
