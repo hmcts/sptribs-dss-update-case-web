@@ -5,7 +5,7 @@ import { getCase } from '../../../app/case/api';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { DATA_VERIFICATION } from '../../urls';
+import { DATA_VERIFICATION, START_HOME } from '../../urls';
 
 @autobind
 export default class CaseFinderController extends PostController<AnyObject> {
@@ -24,6 +24,9 @@ export default class CaseFinderController extends PostController<AnyObject> {
         if (responseFromServerCall.status === 200) {
           req.session.userCase.id = responseFromServerCall.data.id;
           nextUrl = DATA_VERIFICATION;
+        } else if (responseFromServerCall.status === 400) {
+          //ADDED TO TEST SONAR CONFIG
+          nextUrl = START_HOME;
         }
       } catch (error) {
         req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'caseNotFound' });
