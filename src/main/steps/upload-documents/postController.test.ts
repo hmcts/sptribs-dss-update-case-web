@@ -52,7 +52,7 @@ describe('Testing the post controller', () => {
 
   test('Checking filevalidation type for documents', async () => {
     expect(documentExtensions().toString()).toEqual(
-      ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'txt'].toString()
+      ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'xls', 'txt'].toString()
     );
   });
 
@@ -71,6 +71,7 @@ describe('Testing the post controller', () => {
       'sample.docx',
       'sample.rtf',
       'sample.xlsx',
+      'sample.xls',
       'sample.txt',
     ]
   )('isValidFileFormat - valid file %s', async (fileName:string) => {

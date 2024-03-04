@@ -17,7 +17,7 @@ import { getErrors } from './content';
 PostDocumentUploader method */
 
 export const documentExtensions = () => {
-  return ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'txt'];
+  return ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'xls', 'txt'];
 };
 
 export const multimediaExtensions = () => {
