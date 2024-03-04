@@ -32,13 +32,13 @@ export const uploadDocument = async (formData, s2sToken, req) => {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const deleteDocument = async (s2sToken, documentID, req) => {
   const CASE_API_URL: string = config.get('services.sptribs.url')
-  const deleteUrl = DOCUMENT_MANAGEMENT_CONFIGURATIONS.REMOVE_URL.split('{documentId}').join(documentID);
+  const deleteUrl = `/doc/dss-orchestration/${documentID}/delete`;
   const headers = {
     authorization: `Bearer ${req.session.user.accessToken}`,
     serviceAuthorization: s2sToken,
   };
   const DOCUMENT_DELETEMANAGER: AxiosInstance = axios.create({
-    baseURL: config.get(CASE_API_URL),
+    baseURL: CASE_API_URL,
     headers: { ...headers },
   });
 
