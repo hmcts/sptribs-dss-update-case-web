@@ -4,7 +4,7 @@ import { Application, NextFunction, Response } from 'express';
 import { getRedirectUrl, getUserDetails } from '../../app/auth/oidc';
 import { CaseWithId } from '../../app/case/case';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { CALLBACK_URL, CASE_SEARCH_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
+import { CALLBACK_URL, CASE_SEARCH_URL, HOME_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 
 export class OidcMiddleware {
   public enableFor(app: Application): void {
@@ -16,7 +16,7 @@ export class OidcMiddleware {
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL))
     );
 
-    app.get(SIGN_OUT_URL, (req, res) => req.session.destroy(() => res.redirect('/')));
+    app.get(SIGN_OUT_URL, (req, res) => req.session.destroy(() => res.redirect(HOME_URL)));
 
     app.get(
       CALLBACK_URL,
