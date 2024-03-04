@@ -268,7 +268,7 @@ describe('Testing the post controller', () => {
     controller.uploadFileError(newRequest, res, '', 'fileFormat');
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3');
+    expect(req.session?.fileErrors[0].text).toEqual('This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3');
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
 
