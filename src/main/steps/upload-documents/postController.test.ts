@@ -97,12 +97,12 @@ describe('Testing the post controller', () => {
   });
 
   test('isFileSizeGreaterThanMaxAllowed - valid multimedia file', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 30000000, name: 'm.mp4' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 500000000, name: 'm.mp4' } });
     expect(fileSizeCheck).toBe(false);
   });
 
   test('isFileSizeGreaterThanMaxAllowed - invalid multimedia file', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 30000001, name: 'm.mp4' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 500000001, name: 'm.mp4' } });
     expect(fileSizeCheck).toBe(true);
   });
 
@@ -149,14 +149,14 @@ describe('Testing the post controller', () => {
     const data = {};
     mockedAxios.post.mockRejectedValue({ data });
     await controller.checkFileValidation(
-      { documents: { name: 'sample.mp3', size: 30000001, mimetype: 'audio/mpeg', data: '' } },
+      { documents: { name: 'sample.mp3', size: 500000001, mimetype: 'audio/mpeg', data: '' } },
       newRequest,
       res,
       ''
     );
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 30MB (multimedia files)');
+    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 500MB (multimedia files)');
   });
 
   test('checkFileValidation - no file error', async () => {
@@ -227,7 +227,7 @@ describe('Testing the post controller', () => {
     controller.uploadFileError(newRequest, res, '', 'fileSize');
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 30MB (multimedia files)');
+    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 500MB (multimedia files)');
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
 

@@ -21,7 +21,7 @@ api:
   serviceAuth: RPE_API
 uploadPolicy:
   documentSize: 20
-  multimediaSize: 30
+  multimediaSize: 500
   maxNoOfFiles: 20
 app:
   caseTypeOfApplication: 'RELADOP'
