@@ -10,6 +10,7 @@ jest.mock('axios');
 let req, res;
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
+mockedAxios.create = jest.fn(() => mockedAxios);
 beforeEach(() => {
   req = mockRequest();
   res = mockResponse();
@@ -30,8 +31,6 @@ describe('Testing the post controller', () => {
       },
       session: {
         caseDocuments: [],
-        caseTypeId: 'caseRefId',
-        jurisdiction: 'ADOPTION',
         userCase: {
           id: 'caseRefId'
         }
@@ -124,8 +123,6 @@ describe('Testing the post controller', () => {
   test('File validations', async () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
-    newRequest.session['caseTypeId'] = 'caseTypeId';
-    newRequest.session['jurisdiction'] = 'jurisdiction';
     newRequest.files = { documents: { name: 'smple.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {
       status: 'Success',
@@ -149,8 +146,6 @@ describe('Testing the post controller', () => {
   test('checkFileValidation - file size error', async () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
-    newRequest.session['caseTypeId'] = 'caseTypeId';
-    newRequest.session['jurisdiction'] = 'jurisdiction';
     newRequest.files = { documents: { name: 'sample.mp3', size: 31, mimetype: 'audio/mpeg', data: '' } };
     const data = {};
     mockedAxios.post.mockRejectedValue({ data });
@@ -168,8 +163,6 @@ describe('Testing the post controller', () => {
   test('checkFileValidation - no file error', async () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
-    newRequest.session['caseTypeId'] = 'caseTypeId';
-    newRequest.session['jurisdiction'] = 'jurisdiction';
     newRequest.files = null;
     const data = {};
     mockedAxios.post.mockRejectedValue({ data });
@@ -184,11 +177,11 @@ describe('Testing the post controller', () => {
     expect(req.session?.fileErrors[0].text).toEqual('Select a file to upload');
   });
 
-  test('File validations - file uploading successfull', async () => {
+  test('File validations - file uploading successful', async () => {
     const newRequest = req;
-    newRequest.session['caseTypeId'] = 'caseTypeId';
-    newRequest.session['jurisdiction'] = 'jurisdiction';
-    newRequest.session['save'] = () => '';
+    newRequest.body['eventName'] = "TEST"
+    newRequest.session.caseDocuments = []
+    newRequest.session.fileErrors = []
     newRequest.files = { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {
       status: 'Success',
@@ -199,14 +192,23 @@ describe('Testing the post controller', () => {
         binaryUrl: 'http://demon.com',
       },
     };
-    mockedAxios.post.mockRejectedValue({ data });
+    mockedAxios.post.mockResolvedValue({ data });
     await controller.checkFileValidation(
       { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } },
       newRequest,
       res,
       ''
     );
-    expect(res.redirect).not.toHaveBeenCalled();
+    const expectedCaseDocuments = {
+      ...data.document,
+      description: "TEST"
+    };
+
+    expect(mockedAxios.create).toHaveBeenCalled();
+    expect(mockedAxios.post).toHaveBeenCalled();
+    expect(res.redirect).toHaveBeenCalled();
+    expect(req.session.caseDocuments).toHaveLength(1);
+    expect(req.session.caseDocuments[0]).toEqual(expectedCaseDocuments);
     expect(req.session?.fileErrors).toHaveLength(0);
   });
 
@@ -246,7 +248,7 @@ describe('Testing the post controller', () => {
     controller.uploadFileError(newRequest, res, '', 'uploadError');
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('The selected file could not be uploaded – try again');
+    expect(req.session?.fileErrors[0].text).toEqual('Document upload or deletion has failed. Please try again');
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
 

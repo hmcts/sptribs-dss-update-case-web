@@ -44,7 +44,7 @@ export const en = () => ({
       fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 30MB (multimedia files)`,
       fileFormat: `This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3`,
       selectFileToUpload: 'Select a file to upload',
-      uploadError: 'The selected file could not be uploaded – try again',
+      uploadDeleteError: 'Document upload or deletion has failed. Please try again',
       maxFileError: 'You can only select up to 20 files at the same time',
     },
     documentDetail: {
@@ -97,7 +97,7 @@ export const cy = () => ({
       fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 30MB (multimedia files) - welsh`,
       fileFormat: `This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh`,
       selectFileToUpload: 'Select a file to upload - welsh',
-      uploadError: 'The selected file could not be uploaded – try again - welsh',
+      uploadDeleteError: 'Document upload or deletion has failed. Please try again - welsh',
       maxFileError: 'You can only select up to 20 files at the same time - welsh',
     },
     documentDetail: {
