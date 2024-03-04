@@ -32,12 +32,8 @@ export const deleteDocument = async (s2sToken, documentID, req) => {
     authorization: `Bearer ${req.session.user.accessToken}`,
     serviceAuthorization: s2sToken,
   };
-  const DOCUMENT_DELETEMANAGER: AxiosInstance = axios.create({
-    baseURL: CASE_API_URL,
-    headers: { ...headers },
-  });
 
-  await DOCUMENT_DELETEMANAGER.delete(deleteUrl);
+  await uploadDocumentInstance(CASE_API_URL, headers).delete(deleteUrl);
 };
 
 function uploadDocumentInstance(baseUrl: string, header: RawAxiosRequestHeaders): AxiosInstance {
