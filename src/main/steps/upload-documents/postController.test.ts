@@ -74,7 +74,6 @@ describe('Testing the post controller', () => {
       'sample.txt',
     ]
   )('isValidFileFormat - valid file %s', async (fileName:string) => {
-    const filetypeCheck = 
     expect(controller.isValidFileFormat({ documents: { name: fileName} })).toBe(true);
   });
 

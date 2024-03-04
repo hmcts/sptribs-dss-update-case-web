@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 import FormData from 'form-data';
 
 import { deleteDocument, uploadDocument } from './documentManager';
@@ -8,8 +8,6 @@ type uploadedDocument = {
   data: string;
 };
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-const response = { id: '200', state: 'SUCCESS' };
-const mockGet = jest.fn().mockResolvedValueOnce({ data: {} });
 mockedAxios.create = jest.fn(() => mockedAxios);
 
 describe('Test case for document upload', () => {
