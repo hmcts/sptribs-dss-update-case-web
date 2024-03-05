@@ -39,7 +39,7 @@ const englishContent = () => ({
   errors: {
     documentUpload: {
       noInput: 'You cannot continue without providing additional information or a document',
-      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 500MB (documents) or less than 500MB (multimedia files)`,
+      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 500MB`,
       fileFormat: `This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3`,
       selectFileToUpload: 'Select a file to upload',
       uploadDeleteError: 'Document upload or deletion has failed. Please try again',
@@ -93,7 +93,7 @@ const welshContent = () => ({
   errors: {
     documentUpload: {
       noInput: 'You cannot continue without providing additional information or a document - welsh',
-      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 500MB (documents) or less than 500MB (multimedia files) - welsh`,
+      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 500MB - welsh`,
       fileFormat: `This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh`,
       selectFileToUpload: 'Select a file to upload - welsh',
       uploadDeleteError: 'Document upload or deletion has failed. Please try again - welsh',

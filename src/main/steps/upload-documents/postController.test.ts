@@ -157,7 +157,7 @@ describe('Testing the post controller', () => {
     );
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 500MB (documents) or less than 500MB (multimedia files)');
+    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 500MB');
   });
 
   test('checkFileValidation - no file error', async () => {
@@ -228,7 +228,7 @@ describe('Testing the post controller', () => {
     controller.uploadFileError(newRequest, res, '', 'fileSize');
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 500MB (documents) or less than 500MB (multimedia files)');
+    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 500MB');
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
 
