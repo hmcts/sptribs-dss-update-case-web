@@ -22,7 +22,7 @@ export const en = () => ({
   fileUploadRequirementsLabel: 'File upload requirements',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
-    'File size per document: up to 20 megabytes (MB)',
+    'File size per document: up to 500 megabytes (MB)',
     'File size per multimedia file: up to 500 megabytes (MB)',
     'Files cannot be password protected',
   ],
@@ -75,7 +75,7 @@ export const cy = () => ({
   fileUploadRequirementsLabel: 'File upload requirements - welsh',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh',
-    'File size per document: up to 20 megabytes (MB) - welsh',
+    'File size per document: up to 500 megabytes (MB) - welsh',
     'File size per multimedia file: up to 500 megabytes (MB) - welsh',
     'Files cannot be password protected - welsh',
   ],
@@ -94,7 +94,7 @@ export const cy = () => ({
   errors: {
     documentUpload: {
       noInput: 'You cannot continue without providing additional information or a document - welsh',
-      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 500MB (multimedia files) - welsh`,
+      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 500MB (documents) or less than 500MB (multimedia files) - welsh`,
       fileFormat: `This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh`,
       selectFileToUpload: 'Select a file to upload - welsh',
       uploadDeleteError: 'Document upload or deletion has failed. Please try again - welsh',
