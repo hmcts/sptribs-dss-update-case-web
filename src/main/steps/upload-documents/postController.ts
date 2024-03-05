@@ -9,7 +9,6 @@ import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../app/controller/PostController';
 import { uploadDocument } from '../../app/fileUpload/documentManager';
 import { FormFields, FormFieldsFn } from '../../app/form/Form';
-import { isAlphaNumeric } from '../../app/form/validation';
 import { RpeApi } from '../../app/s2s/rpeAuth';
 import { CHECK_YOUR_ANSWERS } from '../urls';
 import { getErrors } from './content';
@@ -36,20 +35,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       req.session.errors = [];
       req.session.fileErrors = [];
     }
-    const documentUploadErrors = getErrors(req.session['lang']);
+
     req.session['documentDetail'] = req.body['documentDetail'];
     req.session.save();
 
-    if (isAlphaNumeric(req.body['documentDetail'] as string)) {
-      req.session.fileErrors?.push({ text: documentUploadErrors.documentDetail.notAlphaNumeric, href: '#documentDetail' });
-      req.session['documentDetail'] = '';
-      return super.redirect(req, res, req.originalUrl);
-    }
-    if (isAlphaNumeric(req.body['eventName'] as string)) {
-      req.session.fileErrors?.push({ text: documentUploadErrors.eventName.notAlphaNumeric, href: '#eventName' });
-      req.session['eventName'] = '';
-      return super.redirect(req, res, req.originalUrl);
-    }
     if (ContinueFromPage) {
       const numDocsUploaded:number = req.session.hasOwnProperty('caseDocuments') ? req.session['caseDocuments'].length : 0;
       if (numDocsUploaded == 0 && req.session['documentDetail'] == '') {
