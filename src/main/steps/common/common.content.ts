@@ -1,5 +1,3 @@
-import { capitalize } from 'lodash';
-
 import { CaseWithId } from '../../app/case/case';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 
@@ -257,7 +255,7 @@ export const generatePageContent = ({
 };
 
 const getServiceName = (translations: typeof en): string => {
-  return capitalize(translations.serviceName);
+  return translations.serviceName;
 };
 
 type CommonContentAdditionalData = {
