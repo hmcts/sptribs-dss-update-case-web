@@ -17,7 +17,7 @@ const englishContent = () => ({
     'related reports',
   ],
   caseRelevancySubTitle: 'For each piece of additional information or evidence you are submitting, please state why it is relevant to your case.',
-  fileUploadRequirementsLabel: 'File upload requirements',
+  fileUploadRequirementsLabel: 'File uploads requirements',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
     'File size per document: up to 500 megabytes (MB)',
@@ -71,7 +71,7 @@ const welshContent = () => ({
     'related reports - welsh',
   ],
   caseRelevancySubTitle: 'For each piece of additional information or evidence you are submitting, please state why it is relevant to your case. - welsh',
-  fileUploadRequirementsLabel: 'File upload requirements - welsh',
+  fileUploadRequirementsLabel: 'File uploads requirements - welsh',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh',
     'File size per document: up to 500 megabytes (MB) - welsh',
