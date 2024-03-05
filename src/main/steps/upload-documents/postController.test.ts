@@ -88,12 +88,12 @@ describe('Testing the post controller', () => {
   });
 
   test('isFileSizeGreaterThanMaxAllowed - valid document file size', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 20000000, name: 'm.docx' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 500000000, name: 'm.docx' } });
     expect(fileSizeCheck).toBe(false);
   });
 
   test('isFileSizeGreaterThanMaxAllowed - invalid document file size', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 20000001, name: 'm.docx' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 500000001, name: 'm.docx' } });
     expect(fileSizeCheck).toBe(true);
   });
 

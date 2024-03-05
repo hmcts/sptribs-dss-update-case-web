@@ -20,8 +20,7 @@ session:
 api:
   serviceAuth: RPE_API
 uploadPolicy:
-  documentSize: 20
-  multimediaSize: 500
+  documentSize: 500
   maxNoOfFiles: 20
 app:
   caseTypeOfApplication: 'RELADOP'
