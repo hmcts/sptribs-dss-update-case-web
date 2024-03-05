@@ -64,21 +64,15 @@
 }) }}
 
          {% if uploadedDocuments.length > 0 %}
-    <dl class="govuk-summary-list govuk-!-margin-bottom-9 govuk-!-margin-top-0">
+    <dul class="govuk-list">
   {% for document in uploadedDocuments %}
-      <div class="govuk-summary-list__row">
-        <dd class="govuk-summary-list__value">
-          {{ document.fileName }}
-        </dd>
-         {% set documentId = document.documentId %}
-          <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="{{postURL}}?removeId={{documentId}}">
-                {{delete}}
-                </a>
-          </dd>
-      </div>
+      <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
+        {{ document.fileName }}
+        {% set documentId = document.documentId%}
+        <a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
+      </li>
     {%endfor%}
-</dl>
+</ul>
 {%endif%}
 
 <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if uploadedDocuments|length %} hidden{% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
