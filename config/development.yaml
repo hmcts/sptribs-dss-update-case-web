@@ -21,7 +21,7 @@ api:
 uploadPolicy:
   documentSize: 20
   multimediaSize: 500
-  maxNoOfFiles: 10
+  maxNoOfFiles: 20
 app:
   caseTypeOfApplication: 'RELADOP'
 e2e:
