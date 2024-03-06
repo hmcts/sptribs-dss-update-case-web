@@ -74,14 +74,14 @@ export const UploadFormSummary = (
   caseInformation: string
 ): SummaryList | undefined => {
   const additionalInformation = {
-    key: keys.infomation,
+    key: keys.information,
     value: caseInformation,
     changeUrl: Urls['UPLOAD_DOCUMENT'],
   };
 
   const documentInformation = uploadedDocuments.map(document => {
     return {
-      keyHtml: keys.fileName + '<br><br>' + keys.description,
+      keyHtml: keys.document + '<br><br>' + keys.documentRelevance,
       valueHtml: document.fileName + '<br><br>' + document.description,
       changeUrl: Urls['UPLOAD_DOCUMENT'],
     };

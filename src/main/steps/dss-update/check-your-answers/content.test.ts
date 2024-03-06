@@ -14,8 +14,8 @@ const enContent = {
   errorSummaryMessage: 'There is a problem',
   keys: {
     information: 'Additional information',
-    documents: 'Additional documents',
-    documentDescription: 'Why is this relevant to the case?',
+    document: 'Additional document',
+    documentRelevance: 'Document relevance',
   },
   errors: {
     submissionError: {
@@ -34,8 +34,8 @@ const cyContent = {
   errorSummaryMessage: 'There is a problem - welsh',
   keys: {
     information: 'Additional information - welsh',
-    documents: 'Additional documents - welsh',
-    documentDescription: 'Why is this relevant to the case? - welsh',
+    document: 'Additional document - welsh',
+    documentRelevance: 'Document relevance - welsh',
   },
   errors: {
     submissionError: {
