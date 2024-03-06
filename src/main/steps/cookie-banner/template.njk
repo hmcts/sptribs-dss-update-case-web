@@ -6,25 +6,24 @@
 {% endset %}
 
 {{ govukCookieBanner({
+  classes: 'cookie-banner',
   ariaLabel: cookiesHeading + " " + serviceName,
+  hidden: true,
   messages: [
     {
+      classes: "cookie-banner-message",
       headingText: cookiesHeading + " " + serviceName,
       html: cookieMessageHTML,
-      classes: "govuk-cookie-banner__decision",
       actions: [
         {
+          classes: 'cookie-banner-accept-button',
           text: acceptAnalyticsCookies,
-
-          attributes: {
-            'data-cm-action': 'accept'
-          }
+          type: "button"
         },
         {
+          classes: 'cookie-banner-reject-button',
           text: rejectAnalyticsCookies,
-          attributes: {
-            'data-cm-action': 'reject'
-          }
+          type: "button"
         },
         {
           text: viewCookies,
@@ -35,16 +34,26 @@
     {
       html: cookiesConfirmationMessage,
       role: "alert",
-      classes: "govuk-cookie-banner__confirmation",
+      classes: "cookie-banner-accept-message",
       hidden: true,
       actions: [
-      {
-        text: hideMessage,
-        attributes: {
-          'data-cm-action': 'hide'
+        {
+          classes: 'cookie-banner-hide-button',
+          text: hideMessage
         }
-      }
-    ]
+      ]
+    },
+    {
+      html: cookiesConfirmationMessage,
+      role: "alert",
+      classes: "cookie-banner-reject-message",
+      hidden: true,
+      actions: [
+        {
+          classes: 'cookie-banner-hide-button',
+          text: hideMessage
+        }
+      ]
     }
   ]
 }) }}
