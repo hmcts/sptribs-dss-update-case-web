@@ -73,42 +73,21 @@ export const UploadFormSummary = (
   uploadedDocuments: Partial<any>,
   caseInformation: string
 ): SummaryList | undefined => {
-  const documentsList = uploadedDocuments
-    ? uploadedDocuments.map((document): string => {
-        return document.fileName + '';
-      })
-        .toString()
-        .split(',')
-        .join('\n')
-    : '';
-
-  const documentDescriptionsList = uploadedDocuments
-    ? uploadedDocuments.map((document): string => {
-        return document.description + '';
-      })
-        .toString()
-        .split(',')
-        .join('\n')
-    : '';
-
-  const summaryData = [
-  {
-    key: keys.information,
+  const additionalInformation = {
+    key: keys.infomation,
     value: caseInformation,
     changeUrl: Urls['UPLOAD_DOCUMENT'],
-  },
-  {
-    keyHtml: keys.documents,
-    valueHtml: documentsList,
-    changeUrl: Urls['UPLOAD_DOCUMENT'],
-  },
-  {
-    keyHtml: keys.documentDescription,
-    valueHtml: documentDescriptionsList,
-    changeUrl: Urls['UPLOAD_DOCUMENT'],
-  }
+  };
 
-];
+  const documentInformation = uploadedDocuments.map(document => {
+    return {
+      keyHtml: keys.fileName + '<br><br>' + keys.description,
+      valueHtml: document.fileName + '<br><br>' + document.description,
+      changeUrl: Urls['UPLOAD_DOCUMENT'],
+    };
+  });
+
+  const summaryData = [additionalInformation, ...documentInformation].filter(item => item);
 
   return {
     title: 'List of documents uploaded ',
