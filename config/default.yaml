@@ -1,7 +1,7 @@
 security:
   referrerPolicy: 'origin'
 port: 3100
-timeout: 30000
+timeout: 500000
 uploadTimeout: 500000
 health:
   timeout: 5000
