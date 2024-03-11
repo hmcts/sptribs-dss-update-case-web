@@ -9,6 +9,7 @@ import DocumentUpload from './getController';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
+mockedAxios.create = jest.fn(() => mockedAxios);
 
 describe('Test URL endpoints', () => {
   const controller = new DocumentUpload('page', () => ({}), FieldPrefix.APPLICANT);
@@ -20,19 +21,15 @@ describe('Test URL endpoints', () => {
   });
 
   test('should be able to remove the documents from session, async', async () => {
-    const requestWithDocumentId = req;
-    requestWithDocumentId.query['removeId'] = 'ubc';
-    const parsedRequest = {
-      ...requestWithDocumentId,
-      session: {
-        caseDocuments: [{ documentId: 'abc' }, { documentId: 'ubc' }],
-      },
-    };
+    req.query['removeId'] = '1';
+    req.session.caseDocuments = [{ documentId: '1' }, { documentId: '2' }];
     const data = {
       status: 'Success',
     };
     mockedAxios.delete.mockResolvedValue({ data });
-    await controller.removeExistingConsentDocument('abc', parsedRequest, res);
-    expect(res.redirect).not.toHaveBeenCalledWith(UPLOAD_DOCUMENT);
+    await controller.removeExistingConsentDocument('1', req, res);
+    expect(mockedAxios.delete).toHaveBeenCalled();
+    expect(req.session.caseDocuments).toEqual([{ documentId: '2' }]);
+    expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
   });
 });
