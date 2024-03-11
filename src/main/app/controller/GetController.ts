@@ -68,11 +68,15 @@ export class GetController {
         ...content,
         ...renderableContents,
         sessionErrors: req.session.hasOwnProperty('errors') ? req.session.errors : [],
+        fileErrors: req.session.hasOwnProperty('fileErrors') ? req.session.fileErrors : [],
         caseId: req.session.userCase?.id,
       };
 
       if (req.session?.errors) {
         req.session.errors = undefined;
+      }
+      if (req.session?.fileErrors) {
+        req.session.fileErrors = [];
       }
       //Add caption only if it exists else it will be rendered by specific page
       if (captionValue) {
