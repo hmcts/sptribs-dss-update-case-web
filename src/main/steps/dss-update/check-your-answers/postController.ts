@@ -12,7 +12,6 @@ import { AnyObject, PostController } from '../../../app/controller/PostControlle
 import { Form } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/s2s/rpeAuth';
 import { APPLICATION_CONFIRMATION } from '../../urls';
-import { getSystemUser } from '../../../app/auth/oidc';
 /* The CheckYourAnswersController class extends the PostController class */
 @autobind
 export default class CheckYourAnswersController extends PostController<AnyObject> {
@@ -41,20 +40,17 @@ export default class CheckYourAnswersController extends PostController<AnyObject
     };
 
     const caseId = req.session.userCase.id;
-    //TODO: change to use UPDATE_CASE ?event=UPDATE_CASE
-    const baseURL = `${config.get('services.sptribs.url')}/case/dss-orchestration/dss/${caseId}/update?event=UPDATE`;
-    const seviceAuthToken = await RpeApi.getRpeToken();
-    const s2sToken = seviceAuthToken.data;
-    const systemUserDetails = await getSystemUser();
-    const updateRequest = await axios.put(baseURL, data, {
+    const baseURL = `${config.get('services.sptribs.url')}/case/dss-orchestration/dss/${caseId}/update?event=UPDATE_CASE`;
+    const serviceAuthToken = await RpeApi.getRpeToken();
+    const s2sToken = serviceAuthToken.data;
+    return await axios.put(baseURL, data, {
       headers: {
-        Authorization: 'Bearer ' + systemUserDetails.accessToken,
+        Authorization: `Bearer ${req.session.user.accessToken}`,
         ServiceAuthorization: `Bearer ${s2sToken}`,
         Accept: '*/*',
         'Content-Type': 'application/json'
       },
     });
-    return updateRequest;
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
