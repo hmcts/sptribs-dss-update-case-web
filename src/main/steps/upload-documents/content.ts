@@ -19,11 +19,11 @@ export const en = () => ({
     'related reports',
   ],
   caseRelevancySubTitle: 'For each piece of additional information or evidence you are submitting, please state why it is relevant to your case.',
-  fileUploadRequirementsLabel: 'File upload requirements',
+  fileUploadRequirementsLabel: 'File uploads requirements',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
-    'File size per document: up to 20 megabytes (MB)',
-    'File size per multimedia file: up to 30 megabytes (MB)',
+    'File size per document: up to 500 megabytes (MB)',
+    'File size per multimedia file: up to 500 megabytes (MB)',
     'Files cannot be password protected',
   ],
   guideText:
@@ -34,24 +34,17 @@ export const en = () => ({
     'Please explain why you feel this document is relevant to your case.',
   delete: 'Delete',
   documentInLanguage: 'Document',
-  fileuploaded: 'Files uploaded',
   errorSummaryMessage: 'There is a problem',
   uploadAFile: 'Upload a file',
   uploadFileHint: 'Once you have selected the file click "Upload file" to upload it.',
   errors: {
     documentUpload: {
       noInput: 'You cannot continue without providing additional information or a document',
-      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 30MB (multimedia files)`,
-      fileFormat: `This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3`,
+      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 500MB`,
+      fileFormat: `This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3`,
       selectFileToUpload: 'Select a file to upload',
-      uploadError: 'The selected file could not be uploaded – try again',
-      maxFileError: 'You can only select up to 10 files at the same time',
-    },
-    documentDetail: {
-      notAlphaNumeric: 'You have entered an invalid character. Please enter letters and numbers only.',
-    },
-    eventName: {
-      notAlphaNumeric: 'You have entered an invalid character. Please enter letters and numbers only.',
+      uploadDeleteError: 'Document upload or deletion has failed. Please try again',
+      maxFileError: 'You can only select up to 20 files at the same time',
     },
   },
 });
@@ -72,11 +65,11 @@ export const cy = () => ({
     'related reports - welsh',
   ],
   caseRelevancySubTitle: 'For each piece of additional information or evidence you are submitting, please state why it is relevant to your case. - welsh',
-  fileUploadRequirementsLabel: 'File upload requirements - welsh',
+  fileUploadRequirementsLabel: 'File uploads requirements - welsh',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh',
-    'File size per document: up to 20 megabytes (MB) - welsh',
-    'File size per multimedia file: up to 30 megabytes (MB) - welsh',
+    'File size per document: up to 500 megabytes (MB) - welsh',
+    'File size per multimedia file: up to 500 megabytes (MB) - welsh',
     'Files cannot be password protected - welsh',
   ],
   guideText:
@@ -87,24 +80,17 @@ export const cy = () => ({
     'Please explain why you feel this document is relevant to your case. - welsh',
   delete: 'Delete - welsh',
   documentInLanguage: 'Document - welsh',
-  fileuploaded: 'Files uploaded - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
   uploadAFile: 'Upload a file - welsh',
   uploadFileHint: 'Once you have selected the file click "Upload file" to upload it. - welsh',
   errors: {
     documentUpload: {
       noInput: 'You cannot continue without providing additional information or a document - welsh',
-      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 20MB (documents) or less than 30MB (multimedia files) - welsh`,
-      fileFormat: `This service only accepts files in the formats - Ms Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh`,
+      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 500MB - welsh`,
+      fileFormat: `This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh`,
       selectFileToUpload: 'Select a file to upload - welsh',
-      uploadError: 'The selected file could not be uploaded – try again - welsh',
-      maxFileError: 'You can only select up to 10 files at the same time - welsh',
-    },
-    documentDetail: {
-      notAlphaNumeric: 'You have entered an invalid character. Please enter letters and numbers only. - welsh',
-    },
-    eventName: {
-      notAlphaNumeric: 'You have entered an invalid character. Please enter letters and numbers only. - welsh',
+      uploadDeleteError: 'Document upload or deletion has failed. Please try again - welsh',
+      maxFileError: 'You can only select up to 20 files at the same time - welsh',
     },
   },
 });

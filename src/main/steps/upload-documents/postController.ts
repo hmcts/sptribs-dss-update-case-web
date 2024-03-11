@@ -9,7 +9,6 @@ import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../app/controller/PostController';
 import { uploadDocument } from '../../app/fileUpload/documentManager';
 import { FormFields, FormFieldsFn } from '../../app/form/Form';
-import { isAlphaNumeric } from '../../app/form/validation';
 import { RpeApi } from '../../app/s2s/rpeAuth';
 import { CHECK_YOUR_ANSWERS } from '../urls';
 import { getErrors } from './content';
@@ -17,11 +16,11 @@ import { getErrors } from './content';
 PostDocumentUploader method */
 
 export const documentExtensions = () => {
-  return ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'txt'];
+  return ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'xls', 'txt'];
 };
 
 export const multimediaExtensions = () => {
-  return ['mp3', 'mp4', 'wav'];
+  return ['mp3', 'mp4'];
 };
 @autobind
 export default class UploadDocumentController extends PostController<AnyObject> {
@@ -36,20 +35,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       req.session.errors = [];
       req.session.fileErrors = [];
     }
-    const documentUploadErrors = getErrors(req.session['lang']);
+
     req.session['documentDetail'] = req.body['documentDetail'];
     req.session.save();
 
-    if (isAlphaNumeric(req.body['documentDetail'] as string)) {
-      req.session.fileErrors?.push({ text: documentUploadErrors.documentDetail.notAlphaNumeric, href: '#documentDetail' });
-      req.session['documentDetail'] = '';
-      return super.redirect(req, res, req.originalUrl);
-    }
-    if (isAlphaNumeric(req.body['eventName'] as string)) {
-      req.session.fileErrors?.push({ text: documentUploadErrors.eventName.notAlphaNumeric, href: '#eventName' });
-      req.session['eventName'] = '';
-      return super.redirect(req, res, req.originalUrl);
-    }
     if (ContinueFromPage) {
       const numDocsUploaded:number = req.session.hasOwnProperty('caseDocuments') ? req.session['caseDocuments'].length : 0;
       if (numDocsUploaded == 0 && req.session['documentDetail'] == '') {
@@ -107,14 +96,13 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         const formData: FormData = new FormData();
         formData.append('file', documents.data, {
           contentType: documents.mimetype,
-          filename: `${documents.name}`,
+          filename: documents.name,
         });
-        formData.append('caseTypeId', req.session['caseTypeId']);
-        formData.append('jurisdiction', req.session['jurisdiction']);
         try {
           const seviceAuthToken = await RpeApi.getRpeToken();
           const s2sToken = seviceAuthToken.data;
-          const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken);
+          console.log(s2sToken)
+          const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken, req);
           const { url, fileName, documentId, binaryUrl } = uploadDocumentResponseBody['data']['document'];
           req.session['caseDocuments'].push({
             url,
@@ -161,7 +149,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         errorMessage = documentUploadErrors.documentUpload.selectFileToUpload;
         break;
       case 'uploadError':
-        errorMessage = documentUploadErrors.documentUpload.uploadError;
+        errorMessage = documentUploadErrors.documentUpload.uploadDeleteError;
         break;
       case 'maxFileError':
         errorMessage = documentUploadErrors.documentUpload.maxFileError;
@@ -189,16 +177,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   public isFileSizeGreaterThanMaxAllowed(files) {
-    const uploadPolicySizeForFiles = Number(config.get('uploadPolicy.documentSize')) * 1000000;
-    const uploadPolicySizeForMultimediaFiles = Number(config.get('uploadPolicy.multimediaSize')) * 1000000;
+    const uploadPolicySizeForFiles = Number(config.get('uploadPolicy.documentSize')) * 1024 * 1024;
     const { documents } = files;
-    const extension = documents.name.toLowerCase().split('.')[documents.name.split('.').length - 1];
-    if (documentExtensions().includes(extension)) {
-      return documents.size > uploadPolicySizeForFiles;
-    } else if (multimediaExtensions().includes(extension)) {
-      return documents.size > uploadPolicySizeForMultimediaFiles;
-    } else {
-      return false;
-    }
+    return documents.size > uploadPolicySizeForFiles;
   }
 }

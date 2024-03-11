@@ -6,9 +6,6 @@
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
 
-
-{% set selectedFileType = "image/jpeg,image/png,application/pdf,image/jpg,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/rtf,audio/mpeg,video/mp4,audio/wav"%}
-
 {% extends "common/template.njk" %}
 
 {% block page_content %}
@@ -44,11 +41,14 @@
 
 <p class="govuk-body">{{paragraph2}}</p>
 <p class="govuk-body">{{paragraph3}}</p>
-  <ul class="govuk-list govuk-list--bullet">
+<p class="govuk-body">{{uploadedDocumentsSubTitle}}</p>
+<div class="govuk-body">
+  <ul class="‘govuk-list govuk-list--bullet’">
     {% for item in uploadDocumentsBullets %}
       <li>{{item | safe}}</li>
     {% endfor %}
   </ul>
+</div>
 <p class="govuk-body">{{caseRelevancySubTitle}}</p>
 
 
@@ -56,7 +56,7 @@
 {% for item in uploadHelpBullets %}
     {% set fileRequirements = fileRequirements + "<li>" + item + "</li>"%}
 {% endfor %}
-{% set uploadRequirements = "<ul class='govuk-list govuk-list--bullet'><div class='govuk-body-s'>" + fileRequirements + "</div></ul><p class='govuk-body-s'>"+ guideText + "</p>" %}
+{% set uploadRequirements = "<ul class='‘govuk-list govuk-list--bullet’'><div class='govuk-body-s'>" + fileRequirements + "</div></ul><p class='govuk-body-s'>"+ guideText + "</p>" %}
 
 {{ govukDetails({
   summaryText: fileUploadRequirementsLabel,
@@ -64,25 +64,15 @@
 }) }}
 
          {% if uploadedDocuments.length > 0 %}
-        <h2 class="govuk-heading-m"> {{fileuploaded}} </h2>
-    <dl class="govuk-summary-list govuk-!-margin-bottom-9 govuk-!-margin-top-0">
+    <dul class="govuk-list">
   {% for document in uploadedDocuments %}
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          {{documentInLanguage}} {{loop.index}}
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{ document.fileName }}
-        </dd>
-         {% set documentId = document.documentId %}
-          <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="{{postURL}}?removeId={{documentId}}">
-                {{delete}}
-                </a>
-          </dd>
-      </div>
+      <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
+        {{ document.fileName }}
+        {% set documentId = document.documentId %}
+        <a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
+      </li>
     {%endfor%}
-</dl>
+</ul>
 {%endif%}
 
 <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if uploadedDocuments|length %} hidden{% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
@@ -102,9 +92,6 @@
       {{ govukFileUpload({
   id: "file-upload-1",
   name: "documents",
-     attributes: {
-            accept: selectedFileType
-  },
   classes: "govuk-!-margin-bottom-3",
   label: {
       text: uploadAFile
