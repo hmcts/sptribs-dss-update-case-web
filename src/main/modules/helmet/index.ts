@@ -5,7 +5,9 @@ export interface HelmetConfig {
   referrerPolicy: string;
 }
 
+const dynatraceDomain = '*.dynatrace.com';
 const googleAnalyticsDomain = '*.google-analytics.com';
+const googleTagManagerDomain = '*.googletagmanager.com';
 const self = "'self'";
 
 /**
@@ -23,15 +25,28 @@ export class Helmet {
   }
 
   private setContentSecurityPolicy(app: express.Express): void {
+    const scriptSrc = [
+      self,
+      googleAnalyticsDomain,
+      googleTagManagerDomain,
+      dynatraceDomain,
+      "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
+      "'sha256-XbrIe2Mu+2yK4boWprqdknTXJvaHzNkq5hBOh5NMUwE='",
+    ];
+
+    if (app.locals.developmentMode) {
+      scriptSrc.push("'unsafe-eval'");
+    }
+
     app.use(
       helmet.contentSecurityPolicy({
         directives: {
-          connectSrc: [self],
+          connectSrc: [self, dynatraceDomain],
           defaultSrc: ["'none'"],
           fontSrc: [self, 'data:'],
           imgSrc: [self, googleAnalyticsDomain],
           objectSrc: [self],
-          scriptSrc: [self, googleAnalyticsDomain, "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='"],
+          scriptSrc,
           styleSrc: [self],
         },
       })
