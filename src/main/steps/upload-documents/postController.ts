@@ -177,7 +177,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   public isFileSizeGreaterThanMaxAllowed(files) {
-    const uploadPolicySizeForFiles = Number(config.get('uploadPolicy.documentSize')) * 1000000;
+    const uploadPolicySizeForFiles = Number(config.get('uploadPolicy.documentSize')) * 1024 * 1024;
     const { documents } = files;
     return documents.size > uploadPolicySizeForFiles;
   }

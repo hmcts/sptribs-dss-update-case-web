@@ -88,22 +88,22 @@ describe('Testing the post controller', () => {
   });
 
   test('isFileSizeGreaterThanMaxAllowed - valid document file size', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 500000000, name: 'm.docx' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 524288000, name: 'm.docx' } });
     expect(fileSizeCheck).toBe(false);
   });
 
   test('isFileSizeGreaterThanMaxAllowed - invalid document file size', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 500000001, name: 'm.docx' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 524288001, name: 'm.docx' } });
     expect(fileSizeCheck).toBe(true);
   });
 
   test('isFileSizeGreaterThanMaxAllowed - valid multimedia file', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 500000000, name: 'm.mp4' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 524288000, name: 'm.mp4' } });
     expect(fileSizeCheck).toBe(false);
   });
 
   test('isFileSizeGreaterThanMaxAllowed - invalid multimedia file', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 500000001, name: 'm.mp4' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 524288001, name: 'm.mp4' } });
     expect(fileSizeCheck).toBe(true);
   });
 
@@ -150,7 +150,7 @@ describe('Testing the post controller', () => {
     const data = {};
     mockedAxios.post.mockRejectedValue({ data });
     await controller.checkFileValidation(
-      { documents: { name: 'sample.mp3', size: 500000001, mimetype: 'audio/mpeg', data: '' } },
+      { documents: { name: 'sample.mp3', size: 524288001, mimetype: 'audio/mpeg', data: '' } },
       newRequest,
       res,
       ''
