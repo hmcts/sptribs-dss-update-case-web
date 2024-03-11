@@ -4,7 +4,7 @@
 {% extends "common/page.njk" %}
 
 {% block page_content %}
-{% if cookieMessage == true%}
+{% if cookieMessage == true %}
   <div class="cookie-preference-success-s" style="display: block;">
     <div class="success-message" aria-labelledby="success-title" role="alert" tabindex="-1">
       <h2 class="govuk-heading-m">
@@ -16,7 +16,7 @@
       <a class="govuk-link" href="/">{{ goToHomepage }}</a>
     </div>
   </div>
-{%endif%}
+{% endif %}
 
   <section>
     <h1 class="govuk-heading-l">{{ title }}</h1>
@@ -189,7 +189,7 @@
     <form class="cookie-preferences-form js-show">
 
       {% set cookiesAnalytics = cookiePrefrences['analytics'] %}
-    
+
 
       {% set AnalyticsData =  []  %}
 
@@ -202,7 +202,7 @@
           {
             value: 'off',
             text: doNotUseAnalyticsCookies
-          }] 
+          }]
       %}
       {%else%}
        {% set AnalyticsData = [{
@@ -245,7 +245,7 @@
               {
                 value: 'off',
                 text: doNotUseApmCookies
-              }] 
+              }]
           %}
           {%else%}
           {% set APMData = [{

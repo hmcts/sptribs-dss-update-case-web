@@ -6,6 +6,9 @@
 
 {% block head %}
   {% include "./webpack/css.njk" %}
+  <!-- Dynatrace -->
+    <script type="text/javascript" src="{{ globals.dynatrace.dynatraceUrl }}" crossorigin="anonymous"></script>
+  <!-- End Dynatrace -->
 {% endblock %}
 
 {% block header %}
@@ -70,7 +73,7 @@
   </div>
   <div class="govuk-grid-row">
        {% block page_contact_us %}
-            
+
         {% endblock %}
   </div>
 {% endblock %}
