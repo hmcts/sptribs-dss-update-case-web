@@ -1,3 +1,5 @@
+import { execSync } from 'child_process';
+
 import * as propertiesVolume from '@hmcts/properties-volume';
 import config from 'config';
 import { Application } from 'express';
@@ -14,6 +16,11 @@ export class PropertiesVolume {
       this.setSecret('secrets.sptribs.idam-systemupdate-username', 'services.idam.systemUsername');
       this.setSecret('secrets.sptribs.idam-systemupdate-password', 'services.idam.systemPassword');
       this.setSecret('secrets.sptribs.idam-dss-update-ui-secret', 'services.idam.clientSecret');
+      this.setSecret('secrets.sptribs.sptribs-dss-update-case-dynatrace-url', 'dynatrace.dynatraceUrl');
+    } else {
+      this.setLocalSecret('idam-systemupdate-username', 'services.idam.systemUsername');
+      this.setLocalSecret('idam-systemupdate-password', 'services.idam.systemPassword');
+      this.setLocalSecret('idam-dss-update-ui-secret', 'services.idam.clientSecret');
     }
   }
 
@@ -21,5 +28,10 @@ export class PropertiesVolume {
     if (config.has(fromPath)) {
       set(config, toPath, get(config, fromPath));
     }
+  }
+
+  private setLocalSecret(secret: string, toPath: string): void {
+    const result = execSync(`az keyvault secret show --vault-name sptribs-aat -o tsv --query value --name ${secret}`);
+    set(config, toPath, result.toString().replace('\n', ''));
   }
 }
