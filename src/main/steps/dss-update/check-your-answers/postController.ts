@@ -18,25 +18,24 @@ export default class CheckYourAnswersController extends PostController<AnyObject
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public async serverCallForCaseSubmission(req: AppRequest<AnyObject>) {
-    // const caseDocuments = req.session['caseDocuments'];
-    //
-    // const alldocuments: DocumentRequest = caseDocuments.map(document => {
-    //   return {
-    //     id: document.documentId,
-    //     value: {
-    //       document: {
-    //         document_url: document.url,
-    //         document_binary_url: document.binaryUrl,
-    //         document_filename: document.fileName,
-    //       },
-    //       comment: document.description,
-    //     },
-    //   };
-    // });
+    const caseDocuments = req.session['caseDocuments'];
+    const allUploadedDocuments: DocumentRequest = caseDocuments.map(document => {
+      return {
+        id: document.documentId,
+        value: {
+          documentLink: {
+            document_url: document.url,
+            document_binary_url: document.binaryUrl,
+            document_filename: document.fileName,
+          },
+          comment: document.description,
+        },
+      };
+    });
+
     const data = {
-      dssAdditionalCaseInformation: req.session['documentDetail'],
-      dssCaseUpdatedBy: req.session['loggedInSystemUserType'],
-      dssDocumentInfoList: [],//alldocuments,
+      dssCaseDataAdditionalInformation: req.session['documentDetail'],
+      dssCaseDataOtherInfoDocuments: allUploadedDocuments,
     };
 
     const caseId = req.session.userCase.id;
