@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */
 
@@ -7,19 +6,48 @@ import axios from 'axios';
 import config from 'config';
 import { Response } from 'express';
 
-import { AppRequest } from '../../../app/controller/AppRequest';
+import { AppRequest, DocumentRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/s2s/rpeAuth';
 import { APPLICATION_CONFIRMATION } from '../../urls';
-/* The CheckYourAnswersController class extends the PostController class */
+import { DocumentUpload } from '../../../app/case/case';
 @autobind
 export default class CheckYourAnswersController extends PostController<AnyObject> {
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
+    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
+    const form = new Form(fields);
+
+    const { ...formData } = form.getParsedBody(req.body);
+    req.session.errors = form.getErrors(formData);
+
+    let nextUrl = req.originalUrl;
+    if (req.session.errors.length === 0) {
+      try {
+        const responseFromServerCall = await this.serverCallForCaseSubmission(req);
+        if (responseFromServerCall.status === 200) {
+          nextUrl = APPLICATION_CONFIRMATION;
+        }
+      } catch (error) {
+        req.session.errors?.push({
+          propertyName: 'submissionError',
+          errorType: 'required',
+        });
+      }
+    }
+
+    req.session.save(err => {
+      if (err) {
+        throw err;
+      }
+      res.redirect(nextUrl);
+    });
+  }
+
   public async serverCallForCaseSubmission(req: AppRequest<AnyObject>) {
     const caseDocuments = req.session['caseDocuments'];
-    const allUploadedDocuments: DocumentRequest = caseDocuments.map(document => {
+    const allUploadedDocuments: DocumentRequest = caseDocuments.map((document: DocumentUpload) => {
       return {
         id: document.documentId,
         value: {
@@ -28,13 +56,13 @@ export default class CheckYourAnswersController extends PostController<AnyObject
             document_binary_url: document.binaryUrl,
             document_filename: document.fileName,
           },
-          comment: document.description,
+          comment: document.description ? document.description : null,
         },
       };
     });
 
     const data = {
-      dssCaseDataAdditionalInformation: req.session['documentDetail'],
+      dssCaseDataAdditionalInformation: req.session['documentDetail'] ? req.session['documentDetail'] : null,
       dssCaseDataOtherInfoDocuments: allUploadedDocuments,
     };
 
@@ -51,38 +79,4 @@ export default class CheckYourAnswersController extends PostController<AnyObject
       },
     });
   }
-
-  public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
-    const form = new Form(fields);
-    const { ...formData } = form.getParsedBody(req.body);
-    req.session.errors = form.getErrors(formData);
-    if (req.session.errors && req.session.errors.length) {
-      return super.redirect(req, res, req.originalUrl);
-    }
-    try {
-      const responseFromServerCall = await this.serverCallForCaseSubmission(req);
-      if (responseFromServerCall.status === 200) {
-        super.redirect(req, res, APPLICATION_CONFIRMATION);
-      }
-    } catch (error) {
-      req.session.errors?.push({
-        propertyName: 'submissionError',
-        errorType: 'required',
-      });
-      super.redirect(req, res, req.originalUrl);
-    }
-  }
-}
-
-export interface DocumentRequest {
-  id: string;
-  value: {
-    document: {
-      document_url: string;
-      document_binary_url: string;
-      document_filename: string;
-    };
-    comment: string;
-  };
 }

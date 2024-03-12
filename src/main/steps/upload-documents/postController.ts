@@ -40,7 +40,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     req.session.save();
 
     if (ContinueFromPage) {
-      const numDocsUploaded:number = req.session.hasOwnProperty('caseDocuments') ? req.session['caseDocuments'].length : 0;
+      const numDocsUploaded:number = req.session.hasOwnProperty('caseDocuments')
+        ? req.session['caseDocuments'].length
+        : 0;
+
       if (numDocsUploaded == 0 && req.session['documentDetail'] == '') {
         this.uploadFileError(req, res, req.originalUrl, 'noInput');
       } else {
@@ -52,10 +55,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   public checkIfMaxDocumentUploaded = (document: C100DocumentInfo[]): boolean => {
-    if (document.length > Number(config.get('uploadPolicy.maxNoOfFiles')) - 1) {
-      return true;
-    }
-    return false;
+    return document.length > Number(config.get('uploadPolicy.maxNoOfFiles')) - 1;
   };
 
   public checkFileCondition(
@@ -101,7 +101,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         try {
           const seviceAuthToken = await RpeApi.getRpeToken();
           const s2sToken = seviceAuthToken.data;
-          console.log(s2sToken)
           const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken, req);
           const { url, fileName, documentId, binaryUrl } = uploadDocumentResponseBody['data']['document'];
           req.session['caseDocuments'].push({
