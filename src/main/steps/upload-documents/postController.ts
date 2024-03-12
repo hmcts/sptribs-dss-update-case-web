@@ -101,7 +101,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         try {
           const seviceAuthToken = await RpeApi.getRpeToken();
           const s2sToken = seviceAuthToken.data;
-          console.log(s2sToken)
           const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken, req);
           const { url, fileName, documentId, binaryUrl } = uploadDocumentResponseBody['data']['document'];
           req.session['caseDocuments'].push({
