@@ -1,14 +1,9 @@
-import { capitalize } from 'lodash';
-
 import { CaseWithId } from '../../app/case/case';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
-import { CASE_SEARCH_URL } from '../../steps/urls';
 
 const en = {
   phase: 'Beta',
-  applyForChildArrangements: 'DSS Update Case',
-  applyForDissolution: 'DSS Update Case',
-  dss_updateServiceName: 'DSS Update Case',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
   feedback:
     '<b>Help us improve this service</b><br>This is a new service. Help us for others to improve it by <a class=\'govuk-link\' href=\'https://www.smartsurvey.co.uk/s/Specials_Feedback/?pageurl=currentUrl\' target=_blank>giving your feedback</a>',
   languageToggle: '<a href="?lng=cy" class="govuk-link language">Cymraeg</a>',
@@ -99,7 +94,7 @@ const en = {
   viewCookies: 'View cookies',
   hideMessage: 'Hide this message',
   cookiesConfirmationMessage:
-    '<p>You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
+    '<p class="govuk-body">You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   changeCookiesHeading: 'Change your cookie settings',
   allowAnalyticsCookies: 'Allow cookies that measure website use?',
   useAnalyticsCookies: 'Use cookies that measure my website use',
@@ -118,9 +113,7 @@ const en = {
 const cy: typeof en = {
   ...en, // @TODO delete me to get a list of missing translations
   phase: 'Beta',
-  applyForChildArrangements: 'DSS Update Case" (in welsh)',
-  applyForDissolution: 'DSS Update Case"(in welsh)',
-  dss_updateServiceName: 'DSS Update Case',
+  serviceName: 'Update an appeal to the First-tier Tribunal (in Welsh)',
   feedback:
     '<b>Helpwch ni i wella’r gwasanaeth hwn</b><br> Mae hwn yn wasanaeth newydd. Helpwch ni ei wella i bobl eraill trwy <a class=\'govuk-link\' href=\'https://www.smartsurvey.co.uk/s/Specials_Feedback/?pageurl=currentUrl\' target=_blank>roi eich adborth</a>',
   languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',
@@ -232,7 +225,7 @@ export const generatePageContent = ({
   // fee?: Fee;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
-  const serviceName = getServiceName(additionalData, commonTranslations);
+  const serviceName = getServiceName(commonTranslations);
 
   const content: CommonContent = {
     ...commonTranslations,
@@ -261,12 +254,8 @@ export const generatePageContent = ({
   return content;
 };
 
-const getServiceName = (addtionalReqData: CommonContentAdditionalData | undefined, translations: typeof en): string => {
-  let serviceName = translations.applyForChildArrangements;
-  if (addtionalReqData?.req?.path?.startsWith(CASE_SEARCH_URL)) {
-    serviceName = translations.dss_updateServiceName;
-  }
-  return capitalize(serviceName);
+const getServiceName = (translations: typeof en): string => {
+  return translations.serviceName;
 };
 
 type CommonContentAdditionalData = {
