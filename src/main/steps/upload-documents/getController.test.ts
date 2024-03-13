@@ -45,7 +45,6 @@ describe('Test URL endpoints', () => {
     expect(req.session.caseDocuments).toEqual([{ documentId: '1' }, { documentId: '2' }]);
     expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
     expect(req.session.fileErrors.length).toEqual(1);
-    console.log(req.session.fileErrors)
     expect(req.session.fileErrors[0].text).toEqual('Document upload or deletion has failed. Please try again');
     expect(req.session.fileErrors[0].href).toEqual('#');
   
