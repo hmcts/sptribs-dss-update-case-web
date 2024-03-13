@@ -177,6 +177,23 @@ describe('Testing the post controller', () => {
     expect(req.session?.fileErrors[0].text).toEqual('Select a file to upload');
   });
 
+  test('checkFileValidation - invalid file type error', async () => {
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    newRequest.files = { documents: { name: 'sample.csv', size: 10, mimetype: 'text/csv', data: '' } };
+    const data = {};
+    mockedAxios.post.mockRejectedValue({ data });
+    await controller.checkFileValidation(
+      { documents: { name: 'sample.csv', size: 10, mimetype: 'text/csv', data: '' } },
+      newRequest,
+      res,
+      ''
+    );
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3');
+  });
+
   test('File validations - file uploading successful', async () => {
     const newRequest = req;
     newRequest.body['eventName'] = "TEST"
@@ -312,5 +329,47 @@ describe('Testing the post controller', () => {
     expect(req.session?.fileErrors).toHaveLength(1);
     expect(req.session?.fileErrors[0].text).toEqual('You can only select up to 20 files at the same time');
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('Continuing without document upload or additional infomation', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = '';
+    newRequest.session.caseDocuments = [];
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('You cannot continue without providing additional information or a document');
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('Continuing with only additional infomation', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = 'test';
+    newRequest.session.caseDocuments = [];
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(0);
+  });
+
+  test('Continuing with only uploaded documents', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = '';
+    newRequest.session.caseDocuments = ['doc1', 'doc2'];
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(0);
+  });
+
+  test('Continuing with additional infomation and uploaded documents', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = 'test';
+    newRequest.session.caseDocuments = ['doc1', 'doc2'];
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(0);
   });
 });
