@@ -32,4 +32,22 @@ describe('Test URL endpoints', () => {
     expect(req.session.caseDocuments).toEqual([{ documentId: '2' }]);
     expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
   });
+
+  test('should handle when document deletion fails', async () => {
+    req.query['removeId'] = '1';
+    req.session.caseDocuments = [{ documentId: '1' }, { documentId: '2' }];
+    const data = {
+      status: 'Success',
+    };
+    mockedAxios.delete.mockRejectedValue({ data })
+    await controller.removeExistingConsentDocument('1', req, res);
+    expect(mockedAxios.delete).toHaveBeenCalled();
+    expect(req.session.caseDocuments).toEqual([{ documentId: '1' }, { documentId: '2' }]);
+    expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
+    expect(req.session.fileErrors.length).toEqual(1);
+    console.log(req.session.fileErrors)
+    expect(req.session.fileErrors[0].text).toEqual('Document upload or deletion has failed. Please try again');
+    expect(req.session.fileErrors[0].href).toEqual('#');
+  
+  });
 });

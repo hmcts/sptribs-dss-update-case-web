@@ -54,7 +54,7 @@ export default class DocumentUpload extends GetController {
       });
     } catch (err) {
       const documentUploadErrors = getErrors(req.session['lang']);
-      req.session.fileErrors = [{text: documentUploadErrors.uploadDeleteError, href: "#"}];
+      req.session.fileErrors = [{text: documentUploadErrors.documentUpload.uploadDeleteError, href: "#"}];
 
       req.session.save(err => {
         if (err) {
