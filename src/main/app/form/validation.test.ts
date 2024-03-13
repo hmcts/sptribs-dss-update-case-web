@@ -1,6 +1,6 @@
 import { CaseDate } from '../case/case';
 
-import { areDateFieldsFilledIn, atLeastOneFieldIsChecked, isDateInputInvalid, isFieldFilledIn } from './validation';
+import { areDateFieldsFilledIn, atLeastOneFieldIsChecked, isAlphaNumeric, isDateInputInvalid, isDateInputNotFilled, isFieldFilledIn, isFieldLetters, isNotNumeric } from './validation';
 
 describe('isFieldFilledIn()', () => {
   test('Should check if value exist', async () => {
@@ -87,5 +87,79 @@ describe('atLeastOneFieldIsChecked()', () => {
     const isValid = atLeastOneFieldIsChecked([]);
 
     expect(isValid).toStrictEqual('required');
+  });
+});
+
+describe('isAlphaNumeric()', () => {
+  test('Should allow letters', async () => {
+    const isValid = isAlphaNumeric('Test');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should allow numbers', async () => {
+    const isValid = isAlphaNumeric('123');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should allow letters and numbers', async () => {
+    const isValid = isAlphaNumeric('Test123');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should not allow any special characters', async () => {
+    const isValid = isAlphaNumeric('*test*');
+    expect(isValid).toStrictEqual('invalid');
+  });
+});
+
+describe('isNotNumeric()', () => {
+  test('Should allow numbers', async () => {
+    const isValid = isNotNumeric('123');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should not allow letters', async () => {
+    const isValid = isNotNumeric('Test');
+    expect(isValid).toStrictEqual('notNumeric');
+  });
+
+  test('Should not allow any special characters', async () => {
+    const isValid = isNotNumeric('*');
+    expect(isValid).toStrictEqual('notNumeric');
+  });
+});
+
+describe('isDateInputNotFilled()', () => {
+  test('Should allow a valid date', async () => {
+    const date = {
+      day: '1',
+      month: '1',
+      year: '2000',
+    };
+
+    let isValid = isDateInputNotFilled(date);
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should not allow no date', async () => {
+    let isValid = isDateInputNotFilled(undefined);
+    expect(isValid).toStrictEqual('invalidDate');
+  });
+});
+
+describe('isFieldLetters()', () => {
+  test('Should allow letters', async () => {
+    const isValid = isFieldLetters('Test');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should allow not numbers', async () => {
+    const isValid = isFieldLetters('123');
+    expect(isValid).toStrictEqual('invalid');
+  });
+
+  test('Should not allow any special characters', async () => {
+    const isValid = isFieldLetters('*');
+    expect(isValid).toStrictEqual('invalid');
   });
 });
