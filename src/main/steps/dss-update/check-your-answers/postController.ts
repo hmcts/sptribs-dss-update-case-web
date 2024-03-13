@@ -62,12 +62,13 @@ export default class CheckYourAnswersController extends PostController<AnyObject
     });
 
     const data = {
-      dssCaseDataAdditionalInformation: req.session['documentDetail'] ? req.session['documentDetail'] : null,
-      dssCaseDataOtherInfoDocuments: allUploadedDocuments,
+      CaseTypeOfApplication: 'CIC',
+      AdditionalInformation: req.session['documentDetail'] ? req.session['documentDetail'] : null,
+      OtherInfoDocuments: allUploadedDocuments,
     };
 
     const caseId = req.session.userCase.id;
-    const baseURL = `${config.get('services.sptribs.url')}/case/dss-orchestration/dss/${caseId}/update?event=UPDATE_CASE`;
+    const baseURL = `${config.get('services.sptribs.url')}/case/dss-orchestration/${caseId}/update?event=UPDATE_CASE`;
     const serviceAuthToken = await RpeApi.getRpeToken();
     const s2sToken = serviceAuthToken.data;
     return await axios.put(baseURL, data, {

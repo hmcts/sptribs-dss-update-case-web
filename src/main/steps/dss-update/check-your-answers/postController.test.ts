@@ -31,17 +31,13 @@ describe('CheckYourAnswersController test cases', () => {
       switch (url) {
         case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
           return Promise.resolve({ data: 'TOKEN'})
-        case 'http://sptribs-case-api-aat.service.core-compute-aat.internal/case/dss-orchestration/dss/1709056435297860/update?event=UPDATE_CASE':
+        case 'http://sptribs-case-api-aat.service.core-compute-aat.internal/case/dss-orchestration/1709056435297860/update?event=UPDATE_CASE':
           return Promise.resolve({ status: 200, id: 1709056435297860, caseData: {} });
         default:
           return Promise.reject(new Error('not found'))
       }
     });
     req = mockRequest({
-      body: {
-        saveAndContinue: true,
-      },
-
       session: {
         user: {
           accessToken: token
@@ -72,7 +68,7 @@ describe('CheckYourAnswersController test cases', () => {
       switch (url) {
         case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
           return Promise.resolve({ data: 'TOKEN'})
-        case 'http://sptribs-case-api-aat.service.core-compute-aat.internal/case/dss-orchestration/dss/1709056435297860/update?event=UPDATE_CASE':
+        case 'http://sptribs-case-api-aat.service.core-compute-aat.internal/case/dss-orchestration/1709056435297860/update?event=UPDATE_CASE':
           return Promise.resolve({ status: 500, id: 1709056435297860, caseData: {} });
         default:
           return Promise.reject(new Error('not found'))
