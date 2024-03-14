@@ -145,6 +145,36 @@ describe('isDateInputNotFilled()', () => {
     let isValid = isDateInputNotFilled(undefined);
     expect(isValid).toStrictEqual('invalidDate');
   });
+
+  test('Should not allow no day', async () => {
+    const date = {
+      day: undefined,
+      month: '1',
+      year: '2000',
+    };
+    let isValid = isDateInputNotFilled(date);
+    expect(isValid).toStrictEqual('invalidDate');
+  });
+
+  test('Should not allow no month', async () => {
+    const date = {
+      day: '1',
+      month: '',
+      year: '2000',
+    };
+    let isValid = isDateInputNotFilled(date);
+    expect(isValid).toStrictEqual('invalidDate');
+  });
+
+  test('Should not allow no year', async () => {
+    const date = {
+      day: '1',
+      month: '',
+      year: '2000',
+    };
+    let isValid = isDateInputNotFilled(date);
+    expect(isValid).toStrictEqual('invalidDate');
+  });
 });
 
 describe('isFieldLetters()', () => {
