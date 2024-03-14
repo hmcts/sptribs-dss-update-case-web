@@ -169,8 +169,8 @@ describe('isDateInputNotFilled()', () => {
   test('Should not allow no year', async () => {
     const date = {
       day: '1',
-      month: '',
-      year: '2000',
+      month: '1',
+      year: '',
     };
     let isValid = isDateInputNotFilled(date);
     expect(isValid).toStrictEqual('invalidDate');
