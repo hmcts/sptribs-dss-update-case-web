@@ -148,7 +148,7 @@ describe('isDateInputNotFilled()', () => {
 
   test('Should not allow no day', async () => {
     const date = {
-      day: undefined,
+      day: '',
       month: '1',
       year: '2000',
     };
