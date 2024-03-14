@@ -17,7 +17,20 @@ describe('Test URL endpoints', () => {
   const req = mockRequest();
   test('should be able to render the page and not show error page', async () => {
     await controller.get(req, res);
-    expect(res.render).not.toHaveBeenCalledWith('error');
+    expect(res.redirect).not.toHaveBeenCalledWith(UPLOAD_DOCUMENT);
+  });
+
+  test('should be able to handle document deletion request', async () => {
+    req.query['removeId'] = '1';
+    req.session.caseDocuments = [{ documentId: '1' }, { documentId: '2' }];
+    const data = {
+      status: 'Success',
+    };
+    mockedAxios.delete.mockResolvedValue({ data });
+    await controller.get(req, res);
+    expect(mockedAxios.delete).toHaveBeenCalled();
+    expect(req.session.caseDocuments).toEqual([{ documentId: '2' }])
+    expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
   });
 
   test('should be able to remove the documents from session, async', async () => {
