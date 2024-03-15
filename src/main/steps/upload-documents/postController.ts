@@ -46,7 +46,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         super.redirect(req, res, CHECK_YOUR_ANSWERS);
       }
     } else {
-      this.checkFileCondition(req, res, req.originalUrl, files);
+      await this.checkFileCondition(req, res, req.originalUrl, files);
     }
   }
 
@@ -57,7 +57,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     return false;
   };
 
-  public checkFileCondition(
+  public async checkFileCondition(
     req: AppRequest<AnyObject>,
     res: Response<any, Record<string, any>>,
     redirectUrl: string,
@@ -73,7 +73,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         res.redirect(redirectUrl);
       });
     } else {
-      this.checkFileValidation(files, req, res, redirectUrl);
+      await this.checkFileValidation(files, req, res, redirectUrl);
     }
   }
 
