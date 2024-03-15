@@ -107,19 +107,6 @@ describe('Testing the post controller', () => {
     expect(fileSizeCheck).toBe(true);
   });
 
-  test('fileNullCheck - file not null', async () => {
-    expect(controller.fileNullCheck({})).toBe(false);
-  });
-
-  test.each(
-    [
-      undefined,
-      null
-    ]
-  )('fileNullCheck - no file', async (files) => {
-    expect(controller.fileNullCheck(files)).toBe(true);
-  });
-
   test('File validations', async () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
@@ -286,6 +273,16 @@ describe('Testing the post controller', () => {
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
     expect(req.session?.fileErrors[0].text).toEqual('This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3');
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('uploadFileError no error code', () => {
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    controller.uploadFileError(newRequest, res, '', '');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('');
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
 

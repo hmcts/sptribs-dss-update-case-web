@@ -86,9 +86,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   ) {
     if (req.files) {
       const { documents } = files;
-      if (this.fileNullCheck(files)) {
-        this.uploadFileError(req, res, redirectUrl, 'selectFileToUpload');
-      } else if (!this.isValidFileFormat(files)) {
+      if (!this.isValidFileFormat(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileFormat');
       } else if (this.isFileSizeGreaterThanMaxAllowed(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileSize');
@@ -119,15 +117,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       this.uploadFileError(req, res, redirectUrl, 'selectFileToUpload');
     }
   }
-
-  /**
-   *
-   * @param files
-   * @returns
-   */
-  public fileNullCheck = (files: any): boolean => {
-    return !!(isNull(files) || files === undefined);
-  };
 
   public uploadFileError(
     req: AppRequest<AnyObject>,
