@@ -2,7 +2,6 @@ import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';
 import FormData from 'form-data';
-import { isNull } from 'lodash';
 
 import { C100DocumentInfo } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
