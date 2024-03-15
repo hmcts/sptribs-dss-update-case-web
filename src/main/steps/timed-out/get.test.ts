@@ -17,13 +17,4 @@ describe('TimedOutGetController', () => {
       expect.anything()
     );
   });
-
-  test('Should throw err if error encountered during req.session.destroy', async () => {
-    const req = mockRequest();
-    const res = mockResponse();
-    await controller.get(req, res);
-    req.session.destroy = jest.fn((err) => { throw err; });
-
-    expect(req.session.destroy).toThrowError();
-  });
 });
