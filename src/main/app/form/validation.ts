@@ -106,7 +106,7 @@ export const isDateInputNotFilled: DateValidator = date => {
     }
   }
 
-  if (isEmpty(date.day || date.month || date.year)) {
+  if (isEmpty(date.day) || isEmpty(date.month) || isEmpty(date.year)) {
     return invalid;
   } else {
     return;
