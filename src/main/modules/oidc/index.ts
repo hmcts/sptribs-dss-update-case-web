@@ -37,12 +37,10 @@ export class OidcMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           return next();
+        } else if (signInNotRequired(req.path)) {
+          return next();
         } else {
-          if (signInNotRequired(req.path)) {
-            return next();
-          } else {
-            res.redirect(SIGN_IN_URL);
-          }
+          res.redirect(SIGN_IN_URL);
         }
       })
     );
