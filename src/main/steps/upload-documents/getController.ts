@@ -22,14 +22,11 @@ export default class DocumentUpload extends GetController {
   }
 
   public async get(req: AppRequest, res: Response): Promise<void> {
-    if (res.headersSent || res.locals.isError) {
-      return;
-    }
     if (!req.session.hasOwnProperty('caseDocuments')) {
       req.session['caseDocuments'] = [];
     }
     if (req.query.hasOwnProperty('removeId')) {
-      this.removeExistingConsentDocument(req.query.removeId as string, req, res);
+      await this.removeExistingConsentDocument(req.query.removeId as string, req, res);
     } else {
       super.get(req, res, {
         uploadedDocuments: req.session['caseDocuments'],
@@ -54,7 +51,7 @@ export default class DocumentUpload extends GetController {
       });
     } catch (err) {
       const documentUploadErrors = getErrors(req.session['lang']);
-      req.session.fileErrors = [{text: documentUploadErrors.uploadDeleteError, href: "#"}];
+      req.session.fileErrors = [{text: documentUploadErrors.documentUpload.uploadDeleteError, href: "#"}];
 
       req.session.save(err => {
         if (err) {
