@@ -50,9 +50,6 @@ export class GetController {
         },
       });
 
-      /**
-       * Handled scenario where caption is not present as query param
-       */
       const viewData = {
         ...content,
         ...renderableContents,

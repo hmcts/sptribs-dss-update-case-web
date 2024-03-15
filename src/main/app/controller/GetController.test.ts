@@ -5,6 +5,7 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import * as Urls from '../../steps/urls';
 
 import { GetController } from './GetController';
+import { AppRequest } from './AppRequest';
 
 describe('GetController', () => {
   const languages = {
@@ -29,7 +30,10 @@ describe('GetController', () => {
       analytics: 'off',
       apm: 'off',
     };
-    expect(1).toEqual(1);
+    expect(res.render).toHaveBeenCalledWith(
+      expect.stringContaining('page'),
+      expect.anything()
+    );
   });
 
   test('Detects when application is not in a draft state', async () => {
@@ -39,7 +43,20 @@ describe('GetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(1).toEqual(1);
+    expect(res.render).toHaveBeenCalledWith(
+      expect.stringContaining('page'),
+      expect.anything()
+    );
+  });
+
+  test('Routes to /error page when exception thrown', async () => {
+    const controller = new GetController('page', () => ({}));
+
+    const req = {} as AppRequest;
+    const res = mockResponse();
+    await controller.get(req, res);
+
+    expect(res.redirect).toHaveBeenCalledWith('/error');
   });
 
   describe('Getting the users preferred language', () => {
@@ -50,6 +67,8 @@ describe('GetController', () => {
       const req = mockRequest();
       const res = mockResponse();
       req.query.lng = language;
+      req.query.caption = 'test caption';
+      req.session.fileErrors = [];
       await controller.get(req, res);
 
       const documentManagerRequest = req;
@@ -91,9 +110,13 @@ describe('GetController', () => {
         docId: 'xyz',
         documentType: 'additional',
       };
+
       await controller.get(documentManagerRequest, res);
 
-      expect(1).toEqual(1);
+      expect(res.render).toHaveBeenCalledWith(
+        expect.stringContaining('page'),
+        expect.anything()
+      );
     });
 
     test('Language via session', async () => {
@@ -104,7 +127,10 @@ describe('GetController', () => {
       const res = mockResponse();
       req.session.lang = language;
       await controller.get(req, res);
-      expect(1).toEqual(1);
+      expect(res.render).toHaveBeenCalledWith(
+        expect.stringContaining('page'),
+        expect.anything()
+      );
     });
 
     test('Language via browser settings', async () => {
@@ -113,10 +139,13 @@ describe('GetController', () => {
       //const language = 'cy';
       const req = mockRequest({ headers: { 'accept-language': 'cy' } });
       const res = mockResponse();
-      //req.query.lng = language;
+
       await controller.get(req, res);
 
-      expect(1).toEqual(1);
+      expect(res.render).toHaveBeenCalledWith(
+        expect.stringContaining('page'),
+        expect.anything()
+      );
     });
 
     test('Language via browser settings fallback to en', async () => {
@@ -125,9 +154,13 @@ describe('GetController', () => {
       //const language = 'en';
       const req = mockRequest({ headers: { 'accept-language': 'unknown' } });
       const res = mockResponse();
-      //req.query.lng = language;
+
       await controller.get(req, res);
-      expect(1).toEqual(1);
+
+      expect(res.render).toHaveBeenCalledWith(
+        expect.stringContaining('page'),
+        expect.anything()
+      );
     });
   });
 
@@ -155,11 +188,15 @@ describe('GetController', () => {
 
   test('sends the current page form session state to the view', async () => {
     const controller = new GetController('page', generateContent);
-
     const req = mockRequest();
     const res = mockResponse();
+
     await controller.get(req, res);
-    expect(1).toEqual(1);
+
+    expect(res.render).toHaveBeenCalledWith(
+      expect.stringContaining('page'),
+      expect.anything()
+    );
   });
 
   describe('generatePageContent()', () => {
@@ -169,36 +206,26 @@ describe('GetController', () => {
 
       const req = mockRequest({ userCase: { state: '' }, session: { errors: [] } });
       const res = mockResponse();
+
       await controller.get(req, res);
-      expect(1).toEqual(1);
+
+      expect(res.render).toHaveBeenCalledWith(
+        expect.stringContaining('page'),
+        expect.anything()
+      );
     });
   });
 
   describe('save', () => {
     test('Should save the users data, and return the updated userCase', async () => {
-      const body = { applyingWith: 'alone' };
       const controller = new GetController('page', () => ({}));
+      const req = mockRequest();
+      const res = mockResponse();
+      req.url = '/next-page'
 
-      const expectedUserCase = {
-        id: '1234',
-        applyingWith: 'alone',
-      };
+      controller.saveSessionAndRedirect(req, res);
 
-      const req = mockRequest({ body });
-      (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce(expectedUserCase);
-
-      const updatedUserCase = await controller.saveSessionAndRedirect(req, mockResponse());
-
-      expect(updatedUserCase).toEqual(undefined);
-      //expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, 'MOCK_EVENT');
-      expect(1).toEqual(1);
-    });
-
-    test('Should log error when there is an error in updating userCase', async () => {
-      const body = { applyingWith: 'alone' };
-      const req = mockRequest({ body });
-      (req.locals.api.triggerEvent as jest.Mock).mockRejectedValueOnce('Error saving');
-      expect(1).toEqual(1);
+      expect(res.redirect).toHaveBeenCalledWith('/next-page');
     });
   });
 
