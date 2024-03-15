@@ -2,10 +2,10 @@
 //import { defaultViewArgs } from '../../../test/unit/utils/defaultViewArgs';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import * as Urls from '../../steps/urls';
 
 import { GetController } from './GetController';
 import { AppRequest } from './AppRequest';
+import { SIGN_IN_URL } from '../../steps/urls';
 
 describe('GetController', () => {
   const languages = {
@@ -234,7 +234,9 @@ describe('GetController', () => {
       const controller = new GetController('page', () => ({}));
       const req = mockRequest();
       const res = mockResponse();
+
       controller.saveSessionAndRedirect(req, res);
+
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
@@ -255,6 +257,17 @@ describe('GetController', () => {
       }
       expect(res.redirect).not.toHaveBeenCalledWith('/request');
     });
+  });
+
+  test('should trigger callback if callback passed', () => {
+    const controller = new GetController('page', () => ({}));
+    const req = mockRequest();
+    const res = mockResponse();
+    const callback = jest.fn();
+
+    controller.saveSessionAndRedirect(req, res, callback);
+
+    expect(callback).toHaveBeenCalled();
   });
 });
 
@@ -307,11 +320,34 @@ describe('checking for documents Delete manager', () => {
     expect(res.render).toHaveBeenCalled();
   });
 
-  test('parseAndSetReturnUrl', async () => {
-    const controller = new GetController('page', () => ({}));
-    const mRequest = mockRequest();
-    mRequest.query = { returnUrl: 'a' };
-    await controller.parseAndSetReturnUrl(mockRequest());
-    expect(Object.values(Urls).includes(mRequest.originalUrl)).not.toBeTruthy();
+  describe('parseAndSetReturnUrl', () => {
+
+    test('req.session.returnUrl populated', async () => {
+      const controller = new GetController('page', () => ({}));
+      const req = mockRequest();
+      req.query = { returnUrl: SIGN_IN_URL };
+
+      controller.parseAndSetReturnUrl(req);
+
+      expect(req.session.returnUrl).toEqual(SIGN_IN_URL);
+    });
+
+    test('returnUrl not populated if returnUrl not set', async () => {
+      const controller = new GetController('page', () => ({}));
+      const req = mockRequest();
+
+      controller.parseAndSetReturnUrl(req);
+
+      expect(req.session.returnUrl).toBeFalsy();
+    });
+
+    test('returnUrl not populated if returnUrl not a valid pagelink url', async () => {
+      const controller = new GetController('page', () => ({}));
+      const req = mockRequest();
+
+      controller.parseAndSetReturnUrl(req);
+
+      expect(req.session.returnUrl).toBeFalsy();
+    });
   });
 });
