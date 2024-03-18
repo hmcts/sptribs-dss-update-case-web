@@ -7,19 +7,17 @@ import { CommonContent } from '../../common/common.content';
 import { UploadFormSummary } from './utils';
 
 export const enContent = {
-  serviceName: 'DSS Update Case',
-  title: 'Check your Answers',
-  change: 'Edit',
-  continue: 'Accept and continue',
-  statementOfTruth: 'I beleive that the facts stated in this case are true.',
-  submitApplicationText: 'Now submit your Application',
-  listOfDocuments: 'List of documents uploaded',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
+  title: 'Check answers before submitting your update',
+  change: 'change',
+  continue: 'Accept and send',
+  statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
+  submitApplicationText: 'Now update your case',
   errorSummaryMessage: 'There is a problem',
-  declarationText:
-    'I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest beleif in its truth.',
   keys: {
-    fileName: 'File name',
-    description: 'Description',
+    information: 'Additional information',
+    document: 'Additional document',
+    documentRelevance: 'Document relevance',
   },
   errors: {
     submissionError: {
@@ -39,19 +37,17 @@ const en = (content: any) => {
 };
 
 const cyContent: typeof enContent = {
-  serviceName: 'DSS Update Case - welsh',
-  title: 'Check your Answers - welsh',
-  change: 'Edit - welsh',
-  statementOfTruth: 'I beleive that the facts stated in this case are true. - welsh',
-  submitApplicationText: 'Now submit your Application - welsh',
-  listOfDocuments: 'List of documents uploaded - welsh',
-  continue: 'Accept and continue - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
+  title: 'Check answers before submitting your update - welsh',
+  change: 'change - welsh',
+  continue: 'Accept and send - welsh',
+  statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct. - welsh',
+  submitApplicationText: 'Now update your case - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
-  declarationText:
-    'I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest beleif in its truth. - welsh',
   keys: {
-    fileName: 'File name - welsh',
-    description: 'Description - welsh',
+    information: 'Additional information - welsh',
+    document: 'Additional document - welsh',
+    documentRelevance: 'Document relevance - welsh',
   },
   errors: {
     submissionError: {
@@ -89,3 +85,17 @@ export const generateContent: TranslationFn = content => {
     form,
   };
 };
+
+export function getErrors(language: any) {
+  let errors: any
+  switch (language) {
+    case 'cy':
+      errors = cyContent.errors;
+      break;
+    case 'en':
+    default:
+      errors = enContent.errors;
+  }
+
+  return errors;
+}
