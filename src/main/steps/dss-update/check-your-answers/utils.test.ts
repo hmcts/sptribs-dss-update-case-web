@@ -13,13 +13,13 @@ describe('Form Summary > check-your-answers', () => {
                 items: [
                   {
                     href: '/upload-documents',
-                    text: 'Edit',
-                    visuallyHiddenText: 'Information',
+                    text: 'change',
+                    visuallyHiddenText: 'Additional information',
                   },
                 ],
               },
               key: {
-                text: 'Information',
+                text: 'Additional information',
               },
               value: {
                 text: 'test',
@@ -30,13 +30,13 @@ describe('Form Summary > check-your-answers', () => {
                 items: [
                   {
                     href: '/upload-documents',
-                    text: 'Edit',
+                    text: 'change',
                     visuallyHiddenText: 'undefined',
                   },
                 ],
               },
               key: {
-                html: 'File name<br><br>Description',
+                html: 'Additional document<br><br>Document relevance',
               },
               value: {
                 html: 'a.txt<br><br>testFile',

@@ -2,22 +2,20 @@ import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
-import { generateContent } from './content';
+import { generateContent, getErrors } from './content';
 
 const enContent = {
-  serviceName: 'DSS Update Case',
-  title: 'Check your Answers',
-  change: 'Edit',
-  continue: 'Accept and continue',
-  statementOfTruth: 'I beleive that the facts stated in this case are true.',
-  submitApplicationText: 'Now submit your Application',
-  listOfDocuments: 'List of documents uploaded',
+  serviceName: 'Update an appeal to the First-tier Tribunal',
+  title: 'Check answers before submitting your update',
+  change: 'change',
+  continue: 'Accept and send',
+  statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
+  submitApplicationText: 'Now update your case',
   errorSummaryMessage: 'There is a problem',
-  declarationText:
-    'I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest beleif in its truth.',
   keys: {
-    fileName: 'File name',
-    description: 'Description',
+    information: 'Additional information',
+    document: 'Additional document',
+    documentRelevance: 'Document relevance',
   },
   errors: {
     submissionError: {
@@ -27,19 +25,17 @@ const enContent = {
 };
 
 const cyContent = {
-  serviceName: 'DSS Update Case - welsh',
-  title: 'Check your Answers - welsh',
-  change: 'Edit - welsh',
-  statementOfTruth: 'I beleive that the facts stated in this case are true. - welsh',
-  submitApplicationText: 'Now submit your Application - welsh',
-  listOfDocuments: 'List of documents uploaded - welsh',
-  continue: 'Accept and continue - welsh',
+  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
+  title: 'Check answers before submitting your update - welsh',
+  change: 'change - welsh',
+  continue: 'Accept and send - welsh',
+  statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct. - welsh',
+  submitApplicationText: 'Now update your case - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
-  declarationText:
-    'I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest beleif in its truth. - welsh',
   keys: {
-    fileName: 'File name - welsh',
-    description: 'Description - welsh',
+    information: 'Additional information - welsh',
+    document: 'Additional document - welsh',
+    documentRelevance: 'Document relevance - welsh',
   },
   errors: {
     submissionError: {
@@ -79,6 +75,18 @@ describe('check-your-answer > content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     expect((form.submit!.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  });
+});
+
+describe('getErrors() function Test', () => {
+  test('getErrors English', () => {
+    const englishErrors = getErrors('en');
+    expect(englishErrors).toEqual(enContent.errors);
+  });
+
+  test('getErrors Welsh', () => {
+    const welshErrors = getErrors('cy');
+    expect(welshErrors).toEqual(cyContent.errors);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
