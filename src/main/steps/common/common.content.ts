@@ -22,7 +22,7 @@ const en = {
   errorSendingInvite:
     'Sorry, we’re having technical problems sending your application for review. Please try again in a few minutes.',
   ogl: 'All content is available under the <a class="govuk-link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated',
-  errorSummaryHeading: 'There is a problem on this page',
+  errorSummaryHeading: 'There is a problem',
   saveAndSignOut: 'Save and sign out',
   saveAndComeLater: 'Save and come back later',
   goBack: 'Go back',
