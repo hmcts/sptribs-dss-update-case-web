@@ -2,7 +2,6 @@ import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';
 import FormData from 'form-data';
-import { isNull } from 'lodash';
 
 import { C100DocumentInfo } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
@@ -47,7 +46,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         super.redirect(req, res, CHECK_YOUR_ANSWERS);
       }
     } else {
-      this.checkFileCondition(req, res, req.originalUrl, files);
+      await this.checkFileCondition(req, res, req.originalUrl, files);
     }
   }
 
@@ -58,7 +57,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     return false;
   };
 
-  public checkFileCondition(
+  public async checkFileCondition(
     req: AppRequest<AnyObject>,
     res: Response<any, Record<string, any>>,
     redirectUrl: string,
@@ -74,7 +73,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         res.redirect(redirectUrl);
       });
     } else {
-      this.checkFileValidation(files, req, res, redirectUrl);
+      await this.checkFileValidation(files, req, res, redirectUrl);
     }
   }
 
@@ -86,9 +85,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   ) {
     if (req.files) {
       const { documents } = files;
-      if (this.fileNullCheck(files)) {
-        this.uploadFileError(req, res, redirectUrl, 'selectFileToUpload');
-      } else if (!this.isValidFileFormat(files)) {
+      if (!this.isValidFileFormat(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileFormat');
       } else if (this.isFileSizeGreaterThanMaxAllowed(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileSize');
@@ -119,15 +116,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       this.uploadFileError(req, res, redirectUrl, 'selectFileToUpload');
     }
   }
-
-  /**
-   *
-   * @param files
-   * @returns
-   */
-  public fileNullCheck = (files: any): boolean => {
-    return !!(isNull(files) || files === undefined);
-  };
 
   public uploadFileError(
     req: AppRequest<AnyObject>,
