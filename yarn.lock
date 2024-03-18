@@ -7341,13 +7341,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.4":
-  version: 1.15.5
-  resolution: "follow-redirects@npm:1.15.5"
+"follow-redirects@npm:^1.15.6":
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 5ca49b5ce6f44338cbfc3546823357e7a70813cecc9b7b768158a1d32c1e62e7407c944402a918ea8c38ae2e78266312d617dc68783fac502cbb55e1047b34ec
+  checksum: a62c378dfc8c00f60b9c80cab158ba54e99ba0239a5dd7c81245e5a5b39d10f0c35e249c3379eae719ff0285fff88c365dd446fab19dee771f1d76252df1bbf5
   languageName: node
   linkType: hard
 
@@ -12678,6 +12678,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sonar-scanner@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "sonar-scanner@npm:3.1.0"
+  bin:
+    sonar-scanner: index.js
+  checksum: f0275ba329a4b2cd59b177585eeddc484c2639ab0677ed320576bd06ea870ec73b6a7e88a10ce81cd46407d5d3103d279fca2aade2e7e0d2140711731ca0be6b
+  languageName: node
+  linkType: hard
+
 "source-list-map@npm:^2.0.0":
   version: 2.0.1
   resolution: "source-list-map@npm:2.0.1"
@@ -12849,6 +12858,7 @@ __metadata:
     sass-loader: ^13.3.2
     serve-favicon: ^2.5.0
     session-file-store: ^1.5.0
+    sonar-scanner: ^3.1.0
     style-loader: ^3.3.3
     toobusy-js: ^0.5.1
     ts-jest: ^29.1.1
