@@ -38,6 +38,7 @@ export interface UserDetails {
   email: string;
   givenName: string;
   familyName: string;
+  roles: string[];
 }
 
 export interface Eligibility {
