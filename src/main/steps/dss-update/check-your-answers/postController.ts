@@ -12,6 +12,7 @@ import { AnyObject, PostController } from '../../../app/controller/PostControlle
 import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/s2s/rpeAuth';
 import { APPLICATION_CONFIRMATION } from '../../urls';
+import { getErrors } from './content';
 /* The CheckYourAnswersController class extends the PostController class */
 @autobind
 export default class CheckYourAnswersController extends PostController<AnyObject> {
@@ -58,6 +59,7 @@ export default class CheckYourAnswersController extends PostController<AnyObject
     const form = new Form(fields);
     const { ...formData } = form.getParsedBody(req.body);
     req.session.errors = form.getErrors(formData);
+    req.session.fileErrors = [];
     if (req.session.errors && req.session.errors.length) {
       return super.redirect(req, res, req.originalUrl);
     }
@@ -67,9 +69,10 @@ export default class CheckYourAnswersController extends PostController<AnyObject
         super.redirect(req, res, APPLICATION_CONFIRMATION);
       }
     } catch (error) {
-      req.session.errors?.push({
-        propertyName: 'submissionError',
-        errorType: 'required',
+      const errors = getErrors(req.session['lang']);
+      req.session.fileErrors?.push({
+        text: errors.submissionError.content,
+        href: '#',
       });
       super.redirect(req, res, req.originalUrl);
     }
