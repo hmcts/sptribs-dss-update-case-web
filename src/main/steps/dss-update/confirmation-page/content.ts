@@ -24,7 +24,7 @@ const cy = (content: CommonContent) => {
     line1: 'Thank you for updating your case. - welsh',
     line2: 'The additional information that you have submitted will be sent to the Tribunal. - welsh',
     line3: 'An email will be sent to you that explains what will happen next. - welsh',
-    feedback: 'Feedback - welsh',
+    feedback: 'Adborth',
     feedbackBody: "<b>We would like to hear your thoughts</b><br>Complete this short 5-minutes survey to help improve our services for you and others <a class='govuk-link' href='https://www.smartsurvey.co.uk/s/SurveyExit/?service=Specials'target=_blank><br>Please leave your your feedback</a> - welsh",
     closeAndExit: 'Close and exit - welsh'
   };
