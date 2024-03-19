@@ -5,12 +5,8 @@ import { Application } from 'express';
 import session from 'express-session';
 import * as redis from 'redis';
 import FileStoreFactory from 'session-file-store';
-import { LoggerInstance } from 'winston';
-
-const { Logger } = require('@hmcts/nodejs-logging');
 
 const FileStore = FileStoreFactory(session);
-const logger: LoggerInstance = Logger.getLogger('session');
 
 export class SessionStorage {
   public enableFor(app: Application): void {
