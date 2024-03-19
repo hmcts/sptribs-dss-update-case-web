@@ -28,6 +28,11 @@ export default class CheckYourAnswersController extends PostController<AnyObject
         const responseFromServerCall = await this.serverCallForCaseSubmission(req);
         if (responseFromServerCall.status === 200) {
           nextUrl = APPLICATION_CONFIRMATION;
+        } else {
+          req.session.errors?.push({
+            propertyName: 'submissionError',
+            errorType: 'required',
+          });
         }
       } catch (error) {
         req.session.errors?.push({
