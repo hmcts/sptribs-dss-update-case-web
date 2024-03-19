@@ -5,8 +5,12 @@ import { Application } from 'express';
 import session from 'express-session';
 import * as redis from 'redis';
 import FileStoreFactory from 'session-file-store';
+import { LoggerInstance } from 'winston';
+
+const { Logger } = require('@hmcts/nodejs-logging');
 
 const FileStore = FileStoreFactory(session);
+const logger: LoggerInstance = Logger.getLogger('session');
 
 export class SessionStorage {
   public enableFor(app: Application): void {
@@ -34,17 +38,18 @@ export class SessionStorage {
   private getStore(app: Application) {
     const redisHost = config.get('session.redis.host');
     if (redisHost) {
-      const client = redis.createClient({
-        socket: {
-          host: redisHost as string,
-          port: 6380,
-          connectTimeout: 15000,
-          tls: true,
-        },
-        password: config.get('session.redis.key') as string,
-      });
-
-      client.connect();
+      const client = redis
+        .createClient({
+          socket: {
+            host: redisHost as string,
+            port: 6380,
+            connectTimeout: 15000,
+            tls: true,
+          },
+          password: config.get('session.redis.key') as string,
+        })
+        .on('error', err => logger.error(`Redis Client Error: ${err}`))
+        .connect();
 
       app.locals.redisClient = client;
       return new RedisStore({ client });
