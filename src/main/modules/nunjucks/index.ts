@@ -1,5 +1,6 @@
 import path from 'path';
 
+import config from 'config';
 import express from 'express';
 import nunjucks from 'nunjucks';
 
@@ -12,8 +13,16 @@ export class Nunjucks {
     const hmctsFrontendPath = path.join(__dirname, '..', '..', '..', '..', 'node_modules', '@hmcts', 'frontend');
     const commonForDss = path.join(__dirname, '..', '..', 'steps', 'dss-update', 'common');
     const generalViews = path.join(__dirname, '..', '..', 'views');
+    const authLessPath = path.join(__dirname, '..', '..', 'routes', 'authless', 'landing');
     const env = nunjucks.configure(
-      [path.join(__dirname, '..', '..', 'steps'), govUkFrontendPath, hmctsFrontendPath, commonForDss, generalViews],
+      [
+        path.join(__dirname, '..', '..', 'steps'),
+        govUkFrontendPath,
+        hmctsFrontendPath,
+        commonForDss,
+        generalViews,
+        authLessPath,
+      ],
       {
         autoescape: true,
         watch: app.locals.developmentMode,
@@ -84,6 +93,14 @@ export class Nunjucks {
       }));
     });
 
+    const globals = {
+      dynatrace: {
+        dynatraceUrl: config.get('dynatrace.dynatraceUrl'),
+      },
+    };
+
+    env.addGlobal('globals', globals);
+
     env.addGlobal('summaryDetailsHtml', function (subFields: FormInput) {
       return env.render(`${__dirname}/../../steps/common/form/fields.njk`, {
         ...this.ctx,
@@ -120,6 +137,7 @@ export class Nunjucks {
       res.locals.host = req.headers['x-forwarded-host'] || req.hostname;
       res.locals.pagePath = req.path;
       res.locals.serviceType = 'ST_CIC';
+      res.locals.currentUrl = req.originalUrl;
       next();
     });
   }

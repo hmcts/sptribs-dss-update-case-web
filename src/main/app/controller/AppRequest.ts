@@ -24,6 +24,7 @@ export interface AppSession extends Session {
   lang: string | undefined;
   errors: FormError[] | undefined;
   addresses: [];
+  fileErrors: any[];
   // eslint-disable-next-line @typescript-eslint/ban-types
   verificationData: {};
   tempValidationData?: {};
@@ -46,4 +47,16 @@ export interface Eligibility {
   marriedEligible?: string;
   livedUKEligible?: string;
   under21Eligible?: string;
+}
+
+export interface DocumentRequest {
+  id: string;
+  value: {
+    document: {
+      document_url: string;
+      document_binary_url: string;
+      document_filename: string;
+    };
+    comment: string;
+  };
 }

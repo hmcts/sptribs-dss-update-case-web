@@ -106,9 +106,15 @@ export const isDateInputNotFilled: DateValidator = date => {
     }
   }
 
-  if (isEmpty(date.day || date.month || date.year)) {
+  if (isEmpty(date.day) || isEmpty(date.month) || isEmpty(date.year)) {
     return invalid;
   } else {
     return;
+  }
+};
+
+export const isFieldLetters: Validator = value => {
+  if (!(value as string).match(/^[\p{Script=Latin}'’\-\s]*$/gu)) {
+    return 'invalid';
   }
 };

@@ -7,6 +7,7 @@ import { GetController, TranslationFn } from '../../app/controller/GetController
 import { deleteDocument } from '../../app/fileUpload/documentManager';
 import { RpeApi } from '../../app/s2s/rpeAuth';
 import { UPLOAD_DOCUMENT } from '../../steps/urls';
+import { getErrors } from './content';
 //eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyType = any;
 
@@ -21,18 +22,14 @@ export default class DocumentUpload extends GetController {
   }
 
   public async get(req: AppRequest, res: Response): Promise<void> {
-    if (res.headersSent || res.locals.isError) {
-      return;
-    }
     if (!req.session.hasOwnProperty('caseDocuments')) {
       req.session['caseDocuments'] = [];
     }
     if (req.query.hasOwnProperty('removeId')) {
-      this.removeExistingConsentDocument(req.query.removeId as string, req, res);
+      await this.removeExistingConsentDocument(req.query.removeId as string, req, res);
     } else {
       super.get(req, res, {
         uploadedDocuments: req.session['caseDocuments'],
-        FileErrors: req.session.errors,
         documentDetail: req.session?.['documentDetail'],
       });
     }
@@ -42,7 +39,7 @@ export default class DocumentUpload extends GetController {
     try {
       const seviceAuthToken = await RpeApi.getRpeToken();
       const s2sToken = seviceAuthToken.data;
-      await deleteDocument(s2sToken, documentId);
+      await deleteDocument(s2sToken, documentId, req);
       req.session['caseDocuments'] = req.session['caseDocuments'].filter(
         document => document.documentId !== documentId
       );
@@ -53,7 +50,15 @@ export default class DocumentUpload extends GetController {
         res.redirect(`${UPLOAD_DOCUMENT}`);
       });
     } catch (err) {
-      res.redirect('/error');
+      const documentUploadErrors = getErrors(req.session['lang']);
+      req.session.fileErrors = [{text: documentUploadErrors.documentUpload.uploadDeleteError, href: "#"}];
+
+      req.session.save(err => {
+        if (err) {
+          throw err;
+        }
+        res.redirect(UPLOAD_DOCUMENT);
+      });
     }
   };
 }
