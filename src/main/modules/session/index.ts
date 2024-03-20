@@ -1,3 +1,4 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import RedisStore from 'connect-redis';
 import cookieParser from 'cookie-parser';
@@ -5,8 +6,10 @@ import { Application } from 'express';
 import session from 'express-session';
 import * as redis from 'redis';
 import FileStoreFactory from 'session-file-store';
+import { LoggerInstance } from 'winston';
 
 const FileStore = FileStoreFactory(session);
+const logger: LoggerInstance = Logger.getLogger('session');
 
 export class SessionStorage {
   public enableFor(app: Application): void {
@@ -44,6 +47,7 @@ export class SessionStorage {
         password: config.get('session.redis.key') as string,
       });
 
+      client.on('error', err => logger.error(`Redis Client Error: ${err}`));
       client.connect();
 
       app.locals.redisClient = client;
