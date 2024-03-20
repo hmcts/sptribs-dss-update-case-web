@@ -46,3 +46,15 @@ export interface Eligibility {
   livedUKEligible?: string;
   under21Eligible?: string;
 }
+
+export interface DocumentRequest {
+  id: string;
+  value: {
+    document: {
+      document_url: string;
+      document_binary_url: string;
+      document_filename: string;
+    };
+    comment: string;
+  };
+}

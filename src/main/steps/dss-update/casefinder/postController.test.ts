@@ -43,8 +43,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 mockedAxios.post.mockImplementation((url) => {
   switch (url) {
     case 'https://idam-api.aat.platform.hmcts.net/o/token':
-      return Promise.resolve({data: {id_token: token, access_token: token}}
-      )
+      return Promise.resolve({ data: { id_token: token, access_token: token }})
     case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
       return Promise.resolve({ data: 'TOKEN'})
     default:

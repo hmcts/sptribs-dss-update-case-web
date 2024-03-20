@@ -18,7 +18,7 @@ export const getCase = async (req: AppRequest<AnyObject>, caseId: string) => {
       ServiceAuthorization: `Bearer ${s2sToken}`,
       experimental: 'true',
       Accept: '*/*',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
   });
 };
