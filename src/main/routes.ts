@@ -10,7 +10,14 @@ import { CookiesGetController } from './steps/cookies/get';
 import { ErrorController } from './steps/error/error.controller';
 import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
 import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
-import { ACCESSIBILITY_STATEMENT, COOKIES_PAGE, PRIVACY_POLICY, TERMS_AND_CONDITIONS } from './steps/urls';
+import { TimedOutGetController } from './steps/timed-out/get';
+import {
+  ACCESSIBILITY_STATEMENT,
+  COOKIES_PAGE,
+  PRIVACY_POLICY,
+  TERMS_AND_CONDITIONS,
+  TIMED_OUT_URL,
+} from './steps/urls';
 
 export class Routes {
   public enableFor(app: Application): void {
@@ -21,6 +28,7 @@ export class Routes {
     app.get(PRIVACY_POLICY, errorHandler(new PrivacyPolicyGetController().get));
     app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
+    app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);

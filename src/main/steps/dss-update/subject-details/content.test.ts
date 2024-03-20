@@ -95,11 +95,6 @@ describe('generateContent() with tempvalidation data', () => {
               dssQuestionAnswerPairs: [{ question: 'what is the name', answer: 'johndoe' }],
               dssQuestionAnswerDatePairs: [{ question: 'what is the DOB', answer: '27-10-1990' }],
             },
-            isDataVerified: false,
-            tempValidationData: {
-              dssQuestionAnswerPairs: [{ question: 'what is the name', answer: 's' }],
-              dssQuestionAnswerDatePairs: [{ question: 'what is the DOB', answer: '27-10-1990' }],
-            },
           },
         },
       },
@@ -120,12 +115,10 @@ describe('generateContent() with no tempdata', () => {
             verificationData: {
               dssQuestionAnswerPairs: [{ question: 'what is the name', answer: 'johndoe' }],
               dssQuestionAnswerDatePairs: [{ question: 'what is the DOB', answer: '27-10-1990' }],
-            },
-            isDataVerified: false,
-            tempValidationData: {},
-          },
-        },
-      },
+            }
+          }
+        }
+      }
     };
     // const genCON: AnyType = generateContent;
     expect(generateContent(content)).not.toEqual({});
