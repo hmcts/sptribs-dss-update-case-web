@@ -19,7 +19,7 @@ const enContent = {
   },
   errors: {
     submissionError: {
-      content: 'Your application is not submitted. Please try again',
+      required: 'Your application is not submitted. Please try again',
     },
   },
 };
@@ -39,7 +39,7 @@ const cyContent = {
   },
   errors: {
     submissionError: {
-      content: 'Your application is not submitted. Please try again - welsh',
+      required: 'Your application is not submitted. Please try again - welsh',
     },
   },
 };

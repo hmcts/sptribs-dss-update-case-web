@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../urls';
+import { DocumentUpload } from '../../../app/case/case';
 
 interface GovUkNunjucksSummary {
   key: {
@@ -79,7 +80,7 @@ export const UploadFormSummary = (
     changeUrl: Urls['UPLOAD_DOCUMENT'],
   };
 
-  const documentInformation = uploadedDocuments.map(document => {
+  const documentInformation = uploadedDocuments.map((document: DocumentUpload) => {
     return {
       keyHtml: keys.document + '<br><br>' + keys.documentRelevance,
       valueHtml: document.fileName + '<br><br>' + document.description,
