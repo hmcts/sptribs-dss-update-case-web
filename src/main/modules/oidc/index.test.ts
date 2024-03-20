@@ -4,8 +4,8 @@ import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 
 import { OidcMiddleware } from './index';
 
-describe('Routes', () => {
-  it('sets up dynamic step sequence routes', () => {
+describe('OidcMiddleware', () => {
+  it('configures oidc middleware', () => {
     const appMock = {
       get: jest.fn(),
       post: jest.fn(),

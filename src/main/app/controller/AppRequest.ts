@@ -26,8 +26,6 @@ export interface AppSession extends Session {
   addresses: [];
   fileErrors: any[];
   // eslint-disable-next-line @typescript-eslint/ban-types
-  verificationData: {};
-  tempValidationData?: {};
   returnUrl?: string;
   accessCodeLoginIn: boolean;
   c100RebuildLdFlag: boolean;
