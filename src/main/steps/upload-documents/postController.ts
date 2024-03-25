@@ -11,7 +11,7 @@ import { FormFields, FormFieldsFn } from '../../app/form/Form';
 import { RpeApi } from '../../app/s2s/rpeAuth';
 import { CHECK_YOUR_ANSWERS } from '../urls';
 import { getErrors } from './content';
-import { Logger } from '../../../test/unit/mocks/hmcts/nodejs-logging';
+import { Logger } from '@hmcts/nodejs-logging';
 /* The UploadDocumentController class extends the PostController class and overrides the
 PostDocumentUploader method */
 
