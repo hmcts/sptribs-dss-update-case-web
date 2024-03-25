@@ -12,6 +12,7 @@ export const uploadDocument = async (formData, s2sToken, req) => {
     authorization: `Bearer ${req.session.user.accessToken}`,
     serviceAuthorization: s2sToken,
   };
+  console.log("Document Upload: Upload start");
   return uploadDocumentInstance(CASE_API_URL, headers).post(
     '/doc/dss-orchestration/upload?caseTypeOfApplication=CIC',
     formData,
