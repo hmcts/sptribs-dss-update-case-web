@@ -2,9 +2,11 @@
 
 import axios, { AxiosInstance, RawAxiosRequestHeaders } from 'axios';
 import config from 'config';
+import { Logger } from '../../../test/unit/mocks/hmcts/nodejs-logging';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const uploadDocument = async (formData, s2sToken, req) => {
+  const logger = Logger.getLogger('documentManager');
   const CASE_API_URL: string = config.get('services.sptribs.url')
   const formHeaders = formData.getHeaders();
 
@@ -12,7 +14,7 @@ export const uploadDocument = async (formData, s2sToken, req) => {
     authorization: `Bearer ${req.session.user.accessToken}`,
     serviceAuthorization: s2sToken,
   };
-  console.log("Document Upload: Upload start");
+  logger.info("Document Upload: Upload start");
   return uploadDocumentInstance(CASE_API_URL, headers).post(
     '/doc/dss-orchestration/upload?caseTypeOfApplication=CIC',
     formData,
