@@ -2,11 +2,12 @@
 
 import axios, { AxiosInstance, RawAxiosRequestHeaders } from 'axios';
 import config from 'config';
-import { Logger } from '../../../test/unit/mocks/hmcts/nodejs-logging';
+import { Logger } from '@hmcts/nodejs-logging';
+
+const logger = Logger.getLogger('documentManager');
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const uploadDocument = async (formData, s2sToken, req) => {
-  const logger = Logger.getLogger('documentManager');
   const CASE_API_URL: string = config.get('services.sptribs.url')
   const formHeaders = formData.getHeaders();
 
