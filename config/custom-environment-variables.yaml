@@ -12,6 +12,8 @@ services:
   equalityAndDiversity:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
+  sptribs:
+    url: CASE_API_URL
 port: PORT
 session:
   redis:
