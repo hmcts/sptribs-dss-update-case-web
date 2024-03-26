@@ -11,6 +11,7 @@ import { FormFields, FormFieldsFn } from '../../app/form/Form';
 import { RpeApi } from '../../app/s2s/rpeAuth';
 import { CHECK_YOUR_ANSWERS } from '../urls';
 import { getErrors } from './content';
+import { Logger } from '@hmcts/nodejs-logging';
 /* The UploadDocumentController class extends the PostController class and overrides the
 PostDocumentUploader method */
 
@@ -21,6 +22,9 @@ export const documentExtensions = () => {
 export const multimediaExtensions = () => {
   return ['mp3', 'mp4'];
 };
+
+const logger = Logger.getLogger('uploadDocumentController');
+
 @autobind
 export default class UploadDocumentController extends PostController<AnyObject> {
   constructor(protected readonly fields: FormFields | FormFieldsFn) {
@@ -63,6 +67,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     redirectUrl: string,
     files: any
   ) {
+    logger.info("Document Upload: Validation Start");
     if (req.session['caseDocuments'] && this.checkIfMaxDocumentUploaded(req.session['caseDocuments'])) {
       const documentUploadErrors = getErrors(req.session['lang']);
       req.session.fileErrors = [{text: documentUploadErrors.documentUpload.maxFileError, href: "#file-upload-1"}];
@@ -90,6 +95,11 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       } else if (this.isFileSizeGreaterThanMaxAllowed(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileSize');
       } else {
+        logger.info("Document Upload: Validation Passed");
+        logger.info("File name: " + documents.name);
+        logger.info("File type: " + documents.mimetype);
+        logger.info("File size in bytes: " + documents.size);
+
         const formData: FormData = new FormData();
         formData.append('file', documents.data, {
           contentType: documents.mimetype,
@@ -99,6 +109,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           const seviceAuthToken = await RpeApi.getRpeToken();
           const s2sToken = seviceAuthToken.data;
           const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken, req);
+          logger.info("Document Upload: Upload sucessful");
           const { url, fileName, documentId, binaryUrl } = uploadDocumentResponseBody['data']['document'];
           req.session['caseDocuments'].push({
             url,
@@ -109,6 +120,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           });
           req.session.save(() => res.redirect(redirectUrl));
         } catch (error) {
+          logger.info("Upload error: " + error);
           this.uploadFileError(req, res, redirectUrl, 'uploadError');
         }
       }
