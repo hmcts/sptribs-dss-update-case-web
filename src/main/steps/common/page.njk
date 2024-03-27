@@ -81,6 +81,12 @@
 
 {% block footer %}
   {{ govukFooter({
+    copyright: {
+      text: copyright | safe
+    },
+    contentLicence: {
+      text: ogl | safe
+    },
     meta: {
       items: [
         {
@@ -98,6 +104,10 @@
         {
           href: "/terms-and-conditions",
           text: termsAndConditions
+        },
+        {
+          href: "/contact-us",
+          text: contactUs
         }
       ]
     }

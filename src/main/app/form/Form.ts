@@ -135,7 +135,7 @@ export type ValidationCheck = (
   formData: Partial<Case>
 ) => void | string;
 export type FormFields = Record<string, FormField>;
-export type FormFieldsFn = (userCase: Partial<Case>) => FormFields;
+export type FormFieldsFn = (userCase: Partial<Case>, language?: string) => FormFields;
 
 export interface FormContent {
   accessCodeCheck?: {
@@ -147,10 +147,6 @@ export interface FormContent {
     classes?: string;
   };
   onlyContinue?: {
-    text: Label;
-    classes?: string;
-  };
-  onlycontinue?: {
     text: Label;
     classes?: string;
   };

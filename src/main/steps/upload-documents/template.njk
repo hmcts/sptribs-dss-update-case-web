@@ -88,7 +88,7 @@
   <p id="passport-issued-error" class="govuk-error-message">
       <span class="govuk-visually-hidden"></span> {{errorMessage}}
     </p>
-  {%endif%}  
+  {%endif%}
       {{ govukFileUpload({
   id: "file-upload-1",
   name: "documents",
@@ -122,11 +122,11 @@
 
 <br>
 {{ govukButton({
-  text: onlycontinue,
+  text: onlyContinue,
   name: 'continue'
 }) }}
 
-</form>  
+</form>
 
 {% endblock %}
 
