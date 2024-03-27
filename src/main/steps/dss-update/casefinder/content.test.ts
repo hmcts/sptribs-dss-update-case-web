@@ -18,13 +18,13 @@ const enContent = {
 };
 
 const cyContent = {
-  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
-  title: 'Existing case details - welsh',
+  serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
+  title: 'Manylion achos sy’n bodoli’n barod',
   line1:
-    'You can find this information in the email you received after submitting your tribunal forms. - welsh',
-  subtitle: 'Case reference number - welsh',
-  caseNumberHint: 'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ; - welsh.',
-  errorSummaryMessage: 'There is a problem - welsh',
+    'Gallwch ddod o hyd i\'r wybodaeth hon yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.',
+  subtitle: 'Cyfeirnod yr achos',
+  caseNumberHint: 'Bydd y rhif hwn yn cynnwys 16 digid. It should not include spaces or any of these characters: - * (  )  &  !  /  ; - welsh.',
+  errorSummaryMessage: 'Mae yna broblem',
   errors: {
     applicantCaseId: {
       required: 'Please enter a reference number - welsh',

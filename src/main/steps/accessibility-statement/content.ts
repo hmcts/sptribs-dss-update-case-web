@@ -1,8 +1,8 @@
 import { TranslationFn } from '../../app/controller/GetController';
 
-const en = {
-  title: 'Accessibility statement for the private law service',
-  websiteRanBy: 'This service allows prospective parents to apply to adopt a child online.',
+export const en = {
+  title: 'Accessibility statement for the Criminal Injury Compensation Document Update service',
+  websiteRanBy: 'This service allows users to upload supporting information and documents to their CICA case.',
   asManyAsPossible:
     "This service is run by HM Courts and Tribunals. We want as many people as possible to be able to use it, so we've designed it to be accessible. For example, you should be able to:",
   asManyAsPossibleColours: 'change colours, contrast levels and fonts',
@@ -23,7 +23,7 @@ const en = {
   needMoreInformation:
     'If you need information on this website in a different format like accessible PDF, large print, easy read, audio recording or braille:',
   email:
-    'Email: <a href="privatelawproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to privatelawproject@justice.gov.uk">privatelawproject@justice.gov.uk</a>',
+    'Email: <a href="CIC.enquiries@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to CIC.enquiries@justice.gov.uk">CIC.enquiries@justice.gov.uk</a>',
   phone: 'Call: 01634 887900',
   considerYourRequest: 'We’ll consider your request and get back to you in 10 working days.',
   reportingAccessibility: 'Reporting accessibility problems with this website',
@@ -37,7 +37,7 @@ const en = {
     'If you’ve contacted us about accessibility and you’re not happy with our response, you can contact the <a href="https://www.equalityadvisoryservice.com/" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for Equality Advisory and Support Service">Equality Advisory and Support Service (EASS)</a>.',
   contactingUs: 'Contacting us by phone or visiting us in person',
   contactCourtDirectly:
-    'If you have a question about accessibility in our family courts, you can <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" class="govuk-link" target="blank">contact the court directly</a>.',
+    'If you have a question about accessibility in our tribunals, you can <a href="https://contact-the-cica.form.service.justice.gov.uk" class="govuk-link" target="blank">contact CICA directly</a>.',
   contactTextRelay:
     'We provide a text relay service for people who are D/deaf, hearing impaired or have a speech impediment.',
   contactInductionLoops:
@@ -49,7 +49,7 @@ const en = {
   partiallyCompliant:
     'This website is partially compliant with the <a href="https://www.w3.org/TR/WCAG21/" class="govuk-link" target="blank">Web Content Accessibility Guidelines version 2.1</a> AA standard, due to the non-compliances and exemptions listed below.',
   partiallyCompliantMobile:
-    'Content not presented without loss of information and requiring scrolling in two dimensions while using Adoption application via Mobile.',
+    'Content not presented without loss of information and requiring scrolling in two dimensions while using Criminal Injuries compensation application via Mobile.',
   nonAccessibleContent: 'Content that’s not within the scope of the accessibility regulations',
   issuesWithDocuments: 'Documents',
   issuesWithDocumentDescription1:
@@ -88,9 +88,9 @@ const en = {
   contactHelp: 'Contact us for help:',
 };
 
-const cy = {
-  title: 'Datganiad hygyrchedd ar gyfer y gwasanaeth mabwysiadu',
-  websiteRanBy: 'Mae’r gwasanaeth hwn yn caniatáu i ddarpar rieni wneud cais i fabwysiadu plentyn ar-lein.',
+export const cy = {
+  title: 'Accessibility statement for the Criminal Injury Compensation Document Update service - Welsh',
+  websiteRanBy: 'This service allows users to upload supporting information and documents to their CICA case. - Welsh',
   asManyAsPossible:
     'Gwasanaeth Llysoedd a Thribiwnlysoedd EM sy’n gyfrifol am y gwasanaeth hwn.  Rydym eisiau i gymaint o bobl â phosibl allu ei ddefnyddio, felly rydym wedi ceisio ei wneud mor hygyrch â phosibl.  Er enghraifft, dylech allu:',
   asManyAsPossibleColours: 'newid y lliwiau, y lefelau cyferbyniad a’r ffontiau',
@@ -99,7 +99,7 @@ const cy = {
   asManyAsPossibleSpeech: "llywio'r rhan fwyaf o'r wefan gan ddefnyddio meddalwedd adnabod llais",
   asManyAsPossibleListen:
     'gwrando ar y rhan fwyaf o’r wefan gan ddefnyddio darllenydd sgrin (gan gynnwys fersiynau diweddaraf NVDA, CCA (Dadansoddwr cyferbyniad lliwiau) a VoiceOver)',
-  simpleAsPossible: "Rydym hefyd wedi gwneud y testun mor syml â phosibl i'w ddeall.",
+  simpleAsPossible: 'Rydym hefyd wedi sicrhau ein bod wedi defnyddio iaith syml.',
   abilityNet:
     '<a href="https://mcmw.abilitynet.org.uk" class="govuk-link" target="_blank">Mae AbilityNet</a> yn rhoi cyngor ar sut i wneud eich dyfais yn haws i’w defnyddio os oes gennych anabledd.',
   howAccessible: "Pa mor hygyrch yw'r wefan hon",
@@ -110,13 +110,13 @@ const cy = {
   feedbackAndContactInformation: 'Adborth a gwybodaeth gyswllt',
   needMoreInformation:
     'Os ydych angen gwybodaeth sydd ar y wefan hon mewn fformat arall megis ar ffurf PDF hygyrch, print bras, fformat hawdd ei ddarllen, recordiad sain neu braille:',
-  email: 'E-bost: <a href=”privatelawproject@justice.gov.uk” class=”govuk-link”>privatelawproject@justice.gov.uk</a>',
+  email: 'E-bost: <a href=”CIC.enquiries@justice.gov.uk” class=”govuk-link”>CIC.enquiries@justice.gov.uk</a>',
   phone: 'Ffoniwch: 01634 887900',
   considerYourRequest: 'Byddwn yn ystyried eich cais ac yn ymateb o fewn 10 diwrnod gwaith.',
   reportingAccessibility: "Riportio problemau hygyrchedd gyda'r wefan hon",
-  accessibilityPhoneNumber: 'Ffôn: 01634 887900',
+  accessibilityPhoneNumber: 'Rhif ffôn: 01634 887900',
   improveAccessibility:
-    'Rydym wastad yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â: <a href=”mailto:privatelawproject@justice.gov.uk” class=”govuk-link”>privatelawproject@justice.gov.uk</a>.',
+    'Rydym wastad yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â: <a href=”mailto:CIC.enquiries@justice.gov.uk” class=”govuk-link”>CIC.enquiries@justice.gov.uk</a>.',
   enforcementProcedure: 'Y Weithdrefn Orfodi',
   humanRightsCommission:
     'Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018 (y ‘rheoliadau hygyrchedd’).',
@@ -124,7 +124,7 @@ const cy = {
     'Os ydych wedi cysylltu â ni ynghylch mater hygyrchedd ac nad ydych yn fodlon â’n hymateb, gallwch gysylltu â’r <a href="https://www.equalityadvisoryservice.com/" class="govuk-link" target="_blank">Gwasanaeth Chynghori a Chymorth Cydraddoldeb (EASS)</a>.',
   contactingUs: 'Cysylltu â ni dros y ffôn neu ymweld â ni’n bersonol',
   contactCourtDirectly:
-    'Os oes gennych gwestiwn am hygyrchedd yn ein llysoedd teulu, gallwch <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode?lng=cy" class="govuk-link" target="blank">cysylltu â’r llys yn uniongyrchol</a>.',
+    'If you have a question about accessibility in our tribunals, you can <a href="https://contact-the-cica.form.service.justice.gov.uk" class="govuk-link" target="blank">contact CICA directly</a>. - ',
   contactTextRelay:
     'Rydym yn darparu gwasanaeth cyfnewid negeseuon testun ar gyfer pobl fyddar, pobl sydd â nam ar eu clyw a phobl sydd â nam ar eu lleferydd.',
   contactInductionLoops:
@@ -136,7 +136,7 @@ const cy = {
   partiallyCompliant:
     'Mae’r wefan hon yn cydymffurfio’n rhannol â safon <a href="https://www.w3.org/TR/WCAG21/" class="govuk-link" target="blank">AA Canllawiau Hygyrchedd Cynnwys Gwe fersiwn 2.1,</a>a hynny oherwydd y materion o beidio â chydymffurfio a’r esemptiadau a restrir isod.',
   partiallyCompliantMobile:
-    'Cynnwys ddim i’w weld heb golli gwybodaeth ac angen sgrolio mewn dwy ffordd wahanol wrth ddefnyddio’r gwasanaeth Mabwysiadu ar ddyfais symudol. ',
+    'Content not presented without loss of information and requiring scrolling in two dimensions while using Criminal Injuries compensation application via Mobile. - Welsh',
   nonAccessibleContent: 'Cynnwys sydd ddim o fewn cwmpas y rheoliadau hygyrchedd',
   issuesWithDocuments: 'Dogfennau',
   issuesWithDocumentDescription1:

@@ -47,7 +47,7 @@ const cyContent: typeof enContent = {
   keys: {
     information: 'Gwybodaeth ychwanegol',
     document: 'Dogfennau ychwanegol',
-    documentRelevance: 'Document relevance - welsh',
+    documentRelevance: 'Perthnasedd y ddogfen',
   },
   errors: {
     submissionError: {
@@ -62,7 +62,7 @@ const cy: typeof en = (content: CommonContent) => {
   return {
     ...cyContent,
     language: content.language,
-    sections: [UploadFormSummary(enContent, caseDocuments, caseInformation)],
+    sections: [UploadFormSummary(cyContent, caseDocuments, caseInformation)],
   };
 };
 
