@@ -30,7 +30,22 @@ resource "azurerm_key_vault_secret" "s2s-secret" {
     "source" : "vault ${data.azurerm_key_vault.s2s_vault.name}"
   })
 
-  key_vault_id = data.azurerm_key_vault.sptribs_key_vault.id
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+data "azurerm_key_vault_secret" "idam-systemupdate-username" {
+  name         = "idam-systemupdate-username"
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+data "azurerm_key_vault_secret" "idam-systemupdate-password" {
+  name         = "idam-systemupdate-password"
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+data "azurerm_key_vault_secret" "idam-dss-update-ui-secret" {
+  name         = "idam-dss-update-ui-secret"
+  key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
 data "azurerm_redis_cache" "sptribs_dss_update_case_web_session_storage" {
