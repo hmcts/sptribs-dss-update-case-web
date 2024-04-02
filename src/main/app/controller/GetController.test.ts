@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-//import { defaultViewArgs } from '../../../test/unit/utils/defaultViewArgs';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-
-import { GetController } from './GetController';
-import { AppRequest } from './AppRequest';
 import { SIGN_IN_URL } from '../../steps/urls';
+
+import { AppRequest } from './AppRequest';
+import { GetController } from './GetController';
 
 describe('GetController', () => {
   const languages = {
@@ -30,10 +28,7 @@ describe('GetController', () => {
       analytics: 'off',
       apm: 'off',
     };
-    expect(res.render).toHaveBeenCalledWith(
-      expect.stringContaining('page'),
-      expect.anything()
-    );
+    expect(res.render).toHaveBeenCalledWith(expect.stringContaining('page'), expect.anything());
   });
 
   test('Detects when application is not in a draft state', async () => {
@@ -43,10 +38,7 @@ describe('GetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.render).toHaveBeenCalledWith(
-      expect.stringContaining('page'),
-      expect.anything()
-    );
+    expect(res.render).toHaveBeenCalledWith(expect.stringContaining('page'), expect.anything());
   });
 
   test('Routes to /error page when exception thrown', async () => {
@@ -113,10 +105,7 @@ describe('GetController', () => {
 
       await controller.get(documentManagerRequest, res);
 
-      expect(res.render).toHaveBeenCalledWith(
-        expect.stringContaining('page'),
-        expect.anything()
-      );
+      expect(res.render).toHaveBeenCalledWith(expect.stringContaining('page'), expect.anything());
     });
 
     test('Language via session', async () => {
@@ -127,10 +116,7 @@ describe('GetController', () => {
       const res = mockResponse();
       req.session.lang = language;
       await controller.get(req, res);
-      expect(res.render).toHaveBeenCalledWith(
-        expect.stringContaining('page'),
-        expect.anything()
-      );
+      expect(res.render).toHaveBeenCalledWith(expect.stringContaining('page'), expect.anything());
     });
 
     test('Language via browser settings', async () => {
@@ -142,10 +128,7 @@ describe('GetController', () => {
 
       await controller.get(req, res);
 
-      expect(res.render).toHaveBeenCalledWith(
-        expect.stringContaining('page'),
-        expect.anything()
-      );
+      expect(res.render).toHaveBeenCalledWith(expect.stringContaining('page'), expect.anything());
     });
 
     test('Language via browser settings fallback to en', async () => {
@@ -157,10 +140,7 @@ describe('GetController', () => {
 
       await controller.get(req, res);
 
-      expect(res.render).toHaveBeenCalledWith(
-        expect.stringContaining('page'),
-        expect.anything()
-      );
+      expect(res.render).toHaveBeenCalledWith(expect.stringContaining('page'), expect.anything());
     });
   });
 
@@ -193,10 +173,7 @@ describe('GetController', () => {
 
     await controller.get(req, res);
 
-    expect(res.render).toHaveBeenCalledWith(
-      expect.stringContaining('page'),
-      expect.anything()
-    );
+    expect(res.render).toHaveBeenCalledWith(expect.stringContaining('page'), expect.anything());
   });
 
   describe('generatePageContent()', () => {
@@ -209,10 +186,7 @@ describe('GetController', () => {
 
       await controller.get(req, res);
 
-      expect(res.render).toHaveBeenCalledWith(
-        expect.stringContaining('page'),
-        expect.anything()
-      );
+      expect(res.render).toHaveBeenCalledWith(expect.stringContaining('page'), expect.anything());
     });
   });
 
@@ -221,7 +195,7 @@ describe('GetController', () => {
       const controller = new GetController('page', () => ({}));
       const req = mockRequest();
       const res = mockResponse();
-      req.url = '/next-page'
+      req.url = '/next-page';
 
       controller.saveSessionAndRedirect(req, res);
 
@@ -321,7 +295,6 @@ describe('checking for documents Delete manager', () => {
   });
 
   describe('parseAndSetReturnUrl', () => {
-
     test('req.session.returnUrl populated', async () => {
       const controller = new GetController('page', () => ({}));
       const req = mockRequest();

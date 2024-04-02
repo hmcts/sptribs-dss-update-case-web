@@ -16,11 +16,13 @@ export class PropertiesVolume {
       this.setSecret('secrets.sptribs.idam-systemupdate-username', 'services.idam.systemUsername');
       this.setSecret('secrets.sptribs.idam-systemupdate-password', 'services.idam.systemPassword');
       this.setSecret('secrets.sptribs.idam-dss-update-ui-secret', 'services.idam.clientSecret');
+      this.setSecret('secrets.sptribs.s2s-secret-sptribs-dss-update-case-web', 'services.authProvider.secret');
       this.setSecret('secrets.sptribs.sptribs-dss-update-case-dynatrace-url', 'dynatrace.dynatraceUrl');
     } else {
       this.setLocalSecret('idam-systemupdate-username', 'services.idam.systemUsername');
       this.setLocalSecret('idam-systemupdate-password', 'services.idam.systemPassword');
       this.setLocalSecret('idam-dss-update-ui-secret', 'services.idam.clientSecret');
+      this.setLocalSecret('s2s-secret-sptribs-dss-update-case-web', 'services.authProvider.secret');
     }
   }
 
