@@ -1,20 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */
-
 import autobind from 'autobind-decorator';
 import axios from 'axios';
 import config from 'config';
 import { Response } from 'express';
 
+import { DocumentUpload } from '../../../app/case/case';
 import { AppRequest, DocumentRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { RpeApi } from '../../../app/s2s/rpeAuth';
+import { getServiceAuthToken } from '../../../app/s2s/get-service-auth-token';
 import { APPLICATION_CONFIRMATION } from '../../urls';
-import { DocumentUpload } from '../../../app/case/case';
+
 @autobind
 export default class CheckYourAnswersController extends PostController<AnyObject> {
-
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
@@ -74,14 +71,13 @@ export default class CheckYourAnswersController extends PostController<AnyObject
 
     const caseId = req.session.userCase.id;
     const baseURL = `${config.get('services.sptribs.url')}/case/dss-orchestration/${caseId}/update?event=UPDATE_CASE`;
-    const serviceAuthToken = await RpeApi.getRpeToken();
-    const s2sToken = serviceAuthToken.data;
-    return await axios.put(baseURL, data, {
+    const s2sToken = await getServiceAuthToken();
+    return axios.put(baseURL, data, {
       headers: {
         Authorization: `Bearer ${req.session.user.accessToken}`,
         ServiceAuthorization: `Bearer ${s2sToken}`,
         Accept: '*/*',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
     });
   }

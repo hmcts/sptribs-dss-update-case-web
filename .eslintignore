@@ -11,12 +11,3 @@ jest.*config.js
 .eslintrc.js
 src/test/config.ts
 **/*.js
-
-# TODO: reinstate the below once setup complete
-# /src/main/types/
-# src/test/*/codecept.conf.js
-
-# TODO: remove below 3 ignore options once setup complete
-src/main/app/**
-src/main/steps/**
-src/test/**

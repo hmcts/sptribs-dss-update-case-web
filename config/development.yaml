@@ -16,8 +16,6 @@ session:
     host:
     key:
   secureCookie: 'false'
-api:
-  serviceAuth: 'http://rpe-service-auth-provider-demo.service.core-compute-demo.internal'
 app:
   caseTypeOfApplication: 'RELADOP'
 e2e:
