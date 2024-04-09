@@ -113,7 +113,6 @@ const cy: typeof en = {
     'You acknowledge and accept that you are fully aware of your responsibilities for this organisation, in relation to the use of the Service as set out in the above terms and conditions. You are authorised to accept the terms on behalf of your organisation including other users. {in welsh}',
 };
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('terms-and-conditions > content', () => {
   const commonContent = generatePageContent({
     language: 'en',

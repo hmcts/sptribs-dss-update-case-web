@@ -1,8 +1,8 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../../app/form/Form';
-
 import { HOME_URL } from '../../urls';
+
 import ConfirmationPagePostController from './postController';
 
 describe('ConfirmationPagePostController post controller test cases', () => {

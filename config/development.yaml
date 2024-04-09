@@ -16,12 +16,6 @@ session:
     host:
     key:
   secureCookie: 'false'
-api:
-  serviceAuth: 'http://rpe-service-auth-provider-demo.service.core-compute-demo.internal'
-uploadPolicy:
-  documentSize: 20
-  multimediaSize: 500
-  maxNoOfFiles: 10
 app:
   caseTypeOfApplication: 'RELADOP'
 e2e:
@@ -30,9 +24,7 @@ appInsights:
   instrumentationKey:
 s2s:
   microservice: 'sptribs_dss_update_case_web'
-documentManagement:
-  uploadSizeinMB: 30
 cookies:
   expiryTime: 365
-  cookieName: 'ds-web-update-cookie-preferences'
+  cookieName: 'sptribs-dss-update-case-web-cookie-preferences'
 loggedInUsers: ['legalRep', 'police']

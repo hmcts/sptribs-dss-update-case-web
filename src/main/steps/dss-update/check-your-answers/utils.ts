@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { DocumentUpload } from '../../../app/case/case';
 import { PageContent } from '../../../app/controller/GetController';
-import * as Urls from '../../urls';
+import { UPLOAD_DOCUMENT } from '../../urls';
 
 interface GovUkNunjucksSummary {
   key: {
@@ -67,27 +67,26 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
   });
 };
 
-/* eslint-disable import/namespace */
 export const UploadFormSummary = (
   { keys, ...content }: SummaryListContent,
   uploadedDocuments: Partial<any>,
   caseInformation: string
 ): SummaryList | undefined => {
-  const extraCaseInformation = {
-    key: 'Information',
+  const additionalInformation = {
+    key: keys.information,
     value: caseInformation,
-    changeUrl: Urls['UPLOAD_DOCUMENT'],
+    changeUrl: UPLOAD_DOCUMENT,
   };
 
-  const documentInformation = uploadedDocuments.map(document => {
+  const documentInformation = uploadedDocuments.map((document: DocumentUpload) => {
     return {
-      keyHtml: keys.fileName + '<br><br>' + keys.description,
+      keyHtml: keys.document + '<br><br>' + keys.documentRelevance,
       valueHtml: document.fileName + '<br><br>' + document.description,
-      changeUrl: Urls['UPLOAD_DOCUMENT'],
+      changeUrl: UPLOAD_DOCUMENT,
     };
   });
 
-  const summaryData = [extraCaseInformation, ...documentInformation].filter(item => item);
+  const summaryData = [additionalInformation, ...documentInformation].filter(item => item);
 
   return {
     title: 'List of documents uploaded ',

@@ -9,7 +9,7 @@ export interface Case {
 
 export interface CaseWithId extends Case {
   id: string;
-  state: any;
+  state: string;
 }
 
 export enum Checkbox {
@@ -31,6 +31,14 @@ export enum LanguagePreference {
 export interface UploadedFile {
   id: string;
   name: string;
+}
+
+export interface DocumentUpload {
+  url: string;
+  fileName: string;
+  documentId: string;
+  binaryUrl: string;
+  description: string;
 }
 
 export enum FieldPrefix {

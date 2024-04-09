@@ -38,6 +38,9 @@ def secrets = [
     secret('idam-dss-update-ui-secret', 'IDAM_SECRET'),
     secret('idam-systemupdate-username', 'CITIZEN_USERNAME'),
     secret('idam-systemupdate-password', 'CITIZEN_PASSWORD')
+  ],
+  's2s-${env}': [
+    secret('microservicekey-sptribs-dss-update-case-web', 'SERVICE_AUTH_SECRET')
   ]
 ]
 

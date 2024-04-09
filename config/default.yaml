@@ -17,22 +17,17 @@ session:
     host:
     key:
   secureCookie: 'true'
-api:
-  serviceAuth: RPE_API
 uploadPolicy:
-  documentSize: 20
-  multimediaSize: 500
-  maxNoOfFiles: 10
+  documentSize: 500
+  maxNoOfFiles: 20
 app:
   caseTypeOfApplication: 'RELADOP'
 e2e:
   userTestPassword: ''
 appInsights:
   instrumentationKey:
-s2s:
-  microservice: 'sptribs_dss_update_case_web'
 documentManagement:
-  uploadSizeinMB: 30
+  uploadSizeinMB: 501
 cookies:
   expiryTime: 365
   cookieName: 'sptribs-dss-update-case-web-cookie-preferences'
@@ -50,3 +45,9 @@ services:
     systemUsername: 'DUMMY_VALUE_REPLACE'
     systemPassword: 'DUMMY_VALUE_REPLACE'
     caching: 'false'
+  authProvider:
+    url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
+    microservice: 'sptribs_dss_update_case_web'
+    secret: 'NEED TO INSERT SECRET'
+dynatrace:
+  dynatraceUrl: 'https://js-cdn.dynatrace.com/jstag/17177a07246/bf24054dsx/6664b4fa41dce90c_complete.js'
