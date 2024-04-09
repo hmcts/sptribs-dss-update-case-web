@@ -4,13 +4,12 @@ import config from 'config';
 import { getSystemUser } from '../auth/oidc';
 import { AppRequest } from '../controller/AppRequest';
 import { AnyObject } from '../controller/PostController';
-import { RpeApi } from '../s2s/rpeAuth';
+import { getServiceAuthToken } from '../s2s/get-service-auth-token';
 
 export const getCase = async (req: AppRequest<AnyObject>, caseId: string) => {
   const baseURL = `${config.get('services.case.url')}/cases/${caseId}`;
-  const serviceAuthToken = await RpeApi.getRpeToken();
+  const s2sToken = await getServiceAuthToken();
   const systemUserDetails = await getSystemUser();
-  const s2sToken = serviceAuthToken.data;
 
   return axios.get(baseURL, {
     headers: {

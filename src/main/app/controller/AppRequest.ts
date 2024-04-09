@@ -24,9 +24,8 @@ export interface AppSession extends Session {
   lang: string | undefined;
   errors: FormError[] | undefined;
   addresses: [];
+  fileErrors: any[];
   // eslint-disable-next-line @typescript-eslint/ban-types
-  verificationData: {};
-  tempValidationData?: {};
   returnUrl?: string;
   accessCodeLoginIn: boolean;
   c100RebuildLdFlag: boolean;
@@ -39,6 +38,7 @@ export interface UserDetails {
   email: string;
   givenName: string;
   familyName: string;
+  roles: string[];
 }
 
 export interface Eligibility {
@@ -46,4 +46,16 @@ export interface Eligibility {
   marriedEligible?: string;
   livedUKEligible?: string;
   under21Eligible?: string;
+}
+
+export interface DocumentRequest {
+  id: string;
+  value: {
+    document: {
+      document_url: string;
+      document_binary_url: string;
+      document_filename: string;
+    };
+    comment: string;
+  };
 }

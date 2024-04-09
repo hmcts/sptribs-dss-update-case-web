@@ -1,19 +1,21 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isDateInputInvalid, isDateInputNotFilled, isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 import { covertToDateObject } from '../../../app/form/parser';
+import {
+  isDateInputInvalid,
+  isDateInputNotFilled,
+  isFieldFilledIn,
+  isFieldLetters,
+} from '../../../app/form/validation';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Subject of this case',
   errorSummaryMessage: 'There is a problem',
-  subjectFullNameLabel: "Full name",
-  subjectDOBLabel: "Date of birth",
+  subjectFullNameLabel: 'Full name',
+  subjectDOBLabel: 'Date of birth',
   errors: {
     subjectFullName: {
       required: 'Please enter full name',
@@ -21,13 +23,14 @@ export const en = () => ({
     },
     subjectDOB: {
       required: 'Please enter date of birth',
-      invalid: 'Please enter valid date of birth'
+      invalid: 'Please enter valid date of birth',
     },
     inputFields: {
-      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again.'
+      required:
+        "Some of the information you have given doesn't match our records. Please enter the right value and try again.",
     },
     caseError: {
-      required: 'Error verifying case'
+      required: 'Error verifying case',
     },
   },
 });
@@ -36,8 +39,8 @@ export const cy = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
   title: 'Subject of this case - welsh',
   errorSummaryMessage: 'There is a problem - welsh',
-  subjectFullNameLabel: "Full name - welsh",
-  subjectDOBLabel: "Date of birth - welsh",
+  subjectFullNameLabel: 'Full name - welsh',
+  subjectDOBLabel: 'Date of birth - welsh',
   errors: {
     subjectFullName: {
       required: 'Please enter full name - welsh',
@@ -45,13 +48,14 @@ export const cy = () => ({
     },
     subjectDOB: {
       required: 'Please enter date of birth - welsh',
-      invalid: 'Please enter valid date of birth - welsh'
+      invalid: 'Please enter valid date of birth - welsh',
     },
     inputFields: {
-      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again. - welsh'
+      required:
+        "Some of the information you have given doesn't match our records. Please enter the right value and try again. - welsh",
     },
     caseError: {
-      required: 'Error verifying case - welsh'
+      required: 'Error verifying case - welsh',
     },
   },
 });
