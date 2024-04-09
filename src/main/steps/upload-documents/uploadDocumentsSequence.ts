@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 import { Sections, Step } from '../constants';
 import { UPLOAD_DOCUMENT } from '../urls';
 

@@ -1,20 +1,20 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isNotNumeric } from '../../../app/form/validation';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Existing case details',
   line1: 'You can find this information in the email you received after submitting your tribunal forms.',
   subtitle: 'Case reference number',
-  caseNumberHint: 'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ;',
+  caseNumberHint:
+    'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ;',
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
       required: 'Please enter a reference number',
-      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
+      notNumeric:
+        'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
       caseNotFound: 'Please enter a valid reference number',
     },
   },
@@ -31,7 +31,8 @@ export const cy = () => ({
   errors: {
     applicantCaseId: {
       required: 'Please enter a reference number - welsh',
-      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ; - welsh',
+      notNumeric:
+        'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ; - welsh',
       caseNotFound: 'Please enter a valid reference number - welsh',
     },
   },

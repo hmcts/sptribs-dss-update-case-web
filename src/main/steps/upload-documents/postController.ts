@@ -8,19 +8,16 @@ import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../app/controller/PostController';
 import { uploadDocument } from '../../app/fileUpload/documentManager';
 import { FormFields, FormFieldsFn } from '../../app/form/Form';
-import { RpeApi } from '../../app/s2s/rpeAuth';
+import { getServiceAuthToken } from '../../app/s2s/get-service-auth-token';
 import { CHECK_YOUR_ANSWERS } from '../urls';
+
 import { getErrors } from './content';
 /* The UploadDocumentController class extends the PostController class and overrides the
 PostDocumentUploader method */
 
-export const documentExtensions = () => {
-  return ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'xls', 'txt'];
-};
+export const documentExtensions = ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'xls', 'txt'];
+export const multimediaExtensions = ['mp3', 'mp4'];
 
-export const multimediaExtensions = () => {
-  return ['mp3', 'mp4'];
-};
 @autobind
 export default class UploadDocumentController extends PostController<AnyObject> {
   constructor(protected readonly fields: FormFields | FormFieldsFn) {
@@ -39,11 +36,11 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     req.session.save();
 
     if (ContinueFromPage) {
-      const numDocsUploaded:number = req.session.hasOwnProperty('caseDocuments')
+      const numDocsUploaded: number = req.session.hasOwnProperty('caseDocuments')
         ? req.session['caseDocuments'].length
         : 0;
 
-      if (numDocsUploaded == 0 && req.session['documentDetail'] == '') {
+      if (numDocsUploaded === 0 && req.session['documentDetail'] === '') {
         this.uploadFileError(req, res, req.originalUrl, 'noInput');
       } else {
         super.redirect(req, res, CHECK_YOUR_ANSWERS);
@@ -62,10 +59,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     res: Response<any, Record<string, any>>,
     redirectUrl: string,
     files: any
-  ) {
+  ): Promise<void> {
     if (req.session['caseDocuments'] && this.checkIfMaxDocumentUploaded(req.session['caseDocuments'])) {
       const documentUploadErrors = getErrors(req.session['lang']);
-      req.session.fileErrors = [{text: documentUploadErrors.documentUpload.maxFileError, href: "#file-upload-1"}];
+      req.session.fileErrors = [{ text: documentUploadErrors.documentUpload.maxFileError, href: '#file-upload-1' }];
       req.session.save(err => {
         if (err) {
           throw err;
@@ -82,7 +79,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     req: AppRequest<AnyObject>,
     res: Response<any, Record<string, any>>,
     redirectUrl: string
-  ) {
+  ): Promise<void> {
     if (req.files) {
       const { documents } = files;
       if (!this.isValidFileFormat(files)) {
@@ -96,8 +93,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           filename: documents.name,
         });
         try {
-          const seviceAuthToken = await RpeApi.getRpeToken();
-          const s2sToken = seviceAuthToken.data;
+          const s2sToken = await getServiceAuthToken();
           const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken, req);
           const { url, fileName, documentId, binaryUrl } = uploadDocumentResponseBody['data']['document'];
           req.session['caseDocuments'].push({
@@ -122,9 +118,9 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     res: Response<any, Record<string, any>>,
     redirectUrl: string,
     errorCode: string
-  ) {
+  ): void {
     const documentUploadErrors = getErrors(req.session['lang']);
-    let errorMessage:string
+    let errorMessage: string;
     switch (errorCode) {
       case 'noInput':
         errorMessage = documentUploadErrors.documentUpload.noInput;
@@ -147,7 +143,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       default:
         errorMessage = '';
     }
-    req.session.fileErrors = [{text: errorMessage, href: "#file-upload-1"}];
+    req.session.fileErrors = [{ text: errorMessage, href: '#file-upload-1' }];
     req.session.save(err => {
       if (err) {
         throw err;
@@ -156,14 +152,14 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     });
   }
 
-  public isValidFileFormat(files) {
+  public isValidFileFormat(files): boolean {
     const { documents } = files;
     const extension = documents.name.toLowerCase().split('.')[documents.name.split('.').length - 1];
-    const AllowedFileExtentionList = [...documentExtensions(), ...multimediaExtensions()];
-    return AllowedFileExtentionList.indexOf(extension) > -1;
+    const AllowedFileExtensionList = [...documentExtensions, ...multimediaExtensions];
+    return AllowedFileExtensionList.indexOf(extension) > -1;
   }
 
-  public isFileSizeGreaterThanMaxAllowed(files) {
+  public isFileSizeGreaterThanMaxAllowed(files): boolean {
     const uploadPolicySizeForFiles = Number(config.get('uploadPolicy.documentSize')) * 1024 * 1024;
     const { documents } = files;
     return documents.size > uploadPolicySizeForFiles;

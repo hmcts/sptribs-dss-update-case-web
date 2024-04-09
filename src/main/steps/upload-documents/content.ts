@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { TranslationFn } from '../../app/controller/GetController';
 import { FormContent } from '../../app/form/Form';
 
@@ -7,10 +6,12 @@ export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Add information to a case',
   paragraph1:
-    'Please provide any additional relevant information that you would like to add to this case. Don\'t include any personal financial information, such as your banking details.',
+    "Please provide any additional relevant information that you would like to add to this case. Don't include any personal financial information, such as your banking details.",
   additionalDocumentsHeading: 'Additional documents',
-  paragraph2: 'You may want to submit other documents, files, or evidence that provides the Tribunal with more information about your case.',
-  paragraph3: 'This will depend on the nature of your appeal, application or claim. Specific examples can be found in your completed tribunal form.',
+  paragraph2:
+    'You may want to submit other documents, files, or evidence that provides the Tribunal with more information about your case.',
+  paragraph3:
+    'This will depend on the nature of your appeal, application or claim. Specific examples can be found in your completed tribunal form.',
   uploadedDocumentsSubTitle: 'These may include:',
   uploadDocumentsBullets: [
     'copies of any relevant correspondence or documentation',
@@ -18,7 +19,8 @@ export const en = () => ({
     'written statements',
     'related reports',
   ],
-  caseRelevancySubTitle: 'For each piece of additional information or evidence you are submitting, please state why it is relevant to your case.',
+  caseRelevancySubTitle:
+    'For each piece of additional information or evidence you are submitting, please state why it is relevant to your case.',
   fileUploadRequirementsLabel: 'File uploads requirements',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
@@ -26,12 +28,10 @@ export const en = () => ({
     'File size per multimedia file: up to 500 megabytes (MB)',
     'Files cannot be password protected',
   ],
-  guideText:
-    'You can\'t upload executable (.exe), zip or other archive files due to virus risks.',
+  guideText: "You can't upload executable (.exe), zip or other archive files due to virus risks.",
   titleForFile: 'Select documents to upload',
   uploadButton: 'Upload file',
-  documentListLabel:
-    'Please explain why you feel this document is relevant to your case.',
+  documentListLabel: 'Please explain why you feel this document is relevant to your case.',
   delete: 'Delete',
   documentInLanguage: 'Document',
   errorSummaryMessage: 'There is a problem',
@@ -40,8 +40,9 @@ export const en = () => ({
   errors: {
     documentUpload: {
       noInput: 'You cannot continue without providing additional information or a document',
-      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 500MB`,
-      fileFormat: `This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3`,
+      fileSize: 'File size exceeds the maximum permitted value. Please upload a file that is less than 500MB',
+      fileFormat:
+        'This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
       selectFileToUpload: 'Select a file to upload',
       uploadDeleteError: 'Document upload or deletion has failed. Please try again',
       maxFileError: 'You can only select up to 20 files at the same time',
@@ -86,8 +87,9 @@ export const cy = () => ({
   errors: {
     documentUpload: {
       noInput: 'You cannot continue without providing additional information or a document - welsh',
-      fileSize: `File size exceeds the maximum permitted value. Please upload a file that is less than 500MB - welsh`,
-      fileFormat: `This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh`,
+      fileSize: 'File size exceeds the maximum permitted value. Please upload a file that is less than 500MB - welsh',
+      fileFormat:
+        'This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh',
       selectFileToUpload: 'Select a file to upload - welsh',
       uploadDeleteError: 'Document upload or deletion has failed. Please try again - welsh',
       maxFileError: 'You can only select up to 20 files at the same time - welsh',
@@ -120,7 +122,7 @@ export const generateContent: TranslationFn = content => {
 };
 
 export function getErrors(language: any) {
-  let errors: any
+  let errors: any;
   switch (language) {
     case 'cy':
       errors = cy().errors;
@@ -132,4 +134,3 @@ export function getErrors(language: any) {
 
   return errors;
 }
-

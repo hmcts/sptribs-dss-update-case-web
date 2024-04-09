@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { AnyType } from '../../../app/form/validation';
 
 import { cy, en, generateContent } from './content';
@@ -20,13 +18,14 @@ const englishContent = () => ({
     },
     subjectDOB: {
       required: 'Please enter date of birth',
-      invalid: 'Please enter valid date of birth'
+      invalid: 'Please enter valid date of birth',
     },
     inputFields: {
-      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again.'
+      required:
+        "Some of the information you have given doesn't match our records. Please enter the right value and try again.",
     },
     caseError: {
-      required: 'Error verifying case'
+      required: 'Error verifying case',
     },
   },
 });
@@ -49,10 +48,11 @@ const welshContent = () => ({
       invalid: 'Nodwch ddyddiad geni dilys'
     },
     inputFields: {
-      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again. - welsh'
+      required:
+        "Some of the information you have given doesn't match our records. Please enter the right value and try again. - welsh",
     },
     caseError: {
-      required: 'Error verifying case - welsh'
+      required: 'Error verifying case - welsh',
     },
   },
 });
@@ -121,10 +121,10 @@ describe('generateContent() with no tempdata', () => {
             verificationData: {
               dssQuestionAnswerPairs: [{ question: 'what is the name', answer: 'johndoe' }],
               dssQuestionAnswerDatePairs: [{ question: 'what is the DOB', answer: '27-10-1990' }],
-            }
-          }
-        }
-      }
+            },
+          },
+        },
+      },
     };
     // const genCON: AnyType = generateContent;
     expect(generateContent(content)).not.toEqual({});

@@ -1,6 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent } from '../../../app/form/Form';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { CommonContent } from '../../common/common.content';
 
 import { generateContent, getErrors } from './content';
 
@@ -9,7 +8,8 @@ const enContent = {
   title: 'Check answers before submitting your update',
   change: 'change',
   continue: 'Accept and send',
-  statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
+  statementOfTruth:
+    'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
   submitApplicationText: 'Now update your case',
   errorSummaryMessage: 'There is a problem',
   keys: {
@@ -44,7 +44,6 @@ const cyContent = {
   },
 };
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('check-your-answer > content', () => {
   const commonContent = {
     language: 'en',
@@ -57,12 +56,10 @@ describe('check-your-answer > content', () => {
     },
   } as unknown as CommonContent;
 
-  // eslint-disable-next-line jest/expect-expect
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
-  // eslint-disable-next-line jest/expect-expect
   test('should return correct welsh content', () => {
     languageAssertions('en', cyContent, () =>
       generateContent({
@@ -70,11 +67,6 @@ describe('check-your-answer > content', () => {
         language: 'cy',
       })
     );
-  });
-  test('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.submit!.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
 });
 
@@ -89,4 +81,3 @@ describe('getErrors() function Test', () => {
     expect(welshErrors).toEqual(cyContent.errors);
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

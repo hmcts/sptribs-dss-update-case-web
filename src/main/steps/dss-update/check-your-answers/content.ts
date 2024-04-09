@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-//import { isFieldFilledIn } from '../../../app/form/validation';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { CommonContent } from '../../common/common.content';
+import { CommonContent, Language } from '../../common/common.content';
 
 import { UploadFormSummary } from './utils';
 
@@ -11,7 +9,8 @@ export const enContent = {
   title: 'Check answers before submitting your update',
   change: 'change',
   continue: 'Accept and send',
-  statementOfTruth: 'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
+  statementOfTruth:
+    'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
   submitApplicationText: 'Now update your case',
   errorSummaryMessage: 'There is a problem',
   keys: {
@@ -86,8 +85,8 @@ export const generateContent: TranslationFn = content => {
   };
 };
 
-export function getErrors(language: any) {
-  let errors: any
+export function getErrors(language: Language) {
+  let errors: any;
   switch (language) {
     case 'cy':
       errors = cyContent.errors;

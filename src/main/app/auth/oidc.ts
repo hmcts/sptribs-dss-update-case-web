@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import config from 'config';
 import { jwtDecode } from 'jwt-decode';
 import NodeCache from 'node-cache';
+
 import { PageLink } from '../../steps/urls';
 
 export const idamTokenCache = new NodeCache({ stdTTL: 3600, checkperiod: 1800 });
@@ -38,7 +39,7 @@ export const getUserDetails = async (
     email: jwt.sub,
     givenName: jwt.given_name,
     familyName: jwt.family_name,
-    roles: jwt.roles
+    roles: jwt.roles,
   };
 };
 
@@ -57,7 +58,7 @@ export const getSystemUser = async (): Promise<UserDetails> => {
     email: jwt.sub,
     givenName: jwt.given_name,
     familyName: jwt.family_name,
-    roles: jwt.roles
+    roles: jwt.roles,
   };
 };
 

@@ -1,6 +1,15 @@
 import { CaseDate } from '../case/case';
 
-import { areDateFieldsFilledIn, atLeastOneFieldIsChecked, isAlphaNumeric, isDateInputInvalid, isDateInputNotFilled, isFieldFilledIn, isFieldLetters, isNotNumeric } from './validation';
+import {
+  areDateFieldsFilledIn,
+  atLeastOneFieldIsChecked,
+  isAlphaNumeric,
+  isDateInputInvalid,
+  isDateInputNotFilled,
+  isFieldFilledIn,
+  isFieldLetters,
+  isNotNumeric,
+} from './validation';
 
 describe('isFieldFilledIn()', () => {
   test('Should check if value exist', async () => {
@@ -137,12 +146,12 @@ describe('isDateInputNotFilled()', () => {
       year: '2000',
     };
 
-    let isValid = isDateInputNotFilled(date);
+    const isValid = isDateInputNotFilled(date);
     expect(isValid).toStrictEqual(undefined);
   });
 
   test('Should not allow no date', async () => {
-    let isValid = isDateInputNotFilled(undefined);
+    const isValid = isDateInputNotFilled(undefined);
     expect(isValid).toStrictEqual('invalidDate');
   });
 
@@ -152,7 +161,7 @@ describe('isDateInputNotFilled()', () => {
       month: '1',
       year: '2000',
     };
-    let isValid = isDateInputNotFilled(date);
+    const isValid = isDateInputNotFilled(date);
     expect(isValid).toStrictEqual('invalidDate');
   });
 
@@ -162,7 +171,7 @@ describe('isDateInputNotFilled()', () => {
       month: '',
       year: '2000',
     };
-    let isValid = isDateInputNotFilled(date);
+    const isValid = isDateInputNotFilled(date);
     expect(isValid).toStrictEqual('invalidDate');
   });
 
@@ -172,7 +181,7 @@ describe('isDateInputNotFilled()', () => {
       month: '1',
       year: '',
     };
-    let isValid = isDateInputNotFilled(date);
+    const isValid = isDateInputNotFilled(date);
     expect(isValid).toStrictEqual('invalidDate');
   });
 });
