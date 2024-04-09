@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { isEmpty } from 'lodash';
 
 import { Case, CaseDate } from '../case/case';
-import { isEmpty } from 'lodash';
 
 dayjs.extend(customParseFormat);
 

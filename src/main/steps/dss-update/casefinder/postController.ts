@@ -9,7 +9,6 @@ import { DATA_VERIFICATION } from '../../urls';
 
 @autobind
 export default class CaseFinderController extends PostController<AnyObject> {
-
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);

@@ -12,9 +12,6 @@ describe('TimedOutGetController', () => {
     await controller.get(req, res);
 
     expect(req.session.destroy).toHaveBeenCalled();
-    expect(res.render).toHaveBeenCalledWith(
-      expect.stringContaining('/timed-out'),
-      expect.anything()
-    );
+    expect(res.render).toHaveBeenCalledWith(expect.stringContaining('/timed-out'), expect.anything());
   });
 });
