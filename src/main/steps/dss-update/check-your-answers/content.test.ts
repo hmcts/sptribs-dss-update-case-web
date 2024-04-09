@@ -29,7 +29,8 @@ const cyContent = {
   title: 'Gwiriwch eich atebion cyn cyflwyno eich diweddariad',
   change: 'newid',
   continue: 'Derbyn ac anfon',
-  statementOfTruth: 'Trwy ddiweddaru’r achos hwn rydych yn cadarnhau, hyd eithaf eich gwybodaeth, bod y manylion rydych yn eu darparu yn gywir.',
+  statementOfTruth:
+    'Trwy ddiweddaru’r achos hwn rydych yn cadarnhau, hyd eithaf eich gwybodaeth, bod y manylion rydych yn eu darparu yn gywir.',
   submitApplicationText: 'Diweddarwch eich achos nawr',
   errorSummaryMessage: 'Mae yna broblem',
   keys: {

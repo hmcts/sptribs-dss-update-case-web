@@ -14,11 +14,11 @@ export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Subject of this case',
   errorSummaryMessage: 'There is a problem',
-  subjectFullNameLabel: "Full name",
-  subjectDOBLabel: "Date of birth",
-  day: "Day",
-  month: "Month",
-  year: "Year",
+  subjectFullNameLabel: 'Full name',
+  subjectDOBLabel: 'Date of birth',
+  day: 'Day',
+  month: 'Month',
+  year: 'Year',
   errors: {
     subjectFullName: {
       required: 'Please enter full name',
@@ -42,11 +42,11 @@ export const cy = () => ({
   serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
   title: 'Testun yr achos hwn',
   errorSummaryMessage: 'Mae yna broblem',
-  subjectFullNameLabel: "Enw llawn",
-  subjectDOBLabel: "Dyddiad geni",
-  day: "Diwrnod",
-  month: "Mis",
-  year: "Blwyddyn",
+  subjectFullNameLabel: 'Enw llawn',
+  subjectDOBLabel: 'Dyddiad geni',
+  day: 'Diwrnod',
+  month: 'Mis',
+  year: 'Blwyddyn',
   errors: {
     subjectFullName: {
       required: 'Nodwch enw llawn',
@@ -54,7 +54,7 @@ export const cy = () => ({
     },
     subjectDOB: {
       required: 'Nodwch ddyddiad geni',
-      invalid: 'Nodwch ddyddiad geni dilys'
+      invalid: 'Nodwch ddyddiad geni dilys',
     },
     inputFields: {
       required:

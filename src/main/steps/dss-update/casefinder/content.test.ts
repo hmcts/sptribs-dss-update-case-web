@@ -21,10 +21,10 @@ const enContent = {
 const cyContent = {
   serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
   title: 'Manylion achos sy’n bodoli’n barod',
-  line1:
-    'Gallwch ddod o hyd i\'r wybodaeth hon yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.',
+  line1: "Gallwch ddod o hyd i'r wybodaeth hon yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.",
   subtitle: 'Cyfeirnod yr achos',
-  caseNumberHint: 'Bydd y rhif hwn yn cynnwys 16 digid. It should not include spaces or any of these characters: - * (  )  &  !  /  ; - welsh.',
+  caseNumberHint:
+    'Bydd y rhif hwn yn cynnwys 16 digid. It should not include spaces or any of these characters: - * (  )  &  !  /  ; - welsh.',
   errorSummaryMessage: 'Mae yna broblem',
   errors: {
     applicantCaseId: {

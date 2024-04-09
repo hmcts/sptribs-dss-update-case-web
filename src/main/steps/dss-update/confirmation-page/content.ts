@@ -26,8 +26,9 @@ const cy = (content: CommonContent) => {
     line2: 'Fe anfonir yr wybodaeth ychwanegol rydych wedi’i chyflwyno i’r Tribiwnlys.',
     line3: 'Fe anfonir neges e-bost atoch i esbonio beth fydd yn digwydd nesaf.',
     feedback: 'Adborth',
-    feedbackBody: "<b>Hoffwn gael adborth gennych</b><br>Cwblhewch yr arolwg byr hwn fydd ond yn cymryd 5 munud o’ch amser i’n helpu ni i wella ein gwasanaethau i chi ac eraill <a class='govuk-link' href='https://www.smartsurvey.co.uk/s/SurveyExit/?service=Specials'target=_blank><br>Gadewch eich adborth</a>",
-    closeAndExit: 'Cau a gadael'
+    feedbackBody:
+      "<b>Hoffwn gael adborth gennych</b><br>Cwblhewch yr arolwg byr hwn fydd ond yn cymryd 5 munud o’ch amser i’n helpu ni i wella ein gwasanaethau i chi ac eraill <a class='govuk-link' href='https://www.smartsurvey.co.uk/s/SurveyExit/?service=Specials'target=_blank><br>Gadewch eich adborth</a>",
+    closeAndExit: 'Cau a gadael',
   };
 };
 

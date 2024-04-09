@@ -56,16 +56,19 @@ export const cy = () => ({
   paragraph1:
     'Darparwch unrhyw wybodaeth berthnasol ychwanegol yr hoffech ei hychwanegu at yr achos hwn. Peidiwch â chynnwys unrhyw wybodaeth ariannol bersonol, megis eich manylion banc.',
   additionalDocumentsHeading: 'Dogfennau ychwanegol',
-  paragraph2: 'Efallai y byddwch eisiau cyflwyno dogfennau, ffeiliau neu dystiolaeth arall sy’n rhoi mwy o wybodaeth i’r Tribiwnlys am eich achos.',
-  paragraph3: 'Bydd hyn yn dibynnu ar natur eich apêl, cais neu hawliad. Gellir dod o hyd i enghreifftiau penodol yn y ffurflen tribiwnlys rydych wedi’i llenwi.',
-  uploadedDocumentsSubTitle: 'Gallai\'r rhain gynnwys:',
+  paragraph2:
+    'Efallai y byddwch eisiau cyflwyno dogfennau, ffeiliau neu dystiolaeth arall sy’n rhoi mwy o wybodaeth i’r Tribiwnlys am eich achos.',
+  paragraph3:
+    'Bydd hyn yn dibynnu ar natur eich apêl, cais neu hawliad. Gellir dod o hyd i enghreifftiau penodol yn y ffurflen tribiwnlys rydych wedi’i llenwi.',
+  uploadedDocumentsSubTitle: "Gallai'r rhain gynnwys:",
   uploadDocumentsBullets: [
     'copïau o unrhyw ohebiaeth neu ddogfennaeth berthnasol',
     'recordiadau sain neu fideo',
     'datganiadau ysgrifenedig',
     'adroddiadau cysylltiedig',
   ],
-  caseRelevancySubTitle: 'Ar gyfer pob darn o wybodaeth neu dystiolaeth ychwanegol rydych yn ei chyflwyno, nodwch pam ei bod yn berthnasol i’ch achos.',
+  caseRelevancySubTitle:
+    'Ar gyfer pob darn o wybodaeth neu dystiolaeth ychwanegol rydych yn ei chyflwyno, nodwch pam ei bod yn berthnasol i’ch achos.',
   fileUploadRequirementsLabel: 'Gofynion llwytho ffeil',
   uploadHelpBullets: [
     'Fformatau ffeiliau: MS Word, MS Excel, PDF, JPG, PNG, TXT, RFT, MP4, MP3',
@@ -75,10 +78,9 @@ export const cy = () => ({
   ],
   guideText:
     'Ni allwch lwytho ffeiliau gweithredu (.exe), ffeiliau zip neu ffeiliau archif eraill oherwydd y risg o firws.',
-  titleForFile: 'Dewiswch ddogfennau i\'w huwchlwytho',
+  titleForFile: "Dewiswch ddogfennau i'w huwchlwytho",
   uploadButton: 'Llwytho ffeil',
-  documentListLabel:
-    'Eglurwch pam eich bod yn teimlo bod y ddogfen hon yn berthnasol i’ch achos.',
+  documentListLabel: 'Eglurwch pam eich bod yn teimlo bod y ddogfen hon yn berthnasol i’ch achos.',
   delete: 'Dileu',
   documentInLanguage: 'Dogfen',
   errorSummaryMessage: 'Mae yna broblem',
