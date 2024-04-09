@@ -39,7 +39,7 @@ describe('Test URL endpoints', () => {
       status: 'Success',
     };
     mockedAxios.delete.mockResolvedValue({ data });
-    await controller.removeExistingConsentDocument('1', req, res);
+    await controller.removeExistingDocument('1', req, res);
     expect(mockedAxios.delete).toHaveBeenCalled();
     expect(req.session.caseDocuments).toEqual([{ documentId: '2' }]);
     expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
@@ -52,7 +52,7 @@ describe('Test URL endpoints', () => {
       status: 'Success',
     };
     mockedAxios.delete.mockRejectedValue({ data });
-    await controller.removeExistingConsentDocument('1', req, res);
+    await controller.removeExistingDocument('1', req, res);
     expect(mockedAxios.delete).toHaveBeenCalled();
     expect(req.session.caseDocuments).toEqual([{ documentId: '1' }, { documentId: '2' }]);
     expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);

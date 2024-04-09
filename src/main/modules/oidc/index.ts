@@ -34,7 +34,7 @@ export class OidcMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        if (req.session?.user && req.session.user.roles.includes('citizen')) {
+        if (req.session?.user.roles.includes('citizen')) {
           res.locals.isLoggedIn = true;
           return next();
         } else if (signInNotRequired(req.path)) {
