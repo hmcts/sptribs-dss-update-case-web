@@ -1932,15 +1932,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/create-cache-key-function@npm:^29.7.0":
-  version: 29.7.0
-  resolution: "@jest/create-cache-key-function@npm:29.7.0"
-  dependencies:
-    "@jest/types": ^29.6.3
-  checksum: 681bc761fa1d6fa3dd77578d444f97f28296ea80755e90e46d1c8fa68661b9e67f54dd38b988742db636d26cf160450dc6011892cec98b3a7ceb58cad8ff3aae
-  languageName: node
-  linkType: hard
-
 "@jest/environment@npm:^29.7.0":
   version: 29.7.0
   resolution: "@jest/environment@npm:29.7.0"
@@ -2596,159 +2587,6 @@ __metadata:
   version: 7.3.0
   resolution: "@stryker-mutator/util@npm:7.3.0"
   checksum: fa2e01636c19d00175eb307fbde262475565af38c810a0dcf33e4a7a3fc5294b5a1276d4d338a359f432cbd56bbc610aa7983c10bc2faaee3268d71b59cffb2d
-  languageName: node
-  linkType: hard
-
-"@swc/core-darwin-arm64@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-darwin-arm64@npm:1.3.85"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@swc/core-darwin-x64@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-darwin-x64@npm:1.3.85"
-  conditions: os=darwin & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@swc/core-linux-arm-gnueabihf@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.85"
-  conditions: os=linux & cpu=arm
-  languageName: node
-  linkType: hard
-
-"@swc/core-linux-arm64-gnu@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.85"
-  conditions: os=linux & cpu=arm64 & libc=glibc
-  languageName: node
-  linkType: hard
-
-"@swc/core-linux-arm64-musl@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.85"
-  conditions: os=linux & cpu=arm64 & libc=musl
-  languageName: node
-  linkType: hard
-
-"@swc/core-linux-x64-gnu@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.85"
-  conditions: os=linux & cpu=x64 & libc=glibc
-  languageName: node
-  linkType: hard
-
-"@swc/core-linux-x64-musl@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.85"
-  conditions: os=linux & cpu=x64 & libc=musl
-  languageName: node
-  linkType: hard
-
-"@swc/core-win32-arm64-msvc@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.85"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@swc/core-win32-ia32-msvc@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.85"
-  conditions: os=win32 & cpu=ia32
-  languageName: node
-  linkType: hard
-
-"@swc/core-win32-x64-msvc@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.85"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@swc/core@npm:1.3.85":
-  version: 1.3.85
-  resolution: "@swc/core@npm:1.3.85"
-  dependencies:
-    "@swc/core-darwin-arm64": 1.3.85
-    "@swc/core-darwin-x64": 1.3.85
-    "@swc/core-linux-arm-gnueabihf": 1.3.85
-    "@swc/core-linux-arm64-gnu": 1.3.85
-    "@swc/core-linux-arm64-musl": 1.3.85
-    "@swc/core-linux-x64-gnu": 1.3.85
-    "@swc/core-linux-x64-musl": 1.3.85
-    "@swc/core-win32-arm64-msvc": 1.3.85
-    "@swc/core-win32-ia32-msvc": 1.3.85
-    "@swc/core-win32-x64-msvc": 1.3.85
-    "@swc/types": ^0.1.4
-  peerDependencies:
-    "@swc/helpers": ^0.5.0
-  dependenciesMeta:
-    "@swc/core-darwin-arm64":
-      optional: true
-    "@swc/core-darwin-x64":
-      optional: true
-    "@swc/core-linux-arm-gnueabihf":
-      optional: true
-    "@swc/core-linux-arm64-gnu":
-      optional: true
-    "@swc/core-linux-arm64-musl":
-      optional: true
-    "@swc/core-linux-x64-gnu":
-      optional: true
-    "@swc/core-linux-x64-musl":
-      optional: true
-    "@swc/core-win32-arm64-msvc":
-      optional: true
-    "@swc/core-win32-ia32-msvc":
-      optional: true
-    "@swc/core-win32-x64-msvc":
-      optional: true
-  peerDependenciesMeta:
-    "@swc/helpers":
-      optional: true
-  checksum: af9ec7d88fd9ad3dd876c8fea812b20ba734c2ed917c9f8281fd57c68ab57d5931ccb841f4467332b84c0cd522682737a770dfc8c3f9e0cc88cdce713971978c
-  languageName: node
-  linkType: hard
-
-"@swc/counter@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@swc/counter@npm:0.1.3"
-  checksum: df8f9cfba9904d3d60f511664c70d23bb323b3a0803ec9890f60133954173047ba9bdeabce28cd70ba89ccd3fd6c71c7b0bd58be85f611e1ffbe5d5c18616598
-  languageName: node
-  linkType: hard
-
-"@swc/helpers@npm:^0.5.1":
-  version: 0.5.8
-  resolution: "@swc/helpers@npm:0.5.8"
-  dependencies:
-    tslib: ^2.4.0
-  checksum: 001bb4ef9c59083fd4325e295f800b6ef61b8a2109424060a7dcc73b3c01c6ecbbf90a53db05fddf33025c301d1350e425798dc6d4ffc685f9b1051ad3177dae
-  languageName: node
-  linkType: hard
-
-"@swc/jest@npm:0.2.36":
-  version: 0.2.36
-  resolution: "@swc/jest@npm:0.2.36"
-  dependencies:
-    "@jest/create-cache-key-function": ^29.7.0
-    "@swc/counter": ^0.1.3
-    jsonc-parser: ^3.2.0
-  peerDependencies:
-    "@swc/core": "*"
-  checksum: 14f2e696ac093e23dae1e2e57d894bbcde4de6fe80341a26c8d0d8cbae5aae31832f8fa32dc698529f128d19a76aeedf2227f59480de6dab5eb3f30bfdf9b71a
-  languageName: node
-  linkType: hard
-
-"@swc/types@npm:^0.1.4":
-  version: 0.1.6
-  resolution: "@swc/types@npm:0.1.6"
-  dependencies:
-    "@swc/counter": ^0.1.3
-  checksum: fd579fbb9ab220b01b8eec03e32c37d355efbbce12e408e4c2743ca147760b749e068f5d3bec288b26bb10ecf2fe8d061c2554df0985d50d0e56962597262b34
   languageName: node
   linkType: hard
 
@@ -9336,16 +9174,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest_workaround@npm:^0.79.19":
-  version: 0.79.19
-  resolution: "jest_workaround@npm:0.79.19"
-  peerDependencies:
-    "@swc/core": ^1.3.68
-    "@swc/jest": ^0.2.26
-  checksum: 52c3256593576a76ba483c85cf4068feeb2e0b0a21eb8278345b140f730be72a0981c92465023c1f72d7205488045b0e79f747a72a17318c1ce69f886cc2892f
-  languageName: node
-  linkType: hard
-
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -9467,13 +9295,6 @@ __metadata:
   bin:
     json5: lib/cli.js
   checksum: 2a7436a93393830bce797d4626275152e37e877b265e94ca69c99e3d20c2b9dab021279146a39cdb700e71b2dd32a4cebd1514cd57cee102b1af906ce5040349
-  languageName: node
-  linkType: hard
-
-"jsonc-parser@npm:^3.2.0":
-  version: 3.2.1
-  resolution: "jsonc-parser@npm:3.2.1"
-  checksum: 656d9027b91de98d8ab91b3aa0d0a4cab7dc798a6830845ca664f3e76c82d46b973675bbe9b500fae1de37fd3e81aceacbaa2a57884bf2f8f29192150d2d1ef7
   languageName: node
   linkType: hard
 
@@ -12926,9 +12747,6 @@ __metadata:
     "@hmcts/properties-volume": ^1.0.0
     "@stryker-mutator/core": ^7.1.1
     "@stryker-mutator/jest-runner": ^7.1.1
-    "@swc/core": 1.3.85
-    "@swc/helpers": ^0.5.1
-    "@swc/jest": 0.2.36
     "@types/config": ^3.3.0
     "@types/cookie-parser": ^1.4.3
     "@types/copy-webpack-plugin": ^10.1.0
@@ -12984,7 +12802,6 @@ __metadata:
     http-status-codes: ^2.2.0
     jest: ^29.6.4
     jest-extended: ^4.0.1
-    jest_workaround: ^0.79.19
     jwt-decode: 4.0.0
     lint-staged: ^14.0.1
     lodash: ^4.17.21
@@ -13743,7 +13560,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.6.2, tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.2.0, tslib@npm:^2.4.0, tslib@npm:^2.5.0, tslib@npm:^2.6.2, tslib@npm:~2.6.0":
+"tslib@npm:2.6.2, tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.2.0, tslib@npm:^2.5.0, tslib@npm:^2.6.2, tslib@npm:~2.6.0":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 329ea56123005922f39642318e3d1f0f8265d1e7fcb92c633e0809521da75eeaca28d2cf96d7248229deb40e5c19adf408259f4b9640afd20d13aecc1430f3ad
