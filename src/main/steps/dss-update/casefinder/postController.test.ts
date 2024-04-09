@@ -3,10 +3,10 @@ import axios from 'axios';
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
+import { CASE_SEARCH_URL, DATA_VERIFICATION } from '../../urls';
 
 import CaseFinderController from './postController';
-import { CASE_SEARCH_URL, DATA_VERIFICATION } from '../../urls';
-import { isFieldFilledIn } from '../../../app/form/validation';
 
 jest.mock('axios');
 let req, res;
@@ -21,7 +21,7 @@ const mockFormContent = {
     applicantCaseId: {
       type: 'text',
       validator: isFieldFilledIn,
-    }
+    },
   },
 } as unknown as FormContent;
 
@@ -34,28 +34,26 @@ const caseData = {
     id: '1675676483319900',
     data: {
       cicCaseFullName: 'subject name',
-      cicCaseDateOfBirth: '2000-01-01'
-    }
-  }
+      cicCaseDateOfBirth: '2000-01-01',
+    },
+  },
 };
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-mockedAxios.post.mockImplementation((url) => {
+mockedAxios.post.mockImplementation(url => {
   switch (url) {
     case 'https://idam-api.aat.platform.hmcts.net/o/token':
-      return Promise.resolve({data: {id_token: token, access_token: token}}
-      )
-    case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
-      return Promise.resolve({ data: 'TOKEN'})
+      return Promise.resolve({ data: { id_token: token, access_token: token } });
+    case 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/lease':
+      return Promise.resolve({ data: 'TOKEN' });
     default:
-      return Promise.reject(new Error('not found'))
+      return Promise.reject(new Error('not found'));
   }
 });
 
 const controller = new CaseFinderController(mockFormContent.fields);
 
 describe('case finder post controller test cases', () => {
-
   test('Should navigate to data verification page if valid case reference entered', async () => {
     req = mockRequest({
       body: {
@@ -64,8 +62,8 @@ describe('case finder post controller test cases', () => {
       },
       session: {
         userCase: {
-          id: 'caseRefId'
-        }
+          id: 'caseRefId',
+        },
       },
     });
 
@@ -100,8 +98,8 @@ describe('case finder post controller test cases', () => {
       },
       session: {
         userCase: {
-          id: 'applicantCaseId'
-        }
+          id: 'applicantCaseId',
+        },
       },
     });
     req.originalUrl = CASE_SEARCH_URL;

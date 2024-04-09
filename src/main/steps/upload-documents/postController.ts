@@ -2,26 +2,22 @@ import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';
 import FormData from 'form-data';
-import { isNull } from 'lodash';
 
 import { C100DocumentInfo } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../app/controller/PostController';
 import { uploadDocument } from '../../app/fileUpload/documentManager';
 import { FormFields, FormFieldsFn } from '../../app/form/Form';
-import { RpeApi } from '../../app/s2s/rpeAuth';
+import { getServiceAuthToken } from '../../app/s2s/get-service-auth-token';
 import { CHECK_YOUR_ANSWERS } from '../urls';
+
 import { getErrors } from './content';
 /* The UploadDocumentController class extends the PostController class and overrides the
 PostDocumentUploader method */
 
-export const documentExtensions = () => {
-  return ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'xls', 'txt'];
-};
+export const documentExtensions = ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'xls', 'txt'];
+export const multimediaExtensions = ['mp3', 'mp4'];
 
-export const multimediaExtensions = () => {
-  return ['mp3', 'mp4'];
-};
 @autobind
 export default class UploadDocumentController extends PostController<AnyObject> {
   constructor(protected readonly fields: FormFields | FormFieldsFn) {
@@ -40,33 +36,33 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     req.session.save();
 
     if (ContinueFromPage) {
-      const numDocsUploaded:number = req.session.hasOwnProperty('caseDocuments') ? req.session['caseDocuments'].length : 0;
-      if (numDocsUploaded == 0 && req.session['documentDetail'] == '') {
+      const numDocsUploaded: number = req.session.hasOwnProperty('caseDocuments')
+        ? req.session['caseDocuments'].length
+        : 0;
+
+      if (numDocsUploaded === 0 && req.session['documentDetail'] === '') {
         this.uploadFileError(req, res, req.originalUrl, 'noInput');
       } else {
         super.redirect(req, res, CHECK_YOUR_ANSWERS);
       }
     } else {
-      this.checkFileCondition(req, res, req.originalUrl, files);
+      await this.checkFileCondition(req, res, req.originalUrl, files);
     }
   }
 
   public checkIfMaxDocumentUploaded = (document: C100DocumentInfo[]): boolean => {
-    if (document.length > Number(config.get('uploadPolicy.maxNoOfFiles')) - 1) {
-      return true;
-    }
-    return false;
+    return document.length > Number(config.get('uploadPolicy.maxNoOfFiles')) - 1;
   };
 
-  public checkFileCondition(
+  public async checkFileCondition(
     req: AppRequest<AnyObject>,
     res: Response<any, Record<string, any>>,
     redirectUrl: string,
     files: any
-  ) {
+  ): Promise<void> {
     if (req.session['caseDocuments'] && this.checkIfMaxDocumentUploaded(req.session['caseDocuments'])) {
       const documentUploadErrors = getErrors(req.session['lang']);
-      req.session.fileErrors = [{text: documentUploadErrors.documentUpload.maxFileError, href: "#file-upload-1"}];
+      req.session.fileErrors = [{ text: documentUploadErrors.documentUpload.maxFileError, href: '#file-upload-1' }];
       req.session.save(err => {
         if (err) {
           throw err;
@@ -74,7 +70,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         res.redirect(redirectUrl);
       });
     } else {
-      this.checkFileValidation(files, req, res, redirectUrl);
+      await this.checkFileValidation(files, req, res, redirectUrl);
     }
   }
 
@@ -83,12 +79,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     req: AppRequest<AnyObject>,
     res: Response<any, Record<string, any>>,
     redirectUrl: string
-  ) {
+  ): Promise<void> {
     if (req.files) {
       const { documents } = files;
-      if (this.fileNullCheck(files)) {
-        this.uploadFileError(req, res, redirectUrl, 'selectFileToUpload');
-      } else if (!this.isValidFileFormat(files)) {
+      if (!this.isValidFileFormat(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileFormat');
       } else if (this.isFileSizeGreaterThanMaxAllowed(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileSize');
@@ -99,9 +93,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           filename: documents.name,
         });
         try {
-          const seviceAuthToken = await RpeApi.getRpeToken();
-          const s2sToken = seviceAuthToken.data;
-          console.log(s2sToken)
+          const s2sToken = await getServiceAuthToken();
           const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken, req);
           const { url, fileName, documentId, binaryUrl } = uploadDocumentResponseBody['data']['document'];
           req.session['caseDocuments'].push({
@@ -121,23 +113,14 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     }
   }
 
-  /**
-   *
-   * @param files
-   * @returns
-   */
-  public fileNullCheck = (files: any): boolean => {
-    return !!(isNull(files) || files === undefined);
-  };
-
   public uploadFileError(
     req: AppRequest<AnyObject>,
     res: Response<any, Record<string, any>>,
     redirectUrl: string,
     errorCode: string
-  ) {
+  ): void {
     const documentUploadErrors = getErrors(req.session['lang']);
-    let errorMessage:string
+    let errorMessage: string;
     switch (errorCode) {
       case 'noInput':
         errorMessage = documentUploadErrors.documentUpload.noInput;
@@ -160,7 +143,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       default:
         errorMessage = '';
     }
-    req.session.fileErrors = [{text: errorMessage, href: "#file-upload-1"}];
+    req.session.fileErrors = [{ text: errorMessage, href: '#file-upload-1' }];
     req.session.save(err => {
       if (err) {
         throw err;
@@ -169,14 +152,14 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     });
   }
 
-  public isValidFileFormat(files) {
+  public isValidFileFormat(files): boolean {
     const { documents } = files;
     const extension = documents.name.toLowerCase().split('.')[documents.name.split('.').length - 1];
-    const AllowedFileExtentionList = [...documentExtensions(), ...multimediaExtensions()];
-    return AllowedFileExtentionList.indexOf(extension) > -1;
+    const AllowedFileExtensionList = [...documentExtensions, ...multimediaExtensions];
+    return AllowedFileExtensionList.indexOf(extension) > -1;
   }
 
-  public isFileSizeGreaterThanMaxAllowed(files) {
+  public isFileSizeGreaterThanMaxAllowed(files): boolean {
     const uploadPolicySizeForFiles = Number(config.get('uploadPolicy.documentSize')) * 1024 * 1024;
     const { documents } = files;
     return documents.size > uploadPolicySizeForFiles;

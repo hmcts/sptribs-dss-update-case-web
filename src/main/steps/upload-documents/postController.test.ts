@@ -24,18 +24,12 @@ const controller = new UploadDocumentController(mockFormContent.fields);
 describe('Testing the post controller', () => {
   // eslint-disable-next-line jest/no-done-callback
   test('upload document sequence', async () => {
-    req = mockRequest({
-      body: {
-        continue: true,
-        files: { documents: {} },
-      },
-      session: {
-        caseDocuments: [],
-        userCase: {
-          id: 'caseRefId'
-        }
-      },
-    });
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    newRequest.body['eventName'] = 'TEST';
+    newRequest.session.caseDocuments = [];
+    newRequest.session.fileErrors = [];
+    newRequest.files = { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {
       status: 'Success',
       document: {
@@ -45,55 +39,60 @@ describe('Testing the post controller', () => {
         binaryUrl: 'http://demon.com',
       },
     };
+    const expectedCaseDocuments = {
+      ...data.document,
+      description: 'TEST',
+    };
     mockedAxios.post.mockResolvedValue({ data });
-    // await controller.post(req, res);
-    expect(res.redirect).not.toHaveBeenCalled();
+    await controller.post(newRequest, res);
+    expect(mockedAxios.create).toHaveBeenCalled();
+    expect(mockedAxios.post).toHaveBeenCalled();
+    expect(req.session.caseDocuments).toHaveLength(1);
+    expect(req.session.caseDocuments[0]).toEqual(expectedCaseDocuments);
+    expect(req.session?.fileErrors).toHaveLength(0);
   });
 
   test('Checking filevalidation type for documents', async () => {
-    expect(documentExtensions().toString()).toEqual(
+    expect(documentExtensions.toString()).toEqual(
       ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'xls', 'txt'].toString()
     );
   });
 
   test('Checking filevalidation type for multimedia', async () => {
-    expect(multimediaExtensions().toString()).toEqual(['mp3', 'mp4'].toString());
+    expect(multimediaExtensions.toString()).toEqual(['mp3', 'mp4'].toString());
   });
 
-  test.each(
-    [
-      'sample.jpg',
-      'sample.jpeg',
-      'sample.bmp',
-      'sample.png',
-      'sample.pdf',
-      'sample.doc',
-      'sample.docx',
-      'sample.rtf',
-      'sample.xlsx',
-      'sample.xls',
-      'sample.txt',
-    ]
-  )('isValidFileFormat - valid file %s', async (fileName:string) => {
-    expect(controller.isValidFileFormat({ documents: { name: fileName} })).toBe(true);
+  test.each([
+    'sample.jpg',
+    'sample.jpeg',
+    'sample.bmp',
+    'sample.png',
+    'sample.pdf',
+    'sample.doc',
+    'sample.docx',
+    'sample.rtf',
+    'sample.xlsx',
+    'sample.xls',
+    'sample.txt',
+  ])('isValidFileFormat - valid file %s', async (fileName: string) => {
+    expect(controller.isValidFileFormat({ documents: { name: fileName } })).toBe(true);
   });
 
-  test.each(
-    [
-      'sample.dmg',
-      'sample.wav'
-    ]
-  )('isValidFileFormat - invalid file %s', async (fileName:string) => {
-    expect(controller.isValidFileFormat({ documents: { name: fileName} })).toBe(false);
+  test.each(['sample.dmg', 'sample.wav'])('isValidFileFormat - invalid file %s', async (fileName: string) => {
+    expect(controller.isValidFileFormat({ documents: { name: fileName } })).toBe(false);
   });
 
   test('isFileSizeGreaterThanMaxAllowed - valid document file size', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 524288000, name: 'm.docx' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({
+      documents: { size: 524288000, name: 'm.docx' },
+    });
     expect(fileSizeCheck).toBe(false);
   });
 
   test('isFileSizeGreaterThanMaxAllowed - invalid document file size', async () => {
-    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 524288001, name: 'm.docx' } });
+    const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({
+      documents: { size: 524288001, name: 'm.docx' },
+    });
     expect(fileSizeCheck).toBe(true);
   });
 
@@ -105,19 +104,6 @@ describe('Testing the post controller', () => {
   test('isFileSizeGreaterThanMaxAllowed - invalid multimedia file', async () => {
     const fileSizeCheck = controller.isFileSizeGreaterThanMaxAllowed({ documents: { size: 524288001, name: 'm.mp4' } });
     expect(fileSizeCheck).toBe(true);
-  });
-
-  test('fileNullCheck - file not null', async () => {
-    expect(controller.fileNullCheck({})).toBe(false);
-  });
-
-  test.each(
-    [
-      undefined,
-      null
-    ]
-  )('fileNullCheck - no file', async (files) => {
-    expect(controller.fileNullCheck(files)).toBe(true);
   });
 
   test('File validations', async () => {
@@ -157,7 +143,9 @@ describe('Testing the post controller', () => {
     );
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 500MB');
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'File size exceeds the maximum permitted value. Please upload a file that is less than 500MB'
+    );
   });
 
   test('checkFileValidation - no file error', async () => {
@@ -166,22 +154,36 @@ describe('Testing the post controller', () => {
     newRequest.files = null;
     const data = {};
     mockedAxios.post.mockRejectedValue({ data });
+    await controller.checkFileValidation(null, newRequest, res, '');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('Select a file to upload');
+  });
+
+  test('checkFileValidation - invalid file type error', async () => {
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    newRequest.files = { documents: { name: 'sample.csv', size: 10, mimetype: 'text/csv', data: '' } };
+    const data = {};
+    mockedAxios.post.mockRejectedValue({ data });
     await controller.checkFileValidation(
-      null,
+      { documents: { name: 'sample.csv', size: 10, mimetype: 'text/csv', data: '' } },
       newRequest,
       res,
       ''
     );
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('Select a file to upload');
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3'
+    );
   });
 
   test('File validations - file uploading successful', async () => {
     const newRequest = req;
-    newRequest.body['eventName'] = "TEST"
-    newRequest.session.caseDocuments = []
-    newRequest.session.fileErrors = []
+    newRequest.body['eventName'] = 'TEST';
+    newRequest.session.caseDocuments = [];
+    newRequest.session.fileErrors = [];
     newRequest.files = { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {
       status: 'Success',
@@ -201,7 +203,7 @@ describe('Testing the post controller', () => {
     );
     const expectedCaseDocuments = {
       ...data.document,
-      description: "TEST"
+      description: 'TEST',
     };
 
     expect(mockedAxios.create).toHaveBeenCalled();
@@ -218,7 +220,9 @@ describe('Testing the post controller', () => {
     controller.uploadFileError(newRequest, res, '', 'noInput');
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('You cannot continue without providing additional information or a document');
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'You cannot continue without providing additional information or a document'
+    );
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
 
@@ -228,7 +232,9 @@ describe('Testing the post controller', () => {
     controller.uploadFileError(newRequest, res, '', 'fileSize');
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('File size exceeds the maximum permitted value. Please upload a file that is less than 500MB');
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'File size exceeds the maximum permitted value. Please upload a file that is less than 500MB'
+    );
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
 
@@ -268,7 +274,19 @@ describe('Testing the post controller', () => {
     controller.uploadFileError(newRequest, res, '', 'fileFormat');
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3');
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3'
+    );
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('uploadFileError no error code', () => {
+    const newRequest = req;
+    newRequest.session['save'] = () => '';
+    controller.uploadFileError(newRequest, res, '', '');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual('');
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
 
@@ -312,5 +330,62 @@ describe('Testing the post controller', () => {
     expect(req.session?.fileErrors).toHaveLength(1);
     expect(req.session?.fileErrors[0].text).toEqual('You can only select up to 20 files at the same time');
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('Continuing without document upload or additional infomation', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = '';
+    newRequest.session.caseDocuments = [];
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'You cannot continue without providing additional information or a document'
+    );
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('Continuing without caseDocuments set', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = '';
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'You cannot continue without providing additional information or a document'
+    );
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('Continuing with only additional infomation', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = 'test';
+    newRequest.session.caseDocuments = [];
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(0);
+  });
+
+  test('Continuing with only uploaded documents', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = '';
+    newRequest.session.caseDocuments = ['doc1', 'doc2'];
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(0);
+  });
+
+  test('Continuing with additional infomation and uploaded documents', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = 'test';
+    newRequest.session.caseDocuments = ['doc1', 'doc2'];
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(0);
   });
 });
