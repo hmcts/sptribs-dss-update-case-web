@@ -58,10 +58,10 @@ export const cy = () => ({
     },
     inputFields: {
       required:
-        "Some of the information you have given doesn't match our records. Please enter the right value and try again. - welsh",
+        'Nid yw rhywfaint o’r wybodaeth rydych wedi’i rhoi yn cyd-fynd â’n cofnodion. Darparwch yr wybodaeth gywir a rhowch gynnig arall arni.',
     },
     caseError: {
-      required: 'Error verifying case - welsh',
+      required: 'Gwall wrth ddilysu’r achos',
     },
   },
 });

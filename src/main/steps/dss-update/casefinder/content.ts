@@ -26,14 +26,14 @@ export const cy = () => ({
   line1: "Gallwch ddod o hyd i'r wybodaeth hon yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.",
   subtitle: 'Cyfeirnod yr achos',
   caseNumberHint:
-    'Bydd y rhif hwn yn cynnwys 16 digid. It should not include spaces or any of these characters: - * (  )  &  !  /  ; - welsh.',
+    "Bydd y rhif hwn yn cynnwys 16 digid. Ni ddylai gynnwys bylchau neu unrhyw un o'r nodau canlynol: - * (  )  &  !  /  ;",
   errorSummaryMessage: 'Mae yna broblem',
   errors: {
     applicantCaseId: {
-      required: 'Please enter a reference number - welsh',
+      required: 'Rhowch gyfeirnod',
       notNumeric:
-        'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ; - welsh',
-      caseNotFound: 'Please enter a valid reference number - welsh',
+        'Rhowch gyfeirnod dilys. Ni ddylai’r cyfeirnod gynnwys bylchau neu unrhyw un o’r nodau canlynol - * ( ) & ! /  ;',
+      caseNotFound: 'Rhowch gyfeirnod dilys',
     },
   },
 });

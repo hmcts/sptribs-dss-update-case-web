@@ -89,8 +89,9 @@ export const en = {
 };
 
 export const cy = {
-  title: 'Accessibility statement for the Criminal Injury Compensation Document Update service - Welsh',
-  websiteRanBy: 'This service allows users to upload supporting information and documents to their CICA case. - Welsh',
+  title: 'Datganiad hygyrchedd ar gyfer gwasanaeth Diweddaru Dogfennau Digolledu am Anafiadau Troseddol',
+  websiteRanBy:
+    'Mae’r gwasanaeth hwn yn caniatáu i ddefnyddwyr uwchlwytho gwybodaeth ategol a dogfennau i’w hachos CICA.',
   asManyAsPossible:
     'Gwasanaeth Llysoedd a Thribiwnlysoedd EM sy’n gyfrifol am y gwasanaeth hwn.  Rydym eisiau i gymaint o bobl â phosibl allu ei ddefnyddio, felly rydym wedi ceisio ei wneud mor hygyrch â phosibl.  Er enghraifft, dylech allu:',
   asManyAsPossibleColours: 'newid y lliwiau, y lefelau cyferbyniad a’r ffontiau',
@@ -136,7 +137,7 @@ export const cy = {
   partiallyCompliant:
     'Mae’r wefan hon yn cydymffurfio’n rhannol â safon <a href="https://www.w3.org/TR/WCAG21/" class="govuk-link" target="blank">AA Canllawiau Hygyrchedd Cynnwys Gwe fersiwn 2.1,</a>a hynny oherwydd y materion o beidio â chydymffurfio a’r esemptiadau a restrir isod.',
   partiallyCompliantMobile:
-    'Content not presented without loss of information and requiring scrolling in two dimensions while using Criminal Injuries compensation application via Mobile. - Welsh',
+    'Cynnwys ddim i’w weld heb golli gwybodaeth ac angen sgrolio mewn dwy ffordd wahanol wrth ddefnyddio’r gwasanaeth gwneud cais am Ddigolledu am Anafiadau Troseddol ar ddyfais symudol.',
   nonAccessibleContent: 'Cynnwys sydd ddim o fewn cwmpas y rheoliadau hygyrchedd',
   issuesWithDocuments: 'Dogfennau',
   issuesWithDocumentDescription1:

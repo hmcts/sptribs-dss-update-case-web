@@ -40,7 +40,7 @@ const cyContent = {
   },
   errors: {
     submissionError: {
-      required: 'Your application is not submitted. Please try again - welsh',
+      required: 'Nid yw eich cais wedi’i gyflwyno. Rhowch gynnig arall arni',
     },
   },
 };
