@@ -12,6 +12,11 @@ services:
   equalityAndDiversity:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
+  sptribs:
+    url: CASE_API_URL
+  authProvider:
+    url: RPE_API
+    secret: SERVICE_AUTH_SECRET
 port: PORT
 session:
   redis:
@@ -21,5 +26,3 @@ e2e:
   userTestPassword: TEST_PASSWORD
 appInsights:
   instrumentationKey: APPINSIGHTS_KEY
-api:
-  serviceAuth: RPE_API

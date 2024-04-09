@@ -4,6 +4,7 @@ import { Application, NextFunction, Response } from 'express';
 import { getRedirectUrl, getUserDetails } from '../../app/auth/oidc';
 import { CaseWithId } from '../../app/case/case';
 import { AppRequest } from '../../app/controller/AppRequest';
+import { signInNotRequired } from '../../steps/url-utils';
 import { CALLBACK_URL, CASE_SEARCH_URL, HOME_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 
 export class OidcMiddleware {
@@ -33,11 +34,14 @@ export class OidcMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        if (req.session?.user) {
+        if (req.session?.user && req.session.user.roles.includes('citizen')) {
           res.locals.isLoggedIn = true;
           return next();
+        } else if (signInNotRequired(req.path)) {
+          return next();
+        } else {
+          res.redirect(SIGN_IN_URL);
         }
-        res.redirect(SIGN_IN_URL);
       })
     );
   }
