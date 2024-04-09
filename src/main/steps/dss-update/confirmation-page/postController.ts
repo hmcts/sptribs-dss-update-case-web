@@ -1,7 +1,8 @@
 import autobind from 'autobind-decorator';
-import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { AppRequest } from '../../../app/controller/AppRequest';
 import { Response } from 'express';
+
+import { AppRequest } from '../../../app/controller/AppRequest';
+import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { HOME_URL } from '../../urls';
 
 @autobind

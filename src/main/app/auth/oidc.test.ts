@@ -1,7 +1,8 @@
 import axios, { AxiosRequestHeaders, AxiosResponse, AxiosStatic } from 'axios';
 
-import { OidcResponse, UserDetails, getSystemUser, getRedirectUrl, getUserDetails } from './oidc';
 import { CALLBACK_URL } from '../../steps/urls';
+
+import { OidcResponse, UserDetails, getRedirectUrl, getSystemUser, getUserDetails } from './oidc';
 
 const config = require('config');
 
@@ -23,9 +24,8 @@ describe('getRedirectUrl', () => {
 });
 
 describe('getUserDetails', () => {
-
   const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyJ9.KaDIFSDdD3ZIYCl_qavvYbQ3a4abk47iBOZhB1-9mUQ';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyIsInJvbGVzIjpbImNpdGl6ZW4iXX0.rxjx6XsSNNYavVppwKAqWiNWT_GxN4vjVzdLRe6q14I';
 
   test('should exchange a code for a token and decode a JWT to get the user details', async () => {
     mockedAxios.post.mockResolvedValue({
@@ -42,6 +42,7 @@ describe('getUserDetails', () => {
       givenName: 'John',
       familyName: 'Dorian',
       id: '123',
+      roles: ['citizen'],
     });
   });
 });
@@ -67,7 +68,8 @@ describe('getSystemUser', () => {
     givenName: 'John',
     familyName: 'Dorian',
     id: '123',
-   };
+    roles: ['caseworker-sptribs-systemupdate', 'caseworker-st_cic-caseworker'],
+  };
 
   test('Cache enabled', async () => {
     mockedConfig.get.mockReturnValueOnce('user');
