@@ -72,8 +72,8 @@ export const cy = () => ({
   fileUploadRequirementsLabel: 'Gofynion llwytho ffeil',
   uploadHelpBullets: [
     'Fformatau ffeiliau: MS Word, MS Excel, PDF, JPG, PNG, TXT, RFT, MP4, MP3',
-    'Maint ffeil pob dogfen: hyd at 20 megabeit (MB)',
-    'Maint pob ffeil amlgyfrwng: 30 megabeit (MB)',
+    'Maint ffeil pob dogfen: hyd at 500 megabeit (MB)',
+    'Maint pob ffeil amlgyfrwng: 500 megabeit (MB)',
     'Ni ellir llwytho ffeiliau sydd wedi’u diogelu â chyfrinair',
   ],
   guideText:
