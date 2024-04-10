@@ -44,7 +44,11 @@ export default class DocumentUpload extends GetController {
       req.session.fileErrors = [{ text: documentUploadErrors.documentUpload.uploadDeleteError, href: '#' }];
     }
 
-    req.session.save();
-    res.redirect(UPLOAD_DOCUMENT);
+    req.session.save(error => {
+      if (error) {
+        throw error;
+      }
+      res.redirect(UPLOAD_DOCUMENT);
+    });
   };
 }
