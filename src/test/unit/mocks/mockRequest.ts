@@ -48,8 +48,8 @@ export const mockRequest: any = ({
         id: '1234',
         ...userCase,
       },
-      save: jest.fn(done => done()),
-      destroy: jest.fn(done => done()),
+      save: jest.fn(),
+      destroy: jest.fn(),
       ...session,
     },
     app: {
