@@ -3,9 +3,9 @@ import axios from 'axios';
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../../app/form/Form';
+import { APPLICATION_CONFIRMATION, CHECK_YOUR_ANSWERS } from '../../urls';
 
 import CheckYourAnswersController from './postController';
-import { APPLICATION_CONFIRMATION, CHECK_YOUR_ANSWERS } from '../../urls';
 
 jest.mock('axios');
 let req, res;
@@ -19,10 +19,10 @@ describe('CheckYourAnswersController test cases', () => {
   const mockedRequest = mockRequest({
     session: {
       user: {
-        accessToken: token
+        accessToken: token,
       },
       userCase: {
-        id: '1709056435297860'
+        id: '1709056435297860',
       },
       caseDocuments: [
         {
@@ -47,24 +47,24 @@ describe('CheckYourAnswersController test cases', () => {
   } as unknown as FormContent;
 
   test('Should submit the case and navigate to confirmation page', async () => {
-    mockedAxios.put.mockImplementation((url) => {
+    mockedAxios.put.mockImplementation(url => {
       switch (url) {
-        case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
-          return Promise.resolve({ data: 'TOKEN'})
+        case 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/lease':
+          return Promise.resolve({ data: 'TOKEN' });
         case 'http://sptribs-case-api-aat.service.core-compute-aat.internal/case/dss-orchestration/1709056435297860/update?event=UPDATE_CASE':
           return Promise.resolve({ status: 200, id: 1709056435297860, caseData: {} });
         default:
-          return Promise.reject(new Error('not found'))
+          return Promise.reject(new Error('not found'));
       }
     });
     req = mockRequest({
       session: {
         user: {
-          accessToken: token
+          accessToken: token,
         },
         documentDetail: 'some info about doc',
         userCase: {
-          id: '1709056435297860'
+          id: '1709056435297860',
         },
         caseDocuments: [
           {
@@ -84,14 +84,14 @@ describe('CheckYourAnswersController test cases', () => {
   });
 
   test('Should redirect back to check your answers page if call to submit event is unsuccessful', async () => {
-    mockedAxios.put.mockImplementation((url) => {
+    mockedAxios.put.mockImplementation(url => {
       switch (url) {
-        case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
-          return Promise.resolve({ data: 'TOKEN'})
+        case 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/lease':
+          return Promise.resolve({ data: 'TOKEN' });
         case 'http://sptribs-case-api-aat.service.core-compute-aat.internal/case/dss-orchestration/1709056435297860/update?event=UPDATE_CASE':
           return Promise.resolve({ status: 500, id: 1709056435297860, caseData: {} });
         default:
-          return Promise.reject(new Error('not found'))
+          return Promise.reject(new Error('not found'));
       }
     });
     req = mockedRequest;
@@ -103,14 +103,14 @@ describe('CheckYourAnswersController test cases', () => {
   });
 
   test('Should redirect back to check your answers page if call to submit event throws error', async () => {
-    mockedAxios.put.mockImplementation((url) => {
+    mockedAxios.put.mockImplementation(url => {
       switch (url) {
-        case 'http://rpe-service-auth-provider-aat.service.core-compute-demo.internal/testing-support/lease':
-          return Promise.resolve({ data: 'TOKEN'})
+        case 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/lease':
+          return Promise.resolve({ data: 'TOKEN' });
         case 'http://sptribs-case-api-aat.service.core-compute-aat.internal/case/dss-orchestration/1709056435297860/update?event=UPDATE_CASE':
           return Promise.reject(new Error('not found'));
         default:
-          return Promise.reject(new Error('not found'))
+          return Promise.reject(new Error('not found'));
       }
     });
     req = mockedRequest;

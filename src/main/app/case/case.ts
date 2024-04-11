@@ -9,7 +9,7 @@ export interface Case {
 
 export interface CaseWithId extends Case {
   id: string;
-  state: any;
+  state: string;
 }
 
 export enum Checkbox {
