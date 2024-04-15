@@ -3341,53 +3341,53 @@ __metadata:
   linkType: hard
 
 "@uppy/core@npm:^3.4.0":
-  version: 3.9.3
-  resolution: "@uppy/core@npm:3.9.3"
+  version: 3.10.0
+  resolution: "@uppy/core@npm:3.10.0"
   dependencies:
     "@transloadit/prettier-bytes": ^0.3.0
     "@uppy/store-default": ^3.2.2
-    "@uppy/utils": ^5.7.4
+    "@uppy/utils": ^5.7.5
     lodash: ^4.17.21
     mime-match: ^1.0.2
     namespace-emitter: ^2.0.1
     nanoid: ^4.0.0
     preact: ^10.5.13
-  checksum: ef12594181a36e3fa79f21c097657ab503a5193fa6dc235f14326954b1e6d4af13d1b102baf0a19c4206ec2a6ed5046dcd8da4d665f38ebf77856c50edf6602c
+  checksum: 5b52ffee2d39dbe64cd829ecbf4b3b4442b0a2efeeebeb34e2e4e127e5e1c3f36aa0f0e4d97c773278ab94358866e293abc5510100f7f418bb2fa7fd1944610b
   languageName: node
   linkType: hard
 
 "@uppy/drop-target@npm:^2.0.1":
-  version: 2.0.4
-  resolution: "@uppy/drop-target@npm:2.0.4"
+  version: 2.0.5
+  resolution: "@uppy/drop-target@npm:2.0.5"
   dependencies:
-    "@uppy/utils": ^5.7.2
+    "@uppy/utils": ^5.7.5
   peerDependencies:
-    "@uppy/core": ^3.9.1
-  checksum: ef1408a001a1c82cf291ae48316f54b43e67119448a936fd61f5d8332ded5d0a3cac84ee5f81da0370dddc21223878e81b5ef28f1f8152593f1b8d1e414b8bcc
+    "@uppy/core": ^3.10.0
+  checksum: cd464cd0c50473415c5d806bdeff502eeb4df37945d0a9249ca201b23f1629a28103de36986ffe2a67b0efe396ac3ed2500bac52fe7d65d225f37a2bed9199aa
   languageName: node
   linkType: hard
 
 "@uppy/file-input@npm:^3.0.3":
-  version: 3.1.0
-  resolution: "@uppy/file-input@npm:3.1.0"
+  version: 3.1.1
+  resolution: "@uppy/file-input@npm:3.1.1"
   dependencies:
-    "@uppy/utils": ^5.7.4
+    "@uppy/utils": ^5.7.5
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^3.9.3
-  checksum: 5d1d56ac01b9d9daab1be22b5f81b5e2e4baa07049c21c25fb8a6224a5b1916201b275611f615b3325e3cb0450fe77945c4e2f4e883e0d3bd92c96f55c3dae61
+    "@uppy/core": ^3.10.0
+  checksum: 72ef1dca9f209de94d0705a528f4b9994c60020a477422ff34c0f116bc67c57efdc32abd3bd5bbf559ddf9e7ea243e727a9ebad13e07681dd59a1c477af85e2b
   languageName: node
   linkType: hard
 
 "@uppy/progress-bar@npm:^3.0.3":
-  version: 3.1.0
-  resolution: "@uppy/progress-bar@npm:3.1.0"
+  version: 3.1.1
+  resolution: "@uppy/progress-bar@npm:3.1.1"
   dependencies:
-    "@uppy/utils": ^5.7.4
+    "@uppy/utils": ^5.7.5
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^3.9.3
-  checksum: 6e34c0be31fb2dfd820c4192955a50fcd5022420b035c0f97453539f22d5f04a97bc7b7eab716f80e6e7e73e5cc6fbe267d1d5f7241a4b45c51234e0e2d81e76
+    "@uppy/core": ^3.10.0
+  checksum: d3a0abd4974b0d764420e51d62ea66b6d3fbe222f6c49aa6916c216b3c60657d05c045326dcc33879eb1f74ef4d92e50e44a6ab986697d869631377eee41599d
   languageName: node
   linkType: hard
 
@@ -3398,13 +3398,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/utils@npm:^5.7.2, @uppy/utils@npm:^5.7.4":
+"@uppy/utils@npm:^5.7.4":
   version: 5.7.4
   resolution: "@uppy/utils@npm:5.7.4"
   dependencies:
     lodash: ^4.17.21
     preact: ^10.5.13
   checksum: 76330cece6bb08906166f5629326efb42c9f93c718ba4100fb9d8436b1cd1aab070924760b5e8d36374c04eca58fa1c12aa9728ff206046423cd5af39281adb8
+  languageName: node
+  linkType: hard
+
+"@uppy/utils@npm:^5.7.5":
+  version: 5.7.5
+  resolution: "@uppy/utils@npm:5.7.5"
+  dependencies:
+    lodash: ^4.17.21
+    preact: ^10.5.13
+  checksum: 96081251fb61f947302561c92e86b777929541da9f9beeb7b8fec6d006d43cbe499716f35fce03f091eafd1400a2bf61fefc772579180b874b901e4b2db8fe88
   languageName: node
   linkType: hard
 
@@ -12322,15 +12332,15 @@ __metadata:
   linkType: hard
 
 "sass@npm:^1.66.1":
-  version: 1.74.1
-  resolution: "sass@npm:1.74.1"
+  version: 1.75.0
+  resolution: "sass@npm:1.75.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 3cbcd73d91e65607f7987656b7f6b0c6143724304544768079ecbe95505f1ce71036916e0e02dcc9923551c3779863bcdd522732a8f4409e89205271966a36f4
+  checksum: bfb9f5ddb6a2e1fe0c1ba6191cdb17afa7b40c1eb892c7152f6a29ff2b06dc7a510bdb648f8cca0179dcb3965920ebeb8894f0710b0b450a99db563831345033
   languageName: node
   linkType: hard
 
