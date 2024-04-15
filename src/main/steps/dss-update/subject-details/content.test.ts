@@ -8,6 +8,9 @@ const englishContent = () => ({
   errorSummaryMessage: 'There is a problem',
   subjectFullNameLabel: 'Full name',
   subjectDOBLabel: 'Date of birth',
+  day: 'Day',
+  month: 'Month',
+  year: 'Year',
   errors: {
     subjectFullName: {
       required: 'Please enter full name',
@@ -27,26 +30,29 @@ const englishContent = () => ({
   },
 });
 const welshContent = () => ({
-  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
-  title: 'Subject of this case - welsh',
-  errorSummaryMessage: 'There is a problem - welsh',
-  subjectFullNameLabel: 'Full name - welsh',
-  subjectDOBLabel: 'Date of birth - welsh',
+  serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
+  title: 'Testun yr achos hwn',
+  errorSummaryMessage: 'Mae yna broblem',
+  subjectFullNameLabel: 'Enw llawn',
+  subjectDOBLabel: 'Dyddiad geni',
+  day: 'Diwrnod',
+  month: 'Mis',
+  year: 'Blwyddyn',
   errors: {
     subjectFullName: {
-      required: 'Please enter full name - welsh',
-      invalid: 'Please enter a valid name - welsh',
+      required: 'Nodwch enw llawn',
+      invalid: 'Rhowch enw dilys',
     },
     subjectDOB: {
-      required: 'Please enter date of birth - welsh',
-      invalid: 'Please enter valid date of birth - welsh',
+      required: 'Nodwch ddyddiad geni',
+      invalid: 'Nodwch ddyddiad geni dilys',
     },
     inputFields: {
       required:
-        "Some of the information you have given doesn't match our records. Please enter the right value and try again. - welsh",
+        'Nid yw rhywfaint o’r wybodaeth rydych wedi’i rhoi yn cyd-fynd â’n cofnodion. Darparwch yr wybodaeth gywir a rhowch gynnig arall arni.',
     },
     caseError: {
-      required: 'Error verifying case - welsh',
+      required: 'Gwall wrth ddilysu’r achos',
     },
   },
 });

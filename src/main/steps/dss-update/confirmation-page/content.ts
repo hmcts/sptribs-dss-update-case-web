@@ -19,16 +19,16 @@ const en = (content: CommonContent) => {
 
 const cy = (content: CommonContent) => {
   return {
-    serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
-    title: 'Case Updated: - welsh',
-    successMessage: `<strong>${getHyphenatedCaseId(content)}</strong> - welsh`,
-    line1: 'Thank you for updating your case. - welsh',
-    line2: 'The additional information that you have submitted will be sent to the Tribunal. - welsh',
-    line3: 'An email will be sent to you that explains what will happen next. - welsh',
+    serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
+    title: 'Achos wedi’i ddiweddaru',
+    successMessage: `<strong>${getHyphenatedCaseId(content)}</strong>`,
+    line1: 'Diolch i chi am ddiweddaru eich achos.',
+    line2: 'Fe anfonir yr wybodaeth ychwanegol rydych wedi’i chyflwyno i’r Tribiwnlys.',
+    line3: 'Fe anfonir neges e-bost atoch i esbonio beth fydd yn digwydd nesaf.',
     feedback: 'Adborth',
     feedbackBody:
-      "<b>We would like to hear your thoughts</b><br>Complete this short 5-minutes survey to help improve our services for you and others <a class='govuk-link' href='https://www.smartsurvey.co.uk/s/SurveyExit/?service=Specials'target=_blank><br>Please leave your your feedback</a> - welsh",
-    closeAndExit: 'Close and exit - welsh',
+      "<b>Hoffwn gael adborth gennych</b><br>Cwblhewch yr arolwg byr hwn fydd ond yn cymryd 5 munud o’ch amser i’n helpu ni i wella ein gwasanaethau i chi ac eraill <a class='govuk-link' href='https://www.smartsurvey.co.uk/s/SurveyExit/?service=Specials'target=_blank><br>Gadewch eich adborth</a>",
+    closeAndExit: 'Cau a gadael',
   };
 };
 

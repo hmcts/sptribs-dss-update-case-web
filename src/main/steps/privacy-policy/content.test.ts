@@ -14,7 +14,7 @@ const en = {
   managedBy:
     'This service is managed by HM Courts & Tribunals Service (HMCTS), which is an executive agency of the Ministry of Justice (MoJ).',
   mojPersonalInformationCharter:
-    "The MoJ is known as the data controller for data protection purposes. The <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter'>The MoJ personal information charter</a> explains how the MoJ processes personal data.",
+    "The MoJ is known as the data controller for data protection purposes. <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter'>The MoJ personal information charter</a> explains how the MoJ processes personal data.",
   protectingData:
     'As part of the MoJ, HMCTS is responsible for deciding how personal data is used and for protecting the personal data you provide.',
   personalData:
