@@ -2,12 +2,12 @@ import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 
 import { cy, en } from './content';
-import { AccessibilityStatementGetController } from './get';
+import { ContactUsGetController } from './get';
 
-describe('AccessibilityStatementGetController', () => {
-  const controller = new AccessibilityStatementGetController();
+describe('ContactUsGetController', () => {
+  const controller = new ContactUsGetController();
 
-  test('Should render the accessibility statement page for the CICA service', async () => {
+  test('Should render the contact us page', async () => {
     const req = mockRequest();
     const res = mockResponse();
     await controller.get(req, res);
@@ -18,7 +18,7 @@ describe('AccessibilityStatementGetController', () => {
     );
   });
 
-  test('Should render the accessibility statement page for the CICA service Welsh', async () => {
+  test('Should render the contact us page for Welsh', async () => {
     const req = mockRequest();
     const res = mockResponse();
     req.session.lang = 'cy';

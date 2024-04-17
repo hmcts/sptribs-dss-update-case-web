@@ -1,8 +1,9 @@
 import axios, { AxiosRequestHeaders, AxiosResponse, AxiosStatic } from 'axios';
 
 import { CALLBACK_URL } from '../../steps/urls';
+import { UserDetails } from '../controller/AppRequest';
 
-import { OidcResponse, UserDetails, getRedirectUrl, getSystemUser, getUserDetails } from './oidc';
+import { OidcResponse, getRedirectUrl, getSystemUser, getUserDetails } from './oidc';
 
 const config = require('config');
 
