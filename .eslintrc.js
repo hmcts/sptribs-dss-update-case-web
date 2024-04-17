@@ -91,6 +91,7 @@ module.exports = {
       files: [
         'src/main/steps/accessibility-statement/content.test.ts',
         'src/main/steps/accessibility-statement/get.test.ts',
+        'src/main/steps/contact-us/content.test.ts',
         'src/main/steps/dss-update/check-your-answers/content.test.ts',
         'src/main/steps/privacy-policy/content.test.ts',
         'src/main/steps/privacy-policy/get.test.ts',

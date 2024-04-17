@@ -36,22 +36,22 @@ const en = (content: any) => {
 };
 
 const cyContent: typeof enContent = {
-  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
-  title: 'Check answers before submitting your update - welsh',
-  change: 'change - welsh',
-  continue: 'Accept and send - welsh',
+  serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
+  title: 'Gwiriwch eich atebion cyn cyflwyno eich diweddariad',
+  change: 'newid',
+  continue: 'Derbyn ac anfon',
   statementOfTruth:
-    'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct. - welsh',
-  submitApplicationText: 'Now update your case - welsh',
-  errorSummaryMessage: 'There is a problem - welsh',
+    'Trwy ddiweddaru’r achos hwn rydych yn cadarnhau, hyd eithaf eich gwybodaeth, bod y manylion rydych yn eu darparu yn gywir.',
+  submitApplicationText: 'Diweddarwch eich achos nawr',
+  errorSummaryMessage: 'Mae yna broblem',
   keys: {
-    information: 'Additional information - welsh',
-    document: 'Additional document - welsh',
-    documentRelevance: 'Document relevance - welsh',
+    information: 'Gwybodaeth ychwanegol',
+    document: 'Dogfennau ychwanegol',
+    documentRelevance: 'Perthnasedd y ddogfen',
   },
   errors: {
     submissionError: {
-      required: 'Your application is not submitted. Please try again - welsh',
+      required: 'Nid yw eich cais wedi’i gyflwyno. Rhowch gynnig arall arni',
     },
   },
 };
@@ -62,7 +62,7 @@ const cy: typeof en = (content: CommonContent) => {
   return {
     ...cyContent,
     language: content.language,
-    sections: [UploadFormSummary(enContent, caseDocuments, caseInformation)],
+    sections: [UploadFormSummary(cyContent, caseDocuments, caseInformation)],
   };
 };
 
