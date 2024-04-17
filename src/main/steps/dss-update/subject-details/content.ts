@@ -1,19 +1,24 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isDateInputInvalid, isDateInputNotFilled, isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 import { covertToDateObject } from '../../../app/form/parser';
+import {
+  isDateInputInvalid,
+  isDateInputNotFilled,
+  isFieldFilledIn,
+  isFieldLetters,
+} from '../../../app/form/validation';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Subject of this case',
   errorSummaryMessage: 'There is a problem',
-  subjectFullNameLabel: "Full name",
-  subjectDOBLabel: "Date of birth",
+  subjectFullNameLabel: 'Full name',
+  subjectDOBLabel: 'Date of birth',
+  day: 'Day',
+  month: 'Month',
+  year: 'Year',
   errors: {
     subjectFullName: {
       required: 'Please enter full name',
@@ -21,37 +26,42 @@ export const en = () => ({
     },
     subjectDOB: {
       required: 'Please enter date of birth',
-      invalid: 'Please enter valid date of birth'
+      invalid: 'Please enter valid date of birth',
     },
     inputFields: {
-      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again.'
+      required:
+        "Some of the information you have given doesn't match our records. Please enter the right value and try again.",
     },
     caseError: {
-      required: 'Error verifying case'
+      required: 'Error verifying case',
     },
   },
 });
 
 export const cy = () => ({
-  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
-  title: 'Subject of this case - welsh',
-  errorSummaryMessage: 'There is a problem - welsh',
-  subjectFullNameLabel: "Full name - welsh",
-  subjectDOBLabel: "Date of birth - welsh",
+  serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
+  title: 'Testun yr achos hwn',
+  errorSummaryMessage: 'Mae yna broblem',
+  subjectFullNameLabel: 'Enw llawn',
+  subjectDOBLabel: 'Dyddiad geni',
+  day: 'Diwrnod',
+  month: 'Mis',
+  year: 'Blwyddyn',
   errors: {
     subjectFullName: {
-      required: 'Please enter full name - welsh',
-      invalid: 'Please enter a valid name - welsh',
+      required: 'Nodwch enw llawn',
+      invalid: 'Rhowch enw dilys',
     },
     subjectDOB: {
-      required: 'Please enter date of birth - welsh',
-      invalid: 'Please enter valid date of birth - welsh'
+      required: 'Nodwch ddyddiad geni',
+      invalid: 'Nodwch ddyddiad geni dilys',
     },
     inputFields: {
-      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again. - welsh'
+      required:
+        'Nid yw rhywfaint o’r wybodaeth rydych wedi’i rhoi yn cyd-fynd â’n cofnodion. Darparwch yr wybodaeth gywir a rhowch gynnig arall arni.',
     },
     caseError: {
-      required: 'Error verifying case - welsh'
+      required: 'Gwall wrth ddilysu’r achos',
     },
   },
 });
@@ -70,19 +80,19 @@ export const form: FormContent = {
       label: l => l.subjectDOBLabel,
       values: [
         {
-          label: l => l.dateFormat['day'],
+          label: l => l.day,
           name: 'day',
           classes: 'govuk-input--width-2',
           attributes: { maxLength: 2, pattern: '[0-9]*', inputMode: 'numeric' },
         },
         {
-          label: l => l.dateFormat['month'],
+          label: l => l.month,
           name: 'month',
           classes: 'govuk-input--width-2',
           attributes: { maxLength: 2, pattern: '[0-9]*', inputMode: 'numeric' },
         },
         {
-          label: l => l.dateFormat['year'],
+          label: l => l.year,
           name: 'year',
           classes: 'govuk-input--width-4',
           attributes: { maxLength: 4, pattern: '[0-9]*', inputMode: 'numeric' },

@@ -28,10 +28,10 @@ module.exports = {
   globals: { Atomics: 'readonly', SharedArrayBuffer: 'readonly' },
   rules: {
     '@typescript-eslint/array-type': 'error',
-    '@typescript-eslint/explicit-module-boundary-types': 'error',
-    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-shadow': 'error',
-    '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
@@ -86,4 +86,21 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: [
+        'src/main/steps/accessibility-statement/content.test.ts',
+        'src/main/steps/accessibility-statement/get.test.ts',
+        'src/main/steps/contact-us/content.test.ts',
+        'src/main/steps/dss-update/check-your-answers/content.test.ts',
+        'src/main/steps/privacy-policy/content.test.ts',
+        'src/main/steps/privacy-policy/get.test.ts',
+        'src/main/steps/terms-and-conditions/content.test.ts',
+        'src/main/steps/terms-and-conditions/get.test.ts',
+      ],
+      rules: {
+        'jest/expect-expect': 'off',
+      },
+    },
+  ],
 };

@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { AnyType } from '../../../app/form/validation';
 
 import { cy, en, generateContent } from './content';
@@ -8,8 +6,11 @@ const englishContent = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Subject of this case',
   errorSummaryMessage: 'There is a problem',
-  subjectFullNameLabel: "Full name",
-  subjectDOBLabel: "Date of birth",
+  subjectFullNameLabel: 'Full name',
+  subjectDOBLabel: 'Date of birth',
+  day: 'Day',
+  month: 'Month',
+  year: 'Year',
   errors: {
     subjectFullName: {
       required: 'Please enter full name',
@@ -17,36 +18,41 @@ const englishContent = () => ({
     },
     subjectDOB: {
       required: 'Please enter date of birth',
-      invalid: 'Please enter valid date of birth'
+      invalid: 'Please enter valid date of birth',
     },
     inputFields: {
-      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again.'
+      required:
+        "Some of the information you have given doesn't match our records. Please enter the right value and try again.",
     },
     caseError: {
-      required: 'Error verifying case'
+      required: 'Error verifying case',
     },
   },
 });
 const welshContent = () => ({
-  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
-  title: 'Subject of this case - welsh',
-  errorSummaryMessage: 'There is a problem - welsh',
-  subjectFullNameLabel: "Full name - welsh",
-  subjectDOBLabel: "Date of birth - welsh",
+  serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
+  title: 'Testun yr achos hwn',
+  errorSummaryMessage: 'Mae yna broblem',
+  subjectFullNameLabel: 'Enw llawn',
+  subjectDOBLabel: 'Dyddiad geni',
+  day: 'Diwrnod',
+  month: 'Mis',
+  year: 'Blwyddyn',
   errors: {
     subjectFullName: {
-      required: 'Please enter full name - welsh',
-      invalid: 'Please enter a valid name - welsh',
+      required: 'Nodwch enw llawn',
+      invalid: 'Rhowch enw dilys',
     },
     subjectDOB: {
-      required: 'Please enter date of birth - welsh',
-      invalid: 'Please enter valid date of birth - welsh'
+      required: 'Nodwch ddyddiad geni',
+      invalid: 'Nodwch ddyddiad geni dilys',
     },
     inputFields: {
-      required: 'Some of the information you have given doesn\'t match our records. Please enter the right value and try again. - welsh'
+      required:
+        'Nid yw rhywfaint o’r wybodaeth rydych wedi’i rhoi yn cyd-fynd â’n cofnodion. Darparwch yr wybodaeth gywir a rhowch gynnig arall arni.',
     },
     caseError: {
-      required: 'Error verifying case - welsh'
+      required: 'Gwall wrth ddilysu’r achos',
     },
   },
 });
@@ -115,10 +121,10 @@ describe('generateContent() with no tempdata', () => {
             verificationData: {
               dssQuestionAnswerPairs: [{ question: 'what is the name', answer: 'johndoe' }],
               dssQuestionAnswerDatePairs: [{ question: 'what is the DOB', answer: '27-10-1990' }],
-            }
-          }
-        }
-      }
+            },
+          },
+        },
+      },
     };
     // const genCON: AnyType = generateContent;
     expect(generateContent(content)).not.toEqual({});

@@ -1,38 +1,39 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isNotNumeric } from '../../../app/form/validation';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Existing case details',
   line1: 'You can find this information in the email you received after submitting your tribunal forms.',
   subtitle: 'Case reference number',
-  caseNumberHint: 'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ;',
+  caseNumberHint:
+    'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ;',
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
       required: 'Please enter a reference number',
-      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
+      notNumeric:
+        'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
       caseNotFound: 'Please enter a valid reference number',
     },
   },
 });
 
 export const cy = () => ({
-  serviceName: 'Update an appeal to the First-tier Tribunal - welsh',
-  title: 'Existing case details - welsh',
-  line1:
-    'You can find this information in the email you received after submitting your tribunal forms. - welsh',
-  subtitle: 'Case reference number - welsh',
-  caseNumberHint: 'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ; - welsh.',
-  errorSummaryMessage: 'There is a problem - welsh',
+  serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
+  title: 'Manylion achos sy’n bodoli’n barod',
+  line1: "Gallwch ddod o hyd i'r wybodaeth hon yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.",
+  subtitle: 'Cyfeirnod yr achos',
+  caseNumberHint:
+    "Bydd y rhif hwn yn cynnwys 16 digid. Ni ddylai gynnwys bylchau neu unrhyw un o'r nodau canlynol: - * (  )  &  !  /  ;",
+  errorSummaryMessage: 'Mae yna broblem',
   errors: {
     applicantCaseId: {
-      required: 'Please enter a reference number - welsh',
-      notNumeric: 'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ; - welsh',
-      caseNotFound: 'Please enter a valid reference number - welsh',
+      required: 'Rhowch gyfeirnod',
+      notNumeric:
+        'Rhowch gyfeirnod dilys. Ni ddylai’r cyfeirnod gynnwys bylchau neu unrhyw un o’r nodau canlynol - * ( ) & ! /  ;',
+      caseNotFound: 'Rhowch gyfeirnod dilys',
     },
   },
 });
