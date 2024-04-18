@@ -40,6 +40,7 @@ describe('Form Summary > check-your-answers', () => {
               },
               value: {
                 html: 'a.txt<br><br>testFile',
+                text: 'Additional document a.txt and Document relevance',
               },
             },
           ],
