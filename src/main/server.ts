@@ -1,9 +1,10 @@
 import * as path from 'path';
 
 import * as bodyParser from 'body-parser';
-import config = require('config');
+import config from 'config';
 import cookies from 'cookie-parser';
 import express, { RequestHandler } from 'express';
+import rateLimit from 'express-rate-limit';
 import favicon from 'serve-favicon';
 import toobusy from 'toobusy-js';
 import type { LoggerInstance } from 'winston';
@@ -33,6 +34,11 @@ const developmentMode = env === 'development';
 const logger: LoggerInstance = Logger.getLogger('server');
 export const app = express();
 
+const limiter = rateLimit({
+  windowMs: config.get('rateLimit.time'),
+  limit: config.get('rateLimit.limit'),
+});
+
 app.locals.ENV = env;
 app.locals.developmentMode = process.env.NODE_ENV !== 'production';
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
@@ -44,6 +50,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cookies());
+app.use(limiter);
 
 new PropertiesVolume().enableFor(app);
 new SessionStorage().enableFor(app);
