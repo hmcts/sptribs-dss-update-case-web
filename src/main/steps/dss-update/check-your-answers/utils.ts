@@ -80,6 +80,7 @@ export const UploadFormSummary = (
 
   const documentInformation = uploadedDocuments.map((document: DocumentUpload) => {
     return {
+      key: keys.document + ' ' + document.fileName + ' and ' + keys.documentRelevance,
       keyHtml: keys.document + '<br><br>' + keys.documentRelevance,
       valueHtml: document.fileName + '<br><br>' + document.description,
       changeUrl: UPLOAD_DOCUMENT,
