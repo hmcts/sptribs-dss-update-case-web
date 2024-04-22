@@ -31,12 +31,13 @@ describe('Form Summary > check-your-answers', () => {
                   {
                     href: '/upload-documents',
                     text: 'change',
-                    visuallyHiddenText: 'undefined',
+                    visuallyHiddenText: 'Additional document a.txt and Document relevance',
                   },
                 ],
               },
               key: {
                 html: 'Additional document<br><br>Document relevance',
+                text: 'Additional document a.txt and Document relevance',
               },
               value: {
                 html: 'a.txt<br><br>testFile',
