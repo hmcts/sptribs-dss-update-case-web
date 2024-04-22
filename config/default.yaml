@@ -7,7 +7,7 @@ health:
   deadline: 15000
 rateLimit:
   time: 15000
-  limit: 10
+  limit: 30
 session:
   secret: 'local'
   name: 'sptribs_dss_update_case_web'
