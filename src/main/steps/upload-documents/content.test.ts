@@ -23,8 +23,8 @@ const englishContent = () => ({
   fileUploadRequirementsLabel: 'File uploads requirements',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
-    'File size per document: up to 500 megabytes (MB)',
-    'File size per multimedia file: up to 500 megabytes (MB)',
+    'File size per document: up to 100 megabytes (MB)',
+    'File size per multimedia file: up to 100 megabytes (MB)',
     'Files cannot be password protected',
   ],
   guideText: "You can't upload executable (.exe), zip or other archive files due to virus risks.",
@@ -39,7 +39,7 @@ const englishContent = () => ({
   errors: {
     documentUpload: {
       noInput: 'You cannot continue without providing additional information or a document',
-      fileSize: 'File size exceeds the maximum permitted value. Please upload a file that is less than 500MB',
+      fileSize: 'File size exceeds the maximum permitted value. Please upload a file that is less than 100MB',
       fileFormat:
         'This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
       selectFileToUpload: 'Select a file to upload',
@@ -72,8 +72,8 @@ const welshContent = () => ({
   fileUploadRequirementsLabel: 'Gofynion llwytho ffeil',
   uploadHelpBullets: [
     'Fformatau ffeiliau: MS Word, MS Excel, PDF, JPG, PNG, TXT, RFT, MP4, MP3',
-    'Maint ffeil pob dogfen: hyd at 500 megabeit (MB)',
-    'Maint pob ffeil amlgyfrwng: 500 megabeit (MB)',
+    'Maint ffeil pob dogfen: hyd at 100 megabeit (MB)',
+    'Maint pob ffeil amlgyfrwng: 100 megabeit (MB)',
     'Ni ellir llwytho ffeiliau sydd wedi’u diogelu â chyfrinair',
   ],
   guideText:
@@ -89,7 +89,7 @@ const welshContent = () => ({
   errors: {
     documentUpload: {
       noInput: 'You cannot continue without providing additional information or a document - welsh',
-      fileSize: 'File size exceeds the maximum permitted value. Please upload a file that is less than 500MB - welsh',
+      fileSize: 'File size exceeds the maximum permitted value. Please upload a file that is less than 100MB - welsh',
       fileFormat:
         'This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh',
       selectFileToUpload: 'Select a file to upload - welsh',
