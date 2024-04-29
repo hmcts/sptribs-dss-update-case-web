@@ -27,7 +27,7 @@ e2e:
 appInsights:
   instrumentationKey:
 documentManagement:
-  uploadSizeinMB: 501
+  uploadSizeinMB: 101
 cookies:
   expiryTime: 365
   cookieName: 'sptribs-dss-update-case-web-cookie-preferences'
