@@ -88,13 +88,13 @@ const welshContent = () => ({
   uploadFileHint: 'Unwaith y byddwch wedi dewis y ffeil, cliciwch ar ”Upload file” i’w llwytho.',
   errors: {
     documentUpload: {
-      noInput: 'You cannot continue without providing additional information or a document - welsh',
-      fileSize: 'File size exceeds the maximum permitted value. Please upload a file that is less than 100MB - welsh',
+      noInput: 'Ni allwch barhau heb ddarparu gwybodaeth ychwanegol neu ddogfen',
+      fileSize: 'Mae’r ffeil yn fwy na’r maint mwyaf a ganiateir. Llwythwch ffeil sy’n llai na 100MB',
       fileFormat:
-        'This service only accepts files in the formats - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3 - welsh',
-      selectFileToUpload: 'Select a file to upload - welsh',
-      uploadDeleteError: 'Document upload or deletion has failed. Please try again - welsh',
-      maxFileError: 'You can only select up to 20 files at the same time - welsh',
+        'Mae’r gwasanaeth hwn yn derbyn ffeiliau yn y fformatau canlynol yn unig - MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
+      selectFileToUpload: 'Dewiswch ffeil i’w llwytho',
+      uploadDeleteError: 'Mae llwytho neu ddileu ffeil wedi methu. Rhowch gynnig arall arni',
+      maxFileError: 'Gallwch ond dewis hyd at 20 ffeil ar yr un pryd',
     },
   },
 });
