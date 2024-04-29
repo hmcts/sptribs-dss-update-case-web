@@ -66,7 +66,7 @@ export const en = {
   vitalInterest: 'We have a vital interest.',
   publicTask: 'We need it to perform a public task.',
   legitimateInterest: 'We have a legitimate interest.',
-  storeAndShare: 'Storing and sharing your data internationally.',
+  storeAndShare: 'Storing and sharing your data internationally',
   personalInformationOutsideUK:
     'Sometimes we need to send your personal information outside of the UK. When we do this we comply with data protection law.',
   yourRights: 'Your rights',
@@ -171,7 +171,7 @@ export const cy: typeof en = {
   vitalInterest: 'Mae gennym ddiddordeb hanfodol.',
   publicTask: 'Mae ei angen arnom i gyflawni tasg gyhoeddus.',
   legitimateInterest: 'Mae gennym ddiddordeb dilys.',
-  storeAndShare: 'Storio a rhannu eich data’n rhyngwladol.',
+  storeAndShare: 'Storio a rhannu eich data’n rhyngwladol',
   personalInformationOutsideUK:
     "Weithiau efallai y bydd angen inni anfon eich gwybodaeth bersonol y tu allan i'r DU. Pan fyddwn yn gwneud hyn, byddwn yn cydymffurfio â chyfraith diogelu data.",
   yourRights: 'Eich hawliau',
