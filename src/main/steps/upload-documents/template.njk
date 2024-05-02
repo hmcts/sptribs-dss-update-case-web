@@ -72,7 +72,9 @@
         <br>
         {{ document.description }}
         {% set documentId = document.documentId %}
-        <a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
+        <a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right">{{ delete }}</a>
+        <br>
+        <br>
       </li>
     {%endfor%}
 </ul>
@@ -108,7 +110,7 @@
 {%endif%}
 {% endfor %}
 <label class="govuk-label govuk-label-s" for="eventName">{{documentListLabel}}</label>
-<input class="govuk-input {{errorForFileDescription}}" id="eventName" name="eventName" type="text" aria-describedby="" autocomplete="eventName">
+<input class="govuk-input {{errorForFileDescription}}" id="eventName" name="eventName" type="text" autocomplete="on">
 </div>
 {% for error in fileErrors %}
 {% if error.propertyName === 'fileDescriptionRequired' %}
