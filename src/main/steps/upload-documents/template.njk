@@ -70,9 +70,13 @@
         {{ document.fileName }}
         <br>
         <br>
-        {{ document.description }}
-        {% set documentId = document.documentId %}
-        <a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
+        <table class="documentRelevanceAndDeletion">
+          <tr>
+            <td class="documentRelevanceAndDeletionAlignment">{{ document.description }}</td>
+            {% set documentId = document.documentId %}
+            <td class="documentRelevanceAndDeletionAlignment"><a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right">{{ delete }}</a></td>
+          </tr>
+        </table>
       </li>
     {%endfor%}
 </ul>
