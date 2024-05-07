@@ -23,11 +23,11 @@ export const en = () => ({
   year: 'Year',
   errors: {
     subjectFullName: {
-      required: 'Please enter full name. This name must match exactly with the case record',
+      required: 'Please enter a full name. This name must match exactly with the case record',
       invalid: 'Please enter a valid name. This name must match exactly with the case record',
     },
     subjectDOB: {
-      required: 'Please enter full date of birth. For example, 31 3 1980',
+      required: 'Please enter a full date of birth. For example, 31 3 1980',
       invalid: 'Please enter a valid date of birth. For example, 31 3 1980',
     },
     inputFields: {
