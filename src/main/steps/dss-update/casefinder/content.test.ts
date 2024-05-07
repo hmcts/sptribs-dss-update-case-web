@@ -10,10 +10,10 @@ const enContent = {
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
-      required: 'Please enter a reference number',
+      required: 'Enter a reference number',
       notNumeric:
-        'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
-      caseNotFound: 'Please enter a valid reference number',
+        'Enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
+      caseNotFound: 'Enter a valid reference number',
     },
   },
 };

@@ -26,8 +26,8 @@ const en = {
   },
   [StatusCodes.INTERNAL_SERVER_ERROR]: {
     ...common.en,
-    title: 'Sorry, we’re having technical problems',
-    info: 'Please try again in a few minutes',
+    title: 'We’re having technical problems',
+    info: 'Try again in a few minutes',
   },
 };
 

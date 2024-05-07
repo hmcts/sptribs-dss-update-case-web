@@ -19,7 +19,7 @@ const enContent = {
   },
   errors: {
     submissionError: {
-      required: 'Your application is not submitted. Please try again',
+      required: 'Your application is not submitted. Try again',
     },
   },
 };

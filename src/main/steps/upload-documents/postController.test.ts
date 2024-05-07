@@ -144,7 +144,7 @@ describe('Testing the post controller', () => {
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
     expect(req.session?.fileErrors[0].text).toEqual(
-      'File size exceeds the maximum permitted value. Please upload a file that is less than 100MB'
+      'File size exceeds the maximum permitted value. Upload a file that is less than 100MB'
     );
   });
 
@@ -233,7 +233,7 @@ describe('Testing the post controller', () => {
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
     expect(req.session?.fileErrors[0].text).toEqual(
-      'File size exceeds the maximum permitted value. Please upload a file that is less than 100MB'
+      'File size exceeds the maximum permitted value. Upload a file that is less than 100MB'
     );
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
@@ -254,7 +254,7 @@ describe('Testing the post controller', () => {
     controller.uploadFileError(newRequest, res, '', 'uploadError');
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session?.fileErrors).toHaveLength(1);
-    expect(req.session?.fileErrors[0].text).toEqual('Document upload or deletion has failed. Please try again');
+    expect(req.session?.fileErrors[0].text).toEqual('Document upload or deletion has failed. Try again');
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
 
