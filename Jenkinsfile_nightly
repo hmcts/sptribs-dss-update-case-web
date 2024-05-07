@@ -50,14 +50,17 @@ pipelineConf.vaultSecrets = secrets
 withNightlyPipeline(type, product, component) {
   env.TEST_URL = "https://sptribs-dss-update-case-web.aat.platform.hmcts.net/?dss-updateType=FMP"
   env.DS_UI_URL = params.FRONTEND_URL
-  enableCrossBrowserTest(60)
-  //enableFullFunctionalTest(120)
+
   loadVaultSecrets(secrets)
+
+  enableCrossBrowserTest(60)
+  enableFortifyScan()
+
+  //  enableFullFunctionalTest(120)
   //  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
-  //  enableFortifyScan()
   //  enableSecurityScan()
 
-afterAlways('test') {
+  afterAlways('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
 
@@ -66,5 +69,9 @@ afterAlways('test') {
   }
   afterAlways('crossBrowserTest') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
+
+  afterAlways('fortify-scan') {
+      steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/Fortify Scan/**/*'
   }
 }
