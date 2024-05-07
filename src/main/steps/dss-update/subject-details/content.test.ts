@@ -15,12 +15,12 @@ const englishContent = () => ({
   year: 'Year',
   errors: {
     subjectFullName: {
-      required: 'Please enter full name',
-      invalid: 'Please enter a valid name',
+      required: 'Please enter a full name. This name must match exactly with the case record',
+      invalid: 'Please enter a valid name. This name must match exactly with the case record',
     },
     subjectDOB: {
-      required: 'Please enter date of birth',
-      invalid: 'Please enter valid date of birth',
+      required: 'Please enter a full date of birth. For example, 31 3 1980',
+      invalid: 'Please enter a valid date of birth. For example, 31 3 1980',
     },
     inputFields: {
       required:
@@ -44,12 +44,12 @@ const welshContent = () => ({
   year: 'Blwyddyn',
   errors: {
     subjectFullName: {
-      required: 'Nodwch enw llawn',
-      invalid: 'Rhowch enw dilys',
+      required: "Nodwch enw llawn. Rhaid i'r enw hwn gyd-fynd yn union â chofnod yr achos",
+      invalid: "Rhowch enw dilys. Rhaid i'r enw hwn gyd-fynd yn union â chofnod yr achos",
     },
     subjectDOB: {
-      required: 'Nodwch ddyddiad geni',
-      invalid: 'Nodwch ddyddiad geni dilys',
+      required: 'Nodwch ddyddiad geni. Er enghraifft, 31 3 1980',
+      invalid: 'Nodwch ddyddiad geni dilys. Er enghraifft, 31 3 1980',
     },
     inputFields: {
       required:
