@@ -67,14 +67,17 @@
     <ul class="govuk-list">
   {% for document in uploadedDocuments %}
       <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
-        {{ document.fileName }}
-        <br>
-        <br>
-        {{ document.description }}
-        {% set documentId = document.documentId %}
-        <a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right">{{ delete }}</a>
-        <br>
-        <br>
+        <table class="documentRelevanceAndDeletion">
+          <tr>
+            <td class="documentRelevanceAndDeletionAlignment">{{ document.fileName }}
+            {% if document.description %}
+              <br><br>
+            {{ document.description }}</td>
+            {%endif%}
+            {% set documentId = document.documentId %}
+            <td class="documentRelevanceAndDeletionAlignment"><a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right">{{ delete }}</a></td>
+          </tr>
+        </table>
       </li>
     {%endfor%}
 </ul>
