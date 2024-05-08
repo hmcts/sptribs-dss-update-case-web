@@ -19,23 +19,23 @@
 {%endif%}
 
 <label for="documentDetail"><h1 class="govuk-heading-l govuk-!-margin-top-7">{{title}}</h1></label>
- <form action="{{postURL}}/upload-documents" method="post" enctype="multipart/form-data">
+<form action="{{postURL}}/upload-documents" method="post" enctype="multipart/form-data">
 <div class="{% if textAreaErrorMsg %}govuk-form-group--error {%endif%}">
   {%if textAreaErrorMsg %}
-  <p id="document-detail-error" class="govuk-error-message">
-      <span class="govuk-visually-hidden"></span> {{textAreaErrorMsg}}
+    <p id="document-detail-error" class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span>{{textAreaErrorMsg}}
     </p>
   {%endif%}
-{{ govukTextarea({
-  name: "documentDetail",
-  id: "documentDetail",
-  value: documentDetail,
-  hint: {
-    text: paragraph1,
-    classes: "govuk-hint",
-    isPageHeading: false
-  }
-}) }}
+  {{ govukTextarea({
+    name: "documentDetail",
+    id: "documentDetail",
+    value: documentDetail,
+    hint: {
+      text: paragraph1,
+      classes: "govuk-hint",
+      isPageHeading: false
+    }
+  }) }}
 </div>
 <h2 class="govuk-heading-m">{{additionalDocumentsHeading}}</h2>
 
@@ -54,7 +54,7 @@
 
 {% set fileRequirements = ""%}
 {% for item in uploadHelpBullets %}
-    {% set fileRequirements = fileRequirements + "<li>" + item + "</li>"%}
+  {% set fileRequirements = fileRequirements + "<li>" + item + "</li>"%}
 {% endfor %}
 {% set uploadRequirements = "<ul class='‘govuk-list govuk-list--bullet’'><div class='govuk-body-s'>" + fileRequirements + "</div></ul><p class='govuk-body-s'>"+ guideText + "</p>" %}
 
@@ -63,48 +63,64 @@
   text: uploadRequirements | safe
 }) }}
 
-         {% if uploadedDocuments.length > 0 %}
-    <ul class="govuk-list">
+{% if uploadedDocuments.length > 0 %}
+  <ul class="govuk-list">
   {% for document in uploadedDocuments %}
-      <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
-        <table class="documentRelevanceAndDeletion">
-          <tr>
-            <td class="documentRelevanceAndDeletionAlignment">{{ document.fileName }}
-            {% if document.description %}
-              <br><br>
-            {{ document.description }}</td>
-            {%endif%}
-            {% set documentId = document.documentId %}
-            <td class="documentRelevanceAndDeletionAlignment"><a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right">{{ delete }}</a></td>
-          </tr>
-        </table>
-      </li>
-    {%endfor%}
+    <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
+      <table class="documentRelevanceAndDeletion">
+        <tr>
+          <td class="documentRelevanceAndDeletionAlignment">{{ document.fileName }}
+          {% if document.description %}
+            <br><br>
+          {{ document.description }}</td>
+          {%endif%}
+          {% set documentId = document.documentId %}
+          <td class="documentRelevanceAndDeletionAlignment"><a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right">{{ delete }}</a></td>
+        </tr>
+      </table>
+    </li>
+  {%endfor%}
 </ul>
 {%endif%}
 
 <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if uploadedDocuments|length %} hidden{% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
 
-    <p class="govuk-body">
-    {{ fileFormats }}<br>
-    {{ fileSize }}
-  </p>
+<p class="govuk-body">
+  {{ fileFormats }}<br>
+  {{ fileSize }}
+</p>
 
- <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
-  <div class=" {% if (fileErrors.length > 0) and (textAreaErrorMsg === "")  %}govuk-form-group--error {%endif%}">
- {%if fileErrors.length > 0  %}
-  <p id="passport-issued-error" class="govuk-error-message">
-      <span class="govuk-visually-hidden"></span> {{errorMessage}}
-    </p>
-  {%endif%}
-      {{ govukFileUpload({
-  id: "file-upload-1",
-  name: "documents",
-  classes: "govuk-!-margin-bottom-3",
-  label: {
+<input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
+<div class=" {% if (fileErrors.length > 0) and (textAreaErrorMsg === "")  %}govuk-form-group--error {%endif%}">
+{%if fileErrors.length > 0  %}
+{{ govukFileUpload({
+    id: "file-upload-1",
+    name: "documents",
+    classes: "govuk-!-margin-bottom-3",
+    label: {
+      text: uploadAFile
+    },
+    errorMessage: {
+      text:fileErrors[0].text
+    }
+}) }}
+ {# CANNOT USE THIS AS IT APPEARS ABOVE "UPLOAD A FILE" AND NOT BELOW 
+ {% for fileError in fileErrors %}
+  <p class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span>
+      {{fileError.text}}
+  </p>
+  {%endfor%} #}
+{%else%}
+{{ govukFileUpload({
+    id: "file-upload-1",
+    name: "documents",
+    classes: "govuk-!-margin-bottom-3",
+    label: {
       text: uploadAFile
     }
 }) }}
+{%endif%}
 {% set errorForFileDescription = ""%}
 {% for error in fileErrors %}
 {% if error.propertyName !== 'fileDescriptionRequired' %}
