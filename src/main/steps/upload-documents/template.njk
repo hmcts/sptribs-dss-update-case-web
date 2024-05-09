@@ -20,8 +20,8 @@
 
 <label for="documentDetail"><h1 class="govuk-heading-l govuk-!-margin-top-7">{{title}}</h1></label>
 <form action="{{postURL}}/upload-documents" method="post" enctype="multipart/form-data">
-<div class="{% if textAreaErrorMsg %}govuk-form-group--error {%endif%}">
-  {%if textAreaErrorMsg %}
+<div class="{% if textAreaErrorMsg %}govuk-form-group--error {% endif %}">
+  {% if textAreaErrorMsg %}
     <p id="document-detail-error" class="govuk-error-message">
       <span class="govuk-visually-hidden">Error:</span>{{textAreaErrorMsg}}
     </p>
@@ -52,9 +52,9 @@
 <p class="govuk-body">{{caseRelevancySubTitle}}</p>
 
 
-{% set fileRequirements = ""%}
+{% set fileRequirements = "" %}
 {% for item in uploadHelpBullets %}
-  {% set fileRequirements = fileRequirements + "<li>" + item + "</li>"%}
+  {% set fileRequirements = fileRequirements + "<li>" + item + "</li>" %}
 {% endfor %}
 {% set uploadRequirements = "<ul class='‘govuk-list govuk-list--bullet’'><div class='govuk-body-s'>" + fileRequirements + "</div></ul><p class='govuk-body-s'>"+ guideText + "</p>" %}
 
@@ -91,7 +91,7 @@
 </p>
 
 <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
-<div class=" {% if (fileErrors.length > 0) and (textAreaErrorMsg === "")  %}govuk-form-group--error {%endif%}">
+<div class=" {% if (fileErrors.length > 0) and (textAreaErrorMsg === "")  %}govuk-form-group--error {% endif %}">
 {% if fileErrors.length > 0  %}
 {{ govukFileUpload({
     id: "file-upload-1",
@@ -115,11 +115,11 @@
     }
 }) }}
 {% endif %}
-{% set errorForFileDescription = ""%}
+{% set errorForFileDescription = "" %}
 {% for error in fileErrors %}
 {% if error.propertyName !== 'fileDescriptionRequired' %}
 {% else %}
-{% set errorForFileDescription = "govuk-input--error"%}
+{% set errorForFileDescription = "govuk-input--error" %}
 {% endif %}
 {% endfor %}
 <label class="govuk-label govuk-label-s" for="eventName">{{documentListLabel}}</label>
