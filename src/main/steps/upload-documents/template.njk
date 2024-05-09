@@ -16,7 +16,7 @@
   errorList: fileErrors
 }) }}
 
-{%endif%}
+{% endif %}
 
 <label for="documentDetail"><h1 class="govuk-heading-l govuk-!-margin-top-7">{{title}}</h1></label>
 <form action="{{postURL}}/upload-documents" method="post" enctype="multipart/form-data">
@@ -25,7 +25,7 @@
     <p id="document-detail-error" class="govuk-error-message">
       <span class="govuk-visually-hidden">Error:</span>{{textAreaErrorMsg}}
     </p>
-  {%endif%}
+  {% endif %}
   {{ govukTextarea({
     name: "documentDetail",
     id: "documentDetail",
@@ -73,15 +73,15 @@
           {% if document.description %}
             <br><br>
           {{ document.description }}</td>
-          {%endif%}
+          {% endif %}
           {% set documentId = document.documentId %}
           <td class="documentRelevanceAndDeletionAlignment"><a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right">{{ delete }}</a></td>
         </tr>
       </table>
     </li>
-  {%endfor%}
+  {% endfor %}
 </ul>
-{%endif%}
+{% endif %}
 
 <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if uploadedDocuments|length %} hidden{% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
 
@@ -92,7 +92,7 @@
 
 <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
 <div class=" {% if (fileErrors.length > 0) and (textAreaErrorMsg === "")  %}govuk-form-group--error {%endif%}">
-{%if fileErrors.length > 0  %}
+{% if fileErrors.length > 0  %}
 {{ govukFileUpload({
     id: "file-upload-1",
     name: "documents",
@@ -104,14 +104,8 @@
       text:fileErrors[0].text
     }
 }) }}
- {# CANNOT USE THIS AS IT APPEARS ABOVE "UPLOAD A FILE" AND NOT BELOW 
- {% for fileError in fileErrors %}
-  <p class="govuk-error-message">
-      <span class="govuk-visually-hidden">Error:</span>
-      {{fileError.text}}
-  </p>
-  {%endfor%} #}
-{%else%}
+
+{% else %}
 {{ govukFileUpload({
     id: "file-upload-1",
     name: "documents",
@@ -120,20 +114,20 @@
       text: uploadAFile
     }
 }) }}
-{%endif%}
+{% endif %}
 {% set errorForFileDescription = ""%}
 {% for error in fileErrors %}
 {% if error.propertyName !== 'fileDescriptionRequired' %}
 {% else %}
 {% set errorForFileDescription = "govuk-input--error"%}
-{%endif%}
+{% endif %}
 {% endfor %}
 <label class="govuk-label govuk-label-s" for="eventName">{{documentListLabel}}</label>
 <input class="govuk-input {{errorForFileDescription}}" id="eventName" name="eventName" type="text" autocomplete="on">
 </div>
 {% for error in fileErrors %}
 {% if error.propertyName === 'fileDescriptionRequired' %}
-{%endif%}
+{% endif %}
 {% endfor %}
 <div class="govuk-!-margin-top-3">
   <p class="govuk-body">{{uploadFileHint}}</p>
