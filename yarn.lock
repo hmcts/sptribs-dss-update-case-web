@@ -2818,10 +2818,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@transloadit/prettier-bytes@npm:^0.3.0":
-  version: 0.3.2
-  resolution: "@transloadit/prettier-bytes@npm:0.3.2"
-  checksum: dda069cf70fcb0b5aa6a7cb3e1ccfe3e33bdef440ad9be70d8e8a3233a65420b75bd15fdbb90576f5bb8e642381b1120e61de0c05cbad095260bf80706ec8f1f
+"@transloadit/prettier-bytes@npm:^0.3.4":
+  version: 0.3.4
+  resolution: "@transloadit/prettier-bytes@npm:0.3.4"
+  checksum: abd6b7a12f57d5db3e744cbfa793e1fbb2aa15943b55901882eed8f32fd95cb72a2805db4e8251862192d8ebaa889a696657f46c9cd41347538d377dea731d58
   languageName: node
   linkType: hard
 
@@ -3161,11 +3161,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*, @types/node@npm:^20.1.0, @types/node@npm:^20.5.7":
-  version: 20.12.10
-  resolution: "@types/node@npm:20.12.10"
+  version: 20.12.11
+  resolution: "@types/node@npm:20.12.11"
   dependencies:
     undici-types: ~5.26.4
-  checksum: 8c35a349f494846c1f1db4e4f8b21e7fc7f6ee14d99a0998f38699f941652be0e2a236b11f13fe404a6fec9b9a82e0e39b80ca71dafc38c742b160cc498b56c3
+  checksum: 0cc06bb69cd8150e96fcf65fa3d7f2eeebedf110a99e1834a7fa55bd6c04e7b6d73f74321a2acfc569ca300c0b88d8e1b702ce245b3802f6e5f6a8987fef451a
   languageName: node
   linkType: hard
 
@@ -3468,10 +3468,10 @@ __metadata:
   linkType: hard
 
 "@uppy/core@npm:^3.4.0":
-  version: 3.11.1
-  resolution: "@uppy/core@npm:3.11.1"
+  version: 3.11.2
+  resolution: "@uppy/core@npm:3.11.2"
   dependencies:
-    "@transloadit/prettier-bytes": ^0.3.0
+    "@transloadit/prettier-bytes": ^0.3.4
     "@uppy/store-default": ^3.2.2
     "@uppy/utils": ^5.9.0
     lodash: ^4.17.21
@@ -3479,7 +3479,7 @@ __metadata:
     namespace-emitter: ^2.0.1
     nanoid: ^4.0.0
     preact: ^10.5.13
-  checksum: 2bbdad616cb0dcff5f22e0f5b338445af4cb3aaeb3c75550bcbded1c2f291e361e7308fc28703965b1fe712da41ef264ce58b57410341998cbdfac2f26eeaf23
+  checksum: 083e165a306344a75bba081163e5d72c04eaef31fa5b088140bf95ee6b3c6d521034c22815c266ff5a607ccdf11ba04ee4b7fe6b9432ac5e5e39936f19156b1b
   languageName: node
   linkType: hard
 
