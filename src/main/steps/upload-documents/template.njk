@@ -72,8 +72,9 @@
             <td class="documentRelevanceAndDeletionAlignment">{{ document.fileName }}
             {% if document.description %}
               <br><br>
-            {{ document.description }}</td>
+            {{ document.description }}
             {%endif%}
+            </td>
             {% set documentId = document.documentId %}
             <td class="documentRelevanceAndDeletionAlignment"><a href="{{postURL}}?removeId={{documentId}}" class="govuk-link--no-visited-state float-right">{{ delete }}</a></td>
           </tr>
