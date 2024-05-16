@@ -17,6 +17,7 @@ export const enum ValidationError {
   NOT_NUMERIC = 'notNumeric',
   LESS = 'lessthan20',
   NOT_UPLOADED = 'NOT_UPLOADED',
+  CONTAINS_MARKDOWN_LINK = 'containsMarkdownLink',
 }
 
 export const isFieldFilledIn: Validator = value => {
@@ -104,6 +105,12 @@ export const isDateInputNotFilled: DateValidator = date => {
     return invalid;
   } else {
     return;
+  }
+};
+
+export const isMarkDownLinkIncluded: Validator = value => {
+  if (value && (value as string).match(/^.*?\[(.*?)]\((https?:\/\/.*?)\)*.*?$/)) {
+    return ValidationError.CONTAINS_MARKDOWN_LINK;
   }
 };
 
