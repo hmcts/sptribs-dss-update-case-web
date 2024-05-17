@@ -83,12 +83,12 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   ): Promise<void> {
     if (req.files) {
       const { documents } = files;
-      if (!this.isValidFileFormat(files)) {
+      if (isMarkDownLinkIncluded(req.body['eventName'] as string)) {
+        this.uploadFileError(req, res, redirectUrl, 'containsMarkdownLink');
+      } else if (!this.isValidFileFormat(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileFormat');
       } else if (this.isFileSizeGreaterThanMaxAllowed(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileSize');
-      } else if (isMarkDownLinkIncluded(req.body['eventName'] as string)) {
-        this.uploadFileError(req, res, redirectUrl, 'containsMarkdownLink');
       } else {
         const formData: FormData = new FormData();
         formData.append('file', documents.data, {
