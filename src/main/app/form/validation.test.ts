@@ -203,6 +203,16 @@ describe('isMarkDownLinkIncluded()', () => {
     expect(isValid).toStrictEqual('containsMarkdownLink');
   });
 
+  test('should return null if value passed contains []() and is valid', async () => {
+    const isValid = isMarkDownLinkIncluded('[hello](test)');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('should return null if value passed contains ) before [ and is valid', async () => {
+    const isValid = isMarkDownLinkIncluded('(some)  [tests]');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
   test('should return null if value passed is valid', async () => {
     const isValid = isMarkDownLinkIncluded('Some document info');
     expect(isValid).toStrictEqual(undefined);
