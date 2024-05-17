@@ -109,7 +109,7 @@ export const isDateInputNotFilled: DateValidator = date => {
 };
 
 export const isMarkDownLinkIncluded: Validator = value => {
-  if (value && (value as string).match(/^.*?\[(.*?)]\((https?:\/\/.*?)\)*.*?$/)) {
+  if (value && (value as string).match(/^[\s\S]*\[(.*?)]\((https?:\/\/.*?)\)*[\s\S]*$/)) {
     return ValidationError.CONTAINS_MARKDOWN_LINK;
   }
 };
