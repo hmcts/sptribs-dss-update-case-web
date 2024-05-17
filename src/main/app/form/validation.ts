@@ -115,7 +115,7 @@ export const isMarkDownLinkIncluded: Validator = value => {
 
   if (firstIndex !== -1 && secondIndex !== -1 && firstIndex < secondIndex) {
     const subStringToValidate = valueToValidate.substring(firstIndex, secondIndex + 1);
-    if (subStringToValidate && (subStringToValidate as string).match(/^\[(.*?)]\((https?:\/\/.*?)\)$/)) {
+    if (subStringToValidate && new RegExp(/^\[(.*?)]\((https?:\/\/.*?)\)$/).exec(subStringToValidate)) {
       return ValidationError.CONTAINS_MARKDOWN_LINK;
     }
   }
