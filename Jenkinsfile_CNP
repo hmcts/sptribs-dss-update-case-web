@@ -34,10 +34,49 @@ def pipelineConf = new AppPipelineConfig()
 pipelineConf.vaultSecrets = secrets
 
 withPipeline(type, product, component) {
+  enableAksStagingDeployment()
   disableLegacyDeployment()
+  syncBranchesWithMaster(branchesToSync)
   loadVaultSecrets(secrets)
 
-  afterAlways('build') {
+  afterSuccess('build') {
     yarnBuilder.yarn('build')
+  }
+
+  before('smoketest:preview') {
+    env.SPTRIBS_DSS_UPDATE_CASE_WEB_URL = "https://sptribs-dss-update-case-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/?edgecaseType=CIC"
+  }
+
+  afterAlways('smoketest:preview') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
+
+  before('smoketest:aat') {
+    env.SPTRIBS_DSS_UPDATE_CASE_WEB_URL = "https://sptribs-dss-update-case-web.aat.platform.hmcts.net/"
+  }
+
+  afterAlways('smoketest:aat') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
+
+  afterAlways('smoketest:preview') {
+    publishHTML target: [
+      allowMissing         : true,
+      alwaysLinkToLastBuild: true,
+      keepAll              : true,
+      reportDir            : "build/reports/tests/smoke",
+      reportFiles          : "index.html",
+      reportName           : "Smoke Test Report"
+    ]
+  }
+  afterAlways('smoketest:aat') {
+    publishHTML target: [
+      allowMissing         : true,
+      alwaysLinkToLastBuild: true,
+      keepAll              : true,
+      reportDir            : "build/reports/tests/smoke",
+      reportFiles          : "index.html",
+      reportName           : "Smoke Test Report"
+    ]
   }
 }
