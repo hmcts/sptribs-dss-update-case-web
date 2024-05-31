@@ -8,18 +8,24 @@ import { APPLICATION_CONFIRMATION, CHECK_YOUR_ANSWERS } from '../../urls';
 import CheckYourAnswersController from './postController';
 
 jest.mock('axios');
+jest.mock('jwt-decode', () => ({
+  jwtDecode: () => ({
+    accessToken: 'token',
+    sub: 'test@test.com',
+    given_name: 'John',
+    family_name: 'Dorian',
+    uid: '123',
+    roles: ['citizen'],
+  }),
+}));
 let req, res;
 
 describe('CheckYourAnswersController test cases', () => {
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyJ9.KaDIFSDdD3ZIYCl_qavvYbQ3a4abk47iBOZhB1-9mUQ';
-
   const mockedAxios = axios as jest.Mocked<typeof axios>;
-
   const mockedRequest = mockRequest({
     session: {
       user: {
-        accessToken: token,
+        accessToken: 'token',
       },
       userCase: {
         id: '1709056435297860',
@@ -36,15 +42,14 @@ describe('CheckYourAnswersController test cases', () => {
       ],
     },
   });
+  const mockFormContent = {
+    fields: {},
+  } as unknown as FormContent;
 
   beforeEach(() => {
     req = mockRequest();
     res = mockResponse();
   });
-
-  const mockFormContent = {
-    fields: {},
-  } as unknown as FormContent;
 
   test('Should submit the case and navigate to confirmation page', async () => {
     mockedAxios.put.mockImplementation(url => {
@@ -60,7 +65,7 @@ describe('CheckYourAnswersController test cases', () => {
     req = mockRequest({
       session: {
         user: {
-          accessToken: token,
+          accessToken: 'token',
         },
         documentDetail: 'some info about doc',
         userCase: {
