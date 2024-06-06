@@ -3,6 +3,7 @@ import {
   APPLICATION_CONFIRMATION,
   CASE_SEARCH_URL,
   CHECK_YOUR_ANSWERS,
+  COOKIES_PAGE,
   DATA_VERIFICATION,
   START_HOME,
   UPLOAD_DOCUMENT,
@@ -33,5 +34,9 @@ export const dss_update_steps: Step[] = [
     url: APPLICATION_CONFIRMATION,
     showInSection: Sections.dss_update,
     getNextStep: () => START_HOME,
+  },
+  {
+    url: COOKIES_PAGE,
+    getNextStep: () => CASE_SEARCH_URL,
   },
 ];

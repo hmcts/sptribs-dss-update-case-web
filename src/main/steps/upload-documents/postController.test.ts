@@ -148,6 +148,24 @@ describe('Testing the post controller', () => {
     );
   });
 
+  test('checkFileValidation - contains markdown link error', async () => {
+    const newRequest = req;
+    newRequest.body['eventName'] = 'info [Text](https://www.google.co.uk) some info';
+    newRequest.session.caseDocuments = [];
+    newRequest.session.fileErrors = [];
+    newRequest.files = { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
+    await controller.checkFileValidation(
+      { documents: { name: 'sample.mp3', size: 10000, mimetype: 'audio/mpeg', data: '' } },
+      newRequest,
+      res,
+      ''
+    );
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'The data entered is not valid. Link markdown characters are not allowed in this field.'
+    );
+  });
+
   test('checkFileValidation - no file error', async () => {
     const newRequest = req;
     newRequest.session['save'] = () => '';
@@ -222,6 +240,19 @@ describe('Testing the post controller', () => {
     expect(req.session?.fileErrors).toHaveLength(1);
     expect(req.session?.fileErrors[0].text).toEqual(
       'You cannot continue without providing additional information or a document'
+    );
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('uploadFileError containsMarkdownLink', () => {
+    const newRequest = req;
+    req.session.documentDetail = 'info [Text](https://www.google.co.uk) some info';
+    newRequest.session['save'] = () => '';
+    controller.uploadFileError(newRequest, res, '', 'containsMarkdownLink');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'The data entered is not valid. Link markdown characters are not allowed in this field.'
     );
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
@@ -342,6 +373,20 @@ describe('Testing the post controller', () => {
     expect(req.session?.fileErrors).toHaveLength(1);
     expect(req.session?.fileErrors[0].text).toEqual(
       'You cannot continue without providing additional information or a document'
+    );
+    expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
+  });
+
+  test('Continuing with invalid additional information', async () => {
+    const newRequest = req;
+    newRequest.body['documentDetail'] = 'info [Text](https://www.google.co.uk) some info';
+    newRequest.session.caseDocuments = [];
+    newRequest.session['save'] = () => '';
+    newRequest.body.continue = true;
+    controller.post(newRequest, res);
+    expect(req.session?.fileErrors).toHaveLength(1);
+    expect(req.session?.fileErrors[0].text).toEqual(
+      'The data entered is not valid. Link markdown characters are not allowed in this field.'
     );
     expect(req.session?.fileErrors[0].href).toEqual('#file-upload-1');
   });
