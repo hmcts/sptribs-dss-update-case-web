@@ -124,7 +124,7 @@
     "npm-run-all2": "^6.1.2",
     "pa11y": "^6.2.3",
     "playwright": "^1.37.1",
-    "prettier": "^3.0.3",
+    "prettier": "^3.3.1",
     "sass-loader": "^14.1.1",
     "sonar-scanner": "^3.1.0",
     "style-loader": "^4.0.0",
