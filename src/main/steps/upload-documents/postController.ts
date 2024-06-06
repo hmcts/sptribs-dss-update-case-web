@@ -8,12 +8,11 @@ import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../app/controller/PostController';
 import { uploadDocument } from '../../app/fileUpload/documentManager';
 import { FormFields, FormFieldsFn } from '../../app/form/Form';
+import { isMarkDownLinkIncluded } from '../../app/form/validation';
 import { getServiceAuthToken } from '../../app/s2s/get-service-auth-token';
 import { CHECK_YOUR_ANSWERS } from '../urls';
 
 import { getErrors } from './content';
-/* The UploadDocumentController class extends the PostController class and overrides the
-PostDocumentUploader method */
 
 export const documentExtensions = ['jpg', 'jpeg', 'bmp', 'png', 'pdf', 'doc', 'docx', 'rtf', 'xlsx', 'xls', 'txt'];
 export const multimediaExtensions = ['mp3', 'mp4'];
@@ -42,6 +41,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
       if (numDocsUploaded === 0 && req.session['documentDetail'] === '') {
         this.uploadFileError(req, res, req.originalUrl, 'noInput');
+      } else if (isMarkDownLinkIncluded(req.session['documentDetail'])) {
+        this.uploadFileError(req, res, req.originalUrl, 'containsMarkdownLink');
       } else {
         super.redirect(req, res, CHECK_YOUR_ANSWERS);
       }
@@ -82,7 +83,9 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   ): Promise<void> {
     if (req.files) {
       const { documents } = files;
-      if (!this.isValidFileFormat(files)) {
+      if (isMarkDownLinkIncluded(req.body['eventName'] as string)) {
+        this.uploadFileError(req, res, redirectUrl, 'containsMarkdownLink');
+      } else if (!this.isValidFileFormat(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileFormat');
       } else if (this.isFileSizeGreaterThanMaxAllowed(files)) {
         this.uploadFileError(req, res, redirectUrl, 'fileSize');
@@ -139,6 +142,9 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         break;
       case 'fileFormat':
         errorMessage = documentUploadErrors.documentUpload.fileFormat;
+        break;
+      case 'containsMarkdownLink':
+        errorMessage = documentUploadErrors.documentUpload.containsMarkdownLink;
         break;
       default:
         errorMessage = '';

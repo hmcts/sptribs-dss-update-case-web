@@ -2,6 +2,7 @@ import {
   APPLICATION_CONFIRMATION,
   CASE_SEARCH_URL,
   CHECK_YOUR_ANSWERS,
+  COOKIES_PAGE,
   DATA_VERIFICATION,
   START_HOME,
   UPLOAD_DOCUMENT,
@@ -11,7 +12,7 @@ import { dss_update_steps } from './dss-sequence';
 
 describe('Sequence must match respective path', () => {
   test('must match the path', () => {
-    expect(dss_update_steps).toHaveLength(5);
+    expect(dss_update_steps).toHaveLength(6);
 
     expect(dss_update_steps[0].url).toBe(CASE_SEARCH_URL);
     expect(dss_update_steps[0].getNextStep({})).toBe(DATA_VERIFICATION);
@@ -27,5 +28,8 @@ describe('Sequence must match respective path', () => {
 
     expect(dss_update_steps[4].url).toBe(APPLICATION_CONFIRMATION);
     expect(dss_update_steps[4].getNextStep({})).toBe(START_HOME);
+
+    expect(dss_update_steps[5].url).toBe(COOKIES_PAGE);
+    expect(dss_update_steps[5].getNextStep({})).toBe(CASE_SEARCH_URL);
   });
 });

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import config from 'config';
+import { set } from 'lodash';
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
@@ -9,7 +11,19 @@ import { CASE_SEARCH_URL, DATA_VERIFICATION } from '../../urls';
 import CaseFinderController from './postController';
 
 jest.mock('axios');
+jest.mock('jwt-decode', () => ({
+  jwtDecode: () => ({
+    accessToken: 'token',
+    sub: 'test@test.com',
+    given_name: 'John',
+    family_name: 'Dorian',
+    uid: '123',
+    roles: ['citizen'],
+  }),
+}));
 let req, res;
+
+set(config, 'services.idam.systemPassword', 'DUMMY_VALUE_REPLACE');
 
 beforeEach(() => {
   req = mockRequest();
@@ -24,9 +38,6 @@ const mockFormContent = {
     },
   },
 } as unknown as FormContent;
-
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyJ9.KaDIFSDdD3ZIYCl_qavvYbQ3a4abk47iBOZhB1-9mUQ';
 
 const caseData = {
   status: 200,
@@ -43,7 +54,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 mockedAxios.post.mockImplementation(url => {
   switch (url) {
     case 'https://idam-api.aat.platform.hmcts.net/o/token':
-      return Promise.resolve({ data: { id_token: token, access_token: token } });
+      return Promise.resolve({ data: { id_token: 'token', access_token: 'token' } });
     case 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/lease':
       return Promise.resolve({ data: 'TOKEN' });
     default:
