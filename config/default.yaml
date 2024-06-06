@@ -43,7 +43,7 @@ services:
     clientID: 'sptribs-dss-update-case-web'
     clientSecret: 'DUMMY_VALUE_REPLACE'
     systemUsername: 'DUMMY_VALUE_REPLACE'
-    systemPassword: 'DUMMY_VALUE_REPLACE'
+    systemPassword:
     caching: 'false'
   authProvider:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
