@@ -92,7 +92,7 @@
 </p>
 
 <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
-<div class=" {% if (fileErrors.length > 0) and (textAreaErrorMsg === "")  %}govuk-form-group--error {% endif %}">
+<div class=" {% if (fileErrors.length > 0) and (textAreaErrorMsg === "") %}govuk-form-group--error {% endif %}">
 {% if fileErrors.length > 0 %}
 {{ govukFileUpload({
     id: "file-upload-1",
