@@ -17,7 +17,8 @@ nodejs:
     CCD_URL: 'http://ccd-data-store-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     IDAM_API_URL: 'https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net/o/token'
     IDAM_WEB_URL: 'https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net/login'
-    CASE_API_URL: 'http://sptribs-case-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
+    CASE_API_URL: 'https://sptribs-case-api-pr-1784.preview.platform.hmcts.net'
+
 
   keyVaults:
     sptribs:
