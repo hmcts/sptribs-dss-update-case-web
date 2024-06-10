@@ -193,7 +193,7 @@
 
       {% set AnalyticsData =  []  %}
 
-      {% if  cookiesAnalytics == 'on' %}
+      {% if cookiesAnalytics == 'on' %}
       {% set AnalyticsData = [{
             value: 'on',
             text: useAnalyticsCookies,
@@ -236,7 +236,7 @@
 
       {% set APMData =  [] %}
 
-    {% if  cookiesApm == 'on' %}
+    {% if cookiesApm == 'on' %}
           {% set APMData = [{
                 value: 'on',
                 text: useApmCookies,
