@@ -3280,9 +3280,9 @@ __metadata:
   linkType: hard
 
 "@types/lodash@npm:^4.14.197":
-  version: 4.17.4
-  resolution: "@types/lodash@npm:4.17.4"
-  checksum: 268e652fd52d49189f155bc89b49bd4535aa44f0b6b0ed9ce7e50318307bda58147c49539d2047f39ca37cf5b5ea38dfb801d0dbcdbc8b019c95c1afc346b05a
+  version: 4.17.5
+  resolution: "@types/lodash@npm:4.17.5"
+  checksum: 3c9bb15772509f0ecb40428531863dbc3f064f2bf34bbccc2ce2b2923c69fb0868aec7e357b1d97fd0d7f7e435a014ea5c1adef8a64715529887179c97a5a823
   languageName: node
   linkType: hard
 
@@ -6914,8 +6914,8 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-jest@npm:^28.3.0":
-  version: 28.5.0
-  resolution: "eslint-plugin-jest@npm:28.5.0"
+  version: 28.6.0
+  resolution: "eslint-plugin-jest@npm:28.6.0"
   dependencies:
     "@typescript-eslint/utils": ^6.0.0 || ^7.0.0
   peerDependencies:
@@ -6927,7 +6927,7 @@ __metadata:
       optional: true
     jest:
       optional: true
-  checksum: 73ba168fb028db0765027c9e7844fe37cb6b660125929e72c5cf5c8e0fd4e67e7136409583256cf6267e066e1aa0be498c0ee729d1f3babaef4a3e7bdac428a8
+  checksum: 5abcef6933445ae0017dcea6cafacb4aaab6619f8660d1097667dd040129b4efa3f1284ded1c2605c7d14c11c976c725912f660dcdec8278c6f6ce793ff9dab6
   languageName: node
   linkType: hard
 
@@ -7185,11 +7185,11 @@ __metadata:
   linkType: hard
 
 "express-rate-limit@npm:^7.0.0":
-  version: 7.3.0
-  resolution: "express-rate-limit@npm:7.3.0"
+  version: 7.3.1
+  resolution: "express-rate-limit@npm:7.3.1"
   peerDependencies:
     express: 4 || 5 || ^5.0.0-beta.1
-  checksum: 6fe4c775391b0c516f1b37fc134fd6f924b8c0c81e7b68108d1ce5fa16aee3ffb9132c8785562ad71ad89f333093358f9750e0f25af060b8f03882205477b349
+  checksum: d82e374319be23bf68b9a6b572f431ec4021ea20f83d88eb724d197e0a88f1755898f66501f2696eb5ff49bcbd5c84dfbf6c0629989c01b3ef303b45acd9d7ec
   languageName: node
   linkType: hard
 
@@ -11051,8 +11051,8 @@ __metadata:
   linkType: hard
 
 "npm-run-all2@npm:^6.1.2":
-  version: 6.1.2
-  resolution: "npm-run-all2@npm:6.1.2"
+  version: 6.2.0
+  resolution: "npm-run-all2@npm:6.2.0"
   dependencies:
     ansi-styles: ^6.2.1
     cross-spawn: ^7.0.3
@@ -11066,7 +11066,7 @@ __metadata:
     npm-run-all2: bin/npm-run-all/index.js
     run-p: bin/run-p/index.js
     run-s: bin/run-s/index.js
-  checksum: dc595a8341eba7f1ac23496da1f5751b8372023716124d4204cee3e2e7005679902137247106861f01b9fc8976681245191ce925f2c6cea9c37a34c61cf1f9d0
+  checksum: ca5c109e6556684972af12a0b0f43e03ab20ba6042b12b38fc95bfa42ba4bb7ff8b7a3ce0772a1fc9f55eef60c26835f88e513185261c506a3832d53528c4f4c
   languageName: node
   linkType: hard
 
