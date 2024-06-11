@@ -191,9 +191,9 @@
       {% set cookiesAnalytics = cookiePrefrences['analytics'] %}
 
 
-      {% set AnalyticsData =  []  %}
+      {% set AnalyticsData = []  %}
 
-      {% if  cookiesAnalytics == 'on'%}
+      {% if cookiesAnalytics == 'on' %}
       {% set AnalyticsData = [{
             value: 'on',
             text: useAnalyticsCookies,
@@ -204,7 +204,7 @@
             text: doNotUseAnalyticsCookies
           }]
       %}
-      {%else%}
+      {% else %}
        {% set AnalyticsData = [{
             value: 'on',
             text: useAnalyticsCookies
@@ -214,7 +214,7 @@
             text: doNotUseAnalyticsCookies,
             checked: true
           }] %}
-      {%endif%}
+      {% endif %}
 
 
       {{ govukRadios({
@@ -234,9 +234,9 @@
 
     {% set cookiesApm = cookiePrefrences['apm'] %}
 
-      {% set APMData =  []%}
+      {% set APMData = [] %}
 
-    {% if  cookiesApm == 'on'%}
+    {% if cookiesApm == 'on' %}
           {% set APMData = [{
                 value: 'on',
                 text: useApmCookies,
@@ -247,7 +247,7 @@
                 text: doNotUseApmCookies
               }]
           %}
-          {%else%}
+          {% else %}
           {% set APMData = [{
                 value: 'on',
                 text: useApmCookies
@@ -257,7 +257,7 @@
                 text: doNotUseApmCookies,
                 checked: true
               }] %}
-      {%endif%}
+      {% endif %}
 
 
       {{ govukRadios({
