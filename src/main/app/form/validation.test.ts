@@ -3,6 +3,7 @@ import { CaseDate } from '../case/case';
 import {
   areDateFieldsFilledIn,
   atLeastOneFieldIsChecked,
+  containsInvalidCharacters,
   isAlphaNumeric,
   isDateInputInvalid,
   isDateInputNotFilled,
@@ -242,6 +243,18 @@ describe('isFieldLetters()', () => {
 
   test('Should not allow any special characters', async () => {
     const isValid = isFieldLetters('*');
+    expect(isValid).toStrictEqual('invalid');
+  });
+});
+
+describe('containsInvalidCharacters()', () => {
+  test('Should allow letters', async () => {
+    const isValid = containsInvalidCharacters('Test');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should not allow string containing html tags', async () => {
+    const isValid = containsInvalidCharacters('some text <a href="www.google.com">click here</a>');
     expect(isValid).toStrictEqual('invalid');
   });
 });
