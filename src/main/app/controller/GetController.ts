@@ -109,20 +109,6 @@ export class GetController {
     }
   }
 
-  //eslint-disable-next-line @typescript-eslint/ban-types
-  public saveSessionAndRedirect(req: AppRequest, res: Response, callback?: Function): void {
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      if (callback) {
-        callback();
-      } else {
-        res.redirect(req.url);
-      }
-    });
-  }
-
   private getName(req: AppRequest) {
     const caption = req.query['name'] as string;
     return caption;
