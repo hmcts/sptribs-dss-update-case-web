@@ -126,3 +126,9 @@ export const isFieldLetters: Validator = value => {
     return 'invalid';
   }
 };
+
+export const containsInvalidCharacters: Validator = value => {
+  if (value && (value as string).match(/[<>]/gu)) {
+    return 'invalid';
+  }
+};

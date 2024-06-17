@@ -46,6 +46,7 @@ const englishContent = () => ({
       uploadDeleteError: 'Document upload or deletion has failed. Please try again',
       maxFileError: 'You can only select up to 20 files at the same time',
       containsMarkdownLink: 'The data entered is not valid. Link markdown characters are not allowed in this field.',
+      invalid: 'The data entered contains invalid characters',
     },
   },
 });
@@ -97,6 +98,7 @@ const welshContent = () => ({
       uploadDeleteError: 'Mae llwytho neu ddileu ffeil wedi methu. Rhowch gynnig arall arni',
       maxFileError: 'Gallwch ond dewis hyd at 20 ffeil ar yr un pryd',
       containsMarkdownLink: "Nid yw'r data a gofnodwyd yn ddilys. Ni chaniateir nodau marcio i lawr yn y maes hwn.",
+      invalid: "Mae'r data a gofnodwyd yn cynnwys nodau annilys",
     },
   },
 });
