@@ -7,7 +7,6 @@ import {
   CASE_SEARCH_URL,
   CHECK_YOUR_ANSWERS,
   CONTACT_US,
-  COOKIES_PAGE,
   DATA_VERIFICATION,
   PRIVACY_POLICY,
   TERMS_AND_CONDITIONS,
@@ -31,7 +30,6 @@ describe('Routes', () => {
 
     expect(appMock.locals.errorHandler).toHaveBeenCalled();
 
-    expect(appMock.get).toHaveBeenCalledWith(COOKIES_PAGE, undefined);
     expect(appMock.get).toHaveBeenCalledWith(PRIVACY_POLICY, undefined);
     expect(appMock.get).toHaveBeenCalledWith(TERMS_AND_CONDITIONS, undefined);
     expect(appMock.get).toHaveBeenCalledWith(ACCESSIBILITY_STATEMENT, undefined);

@@ -3,11 +3,13 @@ import { CaseDate } from '../case/case';
 import {
   areDateFieldsFilledIn,
   atLeastOneFieldIsChecked,
+  containsInvalidCharacters,
   isAlphaNumeric,
   isDateInputInvalid,
   isDateInputNotFilled,
   isFieldFilledIn,
   isFieldLetters,
+  isMarkDownLinkIncluded,
   isNotNumeric,
 } from './validation';
 
@@ -186,6 +188,48 @@ describe('isDateInputNotFilled()', () => {
   });
 });
 
+describe('isMarkDownLinkIncluded()', () => {
+  test('should return error if value contains markdown link and additional text before', async () => {
+    const isValid = isMarkDownLinkIncluded('info [Text](https://www.google.co.uk)');
+    expect(isValid).toStrictEqual('containsMarkdownLink');
+  });
+
+  test('should return error if value contains markdown link and additional text before and after', async () => {
+    const isValid = isMarkDownLinkIncluded('info [Text](https://www.google.co.uk) some info');
+    expect(isValid).toStrictEqual('containsMarkdownLink');
+  });
+
+  test('should return error if value is a markdown link', async () => {
+    const isValid = isMarkDownLinkIncluded('[Text](https://www.google.co.uk)');
+    expect(isValid).toStrictEqual('containsMarkdownLink');
+  });
+
+  test('should return null if value passed contains []() and is valid', async () => {
+    const isValid = isMarkDownLinkIncluded('[hello](test)');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('should return null if value passed contains ) before [ and is valid', async () => {
+    const isValid = isMarkDownLinkIncluded('(some)  [tests]');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('should return null if value passed is valid', async () => {
+    const isValid = isMarkDownLinkIncluded('Some document info');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('should return null if value passed is empty', async () => {
+    const isValid = isMarkDownLinkIncluded('');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('should return null if value passed is undefined', async () => {
+    const isValid = isMarkDownLinkIncluded(undefined);
+    expect(isValid).toStrictEqual(undefined);
+  });
+});
+
 describe('isFieldLetters()', () => {
   test('Should allow letters', async () => {
     const isValid = isFieldLetters('Test');
@@ -199,6 +243,18 @@ describe('isFieldLetters()', () => {
 
   test('Should not allow any special characters', async () => {
     const isValid = isFieldLetters('*');
+    expect(isValid).toStrictEqual('invalid');
+  });
+});
+
+describe('containsInvalidCharacters()', () => {
+  test('Should allow letters', async () => {
+    const isValid = containsInvalidCharacters('Test');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should not allow string containing html tags', async () => {
+    const isValid = containsInvalidCharacters('some text <a href="www.google.com">click here</a>');
     expect(isValid).toStrictEqual('invalid');
   });
 });

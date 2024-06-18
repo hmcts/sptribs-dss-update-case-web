@@ -29,7 +29,11 @@
 
 
 {% block pageTitle %}
-  {{ serviceName }} - {{ title }} - {{ govUk }}
+  {% if (sessionErrors and sessionErrors.length > 0) or (fileErrors and fileErrors.length > 0) %}
+    {{ errorPrefix }} {{ serviceName }} - {{ title }} - {{ govUk }}
+  {% else %}
+    {{ serviceName }} - {{ title }} - {{ govUk }}
+  {% endif %}
 {% endblock %}
 
 {% block beforeContent %}
@@ -62,7 +66,7 @@
 
       {% if form %}
         {% block form %}
-          {% include "common/form/form.njk"%}
+          {% include "common/form/form.njk" %}
         {% endblock %}
       {% endif %}
 
