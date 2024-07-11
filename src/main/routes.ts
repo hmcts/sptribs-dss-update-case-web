@@ -54,8 +54,9 @@ export class Routes {
         }
       };
     };
-    
-    app.use('/dss-update/subject-details', restrictContentType(['application/x-www-form-urlencoded', 'application/json'])); 
-    
+    app.use(
+      '/dss-update/subject-details',
+      restrictContentType(['application/x-www-form-urlencoded', 'application/json'])
+    );
   }
 }
