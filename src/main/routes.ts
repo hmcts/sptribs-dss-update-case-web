@@ -44,5 +44,18 @@ export class Routes {
     }
 
     app.use(errorController.notFound as unknown as RequestHandler);
+
+    const restrictContentType = (contentType) => {
+      return (req, res, next) => {
+        if (contentType.indexOf(req) !== -1) {
+          res.status(403).send(`Unsupported Media Type.`);
+        } else {
+          next();
+        }
+      };
+    };
+    
+    app.use('/dss-update/subject-details', restrictContentType(['application/x-www-form-urlencoded', 'application/json'])); 
+    
   }
 }
