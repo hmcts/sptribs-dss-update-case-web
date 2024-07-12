@@ -18,6 +18,16 @@ export class Routes {
     const { errorHandler } = app.locals;
     const errorController = new ErrorController();
 
+    const restrictContentType = contentType => {
+      return (req, res, next) => {
+        if (contentType.indexOf(req.headers['content-type']) !== -1) {
+          res.status(403).send();
+        } else {
+          next();
+        }
+      };
+    };
+
     app.get(PRIVACY_POLICY, errorHandler(new PrivacyPolicyGetController().get));
     app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
@@ -39,24 +49,11 @@ export class Routes {
         const postController = postControllerFileName
           ? require(`${step.stepDir}/${postControllerFileName}`).default
           : PostController;
+        app.use(step.url, restrictContentType(['application/json']));
         app.post(step.url, errorHandler(new postController(step.form.fields).post));
       }
     }
 
     app.use(errorController.notFound as unknown as RequestHandler);
-
-    const restrictContentType = contentType => {
-      return (req, res, next) => {
-        if (contentType.indexOf(req) !== -1) {
-          res.status(403).send('Unsupported Media Type.');
-        } else {
-          next();
-        }
-      };
-    };
-    app.use(
-      '/dss-update/subject-details',
-      restrictContentType(['application/x-www-form-urlencoded', 'application/json'])
-    );
   }
 }
