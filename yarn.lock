@@ -3867,14 +3867,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/drop-target@npm:^2.0.1":
-  version: 2.1.0
-  resolution: "@uppy/drop-target@npm:2.1.0"
+"@uppy/drop-target@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@uppy/drop-target@npm:3.0.0"
   dependencies:
-    "@uppy/utils": ^5.9.0
+    "@uppy/utils": ^6.0.0
   peerDependencies:
-    "@uppy/core": ^3.11.0
-  checksum: b1af2379023ce0f0183d2af416425395bd96ab21c11c7e0f27aeffc0a71cb4eed1684c9e4bdaafe733b0029578cbcc600b5db18333b26203abd2419175664ea7
+    "@uppy/core": ^4.0.0
+  checksum: 7a5e6a8799bb47c276baca46e8a61c6964163126950f85432474117584be4f9c942ca84079b53a561c14915ea079eb9ec9d36f778e68af05f86b835749456b98
   languageName: node
   linkType: hard
 
@@ -3926,6 +3926,16 @@ __metadata:
     lodash: ^4.17.21
     preact: ^10.5.13
   checksum: c8a8445a3675ba9a1ba96d6c0b3f9c71086fb59a49af05d249355a75a3c488f5d0be3a83827dac54495bfd9b9c697b22ec440b38b5a4192691403d3f6096ef5b
+  languageName: node
+  linkType: hard
+
+"@uppy/utils@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@uppy/utils@npm:6.0.0"
+  dependencies:
+    lodash: ^4.17.21
+    preact: ^10.5.13
+  checksum: 564f85c5f1c12b4764537e6781c2fcd9d790b7ecef5c0430410714c2cd19b89908736d3a3de135778b14b7396d4daf6b4a28d5eb5732d80a762fadb8795ad624
   languageName: node
   linkType: hard
 
@@ -13454,7 +13464,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^7.0.0
     "@typescript-eslint/parser": ^7.7.0
     "@uppy/core": ^3.4.0
-    "@uppy/drop-target": ^2.0.1
+    "@uppy/drop-target": ^3.0.0
     "@uppy/file-input": ^3.0.3
     "@uppy/progress-bar": ^3.0.3
     "@uppy/xhr-upload": ^3.3.2
