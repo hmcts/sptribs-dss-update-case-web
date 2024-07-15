@@ -3878,15 +3878,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/file-input@npm:^3.0.3":
-  version: 3.1.2
-  resolution: "@uppy/file-input@npm:3.1.2"
+"@uppy/file-input@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@uppy/file-input@npm:4.0.0"
   dependencies:
-    "@uppy/utils": ^5.9.0
+    "@uppy/utils": ^6.0.0
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^3.11.0
-  checksum: 087cb18b446c77468b9cdc16c2d0df33da1012c21f5ae44e2985d2b6a8dc2f10643d99c8140e3c705a3bd3103792be61aaf39873d195ff498fc85dcbd750017e
+    "@uppy/core": ^4.0.0
+  checksum: 1c627e184eafeb060651f3b48d5b78bc1a1e6b7c88c3ebc309aa8f01ac25bf958f8070c017dcd839292ba0605e617b6b48235fb07762aa7b1081fc72296b89ee
   languageName: node
   linkType: hard
 
@@ -3926,6 +3926,16 @@ __metadata:
     lodash: ^4.17.21
     preact: ^10.5.13
   checksum: c8a8445a3675ba9a1ba96d6c0b3f9c71086fb59a49af05d249355a75a3c488f5d0be3a83827dac54495bfd9b9c697b22ec440b38b5a4192691403d3f6096ef5b
+  languageName: node
+  linkType: hard
+
+"@uppy/utils@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@uppy/utils@npm:6.0.0"
+  dependencies:
+    lodash: ^4.17.21
+    preact: ^10.5.13
+  checksum: 564f85c5f1c12b4764537e6781c2fcd9d790b7ecef5c0430410714c2cd19b89908736d3a3de135778b14b7396d4daf6b4a28d5eb5732d80a762fadb8795ad624
   languageName: node
   linkType: hard
 
@@ -13455,7 +13465,7 @@ __metadata:
     "@typescript-eslint/parser": ^7.7.0
     "@uppy/core": ^3.4.0
     "@uppy/drop-target": ^2.0.1
-    "@uppy/file-input": ^3.0.3
+    "@uppy/file-input": ^4.0.0
     "@uppy/progress-bar": ^3.0.3
     "@uppy/xhr-upload": ^3.3.2
     "@wdio/sauce-service": ^8.15.9

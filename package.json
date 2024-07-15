@@ -51,7 +51,7 @@
     "@types/toobusy-js": "^0.5.2",
     "@uppy/core": "^3.4.0",
     "@uppy/drop-target": "^2.0.1",
-    "@uppy/file-input": "^3.0.3",
+    "@uppy/file-input": "^4.0.0",
     "@uppy/progress-bar": "^3.0.3",
     "@uppy/xhr-upload": "^3.3.2",
     "applicationinsights": "^2.7.3",
