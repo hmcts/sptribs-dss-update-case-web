@@ -3890,15 +3890,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/progress-bar@npm:^3.0.3":
-  version: 3.1.1
-  resolution: "@uppy/progress-bar@npm:3.1.1"
+"@uppy/progress-bar@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@uppy/progress-bar@npm:4.0.0"
   dependencies:
-    "@uppy/utils": ^5.7.5
+    "@uppy/utils": ^6.0.0
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^3.10.0
-  checksum: d3a0abd4974b0d764420e51d62ea66b6d3fbe222f6c49aa6916c216b3c60657d05c045326dcc33879eb1f74ef4d92e50e44a6ab986697d869631377eee41599d
+    "@uppy/core": ^4.0.0
+  checksum: 50cb7150428da4da8248d8b518c9805a9dff63c62c583b8abac2afeba9ed13bcc61d5c946fb0acc80f117f4b582cd6fe24e1d308b79816b84e725fdba44806b3
   languageName: node
   linkType: hard
 
@@ -3909,16 +3909,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/utils@npm:^5.7.5":
-  version: 5.7.5
-  resolution: "@uppy/utils@npm:5.7.5"
-  dependencies:
-    lodash: ^4.17.21
-    preact: ^10.5.13
-  checksum: 96081251fb61f947302561c92e86b777929541da9f9beeb7b8fec6d006d43cbe499716f35fce03f091eafd1400a2bf61fefc772579180b874b901e4b2db8fe88
-  languageName: node
-  linkType: hard
-
 "@uppy/utils@npm:^5.9.0":
   version: 5.9.0
   resolution: "@uppy/utils@npm:5.9.0"
@@ -3926,6 +3916,16 @@ __metadata:
     lodash: ^4.17.21
     preact: ^10.5.13
   checksum: c8a8445a3675ba9a1ba96d6c0b3f9c71086fb59a49af05d249355a75a3c488f5d0be3a83827dac54495bfd9b9c697b22ec440b38b5a4192691403d3f6096ef5b
+  languageName: node
+  linkType: hard
+
+"@uppy/utils@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@uppy/utils@npm:6.0.0"
+  dependencies:
+    lodash: ^4.17.21
+    preact: ^10.5.13
+  checksum: 564f85c5f1c12b4764537e6781c2fcd9d790b7ecef5c0430410714c2cd19b89908736d3a3de135778b14b7396d4daf6b4a28d5eb5732d80a762fadb8795ad624
   languageName: node
   linkType: hard
 
@@ -13456,7 +13456,7 @@ __metadata:
     "@uppy/core": ^3.4.0
     "@uppy/drop-target": ^2.0.1
     "@uppy/file-input": ^3.0.3
-    "@uppy/progress-bar": ^3.0.3
+    "@uppy/progress-bar": ^4.0.0
     "@uppy/xhr-upload": ^3.3.2
     "@wdio/sauce-service": ^8.15.9
     allure-commandline: ^2.29.0
