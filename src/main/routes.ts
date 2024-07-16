@@ -13,20 +13,20 @@ import { TermsAndConditionsGetController } from './steps/terms-and-conditions/ge
 import { TimedOutGetController } from './steps/timed-out/get';
 import { ACCESSIBILITY_STATEMENT, CONTACT_US, PRIVACY_POLICY, TERMS_AND_CONDITIONS, TIMED_OUT_URL } from './steps/urls';
 
+export const restrictContentType = contentType => {
+  return (req, res, next) => {
+    if (contentType.indexOf(req.headers['content-type']) !== -1) {
+      res.status(403).send();
+    } else {
+      next();
+    }
+  };
+};
+
 export class Routes {
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
     const errorController = new ErrorController();
-
-    const restrictContentType = contentType => {
-      return (req, res, next) => {
-        if (contentType.indexOf(req.headers['content-type']) !== -1) {
-          res.status(403).send();
-        } else {
-          next();
-        }
-      };
-    };
 
     app.get(PRIVACY_POLICY, errorHandler(new PrivacyPolicyGetController().get));
     app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));

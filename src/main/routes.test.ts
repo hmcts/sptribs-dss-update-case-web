@@ -1,6 +1,6 @@
 import { Application } from 'express';
 
-import { Routes } from './routes';
+import { Routes, restrictContentType } from './routes';
 import {
   ACCESSIBILITY_STATEMENT,
   APPLICATION_CONFIRMATION,
@@ -49,5 +49,48 @@ describe('Routes', () => {
     expect(appMock.post).toHaveBeenCalledWith(APPLICATION_CONFIRMATION, undefined);
 
     expect(appMock.use).toHaveBeenCalled();
+  });
+});
+
+describe('restrictContentType', () => {
+  it('should return a function that checks content type and sends 403 if it matches', () => {
+    const req = {
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+
+    const next = jest.fn();
+
+    const middleware = restrictContentType(['application/json']);
+    middleware(req, res, next);
+
+    expect(res.status).toHaveBeenCalledWith(403);
+    expect(res.send).toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it('should call next if content type does not match', () => {
+    const req = {
+      headers: {
+        'content-type': 'text/html',
+      },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    const next = jest.fn();
+    const middleware = restrictContentType(['application/json']);
+    middleware(req, res, next);
+
+    expect(next).toHaveBeenCalled();
+    expect(res.status).not.toHaveBeenCalled();
+    expect(res.send).not.toHaveBeenCalled();
   });
 });
