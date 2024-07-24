@@ -3876,16 +3876,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/companion-client@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "@uppy/companion-client@npm:3.8.1"
+"@uppy/companion-client@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@uppy/companion-client@npm:4.0.0"
   dependencies:
-    "@uppy/utils": ^5.9.0
+    "@uppy/utils": ^6.0.0
     namespace-emitter: ^2.0.1
     p-retry: ^6.1.0
   peerDependencies:
-    "@uppy/core": ^3.11.0
-  checksum: 56d2af8fb77e49a34f313c43bf44f2c1905901d3e099b9d48164a7ed5aaabe558fdf874923d54d5461f28bd3f27f1ff3d29f321c5510db472ab863e71e0b7a68
+    "@uppy/core": ^4.0.0
+  checksum: 10f5604243490d26a87b1a423e9714d306dbf7442f4f4ad620e0d620cfd130e109f2bd95b9103b311115deaa15e44e41238aa212d0393cb02bf6d58c890d4920
   languageName: node
   linkType: hard
 
@@ -3967,15 +3967,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/xhr-upload@npm:^3.3.2":
-  version: 3.6.8
-  resolution: "@uppy/xhr-upload@npm:3.6.8"
+"@uppy/utils@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@uppy/utils@npm:6.0.0"
   dependencies:
-    "@uppy/companion-client": ^3.8.1
-    "@uppy/utils": ^5.9.0
+    lodash: ^4.17.21
+    preact: ^10.5.13
+  checksum: 564f85c5f1c12b4764537e6781c2fcd9d790b7ecef5c0430410714c2cd19b89908736d3a3de135778b14b7396d4daf6b4a28d5eb5732d80a762fadb8795ad624
+  languageName: node
+  linkType: hard
+
+"@uppy/xhr-upload@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "@uppy/xhr-upload@npm:4.0.2"
+  dependencies:
+    "@uppy/companion-client": ^4.0.0
+    "@uppy/utils": ^6.0.0
   peerDependencies:
-    "@uppy/core": ^3.13.0
-  checksum: 02d2dbbaa97b0c69cc3a9f9198357364428a7af27afacec895957973da5d3954b69d747dfcaafae2a95414bac303a0f1dbffb0d391fe15fd35ca3b6def931484
+    "@uppy/core": ^4.0.1
+  checksum: c16650210de0aa941c5ae16df3b7b2fcf4c75f90cb72441e7e0f43a3d4deed4e0af093be2ee1746d20409d3632167e0760c37b201a92429e53d16540f12861b4
   languageName: node
   linkType: hard
 
@@ -13495,7 +13505,7 @@ __metadata:
     "@uppy/drop-target": ^2.0.1
     "@uppy/file-input": ^3.0.3
     "@uppy/progress-bar": ^3.0.3
-    "@uppy/xhr-upload": ^3.3.2
+    "@uppy/xhr-upload": ^4.0.2
     "@wdio/sauce-service": ^8.15.9
     allure-commandline: ^2.29.0
     applicationinsights: ^2.7.3
