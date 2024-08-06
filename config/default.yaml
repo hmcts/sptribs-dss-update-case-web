@@ -34,7 +34,7 @@ cookies:
 loggedInUsers: ['legalRep', 'police']
 services:
   sptribs:
-    url: 'https://sptribs-case-api-pr-1773.preview.platform.hmcts.net'
+    url: 'http://sptribs-case-api-aat.service.core-compute-aat.internal'
   case:
     url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
   idam:
