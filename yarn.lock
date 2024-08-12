@@ -3200,6 +3200,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stryker-mutator/api@npm:8.5.0":
+  version: 8.5.0
+  resolution: "@stryker-mutator/api@npm:8.5.0"
+  dependencies:
+    mutation-testing-metrics: 3.2.0
+    mutation-testing-report-schema: 3.1.1
+    tslib: ~2.6.3
+    typed-inject: ~4.0.0
+  checksum: 2546b086792b792188e3aa9fbace875cfeaf1422320e2c5100cfeb51b12fca26bb572999042fb36cd5a5999d4f247c7fc1b716244fbc6a123bee9e5854b2d194
+  languageName: node
+  linkType: hard
+
 "@stryker-mutator/core@npm:^8.0.0":
   version: 8.4.0
   resolution: "@stryker-mutator/core@npm:8.4.0"
@@ -3256,17 +3268,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stryker-mutator/jest-runner@npm:^8.0.0":
-  version: 8.4.0
-  resolution: "@stryker-mutator/jest-runner@npm:8.4.0"
+"@stryker-mutator/jest-runner@npm:^8.5.0":
+  version: 8.5.0
+  resolution: "@stryker-mutator/jest-runner@npm:8.5.0"
   dependencies:
-    "@stryker-mutator/api": 8.4.0
-    "@stryker-mutator/util": 8.4.0
+    "@stryker-mutator/api": 8.5.0
+    "@stryker-mutator/util": 8.5.0
     semver: ~7.6.3
     tslib: ~2.6.3
   peerDependencies:
-    "@stryker-mutator/core": ~8.4.0
-  checksum: 4a5307c026ffe2ad3959333cbe7b586de716c9a677926708f26d05dae6af84d70ad7acb4e85549be75478d05d0e0264f6fac12e90cf77b0fb051bad5f096e768
+    "@stryker-mutator/core": ~8.5.0
+  checksum: f4b671d15070b51ece7224b686cd68931065532532d1931ad73dc706aecc7e97e3d6f4083467efa28b1f9d9b3fcb60ff86c028f502a77c3b3222d84f1f30d12d
   languageName: node
   linkType: hard
 
@@ -3274,6 +3286,13 @@ __metadata:
   version: 8.4.0
   resolution: "@stryker-mutator/util@npm:8.4.0"
   checksum: cd1d78a3b269e49adddf45960b656e27078a6d2a41199e8b8f2a3e625397d3c7b370a1048bbcf729abf689b6454cf216305c78d1b29dbb31f78ae14199454c20
+  languageName: node
+  linkType: hard
+
+"@stryker-mutator/util@npm:8.5.0":
+  version: 8.5.0
+  resolution: "@stryker-mutator/util@npm:8.5.0"
+  checksum: b3ead0ec2346d72f7c6b77461f67d9335851a6ce804961b26f1ee22ae6512d517e4bc6903b5e2562e46952b7ed656a0620acc6687968d2ac10447f58495609f2
   languageName: node
   linkType: hard
 
@@ -11321,6 +11340,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mutation-testing-metrics@npm:3.2.0":
+  version: 3.2.0
+  resolution: "mutation-testing-metrics@npm:3.2.0"
+  dependencies:
+    mutation-testing-report-schema: 3.1.1
+  checksum: 12dbf60145feb1bf3439ebf81f22c947efd9887077a668317a2bcf00da3ee7569392092850f9ae2a508d9816a6f4dc692c5c870b490985d3636211bda6f9db72
+  languageName: node
+  linkType: hard
+
 "mutation-testing-report-schema@npm:3.1.1":
   version: 3.1.1
   resolution: "mutation-testing-report-schema@npm:3.1.1"
@@ -13654,7 +13682,7 @@ __metadata:
     "@hmcts/nodejs-logging": ^4.0.4
     "@hmcts/properties-volume": ^1.0.0
     "@stryker-mutator/core": ^8.0.0
-    "@stryker-mutator/jest-runner": ^8.0.0
+    "@stryker-mutator/jest-runner": ^8.5.0
     "@types/config": ^3.3.0
     "@types/cookie-parser": ^1.4.3
     "@types/copy-webpack-plugin": ^10.1.0
