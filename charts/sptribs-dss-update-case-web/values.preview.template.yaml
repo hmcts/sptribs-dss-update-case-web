@@ -8,8 +8,11 @@ nodejs:
   keyvaults:
     sptribs:
       secrets:
+        - name: app-insights-instrumentation-key-preview
+          alias: app-insights-instrumentation-key
+        - name: app-insights-connection-string-preview
+          alias: app-insights-connection-string
         - redis-access-key
-        - app-insights-instrumentation-key
         - idam-systemupdate-username
         - idam-systemupdate-password
         - idam-ui-secret
