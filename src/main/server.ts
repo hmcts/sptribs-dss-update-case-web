@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as bodyParser from 'body-parser';
 import config from 'config';
 import cookies from 'cookie-parser';
+import cors from 'cors';
 import express, { RequestHandler } from 'express';
 import rateLimit from 'express-rate-limit';
 import favicon from 'serve-favicon';
@@ -36,6 +37,15 @@ export const app = express();
 
 app.locals.ENV = env;
 app.locals.developmentMode = process.env.NODE_ENV !== 'production';
+
+const corsOptions = {
+  origin: ['https://js-cdn.dynatrace.com'],
+  methods: 'GET',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
+
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
 app.use(bodyParser.json() as RequestHandler);
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
