@@ -4111,22 +4111,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/companion-client@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@uppy/companion-client@npm:4.0.0"
+"@uppy/companion-client@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@uppy/companion-client@npm:4.1.0"
   dependencies:
-    "@uppy/utils": ^6.0.0
+    "@uppy/utils": ^6.0.2
     namespace-emitter: ^2.0.1
     p-retry: ^6.1.0
   peerDependencies:
-    "@uppy/core": ^4.0.0
-  checksum: 10f5604243490d26a87b1a423e9714d306dbf7442f4f4ad620e0d620cfd130e109f2bd95b9103b311115deaa15e44e41238aa212d0393cb02bf6d58c890d4920
+    "@uppy/core": ^4.2.0
+  checksum: 8800d6e0dfc81998ab3eb30b6db44aa83970ad55ae4976434ab2d3365384d252cab828fc6a94068fc1d6ed323f6b5b6ac69d7b684e5bb787c9328989390baabe
   languageName: node
   linkType: hard
 
 "@uppy/core@npm:^4.0.0":
-  version: 4.1.2
-  resolution: "@uppy/core@npm:4.1.2"
+  version: 4.2.0
+  resolution: "@uppy/core@npm:4.2.0"
   dependencies:
     "@transloadit/prettier-bytes": ^0.3.4
     "@uppy/store-default": ^4.1.0
@@ -4136,7 +4136,7 @@ __metadata:
     namespace-emitter: ^2.0.1
     nanoid: ^5.0.0
     preact: ^10.5.13
-  checksum: ccd6be4c9ae28d2209cc67f6155e23c3e7623f3557c395507ce983d694db607d49966e63bab41d41852913db3afe20353186ebf9d5a96336431d6dc004d6baa8
+  checksum: d2bc7fcda97e14af3a562e5f3dbdf36346027012bdb9869a4bb74ed132c912e61548675255eba3d963abdf3c4118503630c2840f5d092f86857abefd2643071e
   languageName: node
   linkType: hard
 
@@ -4203,14 +4203,14 @@ __metadata:
   linkType: hard
 
 "@uppy/xhr-upload@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "@uppy/xhr-upload@npm:4.0.2"
+  version: 4.1.0
+  resolution: "@uppy/xhr-upload@npm:4.1.0"
   dependencies:
-    "@uppy/companion-client": ^4.0.0
-    "@uppy/utils": ^6.0.0
+    "@uppy/companion-client": ^4.1.0
+    "@uppy/utils": ^6.0.2
   peerDependencies:
-    "@uppy/core": ^4.0.1
-  checksum: c16650210de0aa941c5ae16df3b7b2fcf4c75f90cb72441e7e0f43a3d4deed4e0af093be2ee1746d20409d3632167e0760c37b201a92429e53d16540f12861b4
+    "@uppy/core": ^4.2.0
+  checksum: 90d3fec40609e9237772bddbbd0f3e064f50ca0ad712ef9c3cb8638cb30dc34d1ffcc8eeb1314d305396910226f640e681bd855d6f04bd1889daf0e23cd00363
   languageName: node
   linkType: hard
 
