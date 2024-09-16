@@ -125,7 +125,7 @@
     "nodemon": "^3.0.1",
     "npm-run-all2": "^6.1.2",
     "pa11y": "^6.2.3",
-    "playwright": "^1.37.1",
+    "playwright": "^1.47.1",
     "prettier": "^3.0.3",
     "sass-loader": "^16.0.0",
     "sonar-scanner": "^3.1.0",
