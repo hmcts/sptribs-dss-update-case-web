@@ -7732,12 +7732,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-rate-limit@npm:^7.4.0":
-  version: 7.4.0
-  resolution: "express-rate-limit@npm:7.4.0"
+"express-rate-limit@npm:^7.4.1":
+  version: 7.4.1
+  resolution: "express-rate-limit@npm:7.4.1"
   peerDependencies:
     express: 4 || 5 || ^5.0.0-beta.1
-  checksum: 81ddba751b401ff7f04207155dd0559938b5614754f73950d86acc1463dd7ea6a458a5ba941bcf108e8913b786bca6cde94c19ba504cf61f864edf92cc1bdbae
+  checksum: 9eeb159cba08cc968d62eeb3c486cbb1daf779240fa2c3d0c8e90580e76b33ca9ffac205de165facf1f00637aa23326ab2445671723a620aae1f1dfbec7f6c3b
   languageName: node
   linkType: hard
 
@@ -13741,7 +13741,7 @@ __metadata:
     eslint-plugin-prettier: ^5.0.0
     express: ^4.20.0
     express-fileupload: ^1.4.0
-    express-rate-limit: ^7.4.0
+    express-rate-limit: ^7.4.1
     express-session: ^1.17.3
     form-data: ^4.0.0
     govuk-frontend: 4.8.0
