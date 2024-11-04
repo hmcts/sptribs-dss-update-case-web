@@ -3976,32 +3976,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/companion-client@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@uppy/companion-client@npm:4.1.0"
+"@uppy/companion-client@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@uppy/companion-client@npm:4.1.1"
   dependencies:
-    "@uppy/utils": ^6.0.2
+    "@uppy/utils": ^6.0.4
     namespace-emitter: ^2.0.1
     p-retry: ^6.1.0
   peerDependencies:
-    "@uppy/core": ^4.2.0
-  checksum: 8800d6e0dfc81998ab3eb30b6db44aa83970ad55ae4976434ab2d3365384d252cab828fc6a94068fc1d6ed323f6b5b6ac69d7b684e5bb787c9328989390baabe
+    "@uppy/core": ^4.2.3
+  checksum: 1de981c22ed3bdd81661cd6726465e59bb0ffac74511e7866e4d50963373c190c66aefc7eaf0bff014d51c8f3731b4fc8b67bec96878d81065ef1e8e2dc556e8
   languageName: node
   linkType: hard
 
 "@uppy/core@npm:^4.0.0":
-  version: 4.2.1
-  resolution: "@uppy/core@npm:4.2.1"
+  version: 4.2.3
+  resolution: "@uppy/core@npm:4.2.3"
   dependencies:
     "@transloadit/prettier-bytes": ^0.3.4
-    "@uppy/store-default": ^4.1.0
-    "@uppy/utils": ^6.0.2
+    "@uppy/store-default": ^4.1.1
+    "@uppy/utils": ^6.0.4
     lodash: ^4.17.21
     mime-match: ^1.0.2
     namespace-emitter: ^2.0.1
     nanoid: ^5.0.0
     preact: ^10.5.13
-  checksum: d2ef4a3be8accc84dac1847b94dda8fe655c2009b241963af56eca103de7bfcaa430e995494b9a3d86096641984b8ed79a2177d2962da8cc04757d46b7eb0426
+  checksum: de0ca03a3c80c909f8fc52d32034d678aaeeb8dbaa5c82cd7fb33f13b22d28c1795fadc12fa79a29455379c8673a6483f0be2cf5d4d1b43c7f7cf881cbb7be2a
   languageName: node
   linkType: hard
 
@@ -4017,33 +4017,33 @@ __metadata:
   linkType: hard
 
 "@uppy/file-input@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "@uppy/file-input@npm:4.0.1"
+  version: 4.0.3
+  resolution: "@uppy/file-input@npm:4.0.3"
   dependencies:
-    "@uppy/utils": ^6.0.2
+    "@uppy/utils": ^6.0.4
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^4.1.1
-  checksum: c77be2464a64bd40029be340ae426545855493a39636ca823b95ea56b72d08031978957c2f37e1cc7978cc32759e7dc933d5ae2f78674646477c1eae881103b9
+    "@uppy/core": ^4.2.3
+  checksum: 7cfafeec88caff311d0e3e5a517c1605c915c9496480ff87408cb85279015849b3e9f060b3e405211fb9e01f377c3313814591eb3f02e3b81efd7bf83ad08a46
   languageName: node
   linkType: hard
 
 "@uppy/progress-bar@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@uppy/progress-bar@npm:4.0.0"
+  version: 4.0.1
+  resolution: "@uppy/progress-bar@npm:4.0.1"
   dependencies:
-    "@uppy/utils": ^6.0.0
+    "@uppy/utils": ^6.0.4
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^4.0.0
-  checksum: 50cb7150428da4da8248d8b518c9805a9dff63c62c583b8abac2afeba9ed13bcc61d5c946fb0acc80f117f4b582cd6fe24e1d308b79816b84e725fdba44806b3
+    "@uppy/core": ^4.2.3
+  checksum: ef02bb2a39e2fd4aa8ba56c0676dc2919903d65ba822760814dfe455783f276d7b7bb7cea2dba4697219f9e2ea36b3361947078bde69333739b4332bf7eb9f12
   languageName: node
   linkType: hard
 
-"@uppy/store-default@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@uppy/store-default@npm:4.1.0"
-  checksum: 84a25407e52e7001307f7d6bb4f6e2e6aeeb681692d224e9c8e5054541bf08487ba0744c6968abce62918de193bb8ce2d5d0e0520397a58ea5410cda9b595190
+"@uppy/store-default@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@uppy/store-default@npm:4.1.1"
+  checksum: 813a1372f32a29e774174e17ae0a0e21e1f40bb2e0e141e337814c80ee82485b9fd861ab0df2179cece450366ea2545c014da44e836d49523ada9a4ba178ed8a
   languageName: node
   linkType: hard
 
@@ -4057,25 +4057,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/utils@npm:^6.0.2":
-  version: 6.0.2
-  resolution: "@uppy/utils@npm:6.0.2"
+"@uppy/utils@npm:^6.0.4":
+  version: 6.0.4
+  resolution: "@uppy/utils@npm:6.0.4"
   dependencies:
     lodash: ^4.17.21
     preact: ^10.5.13
-  checksum: c9bacd221f454f0159dbd097478aad4c309205b5d1e312beb1f71207ba981f76e0752b2b6453c55560289ffd3293bb6f07b8ebfbc6d4e30b56df05d3d5ddbda6
+  checksum: 501c2b5e434f21e1720373f7174552f067992ec4396106fdb7a8651ed3a6598b5c13fe3125d104d18e711656f9fa49b53eff531b02110d11cfbc44fe80ad2e01
   languageName: node
   linkType: hard
 
 "@uppy/xhr-upload@npm:^4.0.2":
-  version: 4.2.0
-  resolution: "@uppy/xhr-upload@npm:4.2.0"
+  version: 4.2.2
+  resolution: "@uppy/xhr-upload@npm:4.2.2"
   dependencies:
-    "@uppy/companion-client": ^4.1.0
-    "@uppy/utils": ^6.0.2
+    "@uppy/companion-client": ^4.1.1
+    "@uppy/utils": ^6.0.4
   peerDependencies:
-    "@uppy/core": ^4.2.0
-  checksum: 9e0050d376341a9f4cb6ec3f81fbd099ecaeb967a0a3c17cab3361fd0fbd38aeea7ba61825d7952e70bab6361569811781885e900778a95630c581b971043892
+    "@uppy/core": ^4.2.3
+  checksum: e647b9153abbed4fe00a34ebe6e47e4a2386603d48c83ac9a034949c5a58ab5e9a60fa86d6668c4d50db0215a3a36b2f9a6948f48e2783e8d9641e8f149566ea
   languageName: node
   linkType: hard
 
