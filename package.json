@@ -67,7 +67,7 @@
     "express-rate-limit": "^7.4.0",
     "express-session": "^1.17.3",
     "form-data": "^4.0.0",
-    "govuk-frontend": "4.8.0",
+    "govuk-frontend": "4.9.0",
     "helmet": "^4.6.0",
     "http-status-codes": "^2.2.0",
     "jwt-decode": "4.0.0",
@@ -140,12 +140,14 @@
   "resolutions": {
     "@azure/identity": "^4.2.1",
     "@azure/msal-node": "^2.9.2",
+    "cookie": "^0.7.0",
     "follow-redirects": "^1.15.6",
     "formidable": "^3.2.4",
     "http-cache-semantics": "4.1.1",
+    "path-to-regexp": "^0.1.12",
     "send": "^0.19.0",
     "serialize-javascript": "^6.0.1",
     "webpack-cli": "^5.1.4"
   },
-  "packageManager": "yarn@3.8.5"
+  "packageManager": "yarn@3.8.7"
 }
