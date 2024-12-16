@@ -3280,6 +3280,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stryker-mutator/api@npm:8.7.1":
+  version: 8.7.1
+  resolution: "@stryker-mutator/api@npm:8.7.1"
+  dependencies:
+    mutation-testing-metrics: 3.3.0
+    mutation-testing-report-schema: 3.3.0
+    tslib: ~2.7.0
+    typed-inject: ~4.0.0
+  checksum: 0d85951cf4e3bd13526dc745b23f6a97a3676922c9b08743e2607597427ea57ac5fba1b21698193c2107e6b653232a51f69b8442fe2864d474e598b93910e7a8
+  languageName: node
+  linkType: hard
+
 "@stryker-mutator/core@npm:^8.0.0":
   version: 8.6.0
   resolution: "@stryker-mutator/core@npm:8.6.0"
@@ -3336,17 +3348,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stryker-mutator/jest-runner@npm:^8.0.0":
-  version: 8.6.0
-  resolution: "@stryker-mutator/jest-runner@npm:8.6.0"
+"@stryker-mutator/jest-runner@npm:^8.7.1":
+  version: 8.7.1
+  resolution: "@stryker-mutator/jest-runner@npm:8.7.1"
   dependencies:
-    "@stryker-mutator/api": 8.6.0
-    "@stryker-mutator/util": 8.6.0
+    "@stryker-mutator/api": 8.7.1
+    "@stryker-mutator/util": 8.7.1
     semver: ~7.6.3
     tslib: ~2.7.0
   peerDependencies:
-    "@stryker-mutator/core": ~8.6.0
-  checksum: 03b755859f06a01180ae21b84446fee14ed2db40a0ff9e9cc0bc88eba71407806e1ec8848e233ec60cb51e6862492a98fa409c2bb1849440e420d8f0305c1dbc
+    "@stryker-mutator/core": ~8.7.0
+  checksum: bcdcd737366a8cc57f2ea5b9aef737014461c2b7534e469f67ea336e37977941729e70378cdf7306885d3ec76df2624c43745c5956240953341f2d300a359eee
   languageName: node
   linkType: hard
 
@@ -3354,6 +3366,13 @@ __metadata:
   version: 8.6.0
   resolution: "@stryker-mutator/util@npm:8.6.0"
   checksum: a2ee944c6210fad1a3ce7f741301aa9caecb69e6c965fe31a0c2a4be58e146cb1bb78635bc9a4405746c52d63e078a2e64353343650ec9f112918584e4b03796
+  languageName: node
+  linkType: hard
+
+"@stryker-mutator/util@npm:8.7.1":
+  version: 8.7.1
+  resolution: "@stryker-mutator/util@npm:8.7.1"
+  checksum: cfb3740e7b079ae5c3771109333a7f4275b465a15519b12ec8ee722fcd4480305012b5c54447d1da5368827b93d69a2618d61202f7d8c731dbf93aab589079ad
   languageName: node
   linkType: hard
 
@@ -13711,7 +13730,7 @@ __metadata:
     "@hmcts/nodejs-logging": ^4.0.4
     "@hmcts/properties-volume": ^1.0.0
     "@stryker-mutator/core": ^8.0.0
-    "@stryker-mutator/jest-runner": ^8.0.0
+    "@stryker-mutator/jest-runner": ^8.7.1
     "@types/config": ^3.3.0
     "@types/cookie-parser": ^1.4.3
     "@types/copy-webpack-plugin": ^10.1.0
