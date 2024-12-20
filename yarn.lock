@@ -4135,18 +4135,18 @@ __metadata:
   linkType: hard
 
 "@uppy/core@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@uppy/core@npm:4.3.0"
+  version: 4.3.1
+  resolution: "@uppy/core@npm:4.3.1"
   dependencies:
     "@transloadit/prettier-bytes": ^0.3.4
     "@uppy/store-default": ^4.1.2
-    "@uppy/utils": ^6.0.5
+    "@uppy/utils": ^6.0.6
     lodash: ^4.17.21
     mime-match: ^1.0.2
     namespace-emitter: ^2.0.1
     nanoid: ^5.0.0
     preact: ^10.5.13
-  checksum: 98181d561a0062c03ac11ff67052fa62700b0cc1f1f67b5275b77064fe325e4421ee10e5964b5fc078e8263c84de564cc7a6a260d4b828c7234d045092fc17a2
+  checksum: 0166f4b5e3154ec6a77a7eceb6dfad8efa6c421670db61b6bfafdfacb0c5c7dd38240e1f547f0313077d6a216d639b85d01b044d33398612ac8e1a9fbb22f176
   languageName: node
   linkType: hard
 
@@ -4174,14 +4174,14 @@ __metadata:
   linkType: hard
 
 "@uppy/progress-bar@npm:^4.0.0":
-  version: 4.0.2
-  resolution: "@uppy/progress-bar@npm:4.0.2"
+  version: 4.1.0
+  resolution: "@uppy/progress-bar@npm:4.1.0"
   dependencies:
-    "@uppy/utils": ^6.0.5
+    "@uppy/utils": ^6.0.6
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^4.3.0
-  checksum: 45d7bc5ccffc9f0e5785f4bcdb6300975f4e583057c3289233732a11fd6e6d0cf040d1bba91e809d46e1d4720fc21b7d4786000c09b24de098f7c51a9ad8d423
+    "@uppy/core": ^4.3.1
+  checksum: d026a8379fac8248918930f98541c8dadf3adc22ea2765c290025753e6d598ebd34952801e6ae98e7cb7ea410362ae3d774f16f3bbb22618729b90b4acbc4461
   languageName: node
   linkType: hard
 
@@ -4199,6 +4199,16 @@ __metadata:
     lodash: ^4.17.21
     preact: ^10.5.13
   checksum: a1d4ed3edcb82a1100fe433dc2c1f609354c4b6a01444e38b786832237e084a4eb2d983c87f87894220187e4a51067a6bd283346d34244f2528115c1d6bb05f1
+  languageName: node
+  linkType: hard
+
+"@uppy/utils@npm:^6.0.6":
+  version: 6.0.6
+  resolution: "@uppy/utils@npm:6.0.6"
+  dependencies:
+    lodash: ^4.17.21
+    preact: ^10.5.13
+  checksum: 9ce84d94805f4dfb27ff00a445a6a658e30d2a895a36b8f04df5c3458ae82e9fac0f114caf4d98c9e106cec0bc3a46d82646f7e08db7a0f30fe051b80d2c42d1
   languageName: node
   linkType: hard
 
