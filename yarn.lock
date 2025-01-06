@@ -3713,7 +3713,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^22.4.1, @types/node@npm:^22.5.5":
+"@types/node@npm:*, @types/node@npm:^22.5.5":
   version: 22.10.2
   resolution: "@types/node@npm:22.10.2"
   dependencies:
@@ -3728,6 +3728,15 @@ __metadata:
   dependencies:
     undici-types: ~6.19.2
   checksum: 44cfa7cd9a4ebb8f74efa4b89cf963ca0e522121a7d24d8121d40872bbcfd607eaccdc203c4fe92c8b587125be9ca7b071fe4f9b356f263434b8a8512dbebef0
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^22.10.5":
+  version: 22.10.5
+  resolution: "@types/node@npm:22.10.5"
+  dependencies:
+    undici-types: ~6.20.0
+  checksum: 3b0e966df4e130edac3ad034f1cddbe134e70f11556062468c9fbd749a3b07a44445a3a75a7eec68a104930bf05d4899f1a418c4ae48493d2c8c1544d8594bcc
   languageName: node
   linkType: hard
 
@@ -12264,27 +12273,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright-core@npm:1.48.2":
-  version: 1.48.2
-  resolution: "playwright-core@npm:1.48.2"
+"playwright-core@npm:1.49.1":
+  version: 1.49.1
+  resolution: "playwright-core@npm:1.49.1"
   bin:
     playwright-core: cli.js
-  checksum: a73ecea379f13f757ec38299871256a130d4abec5688369969a6b1ef6104c67f731a27c9a503a988c3e5b1141048552a3ed8c4d061cb631ff2ebab606835c10a
+  checksum: a940f4b10ff1de033b4b8594b5104b02849a892d9adda0d42330a872cd3d8d287ffd2b01fc33f33ccd34f8904bb8ae8220b878b62e899f3d9bcd1b0945ab45c7
   languageName: node
   linkType: hard
 
 "playwright@npm:^1.37.1":
-  version: 1.48.2
-  resolution: "playwright@npm:1.48.2"
+  version: 1.49.1
+  resolution: "playwright@npm:1.49.1"
   dependencies:
     fsevents: 2.3.2
-    playwright-core: 1.48.2
+    playwright-core: 1.49.1
   dependenciesMeta:
     fsevents:
       optional: true
   bin:
     playwright: cli.js
-  checksum: 69ffb28b5a94fc21a9bd3439feb363ffebb21c6b00e6d08ffc225787be49005d6b57072ebb043e78378252850f2b7712f8478e6685138a8e445d6fda94a31e28
+  checksum: c136d42d625e32614f90e5228a165dc8be48c5bfb52aca9210c6ff04161a409dbe42fe5ae4f05a2653f6a1b836876a04d3b0f24bcbbc053d1509c1d605b7c8d5
   languageName: node
   linkType: hard
 
@@ -13744,7 +13753,7 @@ __metadata:
     "@types/mini-css-extract-plugin": ^2.5.1
     "@types/multer": ^1.4.7
     "@types/negotiator": ^0.6.1
-    "@types/node": ^22.4.1
+    "@types/node": ^22.10.5
     "@types/nunjucks": ^3.2.3
     "@types/serve-favicon": ^2.5.4
     "@types/session-file-store": ^1.2.2
@@ -14732,22 +14741,22 @@ __metadata:
   linkType: hard
 
 "typescript@npm:^5.4.5":
-  version: 5.6.3
-  resolution: "typescript@npm:5.6.3"
+  version: 5.7.2
+  resolution: "typescript@npm:5.7.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: ba302f8822777ebefb28b554105f3e074466b671e7444ec6b75dadc008a62f46f373d9e57ceced1c433756d06c8b7dc569a7eefdf3a9573122a49205ff99021a
+  checksum: b55300c4cefee8ee380d14fa9359ccb41ff8b54c719f6bc49b424899d662a5ce62ece390ce769568c7f4d14af844085255e63788740084444eb12ef423b13433
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^5.4.5#~builtin<compat/typescript>":
-  version: 5.6.3
-  resolution: "typescript@patch:typescript@npm%3A5.6.3#~builtin<compat/typescript>::version=5.6.3&hash=8c6c40"
+  version: 5.7.2
+  resolution: "typescript@patch:typescript@npm%3A5.7.2#~builtin<compat/typescript>::version=5.7.2&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: f6947c263dc67ea8429eefc3921683320f901a07d9ef29a1101a34f5b30108343b5a29aa77a581217a17f2616091ae7bd3043b304cf37f37d5e128e19296c08b
+  checksum: e9fa1fd1f4203d399a5264e8612f9a64d9daf4ea7c926f346e11f6c8137acc6e29386c171c6b4085950ce714243be1627f60e76e5bd135124e226ce55309380f
   languageName: node
   linkType: hard
 
