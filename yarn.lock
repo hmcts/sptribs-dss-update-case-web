@@ -4452,15 +4452,15 @@ __metadata:
   linkType: hard
 
 "@wdio/sauce-service@npm:^9.0.0":
-  version: 9.5.1
-  resolution: "@wdio/sauce-service@npm:9.5.1"
+  version: 9.5.2
+  resolution: "@wdio/sauce-service@npm:9.5.2"
   dependencies:
     "@wdio/logger": 9.4.4
     "@wdio/types": 9.5.0
     "@wdio/utils": 9.5.0
     saucelabs: 8.0.0
-    webdriverio: 9.5.1
-  checksum: c4f4a0ce8fb83186221455ccb0a76da4b5f22d7ec2406b198097a145fe02b99d807361505d1d57ce501390baaf66f90a4cc215df23895fc4f019aa3248cfb976
+    webdriverio: 9.5.2
+  checksum: a26d529cf1061d62e3ebfdf8938427ec46bbd51675a6f3c14933c17d4aa11a4ca5bc4720d0d56c836084e074fbbe6a8d1542735204c4cbbfcb419bb567dd63de
   languageName: node
   linkType: hard
 
@@ -15367,9 +15367,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webdriverio@npm:9.5.1":
-  version: 9.5.1
-  resolution: "webdriverio@npm:9.5.1"
+"webdriverio@npm:9.5.2":
+  version: 9.5.2
+  resolution: "webdriverio@npm:9.5.2"
   dependencies:
     "@types/node": ^20.11.30
     "@types/sinonjs__fake-timers": ^8.1.5
@@ -15403,7 +15403,7 @@ __metadata:
   peerDependenciesMeta:
     puppeteer-core:
       optional: true
-  checksum: 24ea5d6aaac4f7d4166c447e636b3a2ed0f81bfc8b150a1fa686f8ef548212eed984235d8ccdaf137aeeaea09411fe47ce986b1319c8686aa6e8a22cc776160e
+  checksum: 8f6eb950e2cbe5fc91f73d0901e01647b65b16e772d285149d7d165172a3c0ac6f926d875760f0da5ab13b7b6702bda0cf85e0eb6adb1daa103810b3c0d5a0f4
   languageName: node
   linkType: hard
 
