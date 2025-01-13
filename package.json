@@ -58,7 +58,7 @@
     "autobind-decorator": "^2.4.0",
     "axios": "^1.7.4",
     "config": "^3.3.9",
-    "connect-redis": "^7.1.0",
+    "connect-redis": "^8.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dayjs": "^1.11.9",
