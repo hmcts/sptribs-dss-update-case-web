@@ -4,6 +4,7 @@ import { Application, RequestHandler } from 'express';
 
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
+import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
 import { AccessibilityStatementGetController } from './steps/accessibility-statement/get';
 import { ContactUsGetController } from './steps/contact-us/get';
@@ -11,7 +12,14 @@ import { ErrorController } from './steps/error/error.controller';
 import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
 import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
 import { TimedOutGetController } from './steps/timed-out/get';
-import { ACCESSIBILITY_STATEMENT, CONTACT_US, PRIVACY_POLICY, TERMS_AND_CONDITIONS, TIMED_OUT_URL } from './steps/urls';
+import {
+  ACCESSIBILITY_STATEMENT,
+  CONTACT_US,
+  KEEP_ALIVE_URL,
+  PRIVACY_POLICY,
+  TERMS_AND_CONDITIONS,
+  TIMED_OUT_URL,
+} from './steps/urls';
 
 export const restrictContentType = contentType => {
   return (req, res, next) => {
@@ -53,6 +61,8 @@ export class Routes {
         app.post(step.url, errorHandler(new postController(step.form.fields).post));
       }
     }
+
+    app.get(KEEP_ALIVE_URL, errorHandler(new KeepAliveController().get));
 
     app.use(errorController.notFound as unknown as RequestHandler);
   }
