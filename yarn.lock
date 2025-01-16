@@ -4443,15 +4443,15 @@ __metadata:
   linkType: hard
 
 "@wdio/sauce-service@npm:^9.0.0":
-  version: 9.5.3
-  resolution: "@wdio/sauce-service@npm:9.5.3"
+  version: 9.5.7
+  resolution: "@wdio/sauce-service@npm:9.5.7"
   dependencies:
     "@wdio/logger": 9.4.4
     "@wdio/types": 9.5.0
     "@wdio/utils": 9.5.0
     saucelabs: 8.0.0
-    webdriverio: 9.5.3
-  checksum: 2a34f071a43ed3ce840fb686538c0fed704e1536486fe8949df96d0bca118d9bdcbe75b226ff9bb74317c804768bcb4b98bb432776696c1c7deb329e77f60b8e
+    webdriverio: 9.5.7
+  checksum: c6b55a37cb1538817a15b966ab7dba6704a0fbd59fffe0b0db2d404301b1bac745dd7f2e20dbedf4041aab72c24950bdbc4c6b5a959277ec2328b3f7f09fc9cd
   languageName: node
   linkType: hard
 
@@ -15340,9 +15340,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webdriver@npm:9.5.3":
-  version: 9.5.3
-  resolution: "webdriver@npm:9.5.3"
+"webdriver@npm:9.5.4":
+  version: 9.5.4
+  resolution: "webdriver@npm:9.5.4"
   dependencies:
     "@types/node": ^20.1.0
     "@types/ws": ^8.5.3
@@ -15354,13 +15354,13 @@ __metadata:
     deepmerge-ts: ^7.0.3
     undici: ^6.20.1
     ws: ^8.8.0
-  checksum: e21f904e0de0c0149d10df4c62f69d4191f15ea852dec9be93df9409b807967427be17cb76fa56184747167226b9a83a5ab182a15e4f37c26d3b619c6e801f5b
+  checksum: 7b2caff1a180008e5d6926f93d2b9fe207f10d5c3c9e2cd501d08f87522a3fed38d593fa3dfa89de35751c8146f3989c85537eba08db54117283cf8049207ee6
   languageName: node
   linkType: hard
 
-"webdriverio@npm:9.5.3":
-  version: 9.5.3
-  resolution: "webdriverio@npm:9.5.3"
+"webdriverio@npm:9.5.7":
+  version: 9.5.7
+  resolution: "webdriverio@npm:9.5.7"
   dependencies:
     "@types/node": ^20.11.30
     "@types/sinonjs__fake-timers": ^8.1.5
@@ -15388,13 +15388,13 @@ __metadata:
     rgb2hex: 0.2.5
     serialize-error: ^11.0.3
     urlpattern-polyfill: ^10.0.0
-    webdriver: 9.5.3
+    webdriver: 9.5.4
   peerDependencies:
     puppeteer-core: ^22.3.0
   peerDependenciesMeta:
     puppeteer-core:
       optional: true
-  checksum: 333cb6c4e43929e3b8d7a0229358475a18e18f8664b091d0cfbb5672031ce9b2248e9bd62ee45a313cb24f43349082c4c60984686c78fa497508ccdf34b15f52
+  checksum: 9cc7b4bf61a25e6de244f5ef8dc87d9c68b82a827f74309642eac7596c343554293dab35201420166f28863aad2d04bf9a7dc2ffd1c89263c5a85f1a540491cd
   languageName: node
   linkType: hard
 
