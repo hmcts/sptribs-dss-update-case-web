@@ -11,6 +11,8 @@ import { LoggerInstance } from 'winston';
 const FileStore = FileStoreFactory(session);
 const logger: LoggerInstance = Logger.getLogger('session');
 
+export const cookieMaxAge = 21 * (60 * 1000); // 21 minutes
+
 export class SessionStorage {
   public enableFor(app: Application): void {
     app.use(cookieParser());
