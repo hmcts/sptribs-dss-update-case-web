@@ -5,20 +5,20 @@ import config from 'config';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const uploadDocument = async (formData, s2sToken, req) => {
-  const CASE_API_URL: string = config.get('services.sptribs.url');
+  const CASE_API_URL: string = config.get('services.case.url');
   const formHeaders = formData.getHeaders();
 
   const headers = {
-    authorization: `Bearer ${req.session.user.accessToken}`,
-    serviceAuthorization: s2sToken,
+    Authorization: `Bearer ${req.session.user.accessToken}`,
+    ServiceAuthorization: s2sToken,
   };
   return uploadDocumentInstance(CASE_API_URL, headers).post(
-    '/doc/dss-orchestration/upload?caseTypeOfApplication=CIC',
+    '/case-documents',
     formData,
     {
       headers: {
         ...formHeaders,
-        serviceAuthorization: s2sToken,
+        ServiceAuthorization: s2sToken,
       },
     }
   );
@@ -26,11 +26,11 @@ export const uploadDocument = async (formData, s2sToken, req) => {
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const deleteDocument = async (s2sToken, documentID, req) => {
-  const CASE_API_URL: string = config.get('services.sptribs.url');
-  const deleteUrl = `/doc/dss-orchestration/${documentID}/delete`;
+  const CASE_API_URL: string = config.get('services.case.url');
+  const deleteUrl = `/case-documents/${documentID}`;
   const headers = {
-    authorization: `Bearer ${req.session.user.accessToken}`,
-    serviceAuthorization: s2sToken,
+    Authorization: `Bearer ${req.session.user.accessToken}`,
+    ServiceAuthorization: s2sToken,
   };
 
   await uploadDocumentInstance(CASE_API_URL, headers).delete(deleteUrl);

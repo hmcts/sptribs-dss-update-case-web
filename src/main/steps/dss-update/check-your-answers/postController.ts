@@ -1,13 +1,10 @@
 import autobind from 'autobind-decorator';
-import axios from 'axios';
-import config from 'config';
 import { Response } from 'express';
-
+import { updateCase } from '../../../app/case/api';
 import { DocumentUpload } from '../../../app/case/case';
 import { AppRequest, DocumentRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { getServiceAuthToken } from '../../../app/s2s/get-service-auth-token';
 import { APPLICATION_CONFIRMATION } from '../../urls';
 
 @autobind
@@ -23,7 +20,8 @@ export default class CheckYourAnswersController extends PostController<AnyObject
     if (req.session.errors.length === 0) {
       try {
         const responseFromServerCall = await this.serverCallForCaseSubmission(req);
-        if (responseFromServerCall.status === 200) {
+
+        if (responseFromServerCall.status === 201) {
           nextUrl = APPLICATION_CONFIRMATION;
         } else {
           req.session.errors?.push({
@@ -32,6 +30,7 @@ export default class CheckYourAnswersController extends PostController<AnyObject
           });
         }
       } catch (error) {
+        req.locals.logger.error('Error during server call:', error.response?.data || error.message);
         req.session.errors?.push({
           propertyName: 'submissionError',
           errorType: 'required',
@@ -64,21 +63,12 @@ export default class CheckYourAnswersController extends PostController<AnyObject
     });
 
     const data = {
-      CaseTypeOfApplication: 'CIC',
-      AdditionalInformation: req.session['documentDetail'] ? req.session['documentDetail'] : null,
-      OtherInfoDocuments: allUploadedDocuments,
+      dssCaseDataCaseTypeOfApplication: 'CIC',
+      dssCaseDataAdditionalInformation: req.session['documentDetail'] ? req.session['documentDetail'] : null,
+      dssCaseDataOtherInfoDocuments: allUploadedDocuments,
     };
 
     const caseId = req.session.userCase.id;
-    const baseURL = `${config.get('services.sptribs.url')}/case/dss-orchestration/${caseId}/update?event=UPDATE_CASE`;
-    const s2sToken = await getServiceAuthToken();
-    return axios.put(baseURL, data, {
-      headers: {
-        Authorization: `Bearer ${req.session.user.accessToken}`,
-        ServiceAuthorization: `Bearer ${s2sToken}`,
-        Accept: '*/*',
-        'Content-Type': 'application/json',
-      },
-    });
+    return updateCase(req.session.user.accessToken, caseId, data);
   }
 }
