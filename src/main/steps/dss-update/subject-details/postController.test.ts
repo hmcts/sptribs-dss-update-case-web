@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import config from 'config';
 import { set } from 'lodash';
 
@@ -52,7 +52,7 @@ describe('citizenDataVerification post controller test cases', () => {
   } as unknown as FormContent;
 
   const caseData = {
-    status: 201,
+    status: 200,
     data: {
       data: {
         cicCaseFullName: 'subject name',
@@ -62,7 +62,15 @@ describe('citizenDataVerification post controller test cases', () => {
   };
 
   const mockedAxios = axios as jest.Mocked<typeof axios>;
-  mockedAxios.post.mockImplementation(url => {
+  const mockedAxiosGet = jest.fn();
+  const mockedAxiosPost = jest.fn();
+
+  mockedAxios.post = mockedAxiosPost;
+  mockedAxios.create.mockReturnValue({
+    get: mockedAxiosGet,
+  } as unknown as AxiosInstance);
+
+  mockedAxiosPost.mockImplementation(url => {
     switch (url) {
       case 'https://idam-api.aat.platform.hmcts.net/o/token':
         return Promise.resolve({ data: { id_token: 'token', access_token: 'token' } });
@@ -95,7 +103,7 @@ describe('citizenDataVerification post controller test cases', () => {
       },
     });
 
-    mockedAxios.get.mockImplementation(() => Promise.resolve(caseData));
+    mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
 
     await controller.post(req, res);
     expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
@@ -124,7 +132,7 @@ describe('citizenDataVerification post controller test cases', () => {
     });
     req.originalUrl = DATA_VERIFICATION;
 
-    mockedAxios.get.mockImplementation(() => Promise.resolve(caseData));
+    mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
 
     await controller.post(req, res);
     expect(req.session.errors).toStrictEqual([{ propertyName: 'inputFields', errorType: 'required' }]);
@@ -154,7 +162,7 @@ describe('citizenDataVerification post controller test cases', () => {
     });
     req.originalUrl = DATA_VERIFICATION;
 
-    mockedAxios.get.mockImplementation(() => Promise.reject(new Error('case not found')));
+    mockedAxiosGet.mockImplementation(() => Promise.reject(new Error('case not found')));
 
     await controller.post(req, res);
     expect(req.session.errors).toStrictEqual([{ propertyName: 'caseError', errorType: 'required' }]);

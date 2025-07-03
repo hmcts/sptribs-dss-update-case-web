@@ -2,14 +2,12 @@ import axios, { AxiosInstance } from 'axios';
 import config from 'config';
 
 import { getSystemUser } from '../auth/oidc';
-import { AppRequest } from '../controller/AppRequest';
-import { AnyObject } from '../controller/PostController';
 import { getServiceAuthToken } from '../s2s/get-service-auth-token';
 import { Logger } from '@hmcts/nodejs-logging';
 
 const logger = Logger.getLogger('case-api');
 
-export const getCase = async (req: AppRequest<AnyObject>, caseId: string) => {
+export const getCase = async (caseId: string) => {
   const s2sToken = await getServiceAuthToken();
   const systemUserDetails = await getSystemUser();
   const client = getClient(systemUserDetails.accessToken, s2sToken);

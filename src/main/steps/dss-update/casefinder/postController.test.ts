@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import config from 'config';
 import { set } from 'lodash';
 
@@ -40,7 +40,7 @@ const mockFormContent = {
 } as unknown as FormContent;
 
 const caseData = {
-  status: 201,
+  status: 200,
   data: {
     id: '1675676483319900',
     data: {
@@ -51,6 +51,7 @@ const caseData = {
 };
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
+const mockedAxiosGet = jest.fn();
 mockedAxios.post.mockImplementation(url => {
   switch (url) {
     case 'https://idam-api.aat.platform.hmcts.net/o/token':
@@ -62,6 +63,9 @@ mockedAxios.post.mockImplementation(url => {
       return Promise.reject(new Error('not found'));
   }
 });
+mockedAxios.create.mockReturnValue({
+  get: mockedAxiosGet,
+} as unknown as AxiosInstance);
 
 const controller = new CaseFinderController(mockFormContent.fields);
 
@@ -79,7 +83,7 @@ describe('case finder post controller test cases', () => {
       },
     });
 
-    mockedAxios.get.mockImplementation(() => Promise.resolve(caseData));
+    mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
 
     await controller.post(req, res);
     expect(req.session.userCase.id).toEqual('1675676483319900');
@@ -95,7 +99,7 @@ describe('case finder post controller test cases', () => {
       session: {},
     });
 
-    mockedAxios.get.mockImplementation(() => Promise.resolve(caseData));
+    mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
 
     await controller.post(req, res);
     expect(req.session.userCase.id).toEqual('1675676483319900');
@@ -116,7 +120,7 @@ describe('case finder post controller test cases', () => {
     });
     req.originalUrl = CASE_SEARCH_URL;
 
-    mockedAxios.get.mockImplementation(() => Promise.reject(new Error('invalid case reference')));
+    mockedAxiosGet.mockImplementation(() => Promise.reject(new Error('invalid case reference')));
 
     await controller.post(req, res);
     expect(req.session.errors).toStrictEqual([{ propertyName: 'applicantCaseId', errorType: 'caseNotFound' }]);
