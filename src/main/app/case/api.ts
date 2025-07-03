@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import config from 'config';
 
 import { getSystemUser } from '../auth/oidc';
@@ -8,13 +8,13 @@ import { getServiceAuthToken } from '../s2s/get-service-auth-token';
 import { Logger } from '@hmcts/nodejs-logging';
 
 const logger = Logger.getLogger('case-api');
-const serviceUrl = config.get('services.case.url');
 
 export const getCase = async (req: AppRequest<AnyObject>, caseId: string) => {
   const s2sToken = await getServiceAuthToken();
   const systemUserDetails = await getSystemUser();
+  const client = getClient(systemUserDetails.accessToken, s2sToken);
 
-  return axios.get(`${serviceUrl}/cases/${caseId}`, getHeaders(systemUserDetails.accessToken, s2sToken));
+  return client.get(`/cases/${caseId}`);
 };
 
 export const updateCase = async (
@@ -22,28 +22,25 @@ export const updateCase = async (
   caseId: string,
   caseData: Record<string, unknown>
 ) => {
+  const client = getClient(userToken, await getServiceAuthToken());
   const eventName = 'citizen-cic-dss-update-case';
-  const s2sToken = await getServiceAuthToken();
-  const headers = getHeaders(userToken, s2sToken);
-  const token = await getEventToken(s2sToken, userToken, caseId, eventName);
+  const token = await getEventToken(client, caseId, eventName);
   const data = {
     event: { id: eventName },
     data: caseData,
     event_token: token,
   };
 
-  return axios.post(`${serviceUrl}/cases/${caseId}/events`, data, headers);
+  return client.post(`/cases/${caseId}/events`, data);
 };
 
 const getEventToken = async (
-  s2sToken: string,
-  userToken: string,
+  client: AxiosInstance,
   caseId: string,
   eventName: string
 ): Promise<string> => {
   try {
-    const url = `${serviceUrl}/cases/${caseId}/event-triggers/${eventName}`;
-    const response = await axios.get(url, getHeaders(userToken, s2sToken));
+    const response = await client.get(`/cases/${caseId}/event-triggers/${eventName}`);
 
     return response.data.token;
   } catch (err) {
@@ -54,14 +51,15 @@ const getEventToken = async (
   }
 };
 
-const getHeaders = (userToken: string, s2sToken: string) => {
-  return { 
-    headers:{
+const getClient = (userToken: string, s2sToken: string) => {
+  return axios.create({
+    baseURL: config.get('services.case.url'),
+    headers: {
       Authorization: `Bearer ${userToken}`,
       ServiceAuthorization: `${s2sToken}`,
       experimental: 'true',
       Accept: '*/*',
       'Content-Type': 'application/json',
-    }
-  };
+    },
+  });
 };

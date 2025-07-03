@@ -51,7 +51,7 @@ describe('CheckYourAnswersController test cases', () => {
   });
 
   test('Should submit the case and navigate to confirmation page', async () => {
-    mockedUpdateCase.mockResolvedValue({ status: 200, id: 1709056435297860, caseData: {} } as any);
+    mockedUpdateCase.mockResolvedValue({ status: 201, id: 1709056435297860, caseData: {} } as any);
     req = mockRequest({
       session: {
         user: {

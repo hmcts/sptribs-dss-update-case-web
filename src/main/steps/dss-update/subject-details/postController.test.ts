@@ -52,7 +52,7 @@ describe('citizenDataVerification post controller test cases', () => {
   } as unknown as FormContent;
 
   const caseData = {
-    status: 200,
+    status: 201,
     data: {
       data: {
         cicCaseFullName: 'subject name',

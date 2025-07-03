@@ -40,7 +40,7 @@ const mockFormContent = {
 } as unknown as FormContent;
 
 const caseData = {
-  status: 200,
+  status: 201,
   data: {
     id: '1675676483319900',
     data: {
@@ -58,6 +58,7 @@ mockedAxios.post.mockImplementation(url => {
     case 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/lease':
       return Promise.resolve({ data: 'TOKEN' });
     default:
+      process.exit(1);
       return Promise.reject(new Error('not found'));
   }
 });
