@@ -25,6 +25,6 @@ describe('Test case for document removals', () => {
     req.session.user = { accessToken: 'TEST_ACCESS_TOKEN' };
     mockedAxios.delete.mockResolvedValueOnce({ data: {} });
     await deleteDocument('dummyToken', 'documentId', req);
-    expect(mockedAxios.delete).toHaveBeenCalledWith('/case-documents/documentId');
+    expect(mockedAxios.delete).toHaveBeenCalledWith('/cases/documents/documentId');
   });
 });

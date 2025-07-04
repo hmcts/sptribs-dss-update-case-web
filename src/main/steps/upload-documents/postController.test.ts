@@ -32,15 +32,23 @@ describe('Testing the post controller', () => {
     newRequest.files = { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {
       status: 'Success',
-      document: {
-        url: 'http://demo.com',
-        fileName: 'Screenshot 2023-01-24 at 11.52.19.png',
-        documentId: '93de8780-e3f3',
-        binaryUrl: 'http://demon.com',
-      },
+      documents: [{
+        _links: {
+          self: {
+            href: 'http://demo.com/93de8780-e3f3',
+          },
+          binary: {
+            href: 'http://demo.com/93de8780-e3f3/binary',
+          },
+        },
+        originalDocumentName: 'sample.pdf',
+      }],
     };
     const expectedCaseDocuments = {
-      ...data.document,
+      url: 'http://demo.com/93de8780-e3f3',
+      binaryUrl: 'http://demo.com/93de8780-e3f3/binary',
+      fileName: 'sample.pdf',
+      documentId: '93de8780-e3f3',
       description: 'TEST',
     };
     mockedAxios.post.mockResolvedValue({ data });
@@ -221,12 +229,17 @@ describe('Testing the post controller', () => {
     newRequest.files = { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {
       status: 'Success',
-      document: {
-        url: 'http://demo.com',
-        fileName: 'sample.mp3',
-        documentId: '93de8780-e3f3',
-        binaryUrl: 'http://demon.com',
-      },
+      documents: [{
+        _links: {
+          self: {
+            href: 'http://demo.com/93de8780-e3f3',
+          },
+          binary: {
+            href: 'http://demo.com/93de8780-e3f3/binary',
+          },
+        },
+        originalDocumentName: 'sample.pdf',
+      }],
     };
     mockedAxios.post.mockResolvedValue({ data });
     await controller.checkFileValidation(
@@ -236,7 +249,10 @@ describe('Testing the post controller', () => {
       ''
     );
     const expectedCaseDocuments = {
-      ...data.document,
+      url: 'http://demo.com/93de8780-e3f3',
+      binaryUrl: 'http://demo.com/93de8780-e3f3/binary',
+      fileName: 'sample.pdf',
+      documentId: '93de8780-e3f3',
       description: 'TEST',
     };
 
