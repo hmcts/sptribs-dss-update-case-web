@@ -31,12 +31,14 @@ documentManagement:
 cookies:
   expiryTime: 365
   cookieName: 'sptribs-dss-update-case-web-cookie-preferences'
+caseType: 'CriminalInjuriesCompensation'
+jurisdiction: 'ST_CIC'
 loggedInUsers: ['legalRep', 'police']
 services:
-  sptribs:
-    url: 'http://sptribs-case-api-aat.service.core-compute-aat.internal'
   case:
     url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
+  cdam:
+    url: 'http://ccd-case-document-am-api-aat.service.core-compute-aat.internal'
   idam:
     authorizationURL: 'https://idam-web-public.aat.platform.hmcts.net/login'
     tokenURL: 'https://idam-api.aat.platform.hmcts.net/o/token'
@@ -47,7 +49,7 @@ services:
     caching: 'false'
   authProvider:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
-    microservice: 'sptribs_dss_update_case_web'
+    microservice: 'sptribs_case_api'
     secret: 'NEED TO INSERT SECRET'
 dynatrace:
   dynatraceUrl: 'https://js-cdn.dynatrace.com/jstag/17177a07246/bf24054dsx/6664b4fa41dce90c_complete.js'

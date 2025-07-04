@@ -24,7 +24,7 @@ export default class CitizenDataVerificationPostController extends PostControlle
 
     if (req.session.errors.length === 0) {
       try {
-        const responseFromServerCall = await getCase(req, req.session.userCase.id);
+        const responseFromServerCall = await getCase(req.session.userCase.id);
         if (responseFromServerCall.status === 200) {
           const cicCaseFullName = responseFromServerCall.data.data.cicCaseFullName.trim();
           const cicCaseDateOfBirth = responseFromServerCall.data.data.cicCaseDateOfBirth;

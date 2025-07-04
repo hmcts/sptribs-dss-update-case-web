@@ -5,6 +5,8 @@ services:
     clientSecret: IDAM_SECRET
   case:
     url: CCD_URL
+  cdam:
+    url: CASE_DOCUMENT_API_URL
   payments:
     url: PAYMENTS_API_URL
   feeLookup:
@@ -24,3 +26,5 @@ session:
   secureCookie: SECURE_COOKIE
 appInsights:
   instrumentationKey: APPINSIGHTS_KEY
+caseType: CASE_TYPE
+jurisdiction: JURISDICTION

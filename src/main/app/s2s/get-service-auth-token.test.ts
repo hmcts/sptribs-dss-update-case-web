@@ -12,7 +12,7 @@ const logger = {
   error: jest.fn(),
 };
 
-Logger.getLogger.mockReturnValue(logger);
+(Logger.getLogger as jest.Mock).mockReturnValue(logger);
 
 import { getServiceAuthToken } from './get-service-auth-token';
 
@@ -27,8 +27,8 @@ describe('getServiceAuthToken', () => {
     expect(mockedAxios.post).toHaveBeenCalledWith(
       'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/lease',
       {
-        microservice: 'sptribs_dss_update_case_web',
-        oneTimePassword: expect.anything(),
+        microservice: 'sptribs_case_api',
+        oneTimePassword: expect.any(String),
       }
     );
   });
