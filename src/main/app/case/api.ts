@@ -1,9 +1,9 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosInstance } from 'axios';
 import config from 'config';
 
 import { getSystemUser } from '../auth/oidc';
 import { getServiceAuthToken } from '../s2s/get-service-auth-token';
-import { Logger } from '@hmcts/nodejs-logging';
 
 const logger = Logger.getLogger('case-api');
 
@@ -15,11 +15,7 @@ export const getCase = async (caseId: string) => {
   return client.get(`/cases/${caseId}`);
 };
 
-export const updateCase = async (
-  userToken: string,
-  caseId: string,
-  caseData: Record<string, unknown>
-) => {
+export const updateCase = async (userToken: string, caseId: string, caseData: Record<string, unknown>) => {
   const client = getClient(userToken, await getServiceAuthToken());
   const eventName = 'citizen-cic-dss-update-case';
   const token = await getEventToken(client, caseId, eventName);
@@ -32,11 +28,7 @@ export const updateCase = async (
   return client.post(`/cases/${caseId}/events`, data);
 };
 
-const getEventToken = async (
-  client: AxiosInstance,
-  caseId: string,
-  eventName: string
-): Promise<string> => {
+const getEventToken = async (client: AxiosInstance, caseId: string, eventName: string): Promise<string> => {
   try {
     const response = await client.get(`/cases/${caseId}/event-triggers/${eventName}`);
 
@@ -44,7 +36,7 @@ const getEventToken = async (
   } catch (err) {
     logger.error(`Error getting event token: ${err}`);
     logger.error(err.response?.data || err.message || 'Unknown error');
-    
+
     throw err;
   }
 };

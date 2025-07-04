@@ -1,5 +1,6 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
+
 import { updateCase } from '../../../app/case/api';
 import { DocumentUpload } from '../../../app/case/case';
 import { AppRequest, DocumentRequest } from '../../../app/controller/AppRequest';

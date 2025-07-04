@@ -32,17 +32,19 @@ describe('Testing the post controller', () => {
     newRequest.files = { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {
       status: 'Success',
-      documents: [{
-        _links: {
-          self: {
-            href: 'http://demo.com/93de8780-e3f3',
+      documents: [
+        {
+          _links: {
+            self: {
+              href: 'http://demo.com/93de8780-e3f3',
+            },
+            binary: {
+              href: 'http://demo.com/93de8780-e3f3/binary',
+            },
           },
-          binary: {
-            href: 'http://demo.com/93de8780-e3f3/binary',
-          },
+          originalDocumentName: 'sample.pdf',
         },
-        originalDocumentName: 'sample.pdf',
-      }],
+      ],
     };
     const expectedCaseDocuments = {
       url: 'http://demo.com/93de8780-e3f3',
@@ -229,17 +231,19 @@ describe('Testing the post controller', () => {
     newRequest.files = { documents: { name: 'sample.pdf', size: 10, mimetype: 'application/pdf', data: '' } };
     const data = {
       status: 'Success',
-      documents: [{
-        _links: {
-          self: {
-            href: 'http://demo.com/93de8780-e3f3',
+      documents: [
+        {
+          _links: {
+            self: {
+              href: 'http://demo.com/93de8780-e3f3',
+            },
+            binary: {
+              href: 'http://demo.com/93de8780-e3f3/binary',
+            },
           },
-          binary: {
-            href: 'http://demo.com/93de8780-e3f3/binary',
-          },
+          originalDocumentName: 'sample.pdf',
         },
-        originalDocumentName: 'sample.pdf',
-      }],
+      ],
     };
     mockedAxios.post.mockResolvedValue({ data });
     await controller.checkFileValidation(

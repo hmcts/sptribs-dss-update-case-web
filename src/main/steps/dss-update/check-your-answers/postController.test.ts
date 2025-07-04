@@ -1,8 +1,8 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { updateCase } from '../../../app/case/api';
 import { FormContent } from '../../../app/form/Form';
 import { APPLICATION_CONFIRMATION, CHECK_YOUR_ANSWERS } from '../../urls';
-import { updateCase } from '../../../app/case/api';
 
 import CheckYourAnswersController from './postController';
 
