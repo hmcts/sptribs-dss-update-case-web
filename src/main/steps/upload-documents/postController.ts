@@ -95,23 +95,26 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         this.uploadFileError(req, res, redirectUrl, 'fileSize');
       } else {
         const formData: FormData = new FormData();
-        formData.append('file', documents.data, {
+        formData.append('files', documents.data, {
           contentType: documents.mimetype,
           filename: documents.name,
         });
         try {
           const s2sToken = await getServiceAuthToken();
           const uploadDocumentResponseBody = await uploadDocument(formData, s2sToken, req);
-          const { url, fileName, documentId, binaryUrl } = uploadDocumentResponseBody['data']['document'];
+          const document = uploadDocumentResponseBody['data']['documents'][0];
+
           req.session['caseDocuments'].push({
-            url,
-            fileName,
-            documentId,
-            binaryUrl,
+            url: document._links.self.href,
+            fileName: document.originalDocumentName,
+            documentId: document._links.self.href.split('/').pop(),
+            binaryUrl: document._links.binary.href,
             description: req.body['eventName'],
           });
+
           req.session.save(() => res.redirect(redirectUrl));
         } catch (error) {
+          req.locals.logger.error(`Error uploading document: ${error.message}`, error);
           this.uploadFileError(req, res, redirectUrl, 'uploadError');
         }
       }
