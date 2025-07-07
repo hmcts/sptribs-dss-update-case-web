@@ -14450,7 +14450,7 @@ __metadata:
     typescript: ^5.4.5
     uglifyjs-webpack-plugin: ^2.2.0
     webpack: ^5.88.2
-    webpack-cli: ^5.1.4
+    webpack-cli: ^6.0.1
     webpack-dev-middleware: ^7.2.1
   languageName: unknown
   linkType: soft
