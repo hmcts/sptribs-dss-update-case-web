@@ -3648,6 +3648,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stryker-mutator/api@npm:9.0.1":
+  version: 9.0.1
+  resolution: "@stryker-mutator/api@npm:9.0.1"
+  dependencies:
+    mutation-testing-metrics: 3.5.1
+    mutation-testing-report-schema: 3.5.1
+    tslib: ~2.8.0
+    typed-inject: ~5.0.0
+  checksum: 0052c4803ba62435c0432eb012a00f500026ea21739fd2ab3b8a14479a87261d6f48872088401057a6036a5b2ecc45bfa0f09c69118e8a1db6c0bf583273047c
+  languageName: node
+  linkType: hard
+
 "@stryker-mutator/core@npm:^8.0.0":
   version: 8.7.1
   resolution: "@stryker-mutator/core@npm:8.7.1"
@@ -3702,17 +3714,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stryker-mutator/jest-runner@npm:^8.0.0":
-  version: 8.7.1
-  resolution: "@stryker-mutator/jest-runner@npm:8.7.1"
+"@stryker-mutator/jest-runner@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "@stryker-mutator/jest-runner@npm:9.0.1"
   dependencies:
-    "@stryker-mutator/api": 8.7.1
-    "@stryker-mutator/util": 8.7.1
-    semver: ~7.6.3
-    tslib: ~2.7.0
+    "@stryker-mutator/api": 9.0.1
+    "@stryker-mutator/util": 9.0.1
+    semver: ~7.7.0
+    tslib: ~2.8.0
   peerDependencies:
-    "@stryker-mutator/core": ~8.7.0
-  checksum: bcdcd737366a8cc57f2ea5b9aef737014461c2b7534e469f67ea336e37977941729e70378cdf7306885d3ec76df2624c43745c5956240953341f2d300a359eee
+    "@stryker-mutator/core": ~9.0.0
+  checksum: 0f06ce5a730811748015c1a99dde5d51f467916304b384d1682f1b84c2945d71e2051501eaa4f043007a28212564db4923421a766195a39b987364cb944eac95
   languageName: node
   linkType: hard
 
@@ -3720,6 +3732,13 @@ __metadata:
   version: 8.7.1
   resolution: "@stryker-mutator/util@npm:8.7.1"
   checksum: cfb3740e7b079ae5c3771109333a7f4275b465a15519b12ec8ee722fcd4480305012b5c54447d1da5368827b93d69a2618d61202f7d8c731dbf93aab589079ad
+  languageName: node
+  linkType: hard
+
+"@stryker-mutator/util@npm:9.0.1":
+  version: 9.0.1
+  resolution: "@stryker-mutator/util@npm:9.0.1"
+  checksum: b1e2d403d40fa0216dfb6569f8d047b2bbd2fd320a332e162be39c5520d2cb5dccf26404cdfabda224f58384b46cb1c5e065f6792b76c99280b8f42cfbad827b
   languageName: node
   linkType: hard
 
@@ -11939,10 +11958,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mutation-testing-metrics@npm:3.5.1":
+  version: 3.5.1
+  resolution: "mutation-testing-metrics@npm:3.5.1"
+  dependencies:
+    mutation-testing-report-schema: 3.5.1
+  checksum: cf2f7172913cb3fe8c75f7accbc603106bfb60ca3ce9eba634932fcc51c79956df595730264138cbb9716f6d249c6154b6cd2b4baad23dedbe11a5e2b9752025
+  languageName: node
+  linkType: hard
+
 "mutation-testing-report-schema@npm:3.3.0":
   version: 3.3.0
   resolution: "mutation-testing-report-schema@npm:3.3.0"
   checksum: bb27f65eabd00da74f3159f5a65989e96ef296b387424d214e3de3f485657654d7017378dc2938f5a92e6171a37e3692ddcd2185a04a5e6bf2bb2d2b7efac599
+  languageName: node
+  linkType: hard
+
+"mutation-testing-report-schema@npm:3.5.1":
+  version: 3.5.1
+  resolution: "mutation-testing-report-schema@npm:3.5.1"
+  checksum: ec9c90bed7b4d5c909d2f156f973d89f3f73ea66f18750fca133593ca129854d635c45ae2d7e01ba0c4360818cc5cf25a871db5acdbb298d2aa18d3ba8d6e319
   languageName: node
   linkType: hard
 
@@ -13964,7 +13999,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.7.2":
+"semver@npm:^7.7.2, semver@npm:~7.7.0":
   version: 7.7.2
   resolution: "semver@npm:7.7.2"
   bin:
@@ -14359,7 +14394,7 @@ __metadata:
     "@hmcts/nodejs-logging": ^4.0.4
     "@hmcts/properties-volume": ^1.0.0
     "@stryker-mutator/core": ^8.0.0
-    "@stryker-mutator/jest-runner": ^8.0.0
+    "@stryker-mutator/jest-runner": ^9.0.1
     "@types/config": ^3.3.0
     "@types/cookie-parser": ^1.4.3
     "@types/copy-webpack-plugin": ^10.1.0
@@ -15216,6 +15251,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:~2.8.0":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: e4aba30e632b8c8902b47587fd13345e2827fa639e7c3121074d5ee0880723282411a8838f830b55100cbe4517672f84a2472667d355b81e8af165a55dc6203a
+  languageName: node
+  linkType: hard
+
 "tunnel@npm:0.0.6, tunnel@npm:^0.0.6":
   version: 0.0.6
   resolution: "tunnel@npm:0.0.6"
@@ -15349,6 +15391,13 @@ __metadata:
   version: 4.0.0
   resolution: "typed-inject@npm:4.0.0"
   checksum: 2181b4f50e77dfa42752a645057c85a2e20eaaad639e3ea059fde9596baf8bbc51bb6c2913b040b9103752480045eff1e7f09b10b6dc187b6525b5acccac4971
+  languageName: node
+  linkType: hard
+
+"typed-inject@npm:~5.0.0":
+  version: 5.0.0
+  resolution: "typed-inject@npm:5.0.0"
+  checksum: ad02a16a3583626accf23d22a37b19cbc0d2dc650dbf2cdf23c070244c1e3bc9ee318e39e1ff3ae249b8a5c097710a3f23d471679a2952880e24be21ae40ec32
   languageName: node
   linkType: hard
 
