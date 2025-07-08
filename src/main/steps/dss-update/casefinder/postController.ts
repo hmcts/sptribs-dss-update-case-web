@@ -19,7 +19,7 @@ export default class CaseFinderController extends PostController<AnyObject> {
     let nextUrl = req.originalUrl;
     if (req.session.errors.length === 0) {
       try {
-        const responseFromServerCall = await getCase(req, String(req.body.applicantCaseId));
+        const responseFromServerCall = await getCase(String(req.body.applicantCaseId));
         if (responseFromServerCall.status === 200) {
           req.session.userCase.id = responseFromServerCall.data.id;
           nextUrl = DATA_VERIFICATION;
