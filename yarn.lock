@@ -8789,6 +8789,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"form-data@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "form-data@npm:4.0.4"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    es-set-tostringtag: ^2.1.0
+    hasown: ^2.0.2
+    mime-types: ^2.1.12
+  checksum: 9b7788836df9fa5a6999e0c02515b001946b2a868cfe53f026c69e2c537a2ff9fbfb8e9d2b678744628f3dc7a2d6e14e4e45dfaf68aa6239727f0bdb8ce0abf2
+  languageName: node
+  linkType: hard
+
 "formdata-polyfill@npm:^4.0.10":
   version: 4.0.10
   resolution: "formdata-polyfill@npm:4.0.10"
@@ -14437,7 +14450,7 @@ __metadata:
     express-fileupload: ^1.4.0
     express-rate-limit: ^7.4.0
     express-session: ^1.18.2
-    form-data: ^4.0.0
+    form-data: ^4.0.4
     govuk-frontend: 4.10.1
     helmet: ^4.6.0
     html-webpack-plugin: ^5.5.3
