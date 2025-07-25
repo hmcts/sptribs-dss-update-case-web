@@ -57,7 +57,7 @@
     "applicationinsights": "^2.7.3",
     "autobind-decorator": "^2.4.0",
     "axios": "^1.7.4",
-    "config": "^3.3.9",
+    "config": "^4.1.0",
     "connect-redis": "^7.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
