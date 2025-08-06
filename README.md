@@ -67,6 +67,10 @@ Running the linting with auto fix: (Prettier)
 $ yarn lint --fix
 ```
 
+### Testing compatability with sptribs-case-api
+
+To edit dependent services such as CCD in a PR, update the URLs in default.yaml and values.yaml, to direct them away from using AAT as a default
+
 ### Running the tests
 
 This template app uses [Jest](https://jestjs.io//) as the test engine. You can run unit tests by executing
