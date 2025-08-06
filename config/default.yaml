@@ -36,7 +36,7 @@ jurisdiction: 'ST_CIC'
 loggedInUsers: ['legalRep', 'police']
 services:
   case:
-    url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
+    url: 'http://ccd-data-store-api-sptribs-case-api-pr-2226.preview.platform.hmcts.net'
   cdam:
     url: 'http://ccd-case-document-am-api-aat.service.core-compute-aat.internal'
   idam:
