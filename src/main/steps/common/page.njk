@@ -43,15 +43,14 @@
     },
     html: feedback |replace("currentUrl",currentUrl)  + languageToggle
   }) }}
-
+  {% block backLink %}
+    <a href="#" class="govuk-back-link">{{ back }}</a>
+  {% endblock %}
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        {% block backLink %}
-    <a href="#" class="govuk-back-link">{{ back }}</a>
-  {% endblock %}
 
       {% block error_summary %}
         {% include "common/error/summary.njk" %}
