@@ -4578,8 +4578,8 @@ __metadata:
   linkType: hard
 
 "@uppy/core@npm:^4.3.0":
-  version: 4.5.2
-  resolution: "@uppy/core@npm:4.5.2"
+  version: 4.5.3
+  resolution: "@uppy/core@npm:4.5.3"
   dependencies:
     "@transloadit/prettier-bytes": ^0.3.4
     "@uppy/store-default": ^4.3.2
@@ -4589,7 +4589,7 @@ __metadata:
     namespace-emitter: ^2.0.1
     nanoid: ^5.0.9
     preact: ^10.5.13
-  checksum: 65b1f7a5e4ab0c0b580dfa853c010b8bb49892dddd30bfdb24e362546cfc9394d8237cc4c2d4807107e4f4732cc6dbe12e271197f3708091cf91efc352fa5a06
+  checksum: 57e83a6b0961c15e11b7da41235d341e99f7f1c2f6bbf4ecd0d33baede69654bf23eea8d2beeaaf99ccc5b7f207b62fec1e8eb7e0cc3856af6c354770cda5937
   languageName: node
   linkType: hard
 
