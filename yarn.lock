@@ -6177,15 +6177,15 @@ __metadata:
   linkType: hard
 
 "chai@npm:^5.0.0":
-  version: 5.3.1
-  resolution: "chai@npm:5.3.1"
+  version: 5.3.3
+  resolution: "chai@npm:5.3.3"
   dependencies:
     assertion-error: ^2.0.1
     check-error: ^2.1.1
     deep-eql: ^5.0.1
     loupe: ^3.1.0
     pathval: ^2.0.0
-  checksum: e68804fbf0936f338519ea4bbfded3f3cd00e6b24a847efe4c50b8fcb63a9d0e9a08a77ae409de59718dca44810d00d6a0e7f9db57afb39e2853a82ac6afa0e2
+  checksum: bc4091f1cccfee63f6a3d02ce477fe847f5c57e747916a11bd72675c9459125084e2e55dc2363ee2b82b088a878039ee7ee27c75d6d90f7de9202bf1b12ce573
   languageName: node
   linkType: hard
 
