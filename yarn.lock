@@ -4169,7 +4169,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^24.5.0":
   version: 24.5.0
   resolution: "@types/node@npm:24.5.0"
   dependencies:
@@ -4187,7 +4187,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.10.5, @types/node@npm:^22.5.5":
+"@types/node@npm:^22.5.5":
   version: 22.18.4
   resolution: "@types/node@npm:22.18.4"
   dependencies:
@@ -14438,7 +14438,7 @@ __metadata:
     "@types/mini-css-extract-plugin": ^2.5.1
     "@types/multer": ^2.0.0
     "@types/negotiator": ^0.6.1
-    "@types/node": ^22.10.5
+    "@types/node": ^24.5.0
     "@types/nunjucks": ^3.2.3
     "@types/serve-favicon": ^2.5.4
     "@types/session-file-store": ^1.2.2
