@@ -4187,12 +4187,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.10.5, @types/node@npm:^22.5.5":
+"@types/node@npm:^22.5.5":
   version: 22.18.4
   resolution: "@types/node@npm:22.18.4"
   dependencies:
     undici-types: ~6.21.0
   checksum: 2e11285a1674fef33771d774b7d0a5bc202f9d1c4a2eb5b75f3d5f6143c4669ffac3f372f10ec59ca3a169e8109e43f28e9e5408935c006110249eecf57a0109
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^24.5.2":
+  version: 24.5.2
+  resolution: "@types/node@npm:24.5.2"
+  dependencies:
+    undici-types: ~7.12.0
+  checksum: 5d859c117a3e15e2e7cca429ba2db9b7c5ef167eb6386ab3db9f9aad7f705baee45957ad11d6c3d7514dc189ee9ec311905944dfbe9823497ad80a9f15add048
   languageName: node
   linkType: hard
 
@@ -14438,7 +14447,7 @@ __metadata:
     "@types/mini-css-extract-plugin": ^2.5.1
     "@types/multer": ^2.0.0
     "@types/negotiator": ^0.6.1
-    "@types/node": ^22.10.5
+    "@types/node": ^24.5.2
     "@types/nunjucks": ^3.2.3
     "@types/serve-favicon": ^2.5.4
     "@types/session-file-store": ^1.2.2
