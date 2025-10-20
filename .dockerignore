@@ -18,3 +18,5 @@
 !.yarn/plugins
 !.yarn/versions
 !.yarn/patches
+!.pnp.cjs
+!.pnp.loader.mjs
