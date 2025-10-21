@@ -11,3 +11,4 @@ jest.*config.js
 .eslintrc.js
 src/test/config.ts
 **/*.js
+.pnp.*
