@@ -1,0 +1,10 @@
+diff --git a/dist/commonjs/index.js b/dist/commonjs/index.js
+index 151495d170efa2ddefa9d40819abf488999f7037..273ddb812314ba78d88196cc96e44f73e6aec967 100644
+--- a/dist/commonjs/index.js
++++ b/dist/commonjs/index.js
+@@ -65,4 +65,5 @@ exports.glob = Object.assign(glob_, {
+     unescape: minimatch_1.unescape,
+ });
+ exports.glob.glob = exports.glob;
++exports.default = exports.glob;
+ //# sourceMappingURL=index.js.map
