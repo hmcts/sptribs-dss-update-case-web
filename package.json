@@ -153,6 +153,7 @@
     "form-data": "^4.0.4",
     "js-yaml": "^4.1.1",
     "express": "^4.22.0",
+    "jws@npm:^3.2.2": "npm:3.2.3",
     "glob": "patch:glob@npm%3A11.1.0#~/.yarn/patches/glob-npm-11.1.0-9420ed5efe.patch",
     "glob@npm:^11.1.0": "patch:glob@npm%3A11.1.0#~/.yarn/patches/glob-npm-11.1.0-9420ed5efe.patch",
     "test-exclude@npm:^6.0.0": "patch:test-exclude@npm%3A6.0.0#~/.yarn/patches/test-exclude-npm-6.0.0-3fb03d69df.patch",
