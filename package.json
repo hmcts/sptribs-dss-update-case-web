@@ -141,6 +141,7 @@
     "@azure/identity": "^4.2.1",
     "@azure/msal-node": "^3.0.0",
     "cookie": "^1.0.0",
+    "diff": "^8.0.2",
     "follow-redirects": "^1.15.6",
     "formidable": "^3.5.4",
     "http-cache-semantics": "4.2.0",
