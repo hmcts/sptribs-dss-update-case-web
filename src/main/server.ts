@@ -54,6 +54,8 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
   next();
 });
+app.disable('x-powered-by');
+app.disable('X-Powered-By');
 app.use(cookies());
 
 const rateLimiterDisabled = process.env.RATE_LIMITER_DISABLED;
