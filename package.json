@@ -140,6 +140,7 @@
   "resolutions": {
     "@azure/identity": "^4.2.1",
     "@azure/msal-node": "^3.0.0",
+    "@isaacs/brace-expansion": "^5.0.1",
     "cookie": "^1.0.0",
     "diff": "^8.0.2",
     "follow-redirects": "^1.15.6",
