@@ -60,10 +60,6 @@ app.use((req, res, next) => {
 });
 app.disable('x-powered-by');
 app.disable('X-Powered-By');
-app.disable('x-xss-protection');
-app.disable('X-Xss-Protection');
-app.disable('x-frame-options');
-app.disable('X-Frame-Options');
 app.use(cookies());
 
 const rateLimiterDisabled = process.env.RATE_LIMITER_DISABLED;
