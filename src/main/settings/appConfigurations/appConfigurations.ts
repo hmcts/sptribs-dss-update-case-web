@@ -23,5 +23,9 @@ export class ExpressAppConfigurations {
       res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
       next();
     });
+    app.use((req, res, next) => {
+      res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+      next();
+    });
   }
 }
