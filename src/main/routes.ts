@@ -21,9 +21,10 @@ import {
   TIMED_OUT_URL,
 } from './steps/urls';
 
-export const restrictContentType = contentType => {
+export const restrictContentType = (contentType: string | any[]): RequestHandler => {
   return (req, res, next) => {
-    if (contentType.indexOf(req.headers['content-type']) !== -1) {
+    const headerValue = req.headers['content-type'];
+    if (headerValue && contentType.indexOf(headerValue) !== -1) {
       res.status(403).send();
     } else {
       next();
