@@ -12257,15 +12257,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"multer@npm:^2.0.2":
-  version: 2.1.0
-  resolution: "multer@npm:2.1.0"
+"multer@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "multer@npm:2.1.1"
   dependencies:
     append-field: "npm:^1.0.0"
     busboy: "npm:^1.6.0"
     concat-stream: "npm:^2.0.0"
     type-is: "npm:^1.6.18"
-  checksum: 10/7677636ed84ebd12d67849887ab69c982a7043c1ed0d209e512500f8cff73474601fc0b6922ba07dfd872641822788d323ab795e53f6d0910a5f00b10e07b498
+  checksum: 10/fb22868caaed37d725715c14c60b740b81665265da3a026bb61954414f65b99f76b360128413b8a2a7cc1a95ecae28a42bf831fe172bb79682d19ec105b556bd
   languageName: node
   linkType: hard
 
@@ -14200,9 +14200,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.66.1":
-  version: 1.92.1
-  resolution: "sass@npm:1.92.1"
+"sass@npm:^1.97.3":
+  version: 1.97.3
+  resolution: "sass@npm:1.97.3"
   dependencies:
     "@parcel/watcher": "npm:^2.4.1"
     chokidar: "npm:^4.0.0"
@@ -14213,7 +14213,7 @@ __metadata:
       optional: true
   bin:
     sass: sass.js
-  checksum: 10/ded47fd238d20a826bf3c5d129b4849100abae6fafe525a082d936b5793d7fd59a914134a302f0a6780efb5b26fdc2d1f1bfa37d8a9302ba632cad5e67675eec
+  checksum: 10/707ef8e525ed32d375e737346140d4b675f44de208df996c2df3407f5e62f3f38226ea1faf41a9fd4b068201e67b3a7e152b9e9c3b098daa847dd480c735f038
   languageName: node
   linkType: hard
 
@@ -14858,7 +14858,7 @@ __metadata:
     mocha-multi: "npm:^1.1.7"
     mochawesome: "npm:^7.1.4"
     moment: "npm:^2.30.1"
-    multer: "npm:^2.0.2"
+    multer: "npm:^2.1.1"
     negotiator: "npm:^1.0.0"
     node-cache: "npm:5.1.2"
     nodemon: "npm:^3.0.1"
@@ -14870,7 +14870,7 @@ __metadata:
     prettier: "npm:^3.0.3"
     query-string: "npm:^7.1.1"
     redis: "npm:^4.6.0"
-    sass: "npm:^1.66.1"
+    sass: "npm:^1.97.3"
     sass-loader: "npm:^16.0.0"
     serve-favicon: "npm:^2.5.0"
     session-file-store: "npm:^1.5.0"
