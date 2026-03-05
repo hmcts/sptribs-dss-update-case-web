@@ -1,5 +1,8 @@
 import { Application } from 'express';
 
+import { mockRequest } from '../test/unit/mocks/mockRequest';
+import { mockResponse } from '../test/unit/mocks/mockResponse';
+
 import { Routes, restrictContentType } from './routes';
 import {
   ACCESSIBILITY_STATEMENT,
@@ -54,16 +57,16 @@ describe('Routes', () => {
 
 describe('restrictContentType', () => {
   it('should return a function that checks content type and sends 403 if it matches', () => {
-    const req = {
+    const req = mockRequest({
       headers: {
         'content-type': 'application/json',
       },
-    };
+    });
 
-    const res = {
+    const res = mockResponse({
       status: jest.fn().mockReturnThis(),
       send: jest.fn(),
-    };
+    });
 
     const next = jest.fn();
 
@@ -76,15 +79,17 @@ describe('restrictContentType', () => {
   });
 
   it('should call next if content type does not match', () => {
-    const req = {
+    const req = mockRequest({
       headers: {
         'content-type': 'text/html',
       },
-    };
-    const res = {
+    });
+
+    const res = mockResponse({
       status: jest.fn().mockReturnThis(),
       send: jest.fn(),
-    };
+    });
+
     const next = jest.fn();
     const middleware = restrictContentType(['application/json']);
     middleware(req, res, next);
