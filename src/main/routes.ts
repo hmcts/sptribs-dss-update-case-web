@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { Application, RequestHandler } from 'express';
+import { Application, NextFunction, Request, RequestHandler, Response } from 'express';
 
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
@@ -21,9 +21,10 @@ import {
   TIMED_OUT_URL,
 } from './steps/urls';
 
-export const restrictContentType = contentType => {
-  return (req, res, next) => {
-    if (contentType.indexOf(req.headers['content-type']) !== -1) {
+export const restrictContentType = (contentType: string[]) => {
+  return (req: Request, res: Response, next: NextFunction): void => {
+    const headerValue = req.headers['content-type'];
+    if (headerValue && contentType.includes(headerValue)) {
       res.status(403).send();
     } else {
       next();
