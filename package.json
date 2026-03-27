@@ -144,7 +144,7 @@
     "@puppeteer/browsers": "^2.13.0",
     "axios": "^1.13.5",
     "basic-ftp": "^5.2.0",
-    "brace-expansion": "^1.1.12",
+    "brace-expansion": "^5.0.5",
     "bn.js": "^5.2.3",
     "compressing": "^1.10.3",
     "cookie": "^1.0.0",
@@ -178,7 +178,8 @@
     "underscore": "^1.13.7",
     "webpack-cli": "^5.1.4",
     "ws": "8.17.1",
-    "picomatch": "^4.0.4"
+    "picomatch": "^4.0.4",
+    "node-forge": "1.4.0"
   },
   "packageManager": "yarn@4.10.3"
 }
