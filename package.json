@@ -153,7 +153,7 @@
     "express": "^4.22.0",
     "fast-xml-parser": "^5.5.9",
     "file-entry-cache": "^11.1.2",
-    "follow-redirects": "^1.15.6",
+    "follow-redirects": "^1.16.0",
     "formidable": "^3.5.4",
     "form-data": "^4.0.4",
     "glob": "patch:glob@npm%3A11.1.0#~/.yarn/patches/glob-npm-11.1.0-9420ed5efe.patch",
