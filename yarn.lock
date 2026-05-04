@@ -3664,23 +3664,23 @@ __metadata:
   linkType: hard
 
 "@sonar/scan@npm:^4.3.4":
-  version: 4.3.5
-  resolution: "@sonar/scan@npm:4.3.5"
+  version: 4.3.6
+  resolution: "@sonar/scan@npm:4.3.6"
   dependencies:
-    adm-zip: "npm:0.5.16"
-    axios: "npm:1.13.6"
-    commander: "npm:13.1.0"
+    adm-zip: "npm:0.5.17"
+    axios: "npm:1.15.0"
+    commander: "npm:14.0.3"
     hpagent: "npm:1.2.0"
-    node-forge: "npm:1.3.3"
-    properties-file: "npm:3.6.4"
-    proxy-from-env: "npm:1.1.0"
+    node-forge: "npm:1.4.0"
+    properties-file: "npm:4.0.0"
+    proxy-from-env: "npm:2.1.0"
     semver: "npm:7.7.4"
-    slugify: "npm:1.6.6"
+    slugify: "npm:1.6.9"
     tar-stream: "npm:3.1.8"
   bin:
     sonar: bin/sonar-scanner.js
     sonar-scanner: bin/sonar-scanner.js
-  checksum: 10/ac1a1e145ff688cca3b127a1df407cec91f3e2534fa4fafab19a97ea0332206594c99c34190696de71053a2f59ea2968724c1ccc11942b117d9b1b2ac11f719c
+  checksum: 10/646a454d9c1ba42ebf23fff2e88dd2c804e413eeb81de4169514e899b56e25989360503eacb0320a1a1e6f541a255bc47d9dbfc28f5e29ffffce5608c4f26ac0
   languageName: node
   linkType: hard
 
@@ -5249,10 +5249,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"adm-zip@npm:0.5.16":
-  version: 0.5.16
-  resolution: "adm-zip@npm:0.5.16"
-  checksum: 10/e167d1b9e60cde37334efda828fa514680af9facbd4183952f36526390e5c7da9a90ca1e6880dfd3aba7b3517f1506c6178e0dc29cd630b26b98c795f97fc599
+"adm-zip@npm:0.5.17":
+  version: 0.5.17
+  resolution: "adm-zip@npm:0.5.17"
+  checksum: 10/035ea96d04376c290bed3401b67d1a2a2654996450ec9056dccc0fb194cb6a956bf7ad388d2648b0e1775338a377805601deca4bcd689658dc1d39247a1e9bdd
   languageName: node
   linkType: hard
 
@@ -6810,10 +6810,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:13.1.0, commander@npm:^13.1.0":
-  version: 13.1.0
-  resolution: "commander@npm:13.1.0"
-  checksum: 10/d3b4b79e6be8471ddadacbb8cd441fe82154d7da7393b50e76165a9e29ccdb74fa911a186437b9a211d0fc071db6051915c94fb8ef16d77511d898e9dbabc6af
+"commander@npm:14.0.3, commander@npm:~14.0.0, commander@npm:~14.0.3":
+  version: 14.0.3
+  resolution: "commander@npm:14.0.3"
+  checksum: 10/dfa9ebe2a433d277de5cb0252d23b10a543d245d892db858d23b516336a835c50fd4f52bee4cd13c705cc8acb6f03dc632c73dd806f7d06d3353eb09953dd17a
   languageName: node
   linkType: hard
 
@@ -6821,6 +6821,13 @@ __metadata:
   version: 10.0.1
   resolution: "commander@npm:10.0.1"
   checksum: 10/8799faa84a30da985802e661cc9856adfaee324d4b138413013ef7f087e8d7924b144c30a1f1405475f0909f467665cd9e1ce13270a2f41b141dab0b7a58f3fb
+  languageName: node
+  linkType: hard
+
+"commander@npm:^13.1.0":
+  version: 13.1.0
+  resolution: "commander@npm:13.1.0"
+  checksum: 10/d3b4b79e6be8471ddadacbb8cd441fe82154d7da7393b50e76165a9e29ccdb74fa911a186437b9a211d0fc071db6051915c94fb8ef16d77511d898e9dbabc6af
   languageName: node
   linkType: hard
 
@@ -6849,13 +6856,6 @@ __metadata:
   version: 9.5.0
   resolution: "commander@npm:9.5.0"
   checksum: 10/41c49b3d0f94a1fbeb0463c85b13f15aa15a9e0b4d5e10a49c0a1d58d4489b549d62262b052ae0aa6cfda53299bee487bfe337825df15e342114dde543f82906
-  languageName: node
-  linkType: hard
-
-"commander@npm:~14.0.0, commander@npm:~14.0.3":
-  version: 14.0.3
-  resolution: "commander@npm:14.0.3"
-  checksum: 10/dfa9ebe2a433d277de5cb0252d23b10a543d245d892db858d23b516336a835c50fd4f52bee4cd13c705cc8acb6f03dc632c73dd806f7d06d3353eb09953dd17a
   languageName: node
   linkType: hard
 
@@ -13350,10 +13350,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"properties-file@npm:3.6.4":
-  version: 3.6.4
-  resolution: "properties-file@npm:3.6.4"
-  checksum: 10/87a2fc9ce0dde5d303b5a9ef84a60dfb041ca46ef3589ec7da287ca48db02b87cbabecea9273c0dcd880965b2f1fb88d9d42c6e55eebd794c298b786dcad993f
+"properties-file@npm:4.0.0":
+  version: 4.0.0
+  resolution: "properties-file@npm:4.0.0"
+  checksum: 10/9cc3a1f708ac6ff9e0d4d08096cdbcb82611f39740546dc27e8fb2425a951ab19fd9a283e614aa04cb7c18b61b4b0856e0a102ef3d1d5d165e16d076a617fb62
   languageName: node
   linkType: hard
 
@@ -13383,17 +13383,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proxy-from-env@npm:1.1.0, proxy-from-env@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "proxy-from-env@npm:1.1.0"
-  checksum: 10/f0bb4a87cfd18f77bc2fba23ae49c3b378fb35143af16cc478171c623eebe181678f09439707ad80081d340d1593cd54a33a0113f3ccb3f4bc9451488780ee23
-  languageName: node
-  linkType: hard
-
-"proxy-from-env@npm:^2.1.0":
+"proxy-from-env@npm:2.1.0, proxy-from-env@npm:^2.1.0":
   version: 2.1.0
   resolution: "proxy-from-env@npm:2.1.0"
   checksum: 10/fbbaf4dab2a6231dc9e394903a5f66f20475e36b734335790b46feb9da07c37d6b32e2c02e3e2ea4d4b23774c53d8562e5b7cc73282cb43f4a597b7eacaee2ee
+  languageName: node
+  linkType: hard
+
+"proxy-from-env@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "proxy-from-env@npm:1.1.0"
+  checksum: 10/f0bb4a87cfd18f77bc2fba23ae49c3b378fb35143af16cc478171c623eebe181678f09439707ad80081d340d1593cd54a33a0113f3ccb3f4bc9451488780ee23
   languageName: node
   linkType: hard
 
@@ -14582,10 +14582,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"slugify@npm:1.6.6":
-  version: 1.6.6
-  resolution: "slugify@npm:1.6.6"
-  checksum: 10/d0737cdedc834c50f74227bc1a1cf4f449f3575893f031b0e8c59f501c73526c866a23e47261b262c7acdaaaaf30d6f9e8aaae22772b3f56e858ac84c35efa7b
+"slugify@npm:1.6.9":
+  version: 1.6.9
+  resolution: "slugify@npm:1.6.9"
+  checksum: 10/101599a77585ac3b3fe49662db8666260c8ee1c5090d28a13c6ecabf16b42057e69ea209654797f46b13faee4c53224f48784044bd734a9443b7b88e0357110e
   languageName: node
   linkType: hard
 
