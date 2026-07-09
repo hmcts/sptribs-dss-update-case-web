@@ -142,7 +142,7 @@
     "@azure/msal-node": "^3.0.0",
     "@isaacs/brace-expansion": "^5.0.1",
     "@puppeteer/browsers": "^2.13.0",
-    "axios": "1.15.2",
+    "axios": "1.16.1",
     "basic-ftp": "^5.2.0",
     "brace-expansion": "^5.0.5",
     "bn.js": "^5.2.3",
@@ -155,7 +155,7 @@
     "file-entry-cache": "^11.1.2",
     "follow-redirects": "^1.16.0",
     "formidable": "^3.5.4",
-    "form-data": "^4.0.4",
+    "form-data": "^4.0.6",
     "glob": "patch:glob@npm%3A11.1.0#~/.yarn/patches/glob-npm-11.1.0-9420ed5efe.patch",
     "glob@npm:^11.1.0": "patch:glob@npm%3A11.1.0#~/.yarn/patches/glob-npm-11.1.0-9420ed5efe.patch",
     "glob@npm:^10.3.10": "patch:glob@npm%3A11.1.0#~/.yarn/patches/glob-npm-11.1.0-9420ed5efe.patch",
@@ -165,7 +165,7 @@
     "glob@npm:^10.0.0": "patch:glob@npm%3A11.1.0#~/.yarn/patches/glob-npm-11.1.0-9420ed5efe.patch",
     "http-cache-semantics": "4.2.0",
     "immutable": "^5.1.5",
-    "js-yaml": "^4.1.1",
+    "js-yaml": "^4.2.0",
     "jws@npm:^3.2.2": "npm:3.2.3",
     "lodash": "^4.18.0",
     "minimatch": "^10.2.1",
@@ -184,8 +184,10 @@
     "underscore": "^1.13.7",
     "undici": "^6.24.1",
     "webpack-cli": "^5.1.4",
-    "ws": "8.17.1",
-    "uuid": "^14.0.0"
+    "ws": "8.21.0",
+    "uuid": "^14.0.0",
+    "@opentelemetry/core": "^2.8.0",
+    "tar": "^7.5.16"
   },
   "packageManager": "yarn@4.10.3"
 }
