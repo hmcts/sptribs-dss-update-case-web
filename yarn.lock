@@ -6272,9 +6272,9 @@ __metadata:
   linkType: hard
 
 "bn.js@npm:^5.2.3":
-  version: 5.2.4
-  resolution: "bn.js@npm:5.2.4"
-  checksum: 10/30af6d4e5930dee835c692d6225f2b0a018535647c9d854fb780cda26d9ec9dc920fdcc815f44e312f47223f73eaf58d03074a19fd1593fb33107bb8d9720a5f
+  version: 5.2.5
+  resolution: "bn.js@npm:5.2.5"
+  checksum: 10/10b1ac91e76fd828c1187cf65a9f1a0374e7afb9acd167e19c2d7c4108f6216841007c1e3aef145fa95cc7b3d07f705236a707184af1537667362b3a842d01ac
   languageName: node
   linkType: hard
 
