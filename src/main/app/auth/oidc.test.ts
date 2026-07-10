@@ -41,7 +41,7 @@ describe('getRedirectUrl', () => {
     mockedConfig.get.mockReturnValueOnce('https://idam-web-public.aat.platform.hmcts.net/login');
 
     expect(getRedirectUrl('http://localhost', CALLBACK_URL)).toBe(
-      'https://idam-web-public.aat.platform.hmcts.net/login?client_id=sptribs-dss-update-case-web&response_type=code&redirect_uri=http://localhost/receiver&scope=openid%20profile%20roles'
+      'https://idam-web-public.aat.platform.hmcts.net/login?client_id=sptribs-dss-update-case-web&response_type=code&prompt=login&redirect_uri=http://localhost/receiver&scope=openid%20profile%20roles'
     );
   });
 });
