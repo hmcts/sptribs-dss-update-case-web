@@ -4,7 +4,7 @@ import * as jwtDecode from 'jwt-decode';
 import { CALLBACK_URL } from '../../steps/urls';
 import { UserDetails } from '../controller/AppRequest';
 
-import { OidcResponse, getRedirectUrl, getSystemUser, getUserDetails } from './oidc';
+import { OidcResponse, getEndSessionUrl, getRedirectUrl, getSystemUser, getUserDetails } from './oidc';
 
 const config = require('config');
 
@@ -41,7 +41,7 @@ describe('getRedirectUrl', () => {
     mockedConfig.get.mockReturnValueOnce('https://idam-web-public.aat.platform.hmcts.net/login');
 
     expect(getRedirectUrl('http://localhost', CALLBACK_URL)).toBe(
-      'https://idam-web-public.aat.platform.hmcts.net/login?client_id=sptribs-dss-update-case-web&response_type=code&prompt=login&redirect_uri=http://localhost/receiver&scope=openid%20profile%20roles'
+      'https://idam-web-public.aat.platform.hmcts.net/login?client_id=sptribs-dss-update-case-web&response_type=code&redirect_uri=http://localhost/receiver&scope=openid%20profile%20roles'
     );
   });
 });
@@ -87,6 +87,15 @@ describe('getSystemUser', () => {
     id: '123',
     roles: ['caseworker-sptribs-systemupdate', 'caseworker-st_cic-caseworker'],
   };
+
+  describe('getEndSessionUrl', () => {
+    test('should create a valid URL to redirect to the IDAM endSession endpoint', () => {
+      mockedConfig.get.mockReturnValueOnce('https://idam-web-public.aat.platform.hmcts.net/o/endSession');
+      expect(getEndSessionUrl('http://localhost')).toBe(
+        'https://idam-web-public.aat.platform.hmcts.net/o/endSession?post_logout_redirect_uri=http://localhost'
+      );
+    });
+  });
 
   test('Cache enabled', async () => {
     mockedConfig.get.mockReturnValueOnce('user');
