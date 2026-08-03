@@ -2,9 +2,9 @@ import { cy, en } from './content';
 
 const enContent = {
   serviceName: 'Update an appeal to the First-tier Tribunal',
-  title: 'Existing case details',
+  title: 'Existing appeal details',
   line1: 'You can find this information in the email you received after submitting your tribunal forms.',
-  subtitle: 'Case reference number',
+  subtitle: 'Appeal reference number',
   caseNumberHint:
     'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ;',
   errorSummaryMessage: 'There is a problem',

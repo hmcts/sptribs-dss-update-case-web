@@ -3,12 +3,12 @@ import { cy, en, form, generateContent, getErrors } from './content';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const englishContent = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
-  title: 'Add information to a case',
+  title: 'Add information to a appeal',
   paragraph1:
-    "Please provide any additional relevant information that you would like to add to this case. Don't include any personal financial information, such as your banking details.",
+    "Please provide any additional relevant information that you would like to add to this appeal. Don't include any personal financial information, such as your banking details.",
   additionalDocumentsHeading: 'Additional documents',
   paragraph2:
-    'You may want to submit other documents, files, or evidence that provides the Tribunal with more information about your case.',
+    'You may want to submit other documents, files, or evidence that provides the Tribunal with more information about your appeal.',
   paragraph3:
     'This will depend on the nature of your appeal, application or claim. Specific examples can be found in your completed tribunal form.',
   uploadedDocumentsSubTitle: 'These may include:',
@@ -19,7 +19,7 @@ const englishContent = () => ({
     'related reports',
   ],
   caseRelevancySubTitle:
-    'For each piece of additional information or evidence you are submitting, please state why it is relevant to your case.',
+    'For each piece of additional information or evidence you are submitting, please state why it is relevant to your appeal.',
   fileUploadRequirementsLabel: 'File uploads requirements',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
@@ -30,7 +30,7 @@ const englishContent = () => ({
   guideText: "You can't upload executable (.exe), zip or other archive files due to virus risks.",
   titleForFile: 'Select documents to upload',
   uploadButton: 'Upload file',
-  documentListLabel: 'Please explain why you feel this document is relevant to your case.',
+  documentListLabel: 'Please explain why you feel this document is relevant to your appeal.',
   delete: 'Delete',
   documentInLanguage: 'Document',
   errorSummaryMessage: 'There is a problem',

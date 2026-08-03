@@ -4,10 +4,10 @@ import { cy, en, generateContent } from './content';
 
 const englishContent = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
-  title: 'Subject of this case',
+  title: 'Subject of this appeal',
   errorSummaryMessage: 'There is a problem',
   subjectFullNameLabel: 'Full name',
-  subjectFullNameHint: 'This name must match exactly with the case record',
+  subjectFullNameHint: 'This name must match exactly with the appeal record',
   subjectDOBLabel: 'Date of birth',
   subjectDOBHint: 'For example, 31 3 1980',
   day: 'Day',
@@ -15,8 +15,8 @@ const englishContent = () => ({
   year: 'Year',
   errors: {
     subjectFullName: {
-      required: 'Please enter a full name. This name must match exactly with the case record',
-      invalid: 'Please enter a valid name. This name must match exactly with the case record',
+      required: 'Please enter a full name. This name must match exactly with the appeal record',
+      invalid: 'Please enter a valid name. This name must match exactly with the appeal record',
     },
     subjectDOB: {
       required: 'Please enter a full date of birth. For example, 31 3 1980',
@@ -27,7 +27,7 @@ const englishContent = () => ({
         "Some of the information you have given doesn't match our records. Please enter the right value and try again.",
     },
     caseError: {
-      required: 'Error verifying case',
+      required: 'Error verifying appeal',
     },
   },
 });
