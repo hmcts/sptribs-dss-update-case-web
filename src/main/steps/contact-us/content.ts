@@ -1,7 +1,7 @@
 import { TranslationFn } from '../../app/controller/GetController';
 
 export const en = {
-  title: 'Update an existing First-tier Tribunal case',
+  title: 'Update an existing First-tier Tribunal appeal',
   email: 'Email',
   emailAddress:
     'Email us at <a href="mailto:CIC.enquiries@justice.gov.uk" class="govuk-link">CIC.enquiries@justice.gov.uk.</a>',

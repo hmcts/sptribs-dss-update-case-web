@@ -10,8 +10,8 @@ export const enContent = {
   change: 'change',
   continue: 'Accept and send',
   statementOfTruth:
-    'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
-  submitApplicationText: 'Now update your case',
+    'By updating this appeal you are confirming that, to the best of your knowledge, the details you are providing are correct.',
+  submitApplicationText: 'Now update your appeal',
   errorSummaryMessage: 'There is a problem',
   keys: {
     information: 'Additional information',

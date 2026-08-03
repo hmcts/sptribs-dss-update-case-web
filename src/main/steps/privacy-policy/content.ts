@@ -25,7 +25,7 @@ export const en = {
   personalDataProcessApplication:
     'Our staff use your personal data to process your application. They work in the UK and your data is stored in the UK.',
   collectPersonalData: 'The personal data we collect',
-  onlineSpecialTribunalsServiceUse: 'When you use the online update case document submission service we ask for your:',
+  onlineSpecialTribunalsServiceUse: 'When you use the online update appeal document submission service we ask for your:',
   fullName: 'Full name',
   dateOfBirth: 'Date of birth',
   otherPersonalInfo: 'Other personal information you provide in your application',
