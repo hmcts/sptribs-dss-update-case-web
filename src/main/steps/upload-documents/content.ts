@@ -4,7 +4,7 @@ import { FormContent } from '../../app/form/Form';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
-  title: 'Add information to a appeal',
+  title: 'Add information to an appeal',
   paragraph1:
     "Please provide any additional relevant information that you would like to add to this appeal. Don't include any personal financial information, such as your banking details.",
   additionalDocumentsHeading: 'Additional documents',
