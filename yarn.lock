@@ -7263,7 +7263,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-webpack-plugin@npm:*, copy-webpack-plugin@npm:^12.0.0":
+"copy-webpack-plugin@npm:*":
   version: 12.0.2
   resolution: "copy-webpack-plugin@npm:12.0.2"
   dependencies:
@@ -7276,6 +7276,21 @@ __metadata:
   peerDependencies:
     webpack: ^5.1.0
   checksum: 10/674725d4d9556b7b9a32bb85393532ef2bb75ffce785d942681b3575a86d900751f67cebbb089ddd050757f58c84edc18732e17880f12c45c9775ca94328526c
+  languageName: node
+  linkType: hard
+
+"copy-webpack-plugin@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "copy-webpack-plugin@npm:14.0.0"
+  dependencies:
+    glob-parent: "npm:^6.0.1"
+    normalize-path: "npm:^3.0.0"
+    schema-utils: "npm:^4.2.0"
+    serialize-javascript: "npm:^7.0.3"
+    tinyglobby: "npm:^0.2.12"
+  peerDependencies:
+    webpack: ^5.1.0
+  checksum: 10/734524b9569b873686bdd3addef77ac9604ecaf6eaadaf2fc37f1a91eb4a50c38e8d034899e65a189af37d29b1778b34b818493e5922dc1d089625ecd0f33211
   languageName: node
   linkType: hard
 
@@ -14875,7 +14890,7 @@ __metadata:
     config: "npm:^4.0.0"
     connect-redis: "npm:^7.1.0"
     cookie-parser: "npm:^1.4.6"
-    copy-webpack-plugin: "npm:^12.0.0"
+    copy-webpack-plugin: "npm:^14.0.0"
     cors: "npm:^2.8.5"
     css-loader: "npm:^7.0.0"
     dayjs: "npm:^1.11.9"
