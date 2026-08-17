@@ -2,6 +2,7 @@
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 {% from "govuk/components/footer/macro.njk" import govukFooter %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
 
 {% set language = "Cymraeg" %}
 
@@ -41,6 +42,10 @@
 {% endblock %}
 
 {% block content %}
+    {{ govukNotificationBanner({
+      titleText: content.loginUiBannerTitle,
+      html: '<p class="govuk-notification-banner__heading">' + content.loginUiBannerBody + '</p>'
+    }) }}
     <h1 class="govuk-heading-l govuk-!-margin-bottom-9">{{content.title}}</h1>
     <p class="govuk-body-l">{{content.paragraph1}}</p>
     <p class="govuk-body-l">{{content.paragraph2}}</p>
