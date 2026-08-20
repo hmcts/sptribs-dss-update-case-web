@@ -20,7 +20,7 @@ const enContent = {
 
 const cyContent = {
   serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
-  title: 'Manylion achos sy’n bodoli’n barod',
+  title: 'Manylion apêl presennol',
   line1: "Gallwch ddod o hyd i'r wybodaeth hon yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.",
   subtitle: 'Cyfeirnod yr achos',
   caseNumberHint:
