@@ -7620,6 +7620,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"decode-uri-component@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "decode-uri-component@npm:0.5.0"
+  checksum: 10/7bd7ed31824ea982a54c1e3ab6284a4541a09125ad6b419d3c5db976ceb700334f15bd5f82af5fe9925e2f9f78b750b6dd60fc80a8fc0498ae2b55da8177e49b
+  languageName: node
+  linkType: hard
+
 "decompress-response@npm:^6.0.0":
   version: 6.0.0
   resolution: "decompress-response@npm:6.0.0"
@@ -9080,6 +9087,13 @@ __metadata:
   version: 1.1.0
   resolution: "filter-obj@npm:1.1.0"
   checksum: 10/9d681939eec2b4b129cb4f307b7e93d954a0657421d4e5357d86093b26d3f4f570909ed43717dcfd62428b3cf8cddd9841b35f9d40d12ac62cfabaa677942593
+  languageName: node
+  linkType: hard
+
+"filter-obj@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "filter-obj@npm:5.1.0"
+  checksum: 10/8f6dab6d8d8855f686e8cc6be289bbbd64a80be52c660124e36e982f78017cf5dae7de95f79ec167fbf62101d6aab93067a3105ae8f56251785a721e678d6b07
   languageName: node
   linkType: hard
 
@@ -13655,7 +13669,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"query-string@npm:^7.1.1, query-string@npm:^7.1.3":
+"query-string@npm:^7.1.3":
   version: 7.1.3
   resolution: "query-string@npm:7.1.3"
   dependencies:
@@ -13664,6 +13678,17 @@ __metadata:
     split-on-first: "npm:^1.0.0"
     strict-uri-encode: "npm:^2.0.0"
   checksum: 10/3b6f2c167e76ca4094c5f1a9eb276efcbb9ebfd8b1a28c413f3c4e4e7d6428c8187bf46c8cbc9f92a229369dd0015de10a7fd712c8cee98d5d84c2ac6140357e
+  languageName: node
+  linkType: hard
+
+"query-string@npm:^9.5.0":
+  version: 9.5.0
+  resolution: "query-string@npm:9.5.0"
+  dependencies:
+    decode-uri-component: "npm:^0.5.0"
+    filter-obj: "npm:^5.1.0"
+    split-on-first: "npm:^3.0.0"
+  checksum: 10/9df4123720a1c73e0938492938031964723038998983cb478d083ef263eff66372ab46e504e39ce5b6a7d72870c6e82ba42421b113f7f7f073c1408ba7fd0d1b
   languageName: node
   linkType: hard
 
@@ -14813,6 +14838,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"split-on-first@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "split-on-first@npm:3.0.0"
+  checksum: 10/75dc27ecbac65cfbeab9a3b90cf046307220192d3d7a30e46aa0f19571cc9b4802aac813f3de2cc9b16f2e46aae72f275659b5d2614bb5369c77724d739e5f73
+  languageName: node
+  linkType: hard
+
 "split2@npm:^4.2.0":
   version: 4.2.0
   resolution: "split2@npm:4.2.0"
@@ -14909,7 +14941,7 @@ __metadata:
     pa11y: "npm:^9.1.0"
     playwright: "npm:^1.37.1"
     prettier: "npm:^3.0.3"
-    query-string: "npm:^7.1.1"
+    query-string: "npm:^9.5.0"
     redis: "npm:^4.6.0"
     sass: "npm:^1.97.3"
     sass-loader: "npm:^16.0.0"
