@@ -3,12 +3,12 @@ import { cy, en, form, generateContent, getErrors } from './content';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const englishContent = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
-  title: 'Add information to a case',
+  title: 'Add information to an appeal',
   paragraph1:
-    "Please provide any additional relevant information that you would like to add to this case. Don't include any personal financial information, such as your banking details.",
+    "Please provide any additional relevant information that you would like to add to this appeal. Don't include personal financial information, such as your bank details.",
   additionalDocumentsHeading: 'Additional documents',
   paragraph2:
-    'You may want to submit other documents, files, or evidence that provides the Tribunal with more information about your case.',
+    'You may want to submit other documents, files, or evidence that provides the Tribunal with more information about your appeal.',
   paragraph3:
     'This will depend on the nature of your appeal, application or claim. Specific examples can be found in your completed tribunal form.',
   uploadedDocumentsSubTitle: 'These may include:',
@@ -19,7 +19,7 @@ const englishContent = () => ({
     'related reports',
   ],
   caseRelevancySubTitle:
-    'For each piece of additional information or evidence you are submitting, please state why it is relevant to your case.',
+    'For each piece of additional information or evidence you are submitting, please state why it is relevant to your appeal.',
   fileUploadRequirementsLabel: 'File uploads requirements',
   uploadHelpBullets: [
     'File formats: MS Word, MS Excel, PDF, JPG, PNG, TXT, RTF, MP4, MP3',
@@ -30,7 +30,7 @@ const englishContent = () => ({
   guideText: "You can't upload executable (.exe), zip or other archive files due to virus risks.",
   titleForFile: 'Select documents to upload',
   uploadButton: 'Upload file',
-  documentListLabel: 'Please explain why you feel this document is relevant to your case.',
+  documentListLabel: 'Please explain why you feel this document is relevant to your appeal.',
   delete: 'Delete',
   documentInLanguage: 'Document',
   errorSummaryMessage: 'There is a problem',
@@ -54,12 +54,12 @@ const englishContent = () => ({
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const welshContent = () => ({
   serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
-  title: 'Ychwanegu gwybodaeth at achos',
+  title: 'Ychwanegu gwybodaeth i apêl',
   paragraph1:
-    'Darparwch unrhyw wybodaeth berthnasol ychwanegol yr hoffech ei hychwanegu at yr achos hwn. Peidiwch â chynnwys unrhyw wybodaeth ariannol bersonol, megis eich manylion banc.',
+    'Darparwch unrhyw wybodaeth berthnasol ychwanegol yr hoffech ei hychwanegu at yr apêl hon. Peidiwch â chynnwys unrhyw wybodaeth ariannol bersonol, megis eich manylion banc.',
   additionalDocumentsHeading: 'Dogfennau ychwanegol',
   paragraph2:
-    'Efallai y byddwch eisiau cyflwyno dogfennau, ffeiliau neu dystiolaeth arall sy’n rhoi mwy o wybodaeth i’r Tribiwnlys am eich achos.',
+    'Efallai y byddwch eisiau cyflwyno dogfennau, ffeiliau neu dystiolaeth arall sy’n rhoi mwy o wybodaeth i’r Tribiwnlys am eich apêl.',
   paragraph3:
     'Bydd hyn yn dibynnu ar natur eich apêl, cais neu hawliad. Gellir dod o hyd i enghreifftiau penodol yn y ffurflen tribiwnlys rydych wedi’i llenwi.',
   uploadedDocumentsSubTitle: "Gallai'r rhain gynnwys:",
@@ -70,7 +70,7 @@ const welshContent = () => ({
     'adroddiadau cysylltiedig',
   ],
   caseRelevancySubTitle:
-    'Ar gyfer pob darn o wybodaeth neu dystiolaeth ychwanegol rydych yn ei chyflwyno, nodwch pam ei bod yn berthnasol i’ch achos.',
+    'Ar gyfer pob darn o wybodaeth neu dystiolaeth ychwanegol rydych yn ei chyflwyno, nodwch pam ei bod yn berthnasol i’ch apêl.',
   fileUploadRequirementsLabel: 'Gofynion llwytho ffeil',
   uploadHelpBullets: [
     'Fformatau ffeiliau: MS Word, MS Excel, PDF, JPG, PNG, TXT, RFT, MP4, MP3',
@@ -82,7 +82,7 @@ const welshContent = () => ({
     'Ni allwch lwytho ffeiliau gweithredu (.exe), ffeiliau zip neu ffeiliau archif eraill oherwydd y risg o firws.',
   titleForFile: "Dewiswch ddogfennau i'w huwchlwytho",
   uploadButton: 'Llwytho ffeil',
-  documentListLabel: 'Eglurwch pam eich bod yn teimlo bod y ddogfen hon yn berthnasol i’ch achos.',
+  documentListLabel: 'Eglurwch pam eich bod yn teimlo bod y ddogfen hon yn berthnasol i’ch apêl.',
   delete: 'Dileu',
   documentInLanguage: 'Dogfen',
   errorSummaryMessage: 'Mae yna broblem',

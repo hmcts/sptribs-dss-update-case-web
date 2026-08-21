@@ -5,9 +5,9 @@ import { CommonContent } from '../../common/common.content';
 const en = (content: CommonContent) => {
   return {
     serviceName: 'Update an appeal to the First-tier Tribunal',
-    title: 'Case Updated:',
+    title: 'Appeal Updated:',
     successMessage: `<strong>${getHyphenatedCaseId(content)}</strong>`,
-    line1: 'Thank you for updating your case.',
+    line1: 'Thank you for updating your appeal.',
     line2: 'The additional information that you have submitted will be sent to the Tribunal.',
     line3: 'An email will be sent to you that explains what will happen next.',
     feedback: 'Feedback',
