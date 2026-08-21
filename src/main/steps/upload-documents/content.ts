@@ -6,7 +6,7 @@ export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
   title: 'Add information to an appeal',
   paragraph1:
-    "Please provide any additional relevant information that you would like to add to this appeal. Don't include any personal financial information, such as your banking details.",
+    "Please provide any additional relevant information that you would like to add to this appeal. Don't include personal financial information, such as your bank details.",
   additionalDocumentsHeading: 'Additional documents',
   paragraph2:
     'You may want to submit other documents, files, or evidence that provides the Tribunal with more information about your appeal.',
