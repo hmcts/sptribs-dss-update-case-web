@@ -8,7 +8,7 @@ export const en = {
 };
 
 export const cy: typeof en = {
-  title: 'Diweddaru achos sy’n bodoli’n barod yn y Tribiwnlys Haen Gyntaf',
+  title: 'Diweddaru apêl presennol y Tribiwnlys Haen Gyntaf',
   email: 'E-bost',
   emailAddress:
     'Anfonwch neges e-bost i <a href="mailto:CIC.enquiries@justice.gov.uk" class="govuk-link">CIC.enquiries@justice.gov.uk.</a>',
