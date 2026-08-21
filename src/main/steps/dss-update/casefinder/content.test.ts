@@ -22,7 +22,7 @@ const cyContent = {
   serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
   title: 'Manylion apêl presennol',
   line1: "Gallwch ddod o hyd i'r wybodaeth hon yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.",
-  subtitle: 'Cyfeirnod yr achos',
+  subtitle: 'Cyfeirnod GLlTEF',
   caseNumberHint:
     "Bydd y rhif hwn yn cynnwys 16 digid. Ni ddylai gynnwys bylchau neu unrhyw un o'r nodau canlynol: - * (  )  &  !  /  ;",
   errorSummaryMessage: 'Mae yna broblem',
