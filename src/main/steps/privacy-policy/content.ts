@@ -132,7 +132,7 @@ export const cy: typeof en = {
     'Mae ein staff yn defnyddio eich data personol i brosesu eich cais. Maent yn gweithio yn y DU ac mae eich data yn cael ei storio yn y DU.',
   collectPersonalData: 'Y data personol rydym ni’n casglu',
   onlineSpecialTribunalsServiceUse:
-    'Pan fyddwch yn defnyddio’r gwasanaeth cyflwyno dogfennau achos diweddaru ar-lein rydym yn gofyn am eich:',
+    'Pan fyddwch yn defnyddio’r gwasanaeth cyflwyno dogfen apêl wedi’i diweddaru ar-lein, gofynnwn am eich:',
   fullName: 'Enw llawn',
   dateOfBirth: 'Dyddiad geni',
   otherPersonalInfo: "Gwybodaeth bersonol arall rydych chi'n ei darparu yn eich cais",

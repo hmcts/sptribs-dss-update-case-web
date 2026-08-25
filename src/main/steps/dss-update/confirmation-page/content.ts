@@ -20,9 +20,9 @@ const en = (content: CommonContent) => {
 const cy = (content: CommonContent) => {
   return {
     serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
-    title: 'Achos wedi’i ddiweddaru',
+    title: 'Apêl wedi’i diweddaru:',
     successMessage: `<strong>${getHyphenatedCaseId(content)}</strong>`,
-    line1: 'Diolch i chi am ddiweddaru eich achos.',
+    line1: 'Diolch i chi am ddiweddaru eich apêl.',
     line2: 'Fe anfonir yr wybodaeth ychwanegol rydych wedi’i chyflwyno i’r Tribiwnlys.',
     line3: 'Fe anfonir neges e-bost atoch i esbonio beth fydd yn digwydd nesaf.',
     feedback: 'Adborth',

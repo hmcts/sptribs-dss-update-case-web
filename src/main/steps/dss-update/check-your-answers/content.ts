@@ -41,8 +41,8 @@ const cyContent: typeof enContent = {
   change: 'newid',
   continue: 'Derbyn ac anfon',
   statementOfTruth:
-    'Trwy ddiweddaru’r achos hwn rydych yn cadarnhau, hyd eithaf eich gwybodaeth, bod y manylion rydych yn eu darparu yn gywir.',
-  submitApplicationText: 'Diweddarwch eich achos nawr',
+    'Drwy ddiweddaru’r apêl hon rydych yn cadarnhau, hyd eithaf eich gwybodaeth, bod y manylion a ddarperir gennych yn gywir.',
+  submitApplicationText: 'Diweddarwch eich apêl nawr.',
   errorSummaryMessage: 'Mae yna broblem',
   keys: {
     information: 'Gwybodaeth ychwanegol',

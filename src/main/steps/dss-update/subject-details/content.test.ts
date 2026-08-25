@@ -27,16 +27,16 @@ const englishContent = () => ({
         "Some of the information you have given doesn't match our records. Please enter the right value and try again.",
     },
     caseError: {
-      required: 'Error verifying appeal',
+      required: 'Gwall wrth ddilysu’r apêl',
     },
   },
 });
 const welshContent = () => ({
   serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
-  title: 'Testun yr achos hwn',
+  title: 'Testun yr apêl hon',
   errorSummaryMessage: 'Mae yna broblem',
   subjectFullNameLabel: 'Enw llawn',
-  subjectFullNameHint: "Rhaid i'r enw hwn gyd-fynd yn union â chofnod yr achos",
+  subjectFullNameHint: 'Rhaid i’r enw fod yn union yr un fath â chofnod yr apêl',
   subjectDOBLabel: 'Dyddiad geni',
   subjectDOBHint: 'Er enghraifft, 31 3 1980',
   day: 'Diwrnod',
@@ -44,8 +44,8 @@ const welshContent = () => ({
   year: 'Blwyddyn',
   errors: {
     subjectFullName: {
-      required: "Nodwch enw llawn. Rhaid i'r enw hwn gyd-fynd yn union â chofnod yr achos",
-      invalid: "Rhowch enw dilys. Rhaid i'r enw hwn gyd-fynd yn union â chofnod yr achos",
+      required: 'Rhowch enw llawn. Rhaid i’r enw hwn fod yn union yr un fath â chofnod yr apêl',
+      invalid: 'Rhowch enw dilys. Rhaid i’r enw hwn fod yn union yr un fath â chofnod yr apêl',
     },
     subjectDOB: {
       required: 'Nodwch ddyddiad geni. Er enghraifft, 31 3 1980',
