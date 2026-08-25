@@ -27,7 +27,7 @@ const englishContent = () => ({
         "Some of the information you have given doesn't match our records. Please enter the right value and try again.",
     },
     caseError: {
-      required: 'Gwall wrth ddilysu’r apêl',
+      required: 'Error verifying appeal',
     },
   },
 });
@@ -56,7 +56,7 @@ const welshContent = () => ({
         'Nid yw rhywfaint o’r wybodaeth rydych wedi’i rhoi yn cyd-fynd â’n cofnodion. Darparwch yr wybodaeth gywir a rhowch gynnig arall arni.',
     },
     caseError: {
-      required: 'Gwall wrth ddilysu’r achos',
+      required: 'Gwall wrth ddilysu’r apêl',
     },
   },
 });

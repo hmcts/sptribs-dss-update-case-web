@@ -42,7 +42,7 @@ const cyContent: typeof enContent = {
   continue: 'Derbyn ac anfon',
   statementOfTruth:
     'Drwy ddiweddaru’r apêl hon rydych yn cadarnhau, hyd eithaf eich gwybodaeth, bod y manylion a ddarperir gennych yn gywir.',
-  submitApplicationText: 'Diweddarwch eich apêl nawr.',
+  submitApplicationText: 'Diweddarwch eich apêl nawr',
   errorSummaryMessage: 'Mae yna broblem',
   keys: {
     information: 'Gwybodaeth ychwanegol',
