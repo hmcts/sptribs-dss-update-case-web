@@ -45,7 +45,7 @@ export const cy = () => ({
   title: 'Testun yr apêl hon',
   errorSummaryMessage: 'Mae yna broblem',
   subjectFullNameLabel: 'Enw llawn',
-  subjectFullNameHint: 'Rhaid i’r enw fod yn union yr un fath â chofnod yr apêl',
+  subjectFullNameHint: 'Rhaid i’r enw hwn fod yn union yr un fath â chofnod yr apêl',
   subjectDOBLabel: 'Dyddiad geni',
   subjectDOBHint: 'Er enghraifft, 31 3 1980',
   day: 'Diwrnod',
