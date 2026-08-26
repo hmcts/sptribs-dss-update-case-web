@@ -87,7 +87,7 @@ export const cy = () => ({
   documentInLanguage: 'Dogfen',
   errorSummaryMessage: 'Mae yna broblem',
   uploadAFile: 'Llwythwch ffeil i fyny',
-  uploadFileHint: 'Unwaith y byddwch wedi dewis y ffeil, cliciwch ar ”Upload file” i’w llwytho.',
+  uploadFileHint: 'Unwaith y byddwch wedi dewis y ffeil, cliciwch ar "Llwytho ffeil" i’w llwytho.',
   errors: {
     documentUpload: {
       noInput: 'Ni allwch barhau heb ddarparu gwybodaeth ychwanegol neu ddogfen',
