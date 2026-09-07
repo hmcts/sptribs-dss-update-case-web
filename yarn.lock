@@ -5116,7 +5116,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wdio/sauce-service@npm:^9.31.6":
+"@wdio/sauce-service@npm:^9.24.0":
   version: 9.31.6
   resolution: "@wdio/sauce-service@npm:9.31.6"
   dependencies:
@@ -14482,7 +14482,7 @@ __metadata:
     "@uppy/file-input": "npm:^4.0.0"
     "@uppy/progress-bar": "npm:^4.0.0"
     "@uppy/xhr-upload": "npm:^4.0.2"
-    "@wdio/sauce-service": "npm:^9.31.6"
+    "@wdio/sauce-service": "npm:^9.24.0"
     allure-commandline: "npm:^2.29.0"
     applicationinsights: "npm:^2.7.3"
     autobind-decorator: "npm:^2.4.0"
