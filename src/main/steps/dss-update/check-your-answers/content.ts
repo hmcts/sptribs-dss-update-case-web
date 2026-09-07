@@ -10,8 +10,8 @@ export const enContent = {
   change: 'change',
   continue: 'Accept and send',
   statementOfTruth:
-    'By updating this case you are confirming that, to the best of your knowledge, the details you are providing are correct.',
-  submitApplicationText: 'Now update your case',
+    'By updating this appeal you are confirming that, to the best of your knowledge, the details you are providing are correct.',
+  submitApplicationText: 'Now update your appeal',
   errorSummaryMessage: 'There is a problem',
   keys: {
     information: 'Additional information',
@@ -41,8 +41,8 @@ const cyContent: typeof enContent = {
   change: 'newid',
   continue: 'Derbyn ac anfon',
   statementOfTruth:
-    'Trwy ddiweddaru’r achos hwn rydych yn cadarnhau, hyd eithaf eich gwybodaeth, bod y manylion rydych yn eu darparu yn gywir.',
-  submitApplicationText: 'Diweddarwch eich achos nawr',
+    'Drwy ddiweddaru’r apêl hon rydych yn cadarnhau, hyd eithaf eich gwybodaeth, bod y manylion a ddarperir gennych yn gywir.',
+  submitApplicationText: 'Diweddarwch eich apêl nawr',
   errorSummaryMessage: 'Mae yna broblem',
   keys: {
     information: 'Gwybodaeth ychwanegol',
