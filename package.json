@@ -147,7 +147,6 @@
     "bn.js": "^5.2.3",
     "compressing": "^1.10.3",
     "cookie": "^1.0.0",
-    "decode-uri-component": "^0.5.0",
     "diff": "^8.0.2",
     "edgedriver": "^6.3.0",
     "fast-uri": "^3.1.5",
