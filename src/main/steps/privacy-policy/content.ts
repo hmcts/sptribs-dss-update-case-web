@@ -25,7 +25,8 @@ export const en = {
   personalDataProcessApplication:
     'Our staff use your personal data to process your application. They work in the UK and your data is stored in the UK.',
   collectPersonalData: 'The personal data we collect',
-  onlineSpecialTribunalsServiceUse: 'When you use the online update case document submission service we ask for your:',
+  onlineSpecialTribunalsServiceUse:
+    'When you use the online update appeal document submission service we ask for your:',
   fullName: 'Full name',
   dateOfBirth: 'Date of birth',
   otherPersonalInfo: 'Other personal information you provide in your application',
@@ -131,7 +132,7 @@ export const cy: typeof en = {
     'Mae ein staff yn defnyddio eich data personol i brosesu eich cais. Maent yn gweithio yn y DU ac mae eich data yn cael ei storio yn y DU.',
   collectPersonalData: 'Y data personol rydym ni’n casglu',
   onlineSpecialTribunalsServiceUse:
-    'Pan fyddwch yn defnyddio’r gwasanaeth cyflwyno dogfennau achos diweddaru ar-lein rydym yn gofyn am eich:',
+    'Pan fyddwch yn defnyddio’r gwasanaeth cyflwyno dogfen apêl wedi’i diweddaru ar-lein, gofynnwn am eich:',
   fullName: 'Enw llawn',
   dateOfBirth: 'Dyddiad geni',
   otherPersonalInfo: "Gwybodaeth bersonol arall rydych chi'n ei darparu yn eich cais",

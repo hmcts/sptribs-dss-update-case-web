@@ -4,10 +4,10 @@ import { cy, en, generateContent } from './content';
 
 const englishContent = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
-  title: 'Subject of this case',
+  title: 'Subject of this appeal',
   errorSummaryMessage: 'There is a problem',
   subjectFullNameLabel: 'Full name',
-  subjectFullNameHint: 'This name must match exactly with the case record',
+  subjectFullNameHint: 'This name must match exactly with the appeal record',
   subjectDOBLabel: 'Date of birth',
   subjectDOBHint: 'For example, 31 3 1980',
   day: 'Day',
@@ -15,8 +15,8 @@ const englishContent = () => ({
   year: 'Year',
   errors: {
     subjectFullName: {
-      required: 'Please enter a full name. This name must match exactly with the case record',
-      invalid: 'Please enter a valid name. This name must match exactly with the case record',
+      required: 'Please enter a full name. This name must match exactly with the appeal record',
+      invalid: 'Please enter a valid name. This name must match exactly with the appeal record',
     },
     subjectDOB: {
       required: 'Please enter a full date of birth. For example, 31 3 1980',
@@ -27,16 +27,16 @@ const englishContent = () => ({
         "Some of the information you have given doesn't match our records. Please enter the right value and try again.",
     },
     caseError: {
-      required: 'Error verifying case',
+      required: 'Error verifying appeal',
     },
   },
 });
 const welshContent = () => ({
   serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
-  title: 'Testun yr achos hwn',
+  title: 'Testun yr apêl hon',
   errorSummaryMessage: 'Mae yna broblem',
   subjectFullNameLabel: 'Enw llawn',
-  subjectFullNameHint: "Rhaid i'r enw hwn gyd-fynd yn union â chofnod yr achos",
+  subjectFullNameHint: 'Rhaid i’r enw hwn fod yn union yr un fath â chofnod yr apêl',
   subjectDOBLabel: 'Dyddiad geni',
   subjectDOBHint: 'Er enghraifft, 31 3 1980',
   day: 'Diwrnod',
@@ -44,8 +44,8 @@ const welshContent = () => ({
   year: 'Blwyddyn',
   errors: {
     subjectFullName: {
-      required: "Nodwch enw llawn. Rhaid i'r enw hwn gyd-fynd yn union â chofnod yr achos",
-      invalid: "Rhowch enw dilys. Rhaid i'r enw hwn gyd-fynd yn union â chofnod yr achos",
+      required: 'Rhowch enw llawn. Rhaid i’r enw hwn fod yn union yr un fath â chofnod yr apêl',
+      invalid: 'Rhowch enw dilys. Rhaid i’r enw hwn fod yn union yr un fath â chofnod yr apêl',
     },
     subjectDOB: {
       required: 'Nodwch ddyddiad geni. Er enghraifft, 31 3 1980',
@@ -56,7 +56,7 @@ const welshContent = () => ({
         'Nid yw rhywfaint o’r wybodaeth rydych wedi’i rhoi yn cyd-fynd â’n cofnodion. Darparwch yr wybodaeth gywir a rhowch gynnig arall arni.',
     },
     caseError: {
-      required: 'Gwall wrth ddilysu’r achos',
+      required: 'Gwall wrth ddilysu’r apêl',
     },
   },
 });

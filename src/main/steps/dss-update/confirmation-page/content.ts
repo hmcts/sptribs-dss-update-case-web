@@ -5,9 +5,9 @@ import { CommonContent } from '../../common/common.content';
 const en = (content: CommonContent) => {
   return {
     serviceName: 'Update an appeal to the First-tier Tribunal',
-    title: 'Case Updated:',
+    title: 'Appeal Updated:',
     successMessage: `<strong>${getHyphenatedCaseId(content)}</strong>`,
-    line1: 'Thank you for updating your case.',
+    line1: 'Thank you for updating your appeal.',
     line2: 'The additional information that you have submitted will be sent to the Tribunal.',
     line3: 'An email will be sent to you that explains what will happen next.',
     feedback: 'Feedback',
@@ -20,9 +20,9 @@ const en = (content: CommonContent) => {
 const cy = (content: CommonContent) => {
   return {
     serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
-    title: 'Achos wedi’i ddiweddaru',
+    title: 'Apêl wedi’i diweddaru:',
     successMessage: `<strong>${getHyphenatedCaseId(content)}</strong>`,
-    line1: 'Diolch i chi am ddiweddaru eich achos.',
+    line1: 'Diolch i chi am ddiweddaru eich apêl.',
     line2: 'Fe anfonir yr wybodaeth ychwanegol rydych wedi’i chyflwyno i’r Tribiwnlys.',
     line3: 'Fe anfonir neges e-bost atoch i esbonio beth fydd yn digwydd nesaf.',
     feedback: 'Adborth',
