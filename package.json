@@ -165,7 +165,7 @@
     "glob@npm:^10.0.0": "patch:glob@npm%3A11.1.0#~/.yarn/patches/glob-npm-11.1.0-9420ed5efe.patch",
     "http-cache-semantics": "4.2.0",
     "immutable": "^5.1.5",
-    "ip-address": "^10.5.0",
+    "ip-address": "^10.7.2",
     "js-yaml": "^4.3.1",
     "jws@npm:^3.2.2": "npm:3.2.3",
     "lodash": "^4.18.0",
