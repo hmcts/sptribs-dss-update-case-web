@@ -16,9 +16,7 @@ export class OidcMiddleware {
       : config.get<string>('services.idam.serviceUrl');
     const { errorHandler } = app.locals;
 
-    app.get(SIGN_IN_URL, (req, res) =>
-      res.redirect(getRedirectUrl(serviceUrl, CALLBACK_URL))
-    );
+    app.get(SIGN_IN_URL, (req, res) => res.redirect(getRedirectUrl(serviceUrl, CALLBACK_URL)));
 
     app.get(SIGN_OUT_URL, (req, res) => {
       const endSessionUrl = getEndSessionUrl(serviceUrl);
