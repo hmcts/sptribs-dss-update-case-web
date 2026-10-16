@@ -4,6 +4,7 @@ nodejs:
   ingressHost: ${SERVICE_FQDN}
   environment:
     RATE_LIMITER_DISABLED: true
+    REDIS_HOST: sptribs-preview.redis.cache.windows.net
 
   keyVaults:
     sptribs:
