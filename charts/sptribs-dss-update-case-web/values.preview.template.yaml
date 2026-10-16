@@ -4,6 +4,7 @@ nodejs:
   ingressHost: ${SERVICE_FQDN}
   environment:
     RATE_LIMITER_DISABLED: true
+    IDAM_SERVICE_URL: 'https://${SERVICE_FQDN}'
 
   keyVaults:
     sptribs:

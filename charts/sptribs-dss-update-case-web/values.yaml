@@ -19,6 +19,7 @@ nodejs:
     IDAM_WEB_URL: 'https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net/o/authorize'
     IDAM_END_SESSION_URL: 'https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net/o/endSession'
     CASE_DOCUMENT_API_URL: 'http://ccd-case-document-am-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
+    IDAM_SERVICE_URL: 'https://sptribs-dss-update-case-web.{{ .Values.global.environment }}.platform.hmcts.net'
   keyVaults:
     sptribs:
       secrets:

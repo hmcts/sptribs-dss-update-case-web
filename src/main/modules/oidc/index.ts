@@ -11,21 +11,20 @@ export class OidcMiddleware {
   public enableFor(app: Application): void {
     const protocol = app.locals.developmentMode ? 'http://' : 'https://';
     const port = app.locals.developmentMode ? `:${config.get('port')}` : '';
+    const serviceUrl = app.locals.developmentMode
+      ? `${protocol}localhost${port}`
+      : config.get<string>('services.idam.serviceUrl');
     const { errorHandler } = app.locals;
 
-    app.get(SIGN_IN_URL, (req, res) =>
-      res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL))
-    );
+    app.get(SIGN_IN_URL, (req, res) => res.redirect(getRedirectUrl(serviceUrl, CALLBACK_URL)));
 
     app.get(SIGN_OUT_URL, (req, res) => {
-      const serviceUrl = `${protocol}${res.locals.host}${port}`;
       const endSessionUrl = getEndSessionUrl(serviceUrl);
 
       req.session.destroy(err => {
         if (err) {
           throw err;
         }
-
         res.redirect(endSessionUrl);
       });
     });
@@ -34,7 +33,7 @@ export class OidcMiddleware {
       CALLBACK_URL,
       errorHandler(async (req, res) => {
         if (typeof req.query.code === 'string') {
-          req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
+          req.session.user = await getUserDetails(serviceUrl, req.query.code, CALLBACK_URL);
           req.session.userCase = {} as CaseWithId;
           req.session.save(() => res.redirect(CASE_SEARCH_URL));
         } else {

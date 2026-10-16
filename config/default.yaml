@@ -43,6 +43,7 @@ services:
     authorizationURL: 'https://idam-web-public.aat.platform.hmcts.net/o/authorize'
     tokenURL: 'https://idam-web-public.aat.platform.hmcts.net/o/token'
     endSessionURL: 'https://idam-web-public.aat.platform.hmcts.net/o/endSession'
+    serviceUrl: ${IDAM_SERVICE_URL}
     clientID: 'sptribs-dss-update-case-web'
     clientSecret: 'DUMMY_VALUE_REPLACE'
     systemUsername: 'DUMMY_VALUE_REPLACE'
