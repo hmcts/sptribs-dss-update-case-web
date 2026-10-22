@@ -13,8 +13,26 @@
 {% set language = "Cymraeg" %}
 {% endif %}
 
-{% block govukServiceNavigation %}
-  {{ govukServiceNavigation({serviceName: content.serviceName}) }}
+{% block govukHeader %}
+  <div class="app-header">
+    <div class="govuk-width-container app-header__container">
+      {{ govukHeader({ containerClasses: "app-header__logo-container" }) }}
+      <nav class="app-header__navigation" aria-label="{{ content.serviceName }}">
+        <a class="govuk-link govuk-link--inverse app-header__service-name" href="/">{{ content.serviceName }}</a>
+      </nav>
+    </div>
+  </div>
+{% endblock %}
+
+{% block govukServiceNavigation %}{% endblock %}
+
+{% block headerEnd %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "BETA"
+    },
+    html: content.banner|replace("currentUrl",currentUrl) +'<span class="float-right"><a href="?lang='+ToggleLanguage+'" class="govuk-link ">'+language+'</a></span>'
+  }) }}
 {% endblock %}
 
 {% block backLink %}{% endblock %}
@@ -24,15 +42,6 @@
   <!-- Dynatrace -->
     <script type="text/javascript" src="{{ globals.dynatrace.dynatraceUrl }}" crossorigin="anonymous"></script>
   <!-- End Dynatrace -->
-{% endblock %}
-
-{% block containerStart %}
-{{ govukPhaseBanner({
-  tag: {
-    text: "BETA"
-  },
-  html: content.banner|replace("currentUrl",currentUrl) +'<span class="float-right"><a href="?lang='+ToggleLanguage+'" class="govuk-link ">'+language+'</a></span>'
-}) }}
 {% endblock %}
 
 {% block bodyEnd %}
