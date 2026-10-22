@@ -2,27 +2,19 @@ import path from 'path';
 
 import config from 'config';
 import express from 'express';
-import nunjucks from 'nunjucks';
+import { configure, runtime } from 'nunjucks';
 
 import { FormInput } from '../../app/form/Form';
 
 export class Nunjucks {
   enableFor(app: express.Express): void {
     app.set('view engine', 'njk');
-    const govUkFrontendPath = path.join(__dirname, '..', '..', '..', '..', 'node_modules', 'govuk-frontend');
-    const hmctsFrontendPath = path.join(__dirname, '..', '..', '..', '..', 'node_modules', '@hmcts', 'frontend');
+    const govUkFrontendPath = path.join(__dirname, '..', '..', '..', '..', 'node_modules', 'govuk-frontend', 'dist');
     const commonForDss = path.join(__dirname, '..', '..', 'steps', 'dss-update', 'common');
     const generalViews = path.join(__dirname, '..', '..', 'views');
     const authLessPath = path.join(__dirname, '..', '..', 'routes', 'authless', 'landing');
-    const env = nunjucks.configure(
-      [
-        path.join(__dirname, '..', '..', 'steps'),
-        govUkFrontendPath,
-        hmctsFrontendPath,
-        commonForDss,
-        generalViews,
-        authLessPath,
-      ],
+    const env = configure(
+      [path.join(__dirname, '..', '..', 'steps'), govUkFrontendPath, commonForDss, generalViews, authLessPath],
       {
         autoescape: true,
         watch: app.locals.developmentMode,
@@ -110,11 +102,11 @@ export class Nunjucks {
     });
 
     env.addFilter('json', function (value, spaces) {
-      if (value instanceof nunjucks.runtime.SafeString) {
+      if (value instanceof runtime.SafeString) {
         value = value.toString();
       }
       const jsonString = JSON.stringify(value, null, spaces).replace(/</g, '\\u003c');
-      return new nunjucks.runtime.SafeString(jsonString);
+      return new runtime.SafeString(jsonString);
     });
 
     env.addFilter('uniqueConfidentials', array => {
@@ -122,7 +114,7 @@ export class Nunjucks {
     });
 
     env.addFilter('orderStringParser', str => {
-      const orderNumber = str
+      return str
         .split('')
         .map(num => {
           if (Number.isInteger(Number(num))) {
@@ -131,7 +123,6 @@ export class Nunjucks {
         })
         .filter(num => num !== undefined)
         .join('');
-      return orderNumber;
     });
 
     app.use((req, res, next) => {

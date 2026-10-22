@@ -13,8 +13,8 @@
 {% set language = "Cymraeg" %}
 {% endif %}
 
-{% block header %}
-  {{ govukHeader({serviceName: content.serviceName}) }}
+{% block govukServiceNavigation %}
+  {{ govukServiceNavigation({serviceName: content.serviceName}) }}
 {% endblock %}
 
 {% block backLink %}{% endblock %}
@@ -26,7 +26,7 @@
   <!-- End Dynatrace -->
 {% endblock %}
 
-{% block beforeContent %}
+{% block containerStart %}
 {{ govukPhaseBanner({
   tag: {
     text: "BETA"
@@ -56,7 +56,7 @@
 {% block page_contact_us %}
 {% endblock %}
 
-{% block footer %}
+{% block govukFooter %}
   {{ govukFooter({
     copyright: {
       text: content.copyright | safe

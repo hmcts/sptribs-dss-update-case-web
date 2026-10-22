@@ -4516,15 +4516,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack-dev-middleware@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "@types/webpack-dev-middleware@npm:5.3.0"
-  dependencies:
-    webpack-dev-middleware: "npm:*"
-  checksum: 10/58609c1c34ead0552fe18576c0d6f411b7988030ec3517c07ca9938b4f37f962756b75bb9a694d1315b39134d05e2092b2e3c59ab76ff0715c5484e38602d0c4
-  languageName: node
-  linkType: hard
-
 "@types/which@npm:^2.0.1":
   version: 2.0.2
   resolution: "@types/which@npm:2.0.2"
@@ -9609,10 +9600,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:4.10.1":
-  version: 4.10.1
-  resolution: "govuk-frontend@npm:4.10.1"
-  checksum: 10/7fc16896b73134d227e3c8f6ed4017015293dd12e81262b6dea30b97156727523fb6c133f95f34461846a32cafe516cccf1d94100d936ae1c48a9059177e79cc
+"govuk-frontend@npm:6.6.0":
+  version: 6.6.0
+  resolution: "govuk-frontend@npm:6.6.0"
+  checksum: 10/ba1c5634a83954765613b065d98b01b23c0a5026a7b65306632f715253448a3c957794a1550604cc566118a3630a0fdcebc349deb269ede076b351b1cb736ce8
   languageName: node
   linkType: hard
 
@@ -14576,7 +14567,6 @@ __metadata:
     "@types/serve-favicon": "npm:^2.5.4"
     "@types/session-file-store": "npm:^1.2.2"
     "@types/toobusy-js": "npm:^0.5.2"
-    "@types/webpack-dev-middleware": "npm:^5.3.0"
     "@typescript-eslint/eslint-plugin": "npm:^7.0.0"
     "@typescript-eslint/parser": "npm:^8.3.0"
     "@uppy/core": "npm:^4.3.0"
@@ -14611,7 +14601,7 @@ __metadata:
     express-rate-limit: "npm:^7.4.0"
     express-session: "npm:^1.18.2"
     form-data: "npm:^4.0.4"
-    govuk-frontend: "npm:4.10.1"
+    govuk-frontend: "npm:6.6.0"
     helmet: "npm:^4.6.0"
     html-webpack-plugin: "npm:^5.5.3"
     http-status-codes: "npm:^2.2.0"
@@ -14650,7 +14640,7 @@ __metadata:
     uglifyjs-webpack-plugin: "npm:^2.2.0"
     webpack: "npm:^5.88.2"
     webpack-cli: "npm:^5.1.4"
-    webpack-dev-middleware: "npm:^7.2.1"
+    webpack-dev-middleware: "npm:^7.4.6"
   languageName: unknown
   linkType: soft
 
@@ -16134,9 +16124,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-dev-middleware@npm:*, webpack-dev-middleware@npm:^7.2.1":
-  version: 7.4.5
-  resolution: "webpack-dev-middleware@npm:7.4.5"
+"webpack-dev-middleware@npm:^7.4.6":
+  version: 7.4.6
+  resolution: "webpack-dev-middleware@npm:7.4.6"
   dependencies:
     colorette: "npm:^2.0.10"
     memfs: "npm:^4.43.1"
@@ -16149,7 +16139,7 @@ __metadata:
   peerDependenciesMeta:
     webpack:
       optional: true
-  checksum: 10/50e9b162d740b81f14c0926beb5fa01fc6d2ae16740bab709320dd5ea1a52ebcc48b66f3db5a7262fc4dc31a7e18590db766cef5da90e77a39e3a26d3b5b1001
+  checksum: 10/fd82b8338d93b99bdc3169b4d2d35201a0a9a50b8c403c142b56d643d822e3c5f7295785388de0158879f5769c13207d35ff2b2c3739848e4ac8c01ef81528df
   languageName: node
   linkType: hard
 
