@@ -1,3 +1,6 @@
+import { AxiosError, AxiosResponse } from 'axios';
+import { StatusCodes } from 'http-status-codes';
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { updateCase } from '../../../app/case/api';
@@ -46,6 +49,7 @@ describe('CheckYourAnswersController test cases', () => {
   } as unknown as FormContent;
 
   beforeEach(() => {
+    mockedUpdateCase.mockReset();
     req = mockRequest();
     res = mockResponse();
   });
@@ -76,6 +80,7 @@ describe('CheckYourAnswersController test cases', () => {
     const controller = new CheckYourAnswersController(mockFormContent.fields);
     await controller.post(req, res);
     expect(res.redirect).toHaveBeenCalledWith(APPLICATION_CONFIRMATION);
+    expect(req.session.errors).toEqual([]);
   });
 
   test('Should redirect back to check your answers page if call to submit event is unsuccessful', async () => {
@@ -86,7 +91,45 @@ describe('CheckYourAnswersController test cases', () => {
     const controller = new CheckYourAnswersController(mockFormContent.fields);
     await controller.post(req, res);
     expect(res.redirect).toHaveBeenCalledWith(CHECK_YOUR_ANSWERS);
+    expect(req.session.errors).toEqual([{ propertyName: 'submissionError', errorType: 'required' }]);
   });
+
+  test('Should show a case access error when CCD forbids the update', async () => {
+    mockedUpdateCase.mockRejectedValue(
+      new AxiosError('Forbidden', 'ERR_BAD_REQUEST', undefined, undefined, {
+        status: StatusCodes.FORBIDDEN,
+        data: { message: 'Sensitive response details' },
+      } as AxiosResponse)
+    );
+    req = mockedRequest;
+    req.originalUrl = CHECK_YOUR_ANSWERS;
+
+    const controller = new CheckYourAnswersController(mockFormContent.fields);
+    await controller.post(req, res);
+
+    expect(res.redirect).toHaveBeenCalledWith(CHECK_YOUR_ANSWERS);
+    expect(req.session.errors).toEqual([{ propertyName: 'submissionError', errorType: 'caseNotAccessible' }]);
+    expect(req.locals.logger.error).toHaveBeenCalledWith('Error during server call:', 'Forbidden');
+  });
+
+  test.each([StatusCodes.UNAUTHORIZED, StatusCodes.NOT_FOUND])(
+    'Should keep the generic error for HTTP %s',
+    async status => {
+      mockedUpdateCase.mockRejectedValue(
+        new AxiosError('Request failed', 'ERR_BAD_REQUEST', undefined, undefined, {
+          status,
+        } as AxiosResponse)
+      );
+      req = mockedRequest;
+      req.originalUrl = CHECK_YOUR_ANSWERS;
+
+      const controller = new CheckYourAnswersController(mockFormContent.fields);
+      await controller.post(req, res);
+
+      expect(res.redirect).toHaveBeenCalledWith(CHECK_YOUR_ANSWERS);
+      expect(req.session.errors).toEqual([{ propertyName: 'submissionError', errorType: 'required' }]);
+    }
+  );
 
   test('Should redirect back to check your answers page if call to submit event throws error', async () => {
     mockedUpdateCase.mockRejectedValue(new Error('not found'));
@@ -96,5 +139,6 @@ describe('CheckYourAnswersController test cases', () => {
     const controller = new CheckYourAnswersController(mockFormContent.fields);
     await controller.post(req, res);
     expect(res.redirect).toHaveBeenCalledWith(CHECK_YOUR_ANSWERS);
+    expect(req.session.errors).toEqual([{ propertyName: 'submissionError', errorType: 'required' }]);
   });
 });

@@ -1,5 +1,7 @@
 import autobind from 'autobind-decorator';
+import { isAxiosError } from 'axios';
 import { Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 import { updateCase } from '../../../app/case/api';
 import { DocumentUpload } from '../../../app/case/case';
@@ -31,10 +33,14 @@ export default class CheckYourAnswersController extends PostController<AnyObject
           });
         }
       } catch (error) {
-        req.locals.logger.error('Error during server call:', error.response?.data || error.message);
+        const isCaseNotAccessible = isAxiosError(error) && error.response?.status === StatusCodes.FORBIDDEN;
+        req.locals.logger.error(
+          'Error during server call:',
+          isCaseNotAccessible ? 'Forbidden' : error.response?.data || error.message
+        );
         req.session.errors?.push({
           propertyName: 'submissionError',
-          errorType: 'required',
+          errorType: isCaseNotAccessible ? 'caseNotAccessible' : 'required',
         });
       }
     }

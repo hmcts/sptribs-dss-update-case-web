@@ -1,6 +1,7 @@
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosInstance } from 'axios';
 import config from 'config';
+import { StatusCodes } from 'http-status-codes';
 
 import { getSystemUser } from '../auth/oidc';
 import { getServiceAuthToken } from '../s2s/get-service-auth-token';
@@ -35,7 +36,11 @@ const getEventToken = async (client: AxiosInstance, caseId: string, eventName: s
     return response.data.token;
   } catch (err) {
     logger.error(`Error getting event token: ${err}`);
-    logger.error(err.response?.data || err.message || 'Unknown error');
+    logger.error(
+      err.response?.status === StatusCodes.FORBIDDEN
+        ? 'Forbidden'
+        : err.response?.data || err.message || 'Unknown error'
+    );
 
     throw err;
   }

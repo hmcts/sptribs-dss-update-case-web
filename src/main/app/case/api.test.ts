@@ -1,5 +1,7 @@
 import axios from 'axios';
+import { StatusCodes } from 'http-status-codes';
 
+import { mockLogger } from '../../../test/unit/mocks/hmcts/nodejs-logging';
 import { getSystemUser } from '../auth/oidc';
 import { getServiceAuthToken } from '../s2s/get-service-auth-token';
 
@@ -87,6 +89,29 @@ describe('case-api', () => {
       mockedGetServiceAuthToken.mockResolvedValue(serviceAuthToken);
 
       await expect(updateCase(userToken, caseId, caseData)).rejects.toThrow('Event token error');
+    });
+
+    test('should preserve a forbidden response when requesting the event token', async () => {
+      mockLogger.error.mockClear();
+      const forbidden = Object.assign(new Error('Forbidden'), {
+        response: { status: StatusCodes.FORBIDDEN, data: { message: 'Sensitive response details' } },
+      });
+      const mockGet = jest.fn().mockRejectedValue(forbidden);
+      mockedAxios.create.mockReturnValue({ get: mockGet } as unknown as jest.Mocked<typeof axios>);
+      mockedGetServiceAuthToken.mockResolvedValue(serviceAuthToken);
+
+      await expect(updateCase(userToken, caseId, caseData)).rejects.toBe(forbidden);
+      expect(mockLogger.error).toHaveBeenLastCalledWith('Forbidden');
+    });
+
+    test('should preserve a forbidden response when submitting the event', async () => {
+      const forbidden = Object.assign(new Error('Forbidden'), { response: { status: StatusCodes.FORBIDDEN } });
+      const mockGet = jest.fn().mockResolvedValue({ data: { token: eventToken } });
+      const mockPost = jest.fn().mockRejectedValue(forbidden);
+      mockedAxios.create.mockReturnValue({ get: mockGet, post: mockPost } as unknown as jest.Mocked<typeof axios>);
+      mockedGetServiceAuthToken.mockResolvedValue(serviceAuthToken);
+
+      await expect(updateCase(userToken, caseId, caseData)).rejects.toBe(forbidden);
     });
   });
 });

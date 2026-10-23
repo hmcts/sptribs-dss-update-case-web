@@ -1,3 +1,7 @@
+import path from 'path';
+
+import { configure } from 'nunjucks';
+
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { CommonContent } from '../../common/common.content';
 
@@ -20,6 +24,8 @@ const enContent = {
   errors: {
     submissionError: {
       required: 'Your application is not submitted. Please try again',
+      caseNotAccessible:
+        'You cannot update this appeal with this account. Check that you are signed in with the account used to create it.',
     },
   },
 };
@@ -41,6 +47,8 @@ const cyContent = {
   errors: {
     submissionError: {
       required: 'Nid yw eich cais wedi’i gyflwyno. Rhowch gynnig arall arni',
+      caseNotAccessible:
+        'Ni allwch ddiweddaru’r apêl hon gyda’r cyfrif hwn. Gwiriwch eich bod wedi mewngofnodi gyda’r cyfrif a ddefnyddiwyd i’w chreu.',
     },
   },
 };
@@ -80,5 +88,27 @@ describe('getErrors() function Test', () => {
   test('getErrors Welsh', () => {
     const welshErrors = getErrors('cy');
     expect(welshErrors).toEqual(cyContent.errors);
+  });
+});
+
+describe('case access error summary', () => {
+  const templates = configure(
+    [
+      path.resolve(__dirname, '../..'),
+      path.resolve('node_modules/govuk-frontend/dist'),
+      path.resolve('node_modules/govuk-frontend'),
+    ],
+    { autoescape: true }
+  );
+
+  test.each(['en', 'cy'] as const)('renders the %s access message with a link to the page heading', language => {
+    const html = templates.render('common/error/summary.njk', {
+      sessionErrors: [{ propertyName: 'submissionError', errorType: 'caseNotAccessible' }],
+      errors: getErrors(language),
+      errorSummaryHeading: language === 'en' ? 'There is a problem' : 'Mae yna broblem',
+    });
+
+    expect(html).toContain(getErrors(language).submissionError.caseNotAccessible);
+    expect(html).toContain('href="#submissionError"');
   });
 });
