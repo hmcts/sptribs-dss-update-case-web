@@ -16,6 +16,12 @@ export const getCase = async (caseId: string) => {
   return client.get(`/cases/${caseId}`);
 };
 
+export const getCaseAsUser = async (userToken: string, caseId: string) => {
+  const client = getClient(userToken, await getServiceAuthToken());
+
+  return client.get(`/cases/${caseId}`);
+};
+
 export const updateCase = async (userToken: string, caseId: string, caseData: Record<string, unknown>) => {
   const client = getClient(userToken, await getServiceAuthToken());
   const eventName = 'citizen-cic-dss-update-case';

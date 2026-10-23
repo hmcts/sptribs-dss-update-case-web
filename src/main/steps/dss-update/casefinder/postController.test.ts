@@ -80,6 +80,7 @@ describe('case finder post controller test cases', () => {
         userCase: {
           id: 'caseRefId',
         },
+        isDataVerified: true,
       },
     });
 
@@ -87,6 +88,7 @@ describe('case finder post controller test cases', () => {
 
     await controller.post(req, res);
     expect(req.session.userCase.id).toEqual('1675676483319900');
+    expect(req.session.isDataVerified).toBe(false);
     expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
   });
 
