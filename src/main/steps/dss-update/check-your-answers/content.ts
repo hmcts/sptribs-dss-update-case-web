@@ -21,6 +21,8 @@ export const enContent = {
   errors: {
     submissionError: {
       required: 'Your application is not submitted. Please try again',
+      caseNotAccessible:
+        'You cannot update this appeal with this account. Check that you are signed in with the account used to create it.',
     },
   },
 };
@@ -52,6 +54,8 @@ const cyContent: typeof enContent = {
   errors: {
     submissionError: {
       required: 'Nid yw eich cais wedi’i gyflwyno. Rhowch gynnig arall arni',
+      caseNotAccessible:
+        'Ni allwch ddiweddaru’r apêl hon gyda’r cyfrif hwn. Gwiriwch eich bod wedi mewngofnodi gyda’r cyfrif a ddefnyddiwyd i’w chreu.',
     },
   },
 };

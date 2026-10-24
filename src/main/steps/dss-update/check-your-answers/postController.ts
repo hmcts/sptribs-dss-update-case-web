@@ -1,12 +1,16 @@
 import autobind from 'autobind-decorator';
+import { isAxiosError } from 'axios';
 import { Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
-import { updateCase } from '../../../app/case/api';
+import { getCaseAsUser, updateCase } from '../../../app/case/api';
 import { DocumentUpload } from '../../../app/case/case';
 import { AppRequest, DocumentRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
 import { APPLICATION_CONFIRMATION } from '../../urls';
+
+class CaseNotAccessibleError extends Error {}
 
 @autobind
 export default class CheckYourAnswersController extends PostController<AnyObject> {
@@ -31,10 +35,16 @@ export default class CheckYourAnswersController extends PostController<AnyObject
           });
         }
       } catch (error) {
-        req.locals.logger.error('Error during server call:', error.response?.data || error.message);
+        const isCaseNotAccessible = error instanceof CaseNotAccessibleError;
+        const isForbiddenResponse = isAxiosError(error) && error.response?.status === StatusCodes.FORBIDDEN;
+        let errorDetails = error.response?.data || error.message;
+        if (isCaseNotAccessible || isForbiddenResponse) {
+          errorDetails = isCaseNotAccessible ? 'Case access denied' : 'Forbidden';
+        }
+        req.locals.logger.error('Error during server call:', errorDetails);
         req.session.errors?.push({
           propertyName: 'submissionError',
-          errorType: 'required',
+          errorType: isCaseNotAccessible ? 'caseNotAccessible' : 'required',
         });
       }
     }
@@ -48,6 +58,26 @@ export default class CheckYourAnswersController extends PostController<AnyObject
   }
 
   public async serverCallForCaseSubmission(req: AppRequest<AnyObject>) {
+    if (!req.session.isDataVerified) {
+      throw new Error('Case details have not been verified');
+    }
+
+    const caseId = req.session.userCase.id;
+    try {
+      const response = await getCaseAsUser(req.session.user.accessToken, caseId);
+      if (response.status !== StatusCodes.OK) {
+        throw new Error('Case lookup did not succeed');
+      }
+    } catch (error) {
+      if (
+        isAxiosError(error) &&
+        (error.response?.status === StatusCodes.FORBIDDEN || error.response?.status === StatusCodes.NOT_FOUND)
+      ) {
+        throw new CaseNotAccessibleError();
+      }
+      throw error;
+    }
+
     const caseDocuments = req.session['caseDocuments'];
     const allUploadedDocuments: DocumentRequest = caseDocuments.map((document: DocumentUpload) => {
       return {
@@ -69,7 +99,6 @@ export default class CheckYourAnswersController extends PostController<AnyObject
       dssCaseDataOtherInfoDocuments: allUploadedDocuments,
     };
 
-    const caseId = req.session.userCase.id;
     return updateCase(req.session.user.accessToken, caseId, data);
   }
 }
