@@ -15,6 +15,8 @@ export default class CaseFinderController extends PostController<AnyObject> {
 
     const { ...formData } = form.getParsedBody(req.body);
     req.session.errors = form.getErrors(formData);
+    req.session.isDataVerified = false;
+    req.session.isCreatorRoleAssigned = false;
 
     let nextUrl = req.originalUrl;
     if (req.session.errors.length === 0) {

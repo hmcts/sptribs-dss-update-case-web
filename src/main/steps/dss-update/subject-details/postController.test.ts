@@ -106,6 +106,7 @@ describe('citizenDataVerification post controller test cases', () => {
     mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
 
     await controller.post(req, res);
+    expect(req.session.isDataVerified).toBe(true);
     expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
   });
 
@@ -126,7 +127,7 @@ describe('citizenDataVerification post controller test cases', () => {
         subjectFullName: 'bob smith',
       },
       session: {
-        isDataVerified: false,
+        isDataVerified: true,
         errors: [],
       },
     });
@@ -135,6 +136,7 @@ describe('citizenDataVerification post controller test cases', () => {
     mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
 
     await controller.post(req, res);
+    expect(req.session.isDataVerified).toBe(false);
     expect(req.session.errors).toStrictEqual([{ propertyName: 'inputFields', errorType: 'required' }]);
     expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
   });

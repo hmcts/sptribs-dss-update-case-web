@@ -39,6 +39,8 @@ services:
     url: 'https://ccd-data-store-api-sptribs-case-api-pr-2701.preview.platform.hmcts.net'
   cdam:
     url: 'https://ccd-case-document-am-api-sptribs-case-api-pr-2701.preview.platform.hmcts.net'
+  sptribs:
+    url: 'http://sptribs-case-api-aat.service.core-compute-aat.internal'
   idam:
     authorizationURL: 'https://idam-web-public.aat.platform.hmcts.net/o/authorize'
     tokenURL: 'https://idam-web-public.aat.platform.hmcts.net/o/token'
