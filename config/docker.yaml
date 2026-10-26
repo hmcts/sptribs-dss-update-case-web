@@ -4,6 +4,8 @@ services:
     tokenURL: 'http://localhost:5000/o/token'
   case:
     url: 'http://localhost:4452'
+  sptribs:
+    url: 'http://localhost:4013'
   payments:
     url: 'http://localhost:4401'
   equalityAndDiversity:

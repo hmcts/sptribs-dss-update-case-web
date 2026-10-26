@@ -37,6 +37,8 @@ loggedInUsers: ['legalRep', 'police']
 services:
   case:
     url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
+  sptribs:
+    url: 'http://sptribs-case-api-aat.service.core-compute-aat.internal'
   cdam:
     url: 'http://ccd-case-document-am-api-aat.service.core-compute-aat.internal'
   idam:
