@@ -4,6 +4,8 @@ nodejs:
   ingressHost: ${SERVICE_FQDN}
   environment:
     RATE_LIMITER_DISABLED: true
+    CCD_URL: 'http://ccd-data-store-api-sptribs-case-api-pr-2701.preview.platform.hmcts.net'
+    CASE_DOCUMENT_API_URL: 'http://ccd-case-document-am-api-sptribs-case-api-pr-2701.preview.platform.hmcts.net'
 
   keyVaults:
     sptribs:
