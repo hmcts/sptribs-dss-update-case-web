@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { updateCase } from '../../../app/case/api';
+import { assignCreatorRole, updateCase } from '../../../app/case/api';
 import { DocumentUpload } from '../../../app/case/case';
 import { AppRequest, DocumentRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
@@ -18,7 +18,27 @@ export default class CheckYourAnswersController extends PostController<AnyObject
     req.session.errors = form.getErrors(formData);
 
     let nextUrl = req.originalUrl;
-    if (req.session.errors.length === 0) {
+    if (req.body.assignCreatorRole === 'true') {
+      if (
+        !req.session.isDataVerified ||
+        !/^\d{16}$/.test(req.session.userCase?.id || '') ||
+        !req.session.user?.accessToken
+      ) {
+        req.session.errors.push({ propertyName: 'roleAssignmentError', errorType: 'required' });
+      } else if (!req.session.isCreatorRoleAssigned) {
+        try {
+          const response = await assignCreatorRole(req.session.user.accessToken, req.session.userCase.id);
+          if (response.status === 204) {
+            req.session.isCreatorRoleAssigned = true;
+          } else {
+            req.session.errors.push({ propertyName: 'roleAssignmentError', errorType: 'required' });
+          }
+        } catch (error) {
+          req.locals.logger.error('Creator role assignment failed', { status: error.response?.status });
+          req.session.errors.push({ propertyName: 'roleAssignmentError', errorType: 'required' });
+        }
+      }
+    } else if (req.session.errors.length === 0) {
       try {
         const responseFromServerCall = await this.serverCallForCaseSubmission(req);
 

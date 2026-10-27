@@ -11,6 +11,8 @@ const enContent = {
   statementOfTruth:
     'By updating this appeal you are confirming that, to the best of your knowledge, the details you are providing are correct.',
   submitApplicationText: 'Now update your appeal',
+  assignCreatorRole: 'Give user creator role',
+  creatorRoleAssigned: 'Creator role assigned. You can now send your update.',
   errorSummaryMessage: 'There is a problem',
   keys: {
     information: 'Additional information',
@@ -20,6 +22,9 @@ const enContent = {
   errors: {
     submissionError: {
       required: 'Your application is not submitted. Please try again',
+    },
+    roleAssignmentError: {
+      required: 'We could not assign the creator role. Please try again.',
     },
   },
 };
@@ -32,6 +37,8 @@ const cyContent = {
   statementOfTruth:
     'Drwy ddiweddaru’r apêl hon rydych yn cadarnhau, hyd eithaf eich gwybodaeth, bod y manylion a ddarperir gennych yn gywir.',
   submitApplicationText: 'Diweddarwch eich apêl nawr',
+  assignCreatorRole: 'Rhowch rôl creawdwr i’r defnyddiwr',
+  creatorRoleAssigned: 'Mae’r rôl creawdwr wedi’i neilltuo. Gallwch anfon eich diweddariad nawr.',
   errorSummaryMessage: 'Mae yna broblem',
   keys: {
     information: 'Gwybodaeth ychwanegol',
@@ -41,6 +48,9 @@ const cyContent = {
   errors: {
     submissionError: {
       required: 'Nid yw eich cais wedi’i gyflwyno. Rhowch gynnig arall arni',
+    },
+    roleAssignmentError: {
+      required: 'Nid oedd modd inni neilltuo’r rôl creawdwr. Rhowch gynnig arall arni.',
     },
   },
 };
@@ -68,6 +78,16 @@ describe('check-your-answer > content', () => {
         language: 'cy',
       })
     );
+  });
+
+  test('shows the creator role action only after data verification', () => {
+    const content = generateContent({
+      ...commonContent,
+      additionalData: { req: { session: { isDataVerified: true, isCreatorRoleAssigned: false } } },
+    } as unknown as CommonContent);
+
+    expect(content.isDataVerified).toBe(true);
+    expect(content.isCreatorRoleAssigned).toBe(false);
   });
 });
 

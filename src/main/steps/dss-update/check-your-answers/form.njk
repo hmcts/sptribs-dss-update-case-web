@@ -1,6 +1,7 @@
 {% extends "common/form/form.njk" %}
 {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block before_fields %}
   {% if sections %}
@@ -19,3 +20,19 @@
   {% endif %}
 {% endblock %}
 
+{% block after_fields %}
+  <div id="roleAssignmentError">
+    {% if isDataVerified and isCreatorRoleAssigned %}
+      <p class="govuk-body" role="status">{{ creatorRoleAssigned }}</p>
+    {% elif isDataVerified %}
+      {{ govukButton({
+        text: assignCreatorRole,
+        classes: 'govuk-button--secondary',
+        type: 'submit',
+        name: 'assignCreatorRole',
+        value: 'true',
+        preventDoubleClick: true
+      }) }}
+    {% endif %}
+  </div>
+{% endblock %}

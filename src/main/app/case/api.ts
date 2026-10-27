@@ -28,6 +28,19 @@ export const updateCase = async (userToken: string, caseId: string, caseData: Re
   return client.post(`/cases/${caseId}/events`, data);
 };
 
+export const assignCreatorRole = async (userToken: string, caseId: string) => {
+  const s2sToken = await getServiceAuthToken();
+  if (!s2sToken) {
+    throw new Error('Service auth token unavailable');
+  }
+  return axios.post(`${config.get('services.sptribs.url')}/cases/cica/${caseId}/role-assignments`, undefined, {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+      ServiceAuthorization: s2sToken,
+    },
+  });
+};
+
 const getEventToken = async (client: AxiosInstance, caseId: string, eventName: string): Promise<string> => {
   try {
     const response = await client.get(`/cases/${caseId}/event-triggers/${eventName}`);

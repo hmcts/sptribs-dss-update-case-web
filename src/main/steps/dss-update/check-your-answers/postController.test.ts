@@ -1,6 +1,6 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { updateCase } from '../../../app/case/api';
+import { assignCreatorRole, updateCase } from '../../../app/case/api';
 import { FormContent } from '../../../app/form/Form';
 import { APPLICATION_CONFIRMATION, CHECK_YOUR_ANSWERS } from '../../urls';
 
@@ -21,6 +21,7 @@ let req, res;
 
 describe('CheckYourAnswersController test cases', () => {
   const mockedUpdateCase = updateCase as jest.MockedFn<typeof updateCase>;
+  const mockedAssignCreatorRole = assignCreatorRole as jest.MockedFn<typeof assignCreatorRole>;
   const mockedRequest = mockRequest({
     session: {
       user: {
@@ -48,6 +49,7 @@ describe('CheckYourAnswersController test cases', () => {
   beforeEach(() => {
     req = mockRequest();
     res = mockResponse();
+    jest.clearAllMocks();
   });
 
   test('Should submit the case and navigate to confirmation page', async () => {
@@ -96,5 +98,57 @@ describe('CheckYourAnswersController test cases', () => {
     const controller = new CheckYourAnswersController(mockFormContent.fields);
     await controller.post(req, res);
     expect(res.redirect).toHaveBeenCalledWith(CHECK_YOUR_ANSWERS);
+  });
+
+  test('assigns the creator role after data verification without submitting the case', async () => {
+    mockedAssignCreatorRole.mockResolvedValue({ status: 204 } as any);
+    req = mockRequest({
+      body: { assignCreatorRole: 'true' },
+      session: {
+        isDataVerified: true,
+        userCase: { id: '1709056435297860' },
+      },
+    });
+    req.originalUrl = CHECK_YOUR_ANSWERS;
+
+    await new CheckYourAnswersController(mockFormContent.fields).post(req, res);
+
+    expect(mockedAssignCreatorRole).toHaveBeenCalledWith('mock-user-access-token', '1709056435297860');
+    expect(mockedUpdateCase).not.toHaveBeenCalled();
+    expect(req.session.isCreatorRoleAssigned).toBe(true);
+    expect(res.redirect).toHaveBeenCalledWith(CHECK_YOUR_ANSWERS);
+  });
+
+  test.each([
+    ['unverified', false, '1709056435297860'],
+    ['invalid reference', true, 'invalid'],
+  ])('does not assign a role for %s sessions', async (_, isDataVerified, id) => {
+    req = mockRequest({
+      body: { assignCreatorRole: 'true' },
+      session: { isDataVerified, userCase: { id } },
+    });
+    req.originalUrl = CHECK_YOUR_ANSWERS;
+
+    await new CheckYourAnswersController(mockFormContent.fields).post(req, res);
+
+    expect(mockedAssignCreatorRole).not.toHaveBeenCalled();
+    expect(mockedUpdateCase).not.toHaveBeenCalled();
+    expect(req.session.errors).toEqual([{ propertyName: 'roleAssignmentError', errorType: 'required' }]);
+    expect(res.redirect).toHaveBeenCalledWith(CHECK_YOUR_ANSWERS);
+  });
+
+  test('shows an error if the case API refuses to assign the role', async () => {
+    mockedAssignCreatorRole.mockRejectedValue({ response: { status: 403 } });
+    req = mockRequest({
+      body: { assignCreatorRole: 'true' },
+      session: { isDataVerified: true, userCase: { id: '1709056435297860' } },
+    });
+    req.originalUrl = CHECK_YOUR_ANSWERS;
+
+    await new CheckYourAnswersController(mockFormContent.fields).post(req, res);
+
+    expect(req.session.errors).toEqual([{ propertyName: 'roleAssignmentError', errorType: 'required' }]);
+    expect(req.session.isCreatorRoleAssigned).toBeUndefined();
+    expect(mockedUpdateCase).not.toHaveBeenCalled();
   });
 });

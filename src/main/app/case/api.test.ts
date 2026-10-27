@@ -1,9 +1,10 @@
 import axios from 'axios';
+import config from 'config';
 
 import { getSystemUser } from '../auth/oidc';
 import { getServiceAuthToken } from '../s2s/get-service-auth-token';
 
-import { getCase, updateCase } from './api';
+import { assignCreatorRole, getCase, updateCase } from './api';
 
 jest.mock('axios');
 jest.mock('../auth/oidc');
@@ -42,6 +43,35 @@ describe('case-api', () => {
       });
       expect(mockGet).toHaveBeenCalledWith(`/cases/${caseId}`);
       expect(result).toEqual({ data: mockData });
+    });
+  });
+
+  describe('assignCreatorRole', () => {
+    test('posts to the CICA case API with the citizen and service tokens', async () => {
+      mockedGetServiceAuthToken.mockResolvedValue(serviceAuthToken);
+      mockedAxios.post.mockResolvedValue({ status: 204 });
+
+      const response = await assignCreatorRole(userToken, caseId);
+
+      expect(mockedAxios.post).toHaveBeenCalledWith(
+        `${config.get('services.sptribs.url')}/cases/cica/${caseId}/role-assignments`,
+        undefined,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            ServiceAuthorization: serviceAuthToken,
+          },
+        }
+      );
+      expect(response.status).toBe(204);
+    });
+
+    test('does not send a request if service authentication fails', async () => {
+      mockedGetServiceAuthToken.mockResolvedValue('');
+      mockedAxios.post.mockClear();
+
+      await expect(assignCreatorRole(userToken, caseId)).rejects.toThrow('Service auth token unavailable');
+      expect(mockedAxios.post).not.toHaveBeenCalled();
     });
   });
 
