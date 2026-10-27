@@ -4081,15 +4081,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stryker-mutator/api@npm:10.0.0":
-  version: 10.0.0
-  resolution: "@stryker-mutator/api@npm:10.0.0"
+"@stryker-mutator/api@npm:10.1.1":
+  version: 10.1.1
+  resolution: "@stryker-mutator/api@npm:10.1.1"
   dependencies:
     mutation-testing-metrics: "npm:3.8.4"
     mutation-testing-report-schema: "npm:3.8.4"
     tslib: "npm:~2.8.0"
     typed-inject: "npm:~5.0.0"
-  checksum: 10/06cec22e4d219d5c9fc7c59b52f0b559b7e5e82fa19e64274131aa5e138ee10c4bdc90ab20d5835a0d3c574ff5bc38f9a67d9e43ee11b07e5bff681d84383d43
+  checksum: 10/1a096d24c63fcefb7966a44da2bffc1f763739845264f19ff6080b3d2f002efb6ff3bb9ce42968402f6a030e296c15c026ecd104d95657518c49116caedbe0b7
   languageName: node
   linkType: hard
 
@@ -4106,13 +4106,13 @@ __metadata:
   linkType: hard
 
 "@stryker-mutator/core@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "@stryker-mutator/core@npm:10.0.0"
+  version: 10.1.1
+  resolution: "@stryker-mutator/core@npm:10.1.1"
   dependencies:
     "@inquirer/prompts": "npm:^8.0.0"
-    "@stryker-mutator/api": "npm:10.0.0"
-    "@stryker-mutator/instrumenter": "npm:10.0.0"
-    "@stryker-mutator/util": "npm:10.0.0"
+    "@stryker-mutator/api": "npm:10.1.1"
+    "@stryker-mutator/instrumenter": "npm:10.1.1"
+    "@stryker-mutator/util": "npm:10.1.1"
     ajv: "npm:~8.20.0"
     chalk: "npm:~5.6.0"
     commander: "npm:~14.0.0"
@@ -4137,13 +4137,13 @@ __metadata:
     typed-rest-client: "npm:~2.3.0"
   bin:
     stryker: bin/stryker.js
-  checksum: 10/dcf4f8670ec385427eea3ffaf5f9e82ca53960341569f3ca7118b014f3509e9c151ef9fdf5aa0e59f0b71b96a35d583b00a7cb61ee70f54bb998b873c9b2025e
+  checksum: 10/b8676105178dcbc78eddf986e78964f0af810b451e646943bfef3edbf32566e7fb69a55d6ef8ce4afe9ccdf03c01be2876b3100eb96bd0ced28acec9cecb5093
   languageName: node
   linkType: hard
 
-"@stryker-mutator/instrumenter@npm:10.0.0":
-  version: 10.0.0
-  resolution: "@stryker-mutator/instrumenter@npm:10.0.0"
+"@stryker-mutator/instrumenter@npm:10.1.1":
+  version: 10.1.1
+  resolution: "@stryker-mutator/instrumenter@npm:10.1.1"
   dependencies:
     "@babel/core": "npm:~8.0.0"
     "@babel/generator": "npm:~8.0.0"
@@ -4153,13 +4153,13 @@ __metadata:
     "@babel/preset-react": "npm:~8.0.0"
     "@babel/preset-typescript": "npm:~8.0.0"
     "@babel/traverse": "npm:~8.0.4"
-    "@stryker-mutator/api": "npm:10.0.0"
-    "@stryker-mutator/util": "npm:10.0.0"
+    "@stryker-mutator/api": "npm:10.1.1"
+    "@stryker-mutator/util": "npm:10.1.1"
     angular-html-parser: "npm:~10.11.0"
     semver: "npm:~7.8.0"
     tslib: "npm:2.8.1"
     weapon-regex: "npm:~2.0.0"
-  checksum: 10/7b44e3d5a703f932a455b25bdca823fb75b642a188da0241f597bc3ac4afce20db141b3c45df7c39d8ba3dfe691e9d428cb52fae8493d3675e306d87eca98390
+  checksum: 10/1c5f7c63f96445e6b5ac125966233b608ad18db348ffc4195080deb1e244436c60d9316c51259b46bc91739f01eda1fa44dec1bc45b3f296995569dfda37981d
   languageName: node
   linkType: hard
 
@@ -4177,10 +4177,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stryker-mutator/util@npm:10.0.0":
-  version: 10.0.0
-  resolution: "@stryker-mutator/util@npm:10.0.0"
-  checksum: 10/16a4f3cfad489e04df8262e52c533ceae950f2893e4c985cd17c02242749452c53de3379785f329bd01cf80050efa73e0abc9b53c4572203ee67432c42fa30a8
+"@stryker-mutator/util@npm:10.1.1":
+  version: 10.1.1
+  resolution: "@stryker-mutator/util@npm:10.1.1"
+  checksum: 10/7c9a69c0a486a1d46385d4f2c0730065bda2a72bf6d1092c32e35889c923666815d49047f55e6a3c23ca6f95be09d1bbb565d65629c6148eeb04bbfc21078488
   languageName: node
   linkType: hard
 
