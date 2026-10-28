@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { getCase } from '../../../app/case/api';
+import { checkCaseAccess } from '../../../app/case/api';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
@@ -17,11 +17,18 @@ export default class CaseFinderController extends PostController<AnyObject> {
     req.session.errors = form.getErrors(formData);
 
     let nextUrl = req.originalUrl;
+    req.session.verifiedCaseId = undefined;
+    req.session.verifiedUserId = undefined;
+    req.session.isDataVerified = false;
     if (req.session.errors.length === 0) {
       try {
-        const responseFromServerCall = await getCase(String(req.body.applicantCaseId));
+        const caseId = String(req.body.applicantCaseId);
+        if (!/^\d{16}$/.test(caseId)) {
+          throw new Error('Invalid case reference');
+        }
+        const responseFromServerCall = await checkCaseAccess(req.session.user.accessToken, caseId);
         if (responseFromServerCall.status === 200) {
-          req.session.userCase.id = responseFromServerCall.data.id;
+          req.session.userCase = { id: caseId } as typeof req.session.userCase;
           nextUrl = DATA_VERIFICATION;
         }
       } catch (error) {

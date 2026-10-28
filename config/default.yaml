@@ -35,6 +35,8 @@ caseType: 'CriminalInjuriesCompensation'
 jurisdiction: 'ST_CIC'
 loggedInUsers: ['legalRep', 'police']
 services:
+  sptribs:
+    url: 'http://sptribs-case-api-aat.service.core-compute-aat.internal'
   case:
     url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
   cdam:

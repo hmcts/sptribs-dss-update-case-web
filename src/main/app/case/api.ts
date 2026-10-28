@@ -2,17 +2,36 @@ import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosInstance } from 'axios';
 import config from 'config';
 
-import { getSystemUser } from '../auth/oidc';
 import { getServiceAuthToken } from '../s2s/get-service-auth-token';
 
 const logger = Logger.getLogger('case-api');
 
-export const getCase = async (caseId: string) => {
+export const checkCaseAccess = async (userToken: string, caseId: string) => {
   const s2sToken = await getServiceAuthToken();
-  const systemUserDetails = await getSystemUser();
-  const client = getClient(systemUserDetails.accessToken, s2sToken);
+  const client = getVerificationClient(userToken, s2sToken);
 
-  return client.get(`/cases/${caseId}`);
+  return client.get(`/cases/cica/${encodeURIComponent(caseId)}/access`);
+};
+
+export const verifyCaseSubject = async (userToken: string, caseId: string, name: string, dob: string) => {
+  const client = getVerificationClient(userToken, await getServiceAuthToken());
+
+  return client.post<{ verified: boolean }>(`/cases/cica/${encodeURIComponent(caseId)}/subject-verifications`, {
+    subject_full_name: name,
+    subject_date_of_birth: dob,
+  });
+};
+
+const getVerificationClient = (userToken: string, s2sToken: string) => {
+  return axios.create({
+    baseURL: config.get('services.sptribs.url'),
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+      ServiceAuthorization: s2sToken,
+      Accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  });
 };
 
 export const updateCase = async (userToken: string, caseId: string, caseData: Record<string, unknown>) => {
