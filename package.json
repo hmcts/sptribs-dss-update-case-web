@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": ">=18.16.0"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "start": "NODE_ENV=production ts-node --transpile-only -r tsconfig-paths/register src/main/server.ts",
@@ -14,7 +14,7 @@
     "lint": "tsc --noEmit -p tsconfig.eslint.json && eslint . --ext .js,.ts",
     "build": "webpack --config webpack.config.js",
     "build:prod": "NODE_ENV=production webpack --mode production --config webpack.config.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test": "jest",
     "fortifyScan": "./src/test/java/gradlew -p src/test/java fortifyScan",
     "test:coverage": "jest --coverage",
     "test:a11y": "echo 'a11y tests will be executed after functional tests' && exit 0",
@@ -78,7 +78,7 @@
     "node-cache": "5.1.2",
     "nunjucks": "^3.2.4",
     "otplib": "12.0.1",
-    "query-string": "^7.1.1",
+    "query-string": "^9.5.1",
     "redis": "^4.6.0",
     "sass": "^1.105.2",
     "serve-favicon": "^2.5.0",
@@ -99,7 +99,6 @@
     "@types/mini-css-extract-plugin": "^2.5.1",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^8.3.0",
-    "@wdio/sauce-service": "^9.24.0",
     "allure-commandline": "^2.29.0",
     "axios-debug-log": "^1.0.0",
     "babel-loader": "^10.0.0",
