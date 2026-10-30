@@ -13,7 +13,7 @@ import { dss_update_steps } from './dss-update/dss-sequence';
 import { uploadDocumentsSequence } from './upload-documents/uploadDocumentsSequence';
 import { CASE_SEARCH_URL, PageLink } from './urls';
 
-const QueryString = require('query-string');
+const QueryString = require('query-string').default;
 export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
   if ((req.body as any).saveAsDraft) {
     return CASE_SEARCH_URL;

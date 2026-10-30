@@ -8,7 +8,7 @@ This is a Web application for DSS Update case journey used for Uploading the Doc
 
 Running the application requires the following tools to be installed in your environment:
 
-- [Node.js](https://nodejs.org/) v12.0.0 or later
+- [Node.js](https://nodejs.org/) v22.23.4 or later
 - [yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com)
 

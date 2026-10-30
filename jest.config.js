@@ -4,7 +4,13 @@ module.exports = {
   testEnvironment: 'node',
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
+    // Transform this ESM-only dependency chain for the CommonJS tests on Node 22.
+    'node_modules/(query-string|decode-uri-component|filter-obj|split-on-first)/.+\\.js$': [
+      'ts-jest',
+      { tsconfig: { allowJs: true } },
+    ],
   },
+  transformIgnorePatterns: ['/node_modules/(?!(query-string|decode-uri-component|filter-obj|split-on-first)/)'],
   moduleFileExtensions: ['ts', 'js', 'json'],
   setupFilesAfterEnv: ['jest-extended'],
   moduleNameMapper: {
