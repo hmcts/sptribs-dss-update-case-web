@@ -1,9 +1,9 @@
-@import 'govuk-frontend';
+@use 'govuk-frontend/dist/govuk' as *;
 
-@import './banner';
-@import './header';
-@import './cookie-banner';
-@import './task-list';
+@use './banner';
+@use './header';
+@use './cookie-banner';
+@use './task-list';
 
 .hmcts-button-link,
 .uppy-FileInput-btn {
@@ -47,7 +47,7 @@ section {
 .progress-bar-line {
   text-decoration: none;
   background-color: #1d70b8 !important;
-  border: 0px solid #1d70b8;
+  border: 0 solid #1d70b8;
 }
 .hmcts-progress-bar__icon {
   position: relative;
@@ -133,7 +133,7 @@ section {
         display: block;
         content: '';
         box-sizing: border-box;
-        border: solid 0.1875rem $govuk-border-colour;
+        border: solid 0.1875rem govuk-functional-colour(border);
         height: 2rem;
         position: absolute;
         left: 1.1875rem;
@@ -160,7 +160,7 @@ section {
   &__ring {
     box-sizing: border-box;
     border-radius: 50%;
-    border: 0.25rem solid $govuk-border-colour;
+    border: 0.25rem solid govuk-functional-colour(border);
     width: 2.75rem;
     height: 2.75rem;
   }
@@ -169,19 +169,18 @@ section {
 .stage--active {
   .status-bar__ring {
     background-repeat: no-repeat;
-    background-color: $govuk-link-colour;
+    background-color: govuk-functional-colour(link);
     background-position: center;
-    border: 0.25rem solid $govuk-link-colour;
+    border: 0.25rem solid govuk-functional-colour(link);
   }
 }
 
 .stage--completed {
   .status-bar__ring {
-    background-image: url('/assets/images/icon-progress-tick.png');
     background-repeat: no-repeat;
-    background-color: $govuk-link-colour;
+    background-color: govuk-functional-colour(link);
     background-position: center;
-    border: 0.25rem solid $govuk-link-colour;
+    border: 0.25rem solid govuk-functional-colour(link);
   }
 }
 
@@ -216,7 +215,6 @@ section {
 }
 .app-button--l {
   font-weight: 700;
-  font-size: 18px;
   font-size: 1.25rem;
   line-height: 1;
   min-height: auto;
@@ -226,7 +224,6 @@ section {
 }
 @media screen and (min-width: 640px) {
   .app-button--l {
-    font-size: 24px;
     font-size: 1.5rem;
   }
 }
