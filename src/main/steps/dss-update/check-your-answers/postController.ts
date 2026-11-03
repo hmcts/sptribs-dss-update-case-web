@@ -3,7 +3,7 @@ import { Response } from 'express';
 
 import { updateCase } from '../../../app/case/api';
 import { DocumentUpload } from '../../../app/case/case';
-import { AppRequest, DocumentRequest } from '../../../app/controller/AppRequest';
+import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
 import { APPLICATION_CONFIRMATION } from '../../urls';
@@ -31,7 +31,7 @@ export default class CheckYourAnswersController extends PostController<AnyObject
           });
         }
       } catch (error) {
-        req.locals.logger.error('Error during server call:', error.response?.data || error.message);
+        req.locals.logger.error('Case update failed', { status: error.response?.status });
         req.session.errors?.push({
           propertyName: 'submissionError',
           errorType: 'required',
@@ -48,25 +48,19 @@ export default class CheckYourAnswersController extends PostController<AnyObject
   }
 
   public async serverCallForCaseSubmission(req: AppRequest<AnyObject>) {
-    const caseDocuments = req.session['caseDocuments'];
-    const allUploadedDocuments: DocumentRequest = caseDocuments.map((document: DocumentUpload) => {
+    const caseDocuments: DocumentUpload[] = req.session['caseDocuments'] || [];
+    const allUploadedDocuments = caseDocuments.map(document => {
       return {
-        id: document.documentId,
-        value: {
-          documentLink: {
-            document_url: document.url,
-            document_binary_url: document.binaryUrl,
-            document_filename: document.fileName,
-          },
-          comment: document.description ? document.description : null,
-        },
+        document_url: document.url,
+        document_binary_url: document.binaryUrl,
+        document_filename: document.fileName,
+        comment: document.description || null,
       };
     });
 
     const data = {
-      dssCaseDataCaseTypeOfApplication: 'CIC',
-      dssCaseDataAdditionalInformation: req.session['documentDetail'] ? req.session['documentDetail'] : null,
-      dssCaseDataOtherInfoDocuments: allUploadedDocuments,
+      additional_information: req.session['documentDetail'] || null,
+      documents: allUploadedDocuments,
     };
 
     const caseId = req.session.userCase.id;

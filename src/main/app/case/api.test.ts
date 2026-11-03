@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from 'config';
 
 import { getSystemUser } from '../auth/oidc';
 import { getServiceAuthToken } from '../s2s/get-service-auth-token';
@@ -47,23 +48,20 @@ describe('case-api', () => {
 
   describe('updateCase', () => {
     const caseData = {
-      firstName: 'test',
-      lastName: 'user',
+      additional_information: 'Further information',
+      documents: [],
     };
-    const eventName = 'citizen-cic-dss-update-case';
-    const eventToken = 'event-token';
 
-    test('should make a POST request to /cases/:caseId/events', async () => {
+    test('should submit the update to the case API using the citizen token', async () => {
       const mockPost = jest.fn().mockResolvedValue({ data: { id: caseId, data: caseData } });
-      const mockGet = jest.fn().mockResolvedValue({ data: { token: eventToken } });
-      mockedAxios.create.mockReturnValue({ get: mockGet, post: mockPost } as unknown as jest.Mocked<typeof axios>);
+      mockedAxios.create.mockReturnValue({ post: mockPost } as unknown as jest.Mocked<typeof axios>);
       mockedGetServiceAuthToken.mockResolvedValue(serviceAuthToken);
 
       const result = await updateCase(userToken, caseId, caseData);
 
       expect(mockedGetServiceAuthToken).toHaveBeenCalled();
       expect(mockedAxios.create).toHaveBeenCalledWith({
-        baseURL: expect.any(String),
+        baseURL: config.get('services.sptribs.url'),
         headers: {
           Authorization: `Bearer ${userToken}`,
           ServiceAuthorization: serviceAuthToken,
@@ -72,21 +70,17 @@ describe('case-api', () => {
           'Content-Type': 'application/json',
         },
       });
-      expect(mockGet).toHaveBeenCalledWith(`/cases/${caseId}/event-triggers/${eventName}`);
-      expect(mockPost).toHaveBeenCalledWith(`/cases/${caseId}/events`, {
-        event: { id: eventName },
-        data: caseData,
-        event_token: eventToken,
-      });
+      expect(mockPost).toHaveBeenCalledWith(`/cases/cica/${caseId}/updates`, caseData);
       expect(result).toEqual({ data: { id: caseId, data: caseData } });
     });
 
-    test('should throw an error when getting event token fails', async () => {
-      const mockGet = jest.fn().mockRejectedValue(new Error('Event token error'));
-      mockedAxios.create.mockReturnValue({ get: mockGet } as unknown as jest.Mocked<typeof axios>);
+    test('should propagate update failures without retrying in the frontend', async () => {
+      const mockPost = jest.fn().mockRejectedValue(new Error('Update error'));
+      mockedAxios.create.mockReturnValue({ post: mockPost } as unknown as jest.Mocked<typeof axios>);
       mockedGetServiceAuthToken.mockResolvedValue(serviceAuthToken);
 
-      await expect(updateCase(userToken, caseId, caseData)).rejects.toThrow('Event token error');
+      await expect(updateCase(userToken, caseId, caseData)).rejects.toThrow('Update error');
+      expect(mockPost).toHaveBeenCalledTimes(1);
     });
   });
 });
