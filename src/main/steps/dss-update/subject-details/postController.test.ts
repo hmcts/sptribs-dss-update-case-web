@@ -51,23 +51,15 @@ describe('citizenDataVerification post controller test cases', () => {
     },
   } as unknown as FormContent;
 
-  const caseData = {
-    status: 200,
-    data: {
-      data: {
-        cicCaseFullName: 'subject name',
-        cicCaseDateOfBirth: '2000-01-01',
-      },
-    },
-  };
+  const caseData = { status: 200, data: { verified: true } };
 
   const mockedAxios = axios as jest.Mocked<typeof axios>;
-  const mockedAxiosGet = jest.fn();
+  const mockedVerificationPost = jest.fn();
   const mockedAxiosPost = jest.fn();
 
   mockedAxios.post = mockedAxiosPost;
   mockedAxios.create.mockReturnValue({
-    get: mockedAxiosGet,
+    post: mockedVerificationPost,
   } as unknown as AxiosInstance);
 
   mockedAxiosPost.mockImplementation(url => {
@@ -98,12 +90,14 @@ describe('citizenDataVerification post controller test cases', () => {
         subjectFullName: 'subject name',
       },
       session: {
+        user: { id: 'user-id', accessToken: 'token' },
+        userCase: { id: '1234567891234567' },
         isDataVerified: false,
         errors: [],
       },
     });
 
-    mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
+    mockedVerificationPost.mockImplementation(() => Promise.resolve(caseData));
 
     await controller.post(req, res);
     expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
@@ -126,13 +120,15 @@ describe('citizenDataVerification post controller test cases', () => {
         subjectFullName: 'bob smith',
       },
       session: {
+        user: { id: 'user-id', accessToken: 'token' },
+        userCase: { id: '1234567891234567' },
         isDataVerified: false,
         errors: [],
       },
     });
     req.originalUrl = DATA_VERIFICATION;
 
-    mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
+    mockedVerificationPost.mockImplementation(() => Promise.resolve({ status: 200, data: { verified: false } }));
 
     await controller.post(req, res);
     expect(req.session.errors).toStrictEqual([{ propertyName: 'inputFields', errorType: 'required' }]);
@@ -156,13 +152,15 @@ describe('citizenDataVerification post controller test cases', () => {
         subjectFullName: 'bob smith',
       },
       session: {
+        user: { id: 'user-id', accessToken: 'token' },
+        userCase: { id: '1234567891234567' },
         isDataVerified: false,
         errors: [],
       },
     });
     req.originalUrl = DATA_VERIFICATION;
 
-    mockedAxiosGet.mockImplementation(() => Promise.reject(new Error('case not found')));
+    mockedVerificationPost.mockImplementation(() => Promise.reject(new Error('case not found')));
 
     await controller.post(req, res);
     expect(req.session.errors).toStrictEqual([{ propertyName: 'caseError', errorType: 'required' }]);
@@ -179,7 +177,7 @@ describe('citizenDataVerification post controller test cases', () => {
         'subjectDOB-year': '2020',
         subjectFullName: '',
       },
-      session: {},
+      session: { userCase: { id: '1234567891234567' } },
     });
     req.originalUrl = DATA_VERIFICATION;
 

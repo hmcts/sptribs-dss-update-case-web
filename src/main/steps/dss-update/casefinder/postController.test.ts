@@ -39,16 +39,7 @@ const mockFormContent = {
   },
 } as unknown as FormContent;
 
-const caseData = {
-  status: 200,
-  data: {
-    id: '1675676483319900',
-    data: {
-      cicCaseFullName: 'subject name',
-      cicCaseDateOfBirth: '2000-01-01',
-    },
-  },
-};
+const caseData = { status: 200 };
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 const mockedAxiosGet = jest.fn();
@@ -77,6 +68,7 @@ describe('case finder post controller test cases', () => {
         applicantCaseId: '1675676483319900',
       },
       session: {
+        user: { accessToken: 'token' },
         userCase: {
           id: 'caseRefId',
         },
@@ -96,7 +88,7 @@ describe('case finder post controller test cases', () => {
         saveAndContinue: true,
         applicantCaseId: '1675676483319900',
       },
-      session: {},
+      session: { user: { accessToken: 'token' } },
     });
 
     mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
@@ -113,6 +105,7 @@ describe('case finder post controller test cases', () => {
         applicantCaseId: '1675676483319900',
       },
       session: {
+        user: { accessToken: 'token' },
         userCase: {
           id: 'applicantCaseId',
         },
@@ -134,6 +127,7 @@ describe('case finder post controller test cases', () => {
         applicantCaseId: '',
       },
       session: {
+        user: { accessToken: 'token' },
         userCase: {},
       },
     });
