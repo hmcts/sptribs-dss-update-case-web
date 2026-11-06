@@ -1,24 +1,30 @@
 import fs from 'fs';
 
 import { Application, NextFunction, Request, RequestHandler, Response } from 'express';
+import rateLimit from 'express-rate-limit';
 
+import { AppRequest } from './app/controller/AppRequest';
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
 import { AccessibilityStatementGetController } from './steps/accessibility-statement/get';
 import { ContactUsGetController } from './steps/contact-us/get';
+import { requireSelectedCase, requireVerifiedCase } from './steps/dss-update/requireVerifiedCase';
 import { ErrorController } from './steps/error/error.controller';
 import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
 import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
 import { TimedOutGetController } from './steps/timed-out/get';
 import {
   ACCESSIBILITY_STATEMENT,
+  CHECK_YOUR_ANSWERS,
   CONTACT_US,
+  DATA_VERIFICATION,
   KEEP_ALIVE_URL,
   PRIVACY_POLICY,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
+  UPLOAD_DOCUMENT,
 } from './steps/urls';
 
 export const restrictContentType = (contentType: string[]) => {
@@ -42,6 +48,24 @@ export class Routes {
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
     app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
+
+    app.use(UPLOAD_DOCUMENT, requireVerifiedCase);
+    app.use(CHECK_YOUR_ANSWERS, requireVerifiedCase);
+    app.use(DATA_VERIFICATION, requireSelectedCase);
+    app.use(
+      DATA_VERIFICATION,
+      rateLimit({
+        windowMs: 15 * 60 * 1000,
+        limit: 10,
+        skip: req => req.method !== 'POST',
+        keyGenerator: req => {
+          const request = req as AppRequest;
+          return `${request.session.user.id}:${request.session.userCase?.id || 'no-case'}`;
+        },
+        standardHeaders: 'draft-7',
+        legacyHeaders: false,
+      })
+    );
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);
