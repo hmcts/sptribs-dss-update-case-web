@@ -30,6 +30,8 @@ export interface AppSession extends Session {
   accessCodeLoginIn: boolean;
   c100RebuildLdFlag: boolean;
   isDataVerified: boolean;
+  verifiedCaseId?: string;
+  verifiedUserId?: string;
   loggedInSystemUserType: string;
 }
 export interface UserDetails {

@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { getCase } from '../../../app/case/api';
+import { verifyCaseSubject } from '../../../app/case/api';
 import { CaseDate } from '../../../app/case/case';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
@@ -19,21 +19,28 @@ export default class CitizenDataVerificationPostController extends PostControlle
 
     let nextUrl = req.originalUrl;
 
+    req.session.verifiedCaseId = undefined;
+    req.session.verifiedUserId = undefined;
+    req.session.isDataVerified = false;
+
     req.session.userCase.subjectFullName = formData.subjectFullName as string;
     req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
 
     if (req.session.errors.length === 0) {
       try {
-        const responseFromServerCall = await getCase(req.session.userCase.id);
+        const subjectFullNameToVerify = String(formData.subjectFullName).trim();
+        const dateToVerify = `${formData.subjectDOB?.year}-${formData.subjectDOB?.month?.padStart(2, '0')}-${formData.subjectDOB?.day?.padStart(2, '0')}`;
+        const responseFromServerCall = await verifyCaseSubject(
+          req.session.user.accessToken,
+          req.session.userCase.id,
+          subjectFullNameToVerify,
+          dateToVerify
+        );
         if (responseFromServerCall.status === 200) {
-          const cicCaseFullName = responseFromServerCall.data.data.cicCaseFullName.trim();
-          const cicCaseDateOfBirth = responseFromServerCall.data.data.cicCaseDateOfBirth;
-
-          const subjectFullNameToVerify = String(req.body.subjectFullName).trim();
-          const dateToVerify = `${formData.subjectDOB?.year}-${formData.subjectDOB?.month?.padStart(2, '0')}-${formData.subjectDOB?.day?.padStart(2, '0')}`;
-
-          if (cicCaseFullName === subjectFullNameToVerify && cicCaseDateOfBirth === dateToVerify) {
+          if (responseFromServerCall.data.verified === true) {
             req.session.isDataVerified = true;
+            req.session.verifiedCaseId = req.session.userCase.id;
+            req.session.verifiedUserId = req.session.user.id;
             nextUrl = UPLOAD_DOCUMENT;
           } else {
             req.session.errors.push({ propertyName: 'inputFields', errorType: 'required' });
