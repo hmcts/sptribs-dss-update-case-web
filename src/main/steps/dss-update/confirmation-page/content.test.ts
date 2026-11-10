@@ -12,7 +12,7 @@ const en = {
   line3: 'An email will be sent to you that explains what will happen next.',
   feedback: 'Feedback',
   feedbackBody:
-    "<b>We would like to hear your thoughts</b><br>Complete this short 5-minutes survey to help improve our services for you and others <a class='govuk-link' href='https://www.smartsurvey.co.uk/s/SurveyExit/?service=Specials'target=_blank><br>Please leave your your feedback</a>",
+    "<b>We would like to hear your thoughts</b><br>Complete this short 5-minutes survey to help improve our services for you and others <a class='govuk-link' href='https://www.smartsurvey.co.uk/s/SurveyExit/?service=Specials'target=_blank><br>Please leave your feedback (opens in a new tab)</a>",
   closeAndExit: 'Close and exit',
 };
 
