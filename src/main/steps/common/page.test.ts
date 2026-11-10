@@ -43,6 +43,43 @@ function expectPageStructure(html: string): void {
 }
 
 describe('GOV.UK page templates', () => {
+  describe.each([
+    {
+      language: 'English',
+      title: 'Existing appeal details',
+      serviceName: 'Update an appeal to the First-tier Tribunal',
+      errorPrefix: 'Error:',
+    },
+    {
+      language: 'Welsh',
+      title: 'Manylion apêl presennol',
+      serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
+      errorPrefix: 'Gwall:',
+    },
+  ])('$language page titles', ({ title, serviceName, errorPrefix }) => {
+    test.each([
+      { state: 'without errors', hasSessionErrors: false, hasFileErrors: false },
+      { state: 'with form errors', hasSessionErrors: true, hasFileErrors: false },
+      { state: 'with file upload errors', hasSessionErrors: false, hasFileErrors: true },
+      { state: 'with both form and file upload errors', hasSessionErrors: true, hasFileErrors: true },
+    ])('renders the page title before the service name $state', ({ hasSessionErrors, hasFileErrors }) => {
+      const html = env.render('common/page.njk', {
+        ...commonContent,
+        title,
+        serviceName,
+        errorPrefix,
+        govUk: 'GOV.UK',
+        sessionErrors: hasSessionErrors ? [{ propertyName: 'applicantCaseId', errorType: 'required' }] : [],
+        fileErrors: hasFileErrors ? [{ propertyName: 'documents', errorType: 'required' }] : [],
+        errors: { applicantCaseId: { required: 'Enter a reference number' } },
+      });
+      const pageTitle = html.match(/<title>([\s\S]*?)<\/title>/)?.[1].trim();
+      const expectedPrefix = hasSessionErrors || hasFileErrors ? `${errorPrefix} ` : '';
+
+      expect(pageTitle).toBe(`${expectedPrefix}${title} - ${serviceName} - GOV.UK`);
+    });
+  });
+
   test.each([
     { isLoggedIn: true, languageToggle: '<a href="?lng=cy">Cymraeg</a>', expectedLanguage: 'Cymraeg' },
     { isLoggedIn: false, languageToggle: '<a href="?lng=en">English</a>', expectedLanguage: 'English' },
