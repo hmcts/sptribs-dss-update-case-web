@@ -1,4 +1,6 @@
 services:
+  sptribs:
+    url: 'http://localhost:4013'
   idam:
     authorizationURL: 'http://localhost:3501/login'
     tokenURL: 'http://localhost:5000/o/token'
