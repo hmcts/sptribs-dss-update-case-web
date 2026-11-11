@@ -37,12 +37,15 @@ export class SessionStorage {
   }
 
   private getStore(app: Application) {
-    const redisHost = config.get('session.redis.host');
+    const redisHost = config.get('session.redis.host') as string;
     if (redisHost) {
+      const redisService = redisHost.endsWith('.redis.azure.net') ? 'Azure Managed Redis' : 'Redis';
+      logger.info(`Using ${redisService} for session storage`);
+
       const client = redis.createClient({
         socket: {
-          host: redisHost as string,
-          port: 6380,
+          host: redisHost,
+          port: Number(config.get('session.redis.port')),
           connectTimeout: 15000,
           tls: true,
         },
@@ -50,7 +53,8 @@ export class SessionStorage {
       });
 
       client.on('error', err => logger.error(`Redis Client Error: ${err}`));
-      client.connect();
+      client.on('ready', () => logger.info(`Redis Client connected to ${redisService}`));
+      client.connect().catch(err => logger.error('Redis connection failed', err));
 
       app.locals.redisClient = client;
       return new RedisStore({ client });
