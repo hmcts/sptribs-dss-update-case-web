@@ -7,13 +7,16 @@ nodejs:
     CASE_API_URL: 'https://sptribs-case-api-pr-2701.preview.platform.hmcts.net'
     CASE_DOCUMENT_API_URL: 'https://ccd-case-document-am-api-sptribs-case-api-pr-2701.preview.platform.hmcts.net'
     RATE_LIMITER_DISABLED: true
+    REDIS_HOST: 'sptribs-frontend-aat.uksouth.redis.azure.net'
+    REDIS_PORT: '10000'
 
   keyVaults:
     sptribs:
       secrets:
         - name: app-insights-instrumentation-key-preview
           alias: app-insights-instrumentation-key
-        - redis-access-key
+        - name: redis-new
+          alias: redis-access-key
         - idam-systemupdate-username
         - idam-systemupdate-password
         - idam-dss-update-ui-secret
