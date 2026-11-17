@@ -4,18 +4,16 @@ import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject } from '../../app/controller/PostController';
 import { FormFields } from '../../app/form/Form';
 import { isFieldFilledIn } from '../../app/form/validation';
+import { PageLink } from '../urls';
 
 import { VerificationPostController } from './VerificationPostController';
 
 class TestVerificationController extends VerificationPostController {
+  protected readonly defaultUrl: PageLink = '/default-url' as PageLink;
   public handleVerificationMock = jest.fn();
 
-  protected async handleVerification(
-    req: AppRequest<AnyObject>,
-    formData: Record<string, unknown>,
-    fallbackUrl: string
-  ): Promise<string> {
-    return this.handleVerificationMock(req, formData, fallbackUrl);
+  protected async handleVerification(req: AppRequest<AnyObject>, formData: Record<string, unknown>): Promise<PageLink> {
+    return this.handleVerificationMock(req, formData);
   }
 }
 
@@ -29,7 +27,7 @@ describe('VerificationPostController', () => {
 
   test('should reset verification state and call handleVerification when there are no errors', async () => {
     const controller = new TestVerificationController(mockFields);
-    controller.handleVerificationMock.mockResolvedValue('/next-step');
+    controller.handleVerificationMock.mockResolvedValue('/next-step' as PageLink);
 
     const req = mockRequest({
       body: { testField: 'someValue' },
@@ -40,7 +38,6 @@ describe('VerificationPostController', () => {
         errors: [],
       },
     });
-    req.originalUrl = '/current-step';
     const res = mockResponse();
 
     await controller.post(req, res);
@@ -50,8 +47,7 @@ describe('VerificationPostController', () => {
     expect(req.session.isDataVerified).toBe(false);
     expect(controller.handleVerificationMock).toHaveBeenCalledWith(
       req,
-      expect.objectContaining({ testField: 'someValue' }),
-      '/current-step'
+      expect.objectContaining({ testField: 'someValue' })
     );
     expect(res.redirect).toHaveBeenCalledWith('/next-step');
   });
@@ -67,7 +63,6 @@ describe('VerificationPostController', () => {
         isDataVerified: true,
       },
     });
-    req.originalUrl = '/current-step';
     const res = mockResponse();
 
     await controller.post(req, res);
@@ -77,13 +72,13 @@ describe('VerificationPostController', () => {
     expect(req.session.isDataVerified).toBe(false);
     expect(req.session.errors).toEqual([{ propertyName: 'testField', errorType: 'required' }]);
     expect(controller.handleVerificationMock).not.toHaveBeenCalled();
-    expect(res.redirect).toHaveBeenCalledWith('/current-step');
+    expect(res.redirect).toHaveBeenCalledWith('/default-url');
   });
 
   test('should resolve fields if passed as a function', async () => {
     const fieldsFn = jest.fn().mockReturnValue(mockFields);
     const controller = new TestVerificationController(fieldsFn);
-    controller.handleVerificationMock.mockResolvedValue('/next-step');
+    controller.handleVerificationMock.mockResolvedValue('/next-step' as PageLink);
 
     const req = mockRequest({
       body: { testField: 'value' },
@@ -95,5 +90,35 @@ describe('VerificationPostController', () => {
 
     expect(fieldsFn).toHaveBeenCalledWith(req.session.userCase);
     expect(controller.handleVerificationMock).toHaveBeenCalled();
+    expect(res.redirect).toHaveBeenCalledWith('/next-step');
+  });
+
+  test('should await session save and reject if session save fails', async () => {
+    const controller = new TestVerificationController(mockFields);
+    controller.handleVerificationMock.mockResolvedValue('/next-step' as PageLink);
+
+    const mockSave = jest.fn(done => done(new Error('session save error')));
+    const req = mockRequest({
+      body: { testField: 'value' },
+      session: { save: mockSave },
+    });
+    const res = mockResponse();
+
+    await expect(controller.post(req, res)).rejects.toThrow('session save error');
+    expect(res.redirect).not.toHaveBeenCalled();
+  });
+
+  test('should handle request without session save function', async () => {
+    const controller = new TestVerificationController(mockFields);
+    controller.handleVerificationMock.mockResolvedValue('/next-step' as PageLink);
+
+    const req = mockRequest({
+      body: { testField: 'value' },
+    });
+    delete req.session.save;
+    const res = mockResponse();
+
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith('/next-step');
   });
 });

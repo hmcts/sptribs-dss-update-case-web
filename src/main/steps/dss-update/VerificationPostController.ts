@@ -4,9 +4,12 @@ import { Response } from 'express';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../app/controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../../app/form/Form';
+import { PageLink } from '../urls';
 
 @autobind
 export abstract class VerificationPostController extends PostController<AnyObject> {
+  protected abstract readonly defaultUrl: PageLink;
+
   constructor(protected readonly fields: FormFields | FormFieldsFn) {
     super(fields);
   }
@@ -20,17 +23,23 @@ export abstract class VerificationPostController extends PostController<AnyObjec
 
     this.resetVerification(req);
 
-    let nextUrl = req.originalUrl;
+    let nextUrl: PageLink = this.defaultUrl;
     if (req.session.errors.length === 0) {
-      nextUrl = await this.handleVerification(req, formData, nextUrl);
+      nextUrl = await this.handleVerification(req, formData);
     }
 
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    if (req.session?.save) {
+      await new Promise<void>((resolve, reject) => {
+        req.session.save(err => {
+          if (err) {
+            return reject(err);
+          }
+          resolve();
+        });
+      });
+    }
+
+    res.redirect(nextUrl);
   }
 
   protected resetVerification(req: AppRequest<AnyObject>): void {
@@ -41,7 +50,6 @@ export abstract class VerificationPostController extends PostController<AnyObjec
 
   protected abstract handleVerification(
     req: AppRequest<AnyObject>,
-    formData: Record<string, unknown>,
-    fallbackUrl: string
-  ): Promise<string>;
+    formData: Record<string, unknown>
+  ): Promise<PageLink>;
 }

@@ -4,16 +4,14 @@ import { verifyCaseSubject } from '../../../app/case/api';
 import { CaseDate } from '../../../app/case/case';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject } from '../../../app/controller/PostController';
-import { NOT_AUTHORISED, SUBJECT_DETAILS_ERROR_URL, UPLOAD_DOCUMENT } from '../../urls';
+import { DATA_VERIFICATION, NOT_AUTHORISED, PageLink, SUBJECT_DETAILS_ERROR_URL, UPLOAD_DOCUMENT } from '../../urls';
 import { VerificationPostController } from '../VerificationPostController';
 
 @autobind
 export default class CitizenDataVerificationPostController extends VerificationPostController {
-  protected async handleVerification(
-    req: AppRequest<AnyObject>,
-    formData: Record<string, unknown>,
-    fallbackUrl: string
-  ): Promise<string> {
+  protected readonly defaultUrl: PageLink = DATA_VERIFICATION;
+
+  protected async handleVerification(req: AppRequest<AnyObject>, formData: Record<string, unknown>): Promise<PageLink> {
     const subjectDOB = formData.subjectDOB as CaseDate;
     req.session.userCase.subjectFullName = formData.subjectFullName as string;
     req.session.userCase.subjectDOB = subjectDOB;
@@ -41,13 +39,14 @@ export default class CitizenDataVerificationPostController extends VerificationP
       const status = error?.response?.status;
       if (status === 403) {
         return NOT_AUTHORISED;
-      } else if (status === 401) {
+      } else if (status === 401 || status === 400) {
         return SUBJECT_DETAILS_ERROR_URL;
       } else {
         req.session.errors = req.session.errors || [];
         req.session.errors.push({ propertyName: 'caseError', errorType: 'required' });
       }
     }
-    return fallbackUrl;
+
+    return this.defaultUrl;
   }
 }
