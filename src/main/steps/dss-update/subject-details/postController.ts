@@ -37,7 +37,7 @@ export default class CitizenDataVerificationPostController extends PostControlle
           dateToVerify
         );
         if (responseFromServerCall.status === 200) {
-          if (responseFromServerCall.data.verified === true) {
+          if (responseFromServerCall.data.verified) {
             req.session.isDataVerified = true;
             req.session.verifiedCaseId = req.session.userCase.id;
             req.session.verifiedUserId = req.session.user.id;
