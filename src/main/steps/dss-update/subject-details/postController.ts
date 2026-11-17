@@ -1,68 +1,53 @@
 import autobind from 'autobind-decorator';
-import { Response } from 'express';
 
 import { verifyCaseSubject } from '../../../app/case/api';
 import { CaseDate } from '../../../app/case/case';
 import { AppRequest } from '../../../app/controller/AppRequest';
-import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { Form } from '../../../app/form/Form';
+import { AnyObject } from '../../../app/controller/PostController';
 import { NOT_AUTHORISED, SUBJECT_DETAILS_ERROR_URL, UPLOAD_DOCUMENT } from '../../urls';
+import { VerificationPostController } from '../VerificationPostController';
 
 @autobind
-export default class CitizenDataVerificationPostController extends PostController<AnyObject> {
-  public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
-    const form = new Form(fields);
-
-    const { ...formData } = form.getParsedBody(req.body);
-    req.session.errors = form.getErrors(formData);
-
-    let nextUrl = req.originalUrl;
-
-    req.session.verifiedCaseId = undefined;
-    req.session.verifiedUserId = undefined;
-    req.session.isDataVerified = false;
-
+export default class CitizenDataVerificationPostController extends VerificationPostController {
+  protected async handleVerification(
+    req: AppRequest<AnyObject>,
+    formData: Record<string, unknown>,
+    fallbackUrl: string
+  ): Promise<string> {
+    const subjectDOB = formData.subjectDOB as CaseDate;
     req.session.userCase.subjectFullName = formData.subjectFullName as string;
-    req.session.userCase.subjectDOB = formData.subjectDOB as CaseDate;
+    req.session.userCase.subjectDOB = subjectDOB;
 
-    if (req.session.errors.length === 0) {
-      try {
-        const subjectFullNameToVerify = String(formData.subjectFullName).trim();
-        const dateToVerify = `${formData.subjectDOB?.year}-${formData.subjectDOB?.month?.padStart(2, '0')}-${formData.subjectDOB?.day?.padStart(2, '0')}`;
-        const responseFromServerCall = await verifyCaseSubject(
-          req.session.user.accessToken,
-          req.session.userCase.id,
-          subjectFullNameToVerify,
-          dateToVerify
-        );
-        if (responseFromServerCall.status === 200) {
-          if (responseFromServerCall.data.verified) {
-            req.session.isDataVerified = true;
-            req.session.verifiedCaseId = req.session.userCase.id;
-            req.session.verifiedUserId = req.session.user.id;
-            nextUrl = UPLOAD_DOCUMENT;
-          } else {
-            nextUrl = SUBJECT_DETAILS_ERROR_URL;
-          }
-        }
-      } catch (error: any) {
-        const status = error?.response?.status;
-        if (status === 403) {
-          nextUrl = NOT_AUTHORISED;
-        } else if (status === 401) {
-          nextUrl = SUBJECT_DETAILS_ERROR_URL;
+    try {
+      const subjectFullNameToVerify = String(formData.subjectFullName).trim();
+      const dateToVerify = `${subjectDOB?.year}-${subjectDOB?.month?.padStart(2, '0')}-${subjectDOB?.day?.padStart(2, '0')}`;
+      const responseFromServerCall = await verifyCaseSubject(
+        req.session.user.accessToken,
+        req.session.userCase.id,
+        subjectFullNameToVerify,
+        dateToVerify
+      );
+      if (responseFromServerCall.status === 200) {
+        if (responseFromServerCall.data.verified) {
+          req.session.isDataVerified = true;
+          req.session.verifiedCaseId = req.session.userCase.id;
+          req.session.verifiedUserId = req.session.user.id;
+          return UPLOAD_DOCUMENT;
         } else {
-          req.session.errors.push({ propertyName: 'caseError', errorType: 'required' });
+          return SUBJECT_DETAILS_ERROR_URL;
         }
+      }
+    } catch (error: any) {
+      const status = error?.response?.status;
+      if (status === 403) {
+        return NOT_AUTHORISED;
+      } else if (status === 401) {
+        return SUBJECT_DETAILS_ERROR_URL;
+      } else {
+        req.session.errors = req.session.errors || [];
+        req.session.errors.push({ propertyName: 'caseError', errorType: 'required' });
       }
     }
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    return fallbackUrl;
   }
 }

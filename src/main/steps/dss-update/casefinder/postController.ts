@@ -1,54 +1,40 @@
 import autobind from 'autobind-decorator';
-import { Response } from 'express';
 
 import { checkCaseAccess } from '../../../app/case/api';
 import { AppRequest } from '../../../app/controller/AppRequest';
-import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { Form } from '../../../app/form/Form';
+import { AnyObject } from '../../../app/controller/PostController';
 import { CASE_NOT_FOUND_URL, DATA_VERIFICATION, NOT_AUTHORISED } from '../../urls';
+import { VerificationPostController } from '../VerificationPostController';
 
 @autobind
-export default class CaseFinderController extends PostController<AnyObject> {
-  public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
-    const form = new Form(fields);
-
-    const { ...formData } = form.getParsedBody(req.body);
-    req.session.errors = form.getErrors(formData);
-
-    let nextUrl = req.originalUrl;
-    req.session.verifiedCaseId = undefined;
-    req.session.verifiedUserId = undefined;
-    req.session.isDataVerified = false;
-    if (req.session.errors.length === 0) {
-      try {
-        const caseId = String(req.body.applicantCaseId);
-        if (!/^\d{16}$/.test(caseId)) {
-          throw new Error('Invalid case reference');
-        }
-        const responseFromServerCall = await checkCaseAccess(req.session.user.accessToken, caseId);
-        if (responseFromServerCall.status === 200) {
-          req.session.userCase = { id: caseId } as typeof req.session.userCase;
-          nextUrl = DATA_VERIFICATION;
-        }
-      } catch (error: any) {
-        const status = error?.response?.status;
-        if (status === 403) {
-          nextUrl = NOT_AUTHORISED;
-        } else if (status === 404) {
-          req.session.userCase = { id: '', ccdReferenceNumber: req.body.applicantCaseId } as any;
-          nextUrl = CASE_NOT_FOUND_URL;
-        } else {
-          req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'caseNotFound' });
-        }
+export default class CaseFinderController extends VerificationPostController {
+  protected async handleVerification(
+    req: AppRequest<AnyObject>,
+    formData: Record<string, unknown>,
+    fallbackUrl: string
+  ): Promise<string> {
+    try {
+      const caseId = String(req.body.applicantCaseId);
+      if (!/^\d{16}$/.test(caseId)) {
+        throw new Error('Invalid case reference');
+      }
+      const responseFromServerCall = await checkCaseAccess(req.session.user.accessToken, caseId);
+      if (responseFromServerCall.status === 200) {
+        req.session.userCase = { id: caseId } as typeof req.session.userCase;
+        return DATA_VERIFICATION;
+      }
+    } catch (error: any) {
+      const status = error?.response?.status;
+      if (status === 403) {
+        return NOT_AUTHORISED;
+      } else if (status === 404) {
+        req.session.userCase = { id: '', ccdReferenceNumber: req.body.applicantCaseId } as any;
+        return CASE_NOT_FOUND_URL;
+      } else {
+        req.session.errors = req.session.errors || [];
+        req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'caseNotFound' });
       }
     }
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    return fallbackUrl;
   }
 }
