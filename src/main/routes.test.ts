@@ -7,11 +7,14 @@ import { Routes, restrictContentType } from './routes';
 import {
   ACCESSIBILITY_STATEMENT,
   APPLICATION_CONFIRMATION,
+  CASE_NOT_FOUND_URL,
   CASE_SEARCH_URL,
   CHECK_YOUR_ANSWERS,
   CONTACT_US,
   DATA_VERIFICATION,
+  NOT_AUTHORISED,
   PRIVACY_POLICY,
+  SUBJECT_DETAILS_ERROR_URL,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
   UPLOAD_DOCUMENT,
@@ -38,6 +41,9 @@ describe('Routes', () => {
     expect(appMock.get).toHaveBeenCalledWith(ACCESSIBILITY_STATEMENT, undefined);
     expect(appMock.get).toHaveBeenCalledWith(TIMED_OUT_URL, undefined);
     expect(appMock.get).toHaveBeenCalledWith(CONTACT_US, undefined);
+    expect(appMock.get).toHaveBeenCalledWith(NOT_AUTHORISED, undefined);
+    expect(appMock.get).toHaveBeenCalledWith(CASE_NOT_FOUND_URL, undefined);
+    expect(appMock.get).toHaveBeenCalledWith(SUBJECT_DETAILS_ERROR_URL, expect.any(Function), undefined);
 
     expect(appMock.get).toHaveBeenCalledWith(CASE_SEARCH_URL, undefined);
     expect(appMock.get).toHaveBeenCalledWith(DATA_VERIFICATION, undefined);

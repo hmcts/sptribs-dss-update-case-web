@@ -6,7 +6,7 @@ import { CaseDate } from '../../../app/case/case';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { UPLOAD_DOCUMENT } from '../../urls';
+import { NOT_AUTHORISED, SUBJECT_DETAILS_ERROR_URL, UPLOAD_DOCUMENT } from '../../urls';
 
 @autobind
 export default class CitizenDataVerificationPostController extends PostController<AnyObject> {
@@ -43,11 +43,18 @@ export default class CitizenDataVerificationPostController extends PostControlle
             req.session.verifiedUserId = req.session.user.id;
             nextUrl = UPLOAD_DOCUMENT;
           } else {
-            req.session.errors.push({ propertyName: 'inputFields', errorType: 'required' });
+            nextUrl = SUBJECT_DETAILS_ERROR_URL;
           }
         }
-      } catch (error) {
-        req.session.errors.push({ propertyName: 'caseError', errorType: 'required' });
+      } catch (error: any) {
+        const status = error?.response?.status;
+        if (status === 403) {
+          nextUrl = NOT_AUTHORISED;
+        } else if (status === 401) {
+          nextUrl = SUBJECT_DETAILS_ERROR_URL;
+        } else {
+          req.session.errors.push({ propertyName: 'caseError', errorType: 'required' });
+        }
       }
     }
 

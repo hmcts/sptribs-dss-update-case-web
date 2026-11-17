@@ -5,7 +5,7 @@ import { checkCaseAccess } from '../../../app/case/api';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { DATA_VERIFICATION } from '../../urls';
+import { CASE_NOT_FOUND_URL, DATA_VERIFICATION, NOT_AUTHORISED } from '../../urls';
 
 @autobind
 export default class CaseFinderController extends PostController<AnyObject> {
@@ -31,8 +31,16 @@ export default class CaseFinderController extends PostController<AnyObject> {
           req.session.userCase = { id: caseId } as typeof req.session.userCase;
           nextUrl = DATA_VERIFICATION;
         }
-      } catch (error) {
-        req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'caseNotFound' });
+      } catch (error: any) {
+        const status = error?.response?.status;
+        if (status === 403) {
+          nextUrl = NOT_AUTHORISED;
+        } else if (status === 404) {
+          req.session.userCase = { id: '', ccdReferenceNumber: req.body.applicantCaseId } as any;
+          nextUrl = CASE_NOT_FOUND_URL;
+        } else {
+          req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'caseNotFound' });
+        }
       }
     }
 
