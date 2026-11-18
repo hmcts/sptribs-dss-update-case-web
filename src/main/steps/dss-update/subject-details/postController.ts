@@ -39,7 +39,7 @@ export default class CitizenDataVerificationPostController extends VerificationP
       const status = error?.response?.status;
       if (status === 403) {
         return NOT_AUTHORISED;
-      } else if (status === 401 || status === 400) {
+      } else if (status === 401 || status === 400 || status === 404) {
         return SUBJECT_DETAILS_ERROR_URL;
       } else {
         req.session.errors = req.session.errors || [];

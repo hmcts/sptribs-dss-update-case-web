@@ -21,6 +21,11 @@ export abstract class VerificationPostController extends PostController<AnyObjec
     const { ...formData } = form.getParsedBody(req.body);
     req.session.errors = form.getErrors(formData);
 
+    req.session.userCase = {
+      ...(req.session.userCase || {}),
+      ...formData,
+    };
+
     this.resetVerification(req);
 
     let nextUrl: PageLink = this.defaultUrl;

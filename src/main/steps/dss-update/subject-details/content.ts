@@ -2,12 +2,7 @@ import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
-import {
-  isDateInputInvalid,
-  isDateInputNotFilled,
-  isFieldFilledIn,
-  isFieldLetters,
-} from '../../../app/form/validation';
+import { isDateInputInvalid, isDateInputNotFilled, isFieldFilledIn } from '../../../app/form/validation';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const en = () => ({
@@ -77,7 +72,7 @@ export const form: FormContent = {
       classes: 'govuk-input--width-20',
       label: l => l.subjectFullNameLabel,
       hint: l => l.subjectFullNameHint,
-      validator: value => isFieldFilledIn(value) || isFieldLetters(value),
+      validator: isFieldFilledIn,
     },
     subjectDOB: {
       type: 'date',

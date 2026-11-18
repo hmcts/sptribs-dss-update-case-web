@@ -6,6 +6,7 @@ export interface Case {
   subjectFullName: string;
   subjectDOB: CaseDate;
   ccdReferenceNumber?: string;
+  applicantCaseId?: string;
 }
 
 export interface CaseWithId extends Case {

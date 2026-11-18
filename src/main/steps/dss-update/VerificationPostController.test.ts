@@ -71,8 +71,29 @@ describe('VerificationPostController', () => {
     expect(req.session.verifiedUserId).toBeUndefined();
     expect(req.session.isDataVerified).toBe(false);
     expect(req.session.errors).toEqual([{ propertyName: 'testField', errorType: 'required' }]);
+    expect(req.session.userCase).toEqual(expect.objectContaining({ testField: '' }));
     expect(controller.handleVerificationMock).not.toHaveBeenCalled();
     expect(res.redirect).toHaveBeenCalledWith('/default-url');
+  });
+
+  test('should preserve entered field values in userCase when validation fails', async () => {
+    const controller = new TestVerificationController(mockFields);
+
+    const req = mockRequest({
+      body: { testField: '', otherField: 'keep-me' },
+      session: {
+        userCase: { id: 'caseId' },
+      },
+    });
+    const res = mockResponse();
+
+    await controller.post(req, res);
+
+    expect(req.session.userCase).toEqual({
+      id: 'caseId',
+      testField: '',
+      otherField: 'keep-me',
+    });
   });
 
   test('should resolve fields if passed as a function', async () => {
@@ -88,7 +109,7 @@ describe('VerificationPostController', () => {
 
     await controller.post(req, res);
 
-    expect(fieldsFn).toHaveBeenCalledWith(req.session.userCase);
+    expect(fieldsFn).toHaveBeenCalledWith({ id: 'caseId' });
     expect(controller.handleVerificationMock).toHaveBeenCalled();
     expect(res.redirect).toHaveBeenCalledWith('/next-step');
   });
