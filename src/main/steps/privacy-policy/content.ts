@@ -116,7 +116,7 @@ export const cy: typeof en = {
   whoManages: "Pwy sy’n rheoli'r gwasanaeth hwn",
   managedBy:
     'Gwasanaeth Llysoedd a Thribiwnlysoedd EM (GLlTEM) sy’n rheoli’r gwasanaeth hwn, sef un o asiantaethau gweithredol y Weinyddiaeth Gyfiawnder (MoJ).',
-  moj: "MoJ yw’r rheolydd data at ddibenion diogelu data. <a class='govuk-link' target = 'blank' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter.cy'>Mae siarter gwybodaeth bersonol y Weinyddiaeth Gyfiawnder (yn agor mewn tab newydd)</a> yn esbonio sut mae’r MoJ yn prosesu data personol.",
+  moj: "MoJ yw’r rheolydd data at ddibenion diogelu data. <a class='govuk-link' target='_blank' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter.cy'>Mae siarter gwybodaeth bersonol y Weinyddiaeth Gyfiawnder (yn agor mewn tab newydd)</a> yn esbonio sut mae’r MoJ yn prosesu data personol.",
   responsibleForDeciding:
     "Fel rhan o’r MoJ, mae GLlTEM yn gyfrifol am benderfynu sut mae eich data personol yn cael ei ddefnyddio ac am ddiogelu'r data personol rydych yn ei ddarparu.",
   moreInformation:
@@ -189,7 +189,7 @@ export const cy: typeof en = {
     "ein bod yn trosglwyddo'r wybodaeth bersonol a roesoch i ni i sefydliad arall, neu i chi, mewn rhai amgylchiadau",
   ifYouWantToSeePersonal: 'Os ydych eisiau gweld y data personol rydym yn ei gadw amdanoch, gallwch:',
   completeForm:
-    "llenwi ffurflen i wneud <a class='govuk-link' target = 'blank' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter.cy'>cais gwrthrych am wybodaeth (yn agor mewn tab newydd)</a>. Bydd eich cais yn mynd i’r rheolydd data, sef MoJ.",
+    "llenwi ffurflen i wneud <a class='govuk-link' target='_blank' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter.cy'>cais gwrthrych am wybodaeth (yn agor mewn tab newydd)</a>. Bydd eich cais yn mynd i’r rheolydd data, sef MoJ.",
   writeToUs: 'ysgrifennu atom yn: Disclosure Team, Post point 10.24, 102 Petty France, Llundain, SW1H 9AJ',
   emailUs: 'e-bost: <a href="mailto:data.access@justice.gov.uk" class="govuk-link">data.access@justice.gov.uk</a>',
   askMoreInformation: 'Gallwch ofyn am fwy o wybodaeth ynghylch:',
