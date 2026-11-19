@@ -24,6 +24,7 @@ port: PORT
 session:
   redis:
     host: REDIS_HOST
+    port: REDIS_PORT
   secureCookie: SECURE_COOKIE
 appInsights:
   instrumentationKey: APPINSIGHTS_KEY

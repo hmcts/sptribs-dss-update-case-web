@@ -15,6 +15,7 @@ session:
   COOKIE_MAX_AGE: 21
   redis:
     host:
+    port: 6380
     key:
   secureCookie: 'true'
 uploadPolicy:
