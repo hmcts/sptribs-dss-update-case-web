@@ -23,7 +23,7 @@ export const cy = () => ({
   bullet2: 'rydych yn defnyddio cyfrif gwahanol',
   line3: 'Os ydych yn meddwl bod hwn yn gamgymeriad, gallwch:',
   tryAgain: 'Ceisiwch ddefnyddio cyfeirnod arall',
-  contactSupport: 'Cysylltu am gymorth',
+  contactSupport: "Cysylltu â'r adran gymorth",
   back: 'Yn ôl',
 });
 
