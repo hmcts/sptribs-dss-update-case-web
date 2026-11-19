@@ -18,7 +18,7 @@ export const cy = () => ({
   title: 'Nid oes gennych awdurdod i weld yr apêl hon',
   heading: 'Nid oes gennych awdurdod i weld yr apêl hon',
   line1: 'Nid yw’r enw neu’r dyddiad geni a nodwyd gennych yn cyfateb i’n cofnodion ni. Gallai hyn fod oherwydd:',
-  bullet1: 'mae’r apêl yn perthyn i rywun arall',
+  bullet1: "mae'r apêl yn perthyn i rywun arall",
   bullet2:
     'nid ydych yn defnyddio’r enw a’r dyddiad geni a ddarparwyd pan gofrestrwyd yr apêl. Os ydych chi’n gynrychiolydd, gwnewch yn siŵr eich bod chi’n defnyddio’r enw a’r dyddiad geni ar gyfer yr unigolyn y mae’r apêl yn ymwneud ag ef neu hi',
   line2:
