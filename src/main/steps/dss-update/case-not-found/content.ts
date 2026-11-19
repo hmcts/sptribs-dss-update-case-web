@@ -21,7 +21,7 @@ export const cy = () => ({
   line2:
     "Gwiriwch eich bod wedi nodi'r cyfeirnod 16 digid cywir. Gallwch ddod o hyd i hwn yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.",
   reEnterReference: 'Nodi eich cyfeirnod GLlTEF eto',
-  contactSupport: 'Cysylltu am gymorth',
+  contactSupport: "Cysylltu â'r adran gymorth",
   back: 'Yn ôl',
 });
 
