@@ -50,7 +50,7 @@ data "azurerm_key_vault_secret" "idam-dss-update-ui-secret" {
 
 locals {
   # Match the frontend-owned cache retirement; retain the production lookup.
-  retire_classic_redis = contains(["aat", "demo", "ithc", "perftest"], var.env)
+  retire_classic_redis = true
 }
 
 data "azurerm_redis_cache" "sptribs_dss_update_case_web_session_storage" {
