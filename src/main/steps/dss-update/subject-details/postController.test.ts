@@ -7,7 +7,7 @@ import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
 import { isDateInputNotFilled, isFieldFilledIn } from '../../../app/form/validation';
-import { DATA_VERIFICATION, UPLOAD_DOCUMENT } from '../../urls';
+import { DATA_VERIFICATION, NOT_AUTHORISED, SUBJECT_DETAILS_ERROR_URL, UPLOAD_DOCUMENT } from '../../urls';
 
 import CitizenDataVerificationPostController from './postController';
 
@@ -103,7 +103,7 @@ describe('citizenDataVerification post controller test cases', () => {
     expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
   });
 
-  test('Should navigate to original url if data does not match and return errors', async () => {
+  test('Should navigate to subject details error page if data does not match', async () => {
     const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
 
     req = mockRequest({
@@ -131,11 +131,134 @@ describe('citizenDataVerification post controller test cases', () => {
     mockedVerificationPost.mockImplementation(() => Promise.resolve({ status: 200, data: { verified: false } }));
 
     await controller.post(req, res);
-    expect(req.session.errors).toStrictEqual([{ propertyName: 'inputFields', errorType: 'required' }]);
-    expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
+    expect(res.redirect).toHaveBeenCalledWith(SUBJECT_DETAILS_ERROR_URL);
   });
 
-  test('Should navigate to original url and return errors if exception thrown from http request', async () => {
+  test('Should navigate to not authorised page if 403 status is returned', async () => {
+    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        'subjectDOB-day': '02',
+        'subjectDOB-month': '02',
+        'subjectDOB-year': '1990',
+        subjectDOB: {
+          year: '1990',
+          month: '02',
+          day: '02',
+        },
+        subjectFullName: 'bob smith',
+      },
+      session: {
+        user: { id: 'user-id', accessToken: 'token' },
+        userCase: { id: '1234567891234567' },
+        isDataVerified: false,
+        errors: [],
+      },
+    });
+
+    const error = { response: { status: 403 } };
+    mockedVerificationPost.mockImplementation(() => Promise.reject(error));
+
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(NOT_AUTHORISED);
+  });
+
+  test('Should navigate to subject details error page if 401 status is returned', async () => {
+    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        'subjectDOB-day': '02',
+        'subjectDOB-month': '02',
+        'subjectDOB-year': '1990',
+        subjectDOB: {
+          year: '1990',
+          month: '02',
+          day: '02',
+        },
+        subjectFullName: 'bob smith',
+      },
+      session: {
+        user: { id: 'user-id', accessToken: 'token' },
+        userCase: { id: '1234567891234567' },
+        isDataVerified: false,
+        errors: [],
+      },
+    });
+
+    const error = { response: { status: 401 } };
+    mockedVerificationPost.mockImplementation(() => Promise.reject(error));
+
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(SUBJECT_DETAILS_ERROR_URL);
+  });
+
+  test('Should navigate to subject details error page if 400 status is returned', async () => {
+    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        'subjectDOB-day': '02',
+        'subjectDOB-month': '02',
+        'subjectDOB-year': '1990',
+        subjectDOB: {
+          year: '1990',
+          month: '02',
+          day: '02',
+        },
+        subjectFullName: 'bob smith',
+      },
+      session: {
+        user: { id: 'user-id', accessToken: 'token' },
+        userCase: { id: '1234567891234567' },
+        isDataVerified: false,
+        errors: [],
+      },
+    });
+
+    const error = { response: { status: 400 } };
+    mockedVerificationPost.mockImplementation(() => Promise.reject(error));
+
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(SUBJECT_DETAILS_ERROR_URL);
+  });
+
+  test('Should navigate to subject details error page if 404 status is returned', async () => {
+    const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
+
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        'subjectDOB-day': '02',
+        'subjectDOB-month': '02',
+        'subjectDOB-year': '1990',
+        subjectDOB: {
+          year: '1990',
+          month: '02',
+          day: '02',
+        },
+        subjectFullName: 'bob smith',
+      },
+      session: {
+        user: { id: 'user-id', accessToken: 'token' },
+        userCase: { id: '1234567891234567' },
+        isDataVerified: false,
+        errors: [],
+      },
+    });
+
+    const error = { response: { status: 404 } };
+    mockedVerificationPost.mockImplementation(() => Promise.reject(error));
+
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(SUBJECT_DETAILS_ERROR_URL);
+  });
+
+  test('Should navigate to original url and return errors if unexpected exception thrown from http request', async () => {
     const controller = new CitizenDataVerificationPostController(mockFormContent.fields);
 
     req = mockRequest({

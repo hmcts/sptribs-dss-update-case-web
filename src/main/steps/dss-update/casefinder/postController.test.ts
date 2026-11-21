@@ -5,8 +5,8 @@ import { set } from 'lodash';
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
-import { CASE_SEARCH_URL, DATA_VERIFICATION } from '../../urls';
+import { isFieldFilledIn, isNotNumeric } from '../../../app/form/validation';
+import { CASE_NOT_FOUND_URL, CASE_SEARCH_URL, DATA_VERIFICATION, NOT_AUTHORISED } from '../../urls';
 
 import CaseFinderController from './postController';
 
@@ -136,5 +136,68 @@ describe('case finder post controller test cases', () => {
     await controller.post(req, res);
     expect(req.session.errors).toStrictEqual([{ propertyName: 'applicantCaseId', errorType: 'required' }]);
     expect(res.redirect).toHaveBeenCalledWith(CASE_SEARCH_URL);
+  });
+
+  test('Should retain entered value in userCase when special characters entered in case reference', async () => {
+    const controllerWithValidation = new CaseFinderController({
+      applicantCaseId: {
+        type: 'text',
+        validator: value => isFieldFilledIn(value) || isNotNumeric(value),
+      },
+    });
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        applicantCaseId: '123*456',
+      },
+      session: {
+        user: { accessToken: 'token' },
+        userCase: {},
+      },
+    });
+
+    await controllerWithValidation.post(req, res);
+    expect(req.session.errors).toStrictEqual([{ propertyName: 'applicantCaseId', errorType: 'notNumeric' }]);
+    expect(req.session.userCase.applicantCaseId).toEqual('123*456');
+    expect(res.redirect).toHaveBeenCalledWith(CASE_SEARCH_URL);
+  });
+
+  test('Should navigate to not authorised page if user not allowed (403)', async () => {
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        applicantCaseId: '1675676483319900',
+      },
+      session: {
+        user: { accessToken: 'token' },
+        userCase: {},
+      },
+    });
+
+    const error = { response: { status: 403 } };
+    mockedAxiosGet.mockImplementation(() => Promise.reject(error));
+
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(NOT_AUTHORISED);
+  });
+
+  test('Should navigate to case not found page if case does not exist (404)', async () => {
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        applicantCaseId: '1675676483319900',
+      },
+      session: {
+        user: { accessToken: 'token' },
+        userCase: {},
+      },
+    });
+
+    const error = { response: { status: 404 } };
+    mockedAxiosGet.mockImplementation(() => Promise.reject(error));
+
+    await controller.post(req, res);
+    expect(req.session.userCase.ccdReferenceNumber).toEqual('1675676483319900');
+    expect(res.redirect).toHaveBeenCalledWith(CASE_NOT_FOUND_URL);
   });
 });

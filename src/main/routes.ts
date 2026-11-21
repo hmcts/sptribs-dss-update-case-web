@@ -10,18 +10,24 @@ import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
 import { AccessibilityStatementGetController } from './steps/accessibility-statement/get';
 import { ContactUsGetController } from './steps/contact-us/get';
+import { CaseNotFoundGetController } from './steps/dss-update/case-not-found/get';
+import { CCDNotAuthorisedGetController } from './steps/dss-update/not-authorised/get';
 import { requireSelectedCase, requireVerifiedCase } from './steps/dss-update/requireVerifiedCase';
+import { SubjectDetailsErrorGetController } from './steps/dss-update/subject-details-error/get';
 import { ErrorController } from './steps/error/error.controller';
 import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
 import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
 import { TimedOutGetController } from './steps/timed-out/get';
 import {
   ACCESSIBILITY_STATEMENT,
+  CASE_NOT_FOUND_URL,
   CHECK_YOUR_ANSWERS,
   CONTACT_US,
   DATA_VERIFICATION,
   KEEP_ALIVE_URL,
+  NOT_AUTHORISED,
   PRIVACY_POLICY,
+  SUBJECT_DETAILS_ERROR_URL,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
   UPLOAD_DOCUMENT,
@@ -48,6 +54,9 @@ export class Routes {
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
     app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
+    app.get(NOT_AUTHORISED, errorHandler(new CCDNotAuthorisedGetController().get));
+    app.get(CASE_NOT_FOUND_URL, errorHandler(new CaseNotFoundGetController().get));
+    app.get(SUBJECT_DETAILS_ERROR_URL, requireSelectedCase, errorHandler(new SubjectDetailsErrorGetController().get));
 
     app.use(UPLOAD_DOCUMENT, requireVerifiedCase);
     app.use(CHECK_YOUR_ANSWERS, requireVerifiedCase);
