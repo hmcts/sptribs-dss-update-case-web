@@ -9,13 +9,12 @@ session:
   secret: 'local'
   name: 'sptribs_dss_update_case_web'
   maxAge: 1260000
-  PORT: 6380
   TLS: true
   CONNECTION_TIMEOUT: 15000
   COOKIE_MAX_AGE: 21
   redis:
     host:
-    port: 6380
+    port: 10000
     key:
   secureCookie: 'true'
 uploadPolicy:
