@@ -10853,8 +10853,8 @@ __metadata:
   linkType: hard
 
 "lint-staged@npm:^17.6.0":
-  version: 17.6.1
-  resolution: "lint-staged@npm:17.6.1"
+  version: 17.6.2
+  resolution: "lint-staged@npm:17.6.2"
   dependencies:
     picomatch: "npm:^4.0.7"
     string-argv: "npm:^0.4.0"
@@ -10865,7 +10865,7 @@ __metadata:
       optional: true
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/d449ca6c269e058feb796dd629dbe4393254f56d05d95101edd6baa4519d3cf098f3f9bb628eff15819f64fa76a0dbf8829218bfb2d4199b1089d8fb28e0247c
+  checksum: 10/51e75c0d1dadefd0a4769c9057acfe593e484d7c52e885a825e0aef298fa15d466b81ff1da0a20711bc8f5d282e7e5f14281c0d4790e3ec5b60a6c1e7df41bcc
   languageName: node
   linkType: hard
 
@@ -11651,10 +11651,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-forge@npm:1.4.3":
-  version: 1.4.3
-  resolution: "node-forge@npm:1.4.3"
-  checksum: 10/e0341f893234fd15aeb52c704ad1ea3b31f0bd8671f2c2aa45abaef9dac928ebbf473c7fcfca69994e90478d71936d0cc1b2001bc4b81ab70b86da0d676060c1
+"node-forge@npm:1.4.4":
+  version: 1.4.4
+  resolution: "node-forge@npm:1.4.4"
+  checksum: 10/e5f7c47e846286dce1394471713e5c8c5dca06ba29ba2ea3d4de2c7f51871ca93244a6bd3719461c6c067664a43c38867c978d537a0ed4bb1f406ac05172eff2
   languageName: node
   linkType: hard
 
