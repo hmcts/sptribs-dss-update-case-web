@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from 'config';
 
 import { getServiceAuthToken } from '../s2s/get-service-auth-token';
 
@@ -23,7 +24,7 @@ describe('case-api', () => {
 
     expect(await checkCaseAccess(userToken, caseId)).toEqual({ status: 200 });
     expect(mockedAxios.create).toHaveBeenCalledWith({
-      baseURL: expect.any(String),
+      baseURL: config.get('services.sptribs.url'),
       headers: {
         Authorization: `Bearer ${userToken}`,
         ServiceAuthorization: serviceAuthToken,
@@ -43,7 +44,7 @@ describe('case-api', () => {
       data: { verified: true },
     });
     expect(mockedAxios.create).toHaveBeenCalledWith({
-      baseURL: expect.any(String),
+      baseURL: config.get('services.sptribs.url'),
       headers: {
         Authorization: `Bearer ${userToken}`,
         ServiceAuthorization: serviceAuthToken,
@@ -57,7 +58,7 @@ describe('case-api', () => {
     });
   });
 
-  test('encodes case references in both case-api paths', async () => {
+  test('encodes case references in both verification paths', async () => {
     const get = jest.fn().mockResolvedValue({ status: 200 });
     const post = jest.fn().mockResolvedValue({ status: 200, data: { verified: false } });
     mockedAxios.create.mockReturnValue({ get, post } as unknown as jest.Mocked<typeof axios>);
@@ -72,24 +73,41 @@ describe('case-api', () => {
     });
   });
 
-  test('submits using the citizen token and CCD event token', async () => {
-    const post = jest.fn().mockResolvedValue({ status: 201 });
-    const get = jest.fn().mockResolvedValue({ data: { token: 'event-token' } });
-    mockedAxios.create.mockReturnValue({ post, get } as unknown as jest.Mocked<typeof axios>);
+  describe('updateCase', () => {
+    const caseData = {
+      additional_information: 'Further information',
+      documents: [],
+    };
 
-    expect(await updateCase(userToken, caseId, { firstName: 'test' })).toEqual({ status: 201 });
-    expect(get).toHaveBeenCalledWith(`/cases/${caseId}/event-triggers/citizen-cic-dss-update-case`);
-    expect(post).toHaveBeenCalledWith(`/cases/${caseId}/events`, {
-      event: { id: 'citizen-cic-dss-update-case' },
-      data: { firstName: 'test' },
-      event_token: 'event-token',
+    test('should submit the update to the case API using the citizen token', async () => {
+      const mockPost = jest.fn().mockResolvedValue({ data: { id: caseId, data: caseData } });
+      mockedAxios.create.mockReturnValue({ post: mockPost } as unknown as jest.Mocked<typeof axios>);
+      mockedGetServiceAuthToken.mockResolvedValue(serviceAuthToken);
+
+      const result = await updateCase(userToken, caseId, caseData);
+
+      expect(mockedGetServiceAuthToken).toHaveBeenCalled();
+      expect(mockedAxios.create).toHaveBeenCalledWith({
+        baseURL: config.get('services.sptribs.url'),
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          ServiceAuthorization: serviceAuthToken,
+          experimental: 'true',
+          Accept: '*/*',
+          'Content-Type': 'application/json',
+        },
+      });
+      expect(mockPost).toHaveBeenCalledWith(`/cases/cica/${caseId}/updates`, caseData);
+      expect(result).toEqual({ data: { id: caseId, data: caseData } });
     });
-  });
 
-  test('propagates a failed CCD event-token request', async () => {
-    mockedAxios.create.mockReturnValue({
-      get: jest.fn().mockRejectedValue(new Error('Event token error')),
-    } as unknown as jest.Mocked<typeof axios>);
-    await expect(updateCase(userToken, caseId, {})).rejects.toThrow('Event token error');
+    test('should propagate update failures without retrying in the frontend', async () => {
+      const mockPost = jest.fn().mockRejectedValue(new Error('Update error'));
+      mockedAxios.create.mockReturnValue({ post: mockPost } as unknown as jest.Mocked<typeof axios>);
+      mockedGetServiceAuthToken.mockResolvedValue(serviceAuthToken);
+
+      await expect(updateCase(userToken, caseId, caseData)).rejects.toThrow('Update error');
+      expect(mockPost).toHaveBeenCalledTimes(1);
+    });
   });
 });
