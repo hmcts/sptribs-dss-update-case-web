@@ -47,24 +47,3 @@ data "azurerm_key_vault_secret" "idam-dss-update-ui-secret" {
   name         = "idam-dss-update-ui-secret"
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
-
-locals {
-  # Match the frontend-owned cache retirement; retain the production lookup.
-  retire_classic_redis = true
-}
-
-data "azurerm_redis_cache" "sptribs_dss_update_case_web_session_storage" {
-  count = local.retire_classic_redis ? 0 : 1
-
-  name                = "sptribs-${var.env}"
-  resource_group_name = "sptribs-cache-${var.env}"
-}
-
-output "primary_access_key" {
-  value     = try(data.azurerm_redis_cache.sptribs_dss_update_case_web_session_storage[0].primary_access_key, null)
-  sensitive = true
-}
-
-output "hostname" {
-  value = try(data.azurerm_redis_cache.sptribs_dss_update_case_web_session_storage[0].hostname, null)
-}

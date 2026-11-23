@@ -38,18 +38,18 @@ describe('SessionStorage Redis configuration', () => {
     values = {
       'session.secret': 'MOCK_SESSION_SECRET',
       'session.maxAge': 1260000,
-      'session.redis.host': 'sptribs-aat.redis.cache.windows.net',
+      'session.redis.host': 'redis.example.test',
       'session.redis.port': 6380,
       'session.redis.key': 'MOCK_REDIS_KEY',
     };
     config.get = jest.fn((key: string) => values[key]) as typeof config.get;
   });
 
-  test('should preserve classic Redis port and session prefix', () => {
+  test('should use the configured Redis port and default session prefix', () => {
     new SessionStorage().enableFor(app);
 
     expect(redis.createClient).toHaveBeenCalledWith({
-      socket: { host: 'sptribs-aat.redis.cache.windows.net', port: 6380, connectTimeout: 15000, tls: true },
+      socket: { host: 'redis.example.test', port: 6380, connectTimeout: 15000, tls: true },
       password: 'MOCK_REDIS_KEY',
     });
     expect(RedisStore).toHaveBeenCalledWith({ client: mockClient });
