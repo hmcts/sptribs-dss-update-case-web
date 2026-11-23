@@ -17,6 +17,8 @@ jest.mock('session-file-store', () => ({
   default: jest.fn(() => mockFileStore),
 }));
 
+import { randomUUID } from 'crypto';
+
 import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import RedisStore from 'connect-redis';
@@ -36,11 +38,11 @@ describe('SessionStorage Redis configuration', () => {
     mockClient.connect.mockResolvedValue(undefined);
     app = { locals: { developmentMode: false }, use: jest.fn(), set: jest.fn() } as unknown as Application;
     values = {
-      'session.secret': 'MOCK_SESSION_SECRET',
+      'session.secret': randomUUID(),
       'session.maxAge': 1260000,
       'session.redis.host': 'redis.example.test',
       'session.redis.port': 6380,
-      'session.redis.key': 'MOCK_REDIS_KEY',
+      'session.redis.key': randomUUID(),
     };
     config.get = jest.fn((key: string) => values[key]) as typeof config.get;
   });
@@ -50,7 +52,7 @@ describe('SessionStorage Redis configuration', () => {
 
     expect(redis.createClient).toHaveBeenCalledWith({
       socket: { host: 'redis.example.test', port: 6380, connectTimeout: 15000, tls: true },
-      password: 'MOCK_REDIS_KEY',
+      password: values['session.redis.key'],
     });
     expect(RedisStore).toHaveBeenCalledWith({ client: mockClient });
   });
@@ -63,7 +65,7 @@ describe('SessionStorage Redis configuration', () => {
 
     expect(redis.createClient).toHaveBeenCalledWith({
       socket: { host: 'sptribs-frontend-aat.uksouth.redis.azure.net', port: 10000, connectTimeout: 15000, tls: true },
-      password: 'MOCK_REDIS_KEY',
+      password: values['session.redis.key'],
     });
     expect(RedisStore).toHaveBeenCalledWith({ client: mockClient });
     expect(app.locals.redisClient).toBe(mockClient);
