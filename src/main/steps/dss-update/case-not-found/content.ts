@@ -19,8 +19,8 @@ export const cy = () => ({
   line1Part1: "Nid yw'r cyfeirnod a nodwyd gennych (",
   line1Part2: ') yn cyfateb i unrhyw apêl yn ein cofnodion.',
   line2:
-    "Gwiriwch eich bod wedi nodi'r cyfeirnod 16 digid cywir. Gallwch ddod o hyd i hwn yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.",
-  reEnterReference: 'Nodi eich cyfeirnod GLlTEF eto',
+    "Gwiriwch eich bod wedi nodi'r cyfeirnod 16 digid cywir. Gallwch ddod o hyd i'r wybodaeth hon yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.",
+  reEnterReference: 'Nodwch eich cyfeirnod GLlTEF eto',
   contactSupport: 'Cysylltu am gymorth',
   back: 'Yn ôl',
 });
