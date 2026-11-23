@@ -17,13 +17,13 @@ export const en = () => ({
 export const cy = () => ({
   title: 'Nid oes gennych awdurdod i weld yr apêl hon',
   heading: 'Nid oes gennych awdurdod i weld yr apêl hon',
-  line1: 'Nid yw’r enw neu’r dyddiad geni a nodwyd gennych yn cyfateb i’n cofnodion ni. Gallai hyn fod oherwydd:',
+  line1: "Nid yw’r enw na'r dyddiad geni a roddwyd gennych yr un fath â’n cofnodion ni. Gallai hyn fod oherwydd:",
   bullet1: "mae'r apêl yn perthyn i rywun arall",
   bullet2:
-    'nid ydych yn defnyddio’r enw a’r dyddiad geni a ddarparwyd pan gofrestrwyd yr apêl. Os ydych chi’n gynrychiolydd, gwnewch yn siŵr eich bod chi’n defnyddio’r enw a’r dyddiad geni ar gyfer yr unigolyn y mae’r apêl yn ymwneud ag ef neu hi',
+    "nid ydych yn defnyddio'r enw a'r dyddiad geni a ddarparwyd pan gofrestrwyd yr apêl. Os ydych chi'n gynrychiolydd, gwnewch yn siŵr eich bod chi'n defnyddio'r enw a'r dyddiad geni ar gyfer yr unigolyn y mae'r apêl yn ymwneud ag ef.",
   line2:
-    'Gallwch geisio defnyddio enw neu ddyddiad geni arall neu gysylltu â’r adran gymorth os ydych chi’n meddwl bod hyn yn gamgymeriad.',
-  tryAnotherDetails: 'Ceisio defnyddio enw neu ddyddiad geni arall',
+    "Gallwch geisio defnyddio enw neu ddyddiad geni arall neu gysylltu â'r adran gymorth os ydych chi'n meddwl bod hwn yn gamgymeriad",
+  tryAnotherDetails: 'Rhowch gynnig ar nodi enw a dyddiad geni gwahanol',
   contactSupport: 'Cysylltu â’r adran gymorth',
   back: 'Yn ôl',
 });
