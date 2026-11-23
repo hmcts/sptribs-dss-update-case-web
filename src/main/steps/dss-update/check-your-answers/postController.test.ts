@@ -92,6 +92,46 @@ describe('CheckYourAnswersController test cases', () => {
     await controller.post(req, res);
     expect(res.redirect).toHaveBeenCalledWith(APPLICATION_CONFIRMATION);
     expect(mockedVerifyCaseSubject).toHaveBeenCalledWith('token', '1709056435297860', 'subject name', '2000-01-01');
+    expect(mockedUpdateCase).toHaveBeenCalledWith('token', '1709056435297860', {
+      additional_information: 'some info about doc',
+      documents: [
+        {
+          document_url: req.session.caseDocuments[0].url,
+          document_binary_url: req.session.caseDocuments[0].binaryUrl,
+          document_filename: 'test.pdf',
+          comment: 'Test1',
+        },
+      ],
+    });
+  });
+
+  test('Should submit text without any uploaded documents for a Draft case', async () => {
+    mockedUpdateCase.mockResolvedValue({ status: 201 } as any);
+    req = mockRequest({
+      session: {
+        user: { id: 'user-id', accessToken: 'token' },
+        isDataVerified: true,
+        verifiedCaseId: '1709056435297860',
+        verifiedUserId: 'user-id',
+        userCase: {
+          id: '1709056435297860',
+          state: 'Draft',
+          subjectFullName: 'subject name',
+          subjectDOB: { year: '2000', month: '01', day: '01' },
+        },
+        documentDetail: 'Additional information only',
+      },
+    });
+    const controller = new CheckYourAnswersController(mockFormContent.fields);
+
+    await controller.post(req, res);
+
+    expect(mockedUpdateCase).toHaveBeenCalledWith('token', '1709056435297860', {
+      additional_information: 'Additional information only',
+      documents: [],
+    });
+    expect(res.redirect).toHaveBeenCalledWith(APPLICATION_CONFIRMATION);
+    expect(mockedVerifyCaseSubject).toHaveBeenCalledWith('token', '1709056435297860', 'subject name', '2000-01-01');
   });
 
   test('Should redirect back to check your answers page if call to submit event is unsuccessful', async () => {
