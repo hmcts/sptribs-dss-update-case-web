@@ -10,7 +10,7 @@ describe('CaseNotFoundGetController', () => {
   test('Should render the case not found page in English', async () => {
     const req = mockRequest({
       session: {
-        userCase: { ccdReferenceNumber: '1234567890123456' },
+        userCase: { applicantCaseId: '1234567890123456' },
       },
     });
     const res = mockResponse();
@@ -26,7 +26,7 @@ describe('CaseNotFoundGetController', () => {
     const req = mockRequest({
       session: {
         lang: 'cy',
-        userCase: { ccdReferenceNumber: '1234567890123456' },
+        userCase: { applicantCaseId: '1234567890123456' },
       },
     });
     const res = mockResponse();

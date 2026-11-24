@@ -5,7 +5,6 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 export interface Case {
   subjectFullName: string;
   subjectDOB: CaseDate;
-  ccdReferenceNumber?: string;
   applicantCaseId?: string;
 }
 

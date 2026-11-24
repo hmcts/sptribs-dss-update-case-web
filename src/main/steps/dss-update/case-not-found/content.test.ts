@@ -8,7 +8,7 @@ jest.mock('../../../app/form/validation');
 describe('dss-update > case-not-found > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
-    userCase: { ccdReferenceNumber: '1234567890123456' },
+    userCase: { applicantCaseId: '1234567890123456' },
   }) as CommonContent;
 
   test('should return correct english content', () => {
@@ -21,7 +21,7 @@ describe('dss-update > case-not-found > content', () => {
     expect(generateContent({ ...commonContent, language: 'cy' })).toEqual(expect.objectContaining(cy()));
   });
 
-  test('should include ccdReference in line1', () => {
+  test('should include the entered reference number in line1', () => {
     const generated = generateContent(commonContent);
     expect(generated.line1).toBe(
       'The reference number you entered (1234567890123456) does not match any appeal in our records.'

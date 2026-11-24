@@ -181,7 +181,7 @@ describe('case finder post controller test cases', () => {
     expect(res.redirect).toHaveBeenCalledWith(NOT_AUTHORISED);
   });
 
-  test('Should navigate to case not found page if case does not exist (404)', async () => {
+  test('Should keep the entered reference and clear the selected case on a 404', async () => {
     req = mockRequest({
       body: {
         saveAndContinue: true,
@@ -189,7 +189,7 @@ describe('case finder post controller test cases', () => {
       },
       session: {
         user: { accessToken: 'token' },
-        userCase: {},
+        userCase: { id: '1234567890123456' },
       },
     });
 
@@ -197,7 +197,7 @@ describe('case finder post controller test cases', () => {
     mockedAxiosGet.mockImplementation(() => Promise.reject(error));
 
     await controller.post(req, res);
-    expect(req.session.userCase.ccdReferenceNumber).toEqual('1675676483319900');
+    expect(req.session.userCase).toStrictEqual({ id: '', applicantCaseId: '1675676483319900' });
     expect(res.redirect).toHaveBeenCalledWith(CASE_NOT_FOUND_URL);
   });
 });

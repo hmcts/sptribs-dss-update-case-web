@@ -35,11 +35,11 @@ export const form: FormContent = {
 const languages = { en, cy };
 
 export const generateContent: TranslationFn = content => {
-  const ccdReference = content.userCase?.ccdReferenceNumber || '';
+  const referenceNumber = content.userCase?.applicantCaseId || '';
   const translations = languages[content.language]();
   return {
     ...translations,
-    line1: `${translations.line1Part1}${ccdReference}${translations.line1Part2}`,
+    line1: `${translations.line1Part1}${referenceNumber}${translations.line1Part2}`,
     form,
   };
 };

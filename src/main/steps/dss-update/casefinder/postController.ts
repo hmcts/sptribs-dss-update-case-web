@@ -26,7 +26,8 @@ export default class CaseFinderController extends VerificationPostController {
       if (status === 403) {
         return NOT_AUTHORISED;
       } else if (status === 404) {
-        req.session.userCase = { id: '', ccdReferenceNumber: req.body.applicantCaseId } as any;
+        const { applicantCaseId } = req.session.userCase;
+        req.session.userCase = { id: '', applicantCaseId } as typeof req.session.userCase;
         return CASE_NOT_FOUND_URL;
       } else {
         req.session.errors = req.session.errors || [];
