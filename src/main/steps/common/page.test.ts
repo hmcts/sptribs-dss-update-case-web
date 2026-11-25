@@ -46,13 +46,13 @@ describe('GOV.UK page templates', () => {
   describe.each([
     {
       language: 'English',
-      title: 'Existing appeal details',
+      title: 'Enter your HMCTS reference number',
       serviceName: 'Update an appeal to the First-tier Tribunal',
       errorPrefix: 'Error:',
     },
     {
       language: 'Welsh',
-      title: 'Manylion apêl presennol',
+      title: 'Nodwch eich cyfeirnod GLlTEF',
       serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
       errorPrefix: 'Gwall:',
     },
