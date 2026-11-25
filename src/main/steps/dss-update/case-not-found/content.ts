@@ -1,5 +1,4 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
 
 export const en = () => ({
   title: "Your HMCTS reference number doesn't match an existing appeal",
@@ -25,13 +24,6 @@ export const cy = () => ({
   back: 'Yn ôl',
 });
 
-export const form: FormContent = {
-  fields: {},
-  submit: {
-    text: l => l.onlyContinue,
-  },
-};
-
 const languages = { en, cy };
 
 export const generateContent: TranslationFn = content => {
@@ -40,6 +32,5 @@ export const generateContent: TranslationFn = content => {
   return {
     ...translations,
     line1: `${translations.line1Part1}${referenceNumber}${translations.line1Part2}`,
-    form,
   };
 };

@@ -1,5 +1,4 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
 
 export const en = () => ({
   title: 'You are not authorised to view this appeal',
@@ -27,19 +26,6 @@ export const cy = () => ({
   back: 'Yn ôl',
 });
 
-export const form: FormContent = {
-  fields: {},
-  submit: {
-    text: l => l.onlyContinue,
-  },
-};
-
 const languages = { en, cy };
 
-export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
-  return {
-    ...translations,
-    form,
-  };
-};
+export const generateContent: TranslationFn = content => languages[content.language]();

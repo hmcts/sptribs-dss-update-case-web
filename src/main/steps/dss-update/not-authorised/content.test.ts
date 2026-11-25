@@ -3,8 +3,6 @@ import { CommonContent, generatePageContent } from '../../common/common.content'
 
 import { cy, en, generateContent } from './content';
 
-jest.mock('../../../app/form/validation');
-
 describe('dss-update > not-authorised > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
