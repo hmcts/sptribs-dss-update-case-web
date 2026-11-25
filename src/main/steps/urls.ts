@@ -22,7 +22,7 @@ export const CONTACT_US: PageLink = '/contact-us';
 
 export const NOT_AUTHORISED: PageLink = '/not-authorised';
 export const CASE_NOT_FOUND_URL: PageLink = '/dss-update/case-not-found';
-export const SUBJECT_DETAILS_ERROR_URL: PageLink = '/subject-details-error';
+export const SUBJECT_DETAILS_ERROR_URL: PageLink = '/dss-update/subject-details-error';
 
 export const UPLOAD_DOCUMENT: PageLink = '/upload-documents';
 export const DATA_VERIFICATION: PageLink = '/dss-update/subject-details';

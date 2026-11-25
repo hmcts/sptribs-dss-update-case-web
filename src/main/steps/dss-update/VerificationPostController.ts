@@ -1,5 +1,6 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
+import { pick } from 'lodash';
 
 import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../app/controller/PostController';
@@ -18,15 +19,15 @@ export abstract class VerificationPostController extends PostController<AnyObjec
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
 
-    const { ...formData } = form.getParsedBody(req.body);
+    const formData = pick(form.getParsedBody(req.body), [...form.getFieldNames()]);
     req.session.errors = form.getErrors(formData);
+
+    this.resetVerification(req);
 
     req.session.userCase = {
       ...(req.session.userCase || {}),
       ...formData,
     };
-
-    this.resetVerification(req);
 
     let nextUrl: PageLink = this.defaultUrl;
     if (req.session.errors.length === 0) {

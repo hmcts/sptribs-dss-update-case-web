@@ -13,7 +13,10 @@ const enContent = {
       required: 'Please enter a reference number',
       notNumeric:
         'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
-      caseNotFound: 'Please enter a valid reference number',
+      invalidCaseReference: 'Enter a 16-digit reference number',
+    },
+    'main-form-submit': {
+      caseLookupFailed: 'We could not check your appeal reference number. Please try again.',
     },
   },
 };
@@ -31,7 +34,10 @@ const cyContent = {
       required: 'Rhowch gyfeirnod',
       notNumeric:
         'Rhowch gyfeirnod dilys. Ni ddylai’r cyfeirnod gynnwys bylchau neu unrhyw un o’r nodau canlynol - * ( ) & ! /  ;',
-      caseNotFound: 'Rhowch gyfeirnod dilys',
+      invalidCaseReference: 'Nodwch gyfeirnod 16 digid',
+    },
+    'main-form-submit': {
+      caseLookupFailed: 'Nid oeddem yn gallu gwirio cyfeirnod eich apêl. Rhowch gynnig arall arni.',
     },
   },
 };

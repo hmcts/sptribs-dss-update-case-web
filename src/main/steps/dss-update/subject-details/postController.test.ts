@@ -100,6 +100,12 @@ describe('citizenDataVerification post controller test cases', () => {
     mockedVerificationPost.mockImplementation(() => Promise.resolve(caseData));
 
     await controller.post(req, res);
+    expect(req.session.userCase).toEqual({
+      id: '1234567891234567',
+      subjectFullName: 'subject name',
+      subjectDOB: { year: '2000', month: '01', day: '01' },
+    });
+    expect(req.session.verifiedCaseId).toBe('1234567891234567');
     expect(res.redirect).toHaveBeenCalledWith(UPLOAD_DOCUMENT);
   });
 

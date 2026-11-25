@@ -15,7 +15,10 @@ export const en = () => ({
       required: 'Please enter a reference number',
       notNumeric:
         'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
-      caseNotFound: 'Please enter a valid reference number',
+      invalidCaseReference: 'Enter a 16-digit reference number',
+    },
+    'main-form-submit': {
+      caseLookupFailed: 'We could not check your appeal reference number. Please try again.',
     },
   },
 });
@@ -33,7 +36,10 @@ export const cy = () => ({
       required: 'Rhowch gyfeirnod',
       notNumeric:
         'Rhowch gyfeirnod dilys. Ni ddylai’r cyfeirnod gynnwys bylchau neu unrhyw un o’r nodau canlynol - * ( ) & ! /  ;',
-      caseNotFound: 'Rhowch gyfeirnod dilys',
+      invalidCaseReference: 'Nodwch gyfeirnod 16 digid',
+    },
+    'main-form-submit': {
+      caseLookupFailed: 'Nid oeddem yn gallu gwirio cyfeirnod eich apêl. Rhowch gynnig arall arni.',
     },
   },
 });
@@ -45,7 +51,14 @@ export const form: FormContent = {
       classes: 'govuk-input--width-20',
       label: l => l.subtitle,
       hint: l => l.caseNumberHint,
-      validator: value => isFieldFilledIn(value) || isNotNumeric(value),
+      validator: value => {
+        if (value !== undefined && typeof value !== 'string') {
+          return 'notNumeric';
+        }
+        return (
+          isFieldFilledIn(value) || isNotNumeric(value) || (value?.length !== 16 ? 'invalidCaseReference' : undefined)
+        );
+      },
     },
   },
   submit: {

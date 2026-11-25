@@ -13,8 +13,6 @@ export default class CitizenDataVerificationPostController extends VerificationP
 
   protected async handleVerification(req: AppRequest<AnyObject>, formData: Record<string, unknown>): Promise<PageLink> {
     const subjectDOB = formData.subjectDOB as CaseDate;
-    req.session.userCase.subjectFullName = formData.subjectFullName as string;
-    req.session.userCase.subjectDOB = subjectDOB;
 
     try {
       const subjectFullNameToVerify = String(formData.subjectFullName).trim();

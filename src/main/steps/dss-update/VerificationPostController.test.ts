@@ -30,7 +30,7 @@ describe('VerificationPostController', () => {
     controller.handleVerificationMock.mockResolvedValue('/next-step' as PageLink);
 
     const req = mockRequest({
-      body: { testField: 'someValue' },
+      body: { testField: 'someValue', otherField: 'ignore-me' },
       session: {
         verifiedCaseId: '123',
         verifiedUserId: '456',
@@ -45,10 +45,7 @@ describe('VerificationPostController', () => {
     expect(req.session.verifiedCaseId).toBeUndefined();
     expect(req.session.verifiedUserId).toBeUndefined();
     expect(req.session.isDataVerified).toBe(false);
-    expect(controller.handleVerificationMock).toHaveBeenCalledWith(
-      req,
-      expect.objectContaining({ testField: 'someValue' })
-    );
+    expect(controller.handleVerificationMock).toHaveBeenCalledWith(req, { testField: 'someValue' });
     expect(res.redirect).toHaveBeenCalledWith('/next-step');
   });
 
@@ -76,11 +73,11 @@ describe('VerificationPostController', () => {
     expect(res.redirect).toHaveBeenCalledWith('/default-url');
   });
 
-  test('should preserve entered field values in userCase when validation fails', async () => {
+  test('should preserve declared fields without replacing case metadata when validation fails', async () => {
     const controller = new TestVerificationController(mockFields);
 
     const req = mockRequest({
-      body: { testField: '', otherField: 'keep-me' },
+      body: { testField: '', id: 'submitted-id', otherField: 'ignore-me' },
       session: {
         userCase: { id: 'caseId' },
       },
@@ -92,7 +89,6 @@ describe('VerificationPostController', () => {
     expect(req.session.userCase).toEqual({
       id: 'caseId',
       testField: '',
-      otherField: 'keep-me',
     });
   });
 

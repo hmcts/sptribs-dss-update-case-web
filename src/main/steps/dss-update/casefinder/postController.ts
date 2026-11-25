@@ -10,30 +10,31 @@ import { VerificationPostController } from '../VerificationPostController';
 export default class CaseFinderController extends VerificationPostController {
   protected readonly defaultUrl: PageLink = CASE_SEARCH_URL;
 
+  protected resetVerification(req: AppRequest<AnyObject>): void {
+    super.resetVerification(req);
+    req.session.userCase = { id: '' } as typeof req.session.userCase;
+  }
+
   protected async handleVerification(req: AppRequest<AnyObject>, formData: Record<string, unknown>): Promise<PageLink> {
+    const caseId = formData.applicantCaseId as string;
     try {
-      const caseId = String(formData.applicantCaseId || req.body.applicantCaseId);
-      if (!/^\d{16}$/.test(caseId)) {
-        throw new Error('Invalid case reference');
-      }
       const responseFromServerCall = await checkCaseAccess(req.session.user.accessToken, caseId);
       if (responseFromServerCall.status === 200) {
-        req.session.userCase = { id: caseId } as typeof req.session.userCase;
+        req.session.userCase.id = caseId;
         return DATA_VERIFICATION;
       }
     } catch (error: any) {
       const status = error?.response?.status;
       if (status === 403) {
         return NOT_AUTHORISED;
-      } else if (status === 404) {
-        const { applicantCaseId } = req.session.userCase;
-        req.session.userCase = { id: '', applicantCaseId } as typeof req.session.userCase;
+      }
+      if (status === 404) {
         return CASE_NOT_FOUND_URL;
-      } else {
-        req.session.errors = req.session.errors || [];
-        req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'caseNotFound' });
       }
     }
+
+    // Link to the retry button rather than marking a well-formed reference invalid.
+    req.session.errors?.push({ propertyName: 'main-form-submit', errorType: 'caseLookupFailed' });
     return this.defaultUrl;
   }
 }
