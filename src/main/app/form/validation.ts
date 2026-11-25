@@ -95,6 +95,15 @@ export const isNotNumeric: Validator = value => {
   }
 };
 
+export const normaliseCaseReference = (value: unknown): string | undefined => {
+  if (typeof value === 'string') {
+    const digits = value.replace(/[ -]/g, '');
+    if (/^\d{16}$/.test(digits)) {
+      return digits;
+    }
+  }
+};
+
 export const isDateInputNotFilled: DateValidator = date => {
   const invalid = 'invalidDate';
   if (!date) {

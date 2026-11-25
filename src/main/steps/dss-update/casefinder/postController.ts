@@ -5,6 +5,7 @@ import { checkCaseAccess } from '../../../app/case/api';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
+import { normaliseCaseReference } from '../../../app/form/validation';
 import { DATA_VERIFICATION } from '../../urls';
 
 @autobind
@@ -13,19 +14,18 @@ export default class CaseFinderController extends PostController<AnyObject> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
 
-    const { ...formData } = form.getParsedBody(req.body);
+    const formData = form.getParsedBody(req.body);
+    const submittedReference = req.body.applicantCaseId;
     req.session.errors = form.getErrors(formData);
+    delete req.session.caseReferenceForRetry;
 
     let nextUrl = req.originalUrl;
     req.session.verifiedCaseId = undefined;
     req.session.verifiedUserId = undefined;
     req.session.isDataVerified = false;
-    if (req.session.errors.length === 0) {
+    const caseId = normaliseCaseReference(submittedReference);
+    if (req.session.errors.length === 0 && caseId !== undefined) {
       try {
-        const caseId = String(req.body.applicantCaseId);
-        if (!/^\d{16}$/.test(caseId)) {
-          throw new Error('Invalid case reference');
-        }
         const responseFromServerCall = await checkCaseAccess(req.session.user.accessToken, caseId);
         if (responseFromServerCall.status === 200) {
           req.session.userCase = { id: caseId } as typeof req.session.userCase;
@@ -34,6 +34,10 @@ export default class CaseFinderController extends PostController<AnyObject> {
       } catch (error) {
         req.session.errors.push({ propertyName: 'applicantCaseId', errorType: 'caseNotFound' });
       }
+    }
+
+    if (req.session.errors.length && typeof submittedReference === 'string') {
+      req.session.caseReferenceForRetry = submittedReference;
     }
 
     req.session.save(err => {

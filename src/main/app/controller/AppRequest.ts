@@ -19,6 +19,7 @@ export interface AppSession extends Session {
   submissionError: boolean;
   user: UserDetails;
   userCase: CaseWithId;
+  caseReferenceForRetry?: string;
   userCaseList: CaseWithId[];
   eligibility: Eligibility;
   lang: string | undefined;

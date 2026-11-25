@@ -1,20 +1,18 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn, isNotNumeric } from '../../../app/form/validation';
+import { ValidationError, isFieldFilledIn, normaliseCaseReference } from '../../../app/form/validation';
 
 export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
-  title: 'Existing appeal details',
-  line1: 'You can find this information in the email you received after submitting your tribunal forms.',
+  title: 'Enter your HMCTS reference number',
+  line2:
+    "You can find this on any correspondence that you've received from HMCTS. HMCTS reference numbers are 16 digits long.",
   subtitle: 'HMCTS reference number',
-  caseNumberHint:
-    'This number will be 16 digits long. It should not include spaces or any of these characters: - * (  )  &  !  /  ;',
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
-      required: 'Please enter a reference number',
-      notNumeric:
-        'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
+      required: 'Enter your HMCTS reference number',
+      invalid: 'HMCTS reference number must be 16 digits long',
       caseNotFound: 'Please enter a valid reference number',
     },
   },
@@ -22,36 +20,34 @@ export const en = () => ({
 
 export const cy = () => ({
   serviceName: 'Diweddaru apêl i’r Tribiwnlys Haen Gyntaf',
-  title: 'Manylion apêl presennol',
-  line1: "Gallwch ddod o hyd i'r wybodaeth hon yn yr e-bost a gawsoch ar ôl cyflwyno eich ffurflenni tribiwnlys.",
+  title: 'Nodwch eich cyfeirnod GLlTEF',
+  line2:
+    "Gallwch ddod o hyd i hyn ar unrhyw ohebiaeth rydych chi wedi'i derbyn gan GLlTEF. Mae cyfeirnodau GLlTEF yn 16 rhif o hyd.",
   subtitle: 'Cyfeirnod GLlTEF',
-  caseNumberHint:
-    "Bydd y rhif hwn yn cynnwys 16 digid. Ni ddylai gynnwys bylchau neu unrhyw un o'r nodau canlynol: - * (  )  &  !  /  ;",
   errorSummaryMessage: 'Mae yna broblem',
   errors: {
     applicantCaseId: {
-      required: 'Rhowch gyfeirnod',
-      notNumeric:
-        'Rhowch gyfeirnod dilys. Ni ddylai’r cyfeirnod gynnwys bylchau neu unrhyw un o’r nodau canlynol - * ( ) & ! /  ;',
+      required: 'Nodwch eich cyfeirnod GLlTEF',
+      invalid: 'Rhaid i gyfeirnod GLlTEF fod yn 16 digid o hyd',
       caseNotFound: 'Rhowch gyfeirnod dilys',
     },
   },
 });
 
-export const form: FormContent = {
+export const form = {
   fields: {
     applicantCaseId: {
       type: 'text',
       classes: 'govuk-input--width-20',
       label: l => l.subtitle,
-      hint: l => l.caseNumberHint,
-      validator: value => isFieldFilledIn(value) || isNotNumeric(value),
+      validator: value =>
+        isFieldFilledIn(value) || (normaliseCaseReference(value) === undefined ? ValidationError.INVALID : undefined),
     },
   },
   submit: {
     text: l => l.onlyContinue,
   },
-};
+} satisfies FormContent;
 
 const languages = {
   en,
