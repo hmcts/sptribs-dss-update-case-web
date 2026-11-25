@@ -114,12 +114,12 @@ describe('case finder post controller test cases', () => {
 
   test.each([
     ['', 'required'],
-    ['123*456', 'invalidCaseReference'],
+    ['123*456', 'notNumeric'],
     [['1234567890123456'], 'invalidCaseReference'],
     ['123456789012345', 'invalidCaseReference'],
     ['12345678901234567', 'invalidCaseReference'],
-    ['[reference](https://example.com)', 'containsMarkdownLink'],
-    ['<em>reference</em>', 'containsInvalidCharacters'],
+    ['[reference](https://example.com)', 'notNumeric'],
+    ['<em>reference</em>', 'notNumeric'],
   ])('Should retain an invalid reference %p without checking case access', async (applicantCaseId, errorType) => {
     req = mockRequest({
       body: { applicantCaseId },

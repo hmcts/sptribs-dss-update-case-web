@@ -10,10 +10,10 @@ const enContent = {
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
-      required: 'Enter your HMCTS reference number',
-      containsMarkdownLink: 'HMCTS number must not include a link',
-      containsInvalidCharacters: 'HMCTS reference number must not include HTML',
-      invalidCaseReference: 'HMCTS reference number must be 16 digits long',
+      required: 'Please enter a reference number',
+      notNumeric:
+        'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
+      invalidCaseReference: 'Please enter a valid reference number',
     },
   },
 };
@@ -28,10 +28,10 @@ const cyContent = {
   errorSummaryMessage: 'Mae yna broblem',
   errors: {
     applicantCaseId: {
-      required: 'Nodwch eich cyfeirnod GLlTEF',
-      containsMarkdownLink: 'Ni ddylai’r rhif GLlTEF gynnwys dolen',
-      containsInvalidCharacters: 'Ni ddylai cyfeirnod GLlTEF gynnwys HTML',
-      invalidCaseReference: 'Rhaid i gyfeirnod GLlTEF fod yn 16 digid o hyd',
+      required: 'Rhowch gyfeirnod',
+      notNumeric:
+        'Rhowch gyfeirnod dilys. Ni ddylai’r cyfeirnod gynnwys bylchau neu unrhyw un o’r nodau canlynol - * ( ) & ! /  ;',
+      invalidCaseReference: 'Rhowch gyfeirnod dilys',
     },
   },
 };
