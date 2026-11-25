@@ -1,6 +1,7 @@
+import { FormFields } from '../../../app/form/Form';
 import { AnyType } from '../../../app/form/validation';
 
-import { cy, en, generateContent } from './content';
+import { cy, en, form, generateContent } from './content';
 
 const englishContent = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
@@ -68,6 +69,18 @@ describe('Matching Language content', () => {
 
   test('matching welsh content', () => {
     expect(cy()).toEqual(welshContent());
+  });
+});
+
+describe('Subject name validation', () => {
+  const { validator } = (form.fields as FormFields).subjectFullName;
+
+  test.each([
+    ['', 'required'],
+    ['Ada 123', 'invalid'],
+    ['Aléa O’Name-Sample', undefined],
+  ])('validates %p', (name, error) => {
+    expect(validator?.(name, {})).toBe(error);
   });
 });
 

@@ -13,7 +13,7 @@ const enContent = {
       required: 'Please enter a reference number',
       notNumeric:
         'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
-      caseNotFound: 'Please enter a valid reference number',
+      invalidCaseReference: 'Please enter a valid reference number',
     },
   },
 };
@@ -31,7 +31,7 @@ const cyContent = {
       required: 'Rhowch gyfeirnod',
       notNumeric:
         'Rhowch gyfeirnod dilys. Ni ddylai’r cyfeirnod gynnwys bylchau neu unrhyw un o’r nodau canlynol - * ( ) & ! /  ;',
-      caseNotFound: 'Rhowch gyfeirnod dilys',
+      invalidCaseReference: 'Rhowch gyfeirnod dilys',
     },
   },
 };

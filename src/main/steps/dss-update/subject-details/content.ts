@@ -77,7 +77,8 @@ export const form: FormContent = {
       classes: 'govuk-input--width-20',
       label: l => l.subjectFullNameLabel,
       hint: l => l.subjectFullNameHint,
-      validator: value => isFieldFilledIn(value) || isFieldLetters(value),
+      validator: value =>
+        value === undefined || typeof value === 'string' ? isFieldFilledIn(value) || isFieldLetters(value) : 'invalid',
     },
     subjectDOB: {
       type: 'date',

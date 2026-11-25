@@ -4,10 +4,9 @@ import { set } from 'lodash';
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
-import { CASE_SEARCH_URL, DATA_VERIFICATION } from '../../urls';
+import { CASE_NOT_FOUND_URL, CASE_SEARCH_URL, DATA_VERIFICATION, NOT_AUTHORISED } from '../../urls';
 
+import { form } from './content';
 import CaseFinderController from './postController';
 
 jest.mock('axios');
@@ -28,16 +27,8 @@ set(config, 'services.idam.systemPassword', 'DUMMY_VALUE_REPLACE');
 beforeEach(() => {
   req = mockRequest();
   res = mockResponse();
+  mockedAxiosGet.mockReset();
 });
-
-const mockFormContent = {
-  fields: {
-    applicantCaseId: {
-      type: 'text',
-      validator: isFieldFilledIn,
-    },
-  },
-} as unknown as FormContent;
 
 const caseData = { status: 200 };
 
@@ -58,14 +49,14 @@ mockedAxios.create.mockReturnValue({
   get: mockedAxiosGet,
 } as unknown as AxiosInstance);
 
-const controller = new CaseFinderController(mockFormContent.fields);
+const controller = new CaseFinderController(form.fields);
 
 describe('case finder post controller test cases', () => {
   test('Should navigate to data verification page if valid case reference entered', async () => {
     req = mockRequest({
       body: {
         saveAndContinue: true,
-        applicantCaseId: '1675676483319900',
+        applicantCaseId: '0675676483319900',
       },
       session: {
         user: { accessToken: 'token' },
@@ -78,7 +69,8 @@ describe('case finder post controller test cases', () => {
     mockedAxiosGet.mockImplementation(() => Promise.resolve(caseData));
 
     await controller.post(req, res);
-    expect(req.session.userCase.id).toEqual('1675676483319900');
+    expect(mockedAxiosGet).toHaveBeenCalledWith('/cases/cica/0675676483319900/access');
+    expect(req.session.userCase).toStrictEqual({ id: '0675676483319900', applicantCaseId: '0675676483319900' });
     expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
   });
 
@@ -98,7 +90,7 @@ describe('case finder post controller test cases', () => {
     expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
   });
 
-  test('Should navigate to original url if invalid case reference entered and return errors', async () => {
+  test('Should save the cleared selection before sending an unexpected lookup failure to the error handler', async () => {
     req = mockRequest({
       body: {
         saveAndContinue: true,
@@ -107,34 +99,86 @@ describe('case finder post controller test cases', () => {
       session: {
         user: { accessToken: 'token' },
         userCase: {
-          id: 'applicantCaseId',
+          id: '1234567890123456',
         },
       },
     });
-    req.originalUrl = CASE_SEARCH_URL;
+    mockedAxiosGet.mockRejectedValue(new Error('lookup unavailable'));
 
-    mockedAxiosGet.mockImplementation(() => Promise.reject(new Error('invalid case reference')));
+    await expect(controller.post(req, res)).rejects.toThrow('Appeal access lookup failed');
+    expect(req.session.errors).toEqual([]);
+    expect(req.session.save).toHaveBeenCalledTimes(1);
+    expect(req.session.userCase).toStrictEqual({ id: '', applicantCaseId: '1675676483319900' });
+    expect(res.redirect).not.toHaveBeenCalled();
+  });
+
+  test.each([
+    ['', 'required'],
+    ['123*456', 'notNumeric'],
+    [['1234567890123456'], 'invalidCaseReference'],
+    ['123456789012345', 'invalidCaseReference'],
+    ['12345678901234567', 'invalidCaseReference'],
+    ['[reference](https://example.com)', 'notNumeric'],
+    ['<em>reference</em>', 'notNumeric'],
+  ])('Should retain an invalid reference %p without checking case access', async (applicantCaseId, errorType) => {
+    req = mockRequest({
+      body: { applicantCaseId },
+      session: {
+        userCase: { id: '1234567890123456' },
+        isDataVerified: true,
+        verifiedCaseId: '1234567890123456',
+        verifiedUserId: 'user-id',
+      },
+    });
 
     await controller.post(req, res);
-    expect(req.session.errors).toStrictEqual([{ propertyName: 'applicantCaseId', errorType: 'caseNotFound' }]);
+
+    expect(mockedAxiosGet).not.toHaveBeenCalled();
+    expect(req.session.errors).toStrictEqual([{ propertyName: 'applicantCaseId', errorType }]);
+    expect(req.session.userCase).toStrictEqual({ id: '', applicantCaseId });
+    expect(req.session.isDataVerified).toBe(false);
+    expect(req.session.verifiedCaseId).toBeUndefined();
+    expect(req.session.verifiedUserId).toBeUndefined();
     expect(res.redirect).toHaveBeenCalledWith(CASE_SEARCH_URL);
   });
 
-  test('Should navigate to original url if no case reference entered and return errors', async () => {
+  test('Should navigate to not authorised page if user not allowed (403)', async () => {
     req = mockRequest({
       body: {
         saveAndContinue: true,
-        applicantCaseId: '',
+        applicantCaseId: '1675676483319900',
       },
       session: {
         user: { accessToken: 'token' },
-        userCase: {},
+        userCase: { id: '1234567890123456' },
       },
     });
-    req.originalUrl = CASE_SEARCH_URL;
+
+    const error = { response: { status: 403 } };
+    mockedAxiosGet.mockImplementation(() => Promise.reject(error));
 
     await controller.post(req, res);
-    expect(req.session.errors).toStrictEqual([{ propertyName: 'applicantCaseId', errorType: 'required' }]);
-    expect(res.redirect).toHaveBeenCalledWith(CASE_SEARCH_URL);
+    expect(req.session.userCase).toStrictEqual({ id: '', applicantCaseId: '1675676483319900' });
+    expect(res.redirect).toHaveBeenCalledWith(NOT_AUTHORISED);
+  });
+
+  test('Should keep the entered reference and clear the selected case on a 404', async () => {
+    req = mockRequest({
+      body: {
+        saveAndContinue: true,
+        applicantCaseId: '1675676483319900',
+      },
+      session: {
+        user: { accessToken: 'token' },
+        userCase: { id: '1234567890123456' },
+      },
+    });
+
+    const error = { response: { status: 404 } };
+    mockedAxiosGet.mockImplementation(() => Promise.reject(error));
+
+    await controller.post(req, res);
+    expect(req.session.userCase).toStrictEqual({ id: '', applicantCaseId: '1675676483319900' });
+    expect(res.redirect).toHaveBeenCalledWith(CASE_NOT_FOUND_URL);
   });
 });

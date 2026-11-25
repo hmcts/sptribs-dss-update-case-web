@@ -4,13 +4,16 @@ import { mockRequest } from '../test/unit/mocks/mockRequest';
 import { mockResponse } from '../test/unit/mocks/mockResponse';
 
 import { Routes, restrictContentType } from './routes';
+import { requireSelectedCase } from './steps/dss-update/requireVerifiedCase';
 import {
   ACCESSIBILITY_STATEMENT,
   APPLICATION_CONFIRMATION,
+  CASE_NOT_FOUND_URL,
   CASE_SEARCH_URL,
   CHECK_YOUR_ANSWERS,
   CONTACT_US,
   DATA_VERIFICATION,
+  NOT_AUTHORISED,
   PRIVACY_POLICY,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
@@ -38,6 +41,9 @@ describe('Routes', () => {
     expect(appMock.get).toHaveBeenCalledWith(ACCESSIBILITY_STATEMENT, undefined);
     expect(appMock.get).toHaveBeenCalledWith(TIMED_OUT_URL, undefined);
     expect(appMock.get).toHaveBeenCalledWith(CONTACT_US, undefined);
+    expect(appMock.get).toHaveBeenCalledWith(NOT_AUTHORISED, undefined);
+    expect(appMock.get).toHaveBeenCalledWith(CASE_NOT_FOUND_URL, undefined);
+    expect(appMock.get).toHaveBeenCalledWith('/dss-update/subject-details-error', requireSelectedCase, undefined);
 
     expect(appMock.get).toHaveBeenCalledWith(CASE_SEARCH_URL, undefined);
     expect(appMock.get).toHaveBeenCalledWith(DATA_VERIFICATION, undefined);
