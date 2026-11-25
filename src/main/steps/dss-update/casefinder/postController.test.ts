@@ -90,7 +90,7 @@ describe('case finder post controller test cases', () => {
     expect(res.redirect).toHaveBeenCalledWith(DATA_VERIFICATION);
   });
 
-  test('Should return to case finder with a retry message when the lookup fails unexpectedly', async () => {
+  test('Should save the cleared selection before sending an unexpected lookup failure to the error handler', async () => {
     req = mockRequest({
       body: {
         saveAndContinue: true,
@@ -105,18 +105,21 @@ describe('case finder post controller test cases', () => {
     });
     mockedAxiosGet.mockRejectedValue(new Error('lookup unavailable'));
 
-    await controller.post(req, res);
-    expect(req.session.errors).toStrictEqual([{ propertyName: 'main-form-submit', errorType: 'caseLookupFailed' }]);
+    await expect(controller.post(req, res)).rejects.toThrow('Appeal access lookup failed');
+    expect(req.session.errors).toEqual([]);
+    expect(req.session.save).toHaveBeenCalledTimes(1);
     expect(req.session.userCase).toStrictEqual({ id: '', applicantCaseId: '1675676483319900' });
-    expect(res.redirect).toHaveBeenCalledWith(CASE_SEARCH_URL);
+    expect(res.redirect).not.toHaveBeenCalled();
   });
 
   test.each([
     ['', 'required'],
-    ['123*456', 'notNumeric'],
-    [['1234567890123456'], 'notNumeric'],
+    ['123*456', 'invalidCaseReference'],
+    [['1234567890123456'], 'invalidCaseReference'],
     ['123456789012345', 'invalidCaseReference'],
     ['12345678901234567', 'invalidCaseReference'],
+    ['[reference](https://example.com)', 'containsMarkdownLink'],
+    ['<em>reference</em>', 'containsInvalidCharacters'],
   ])('Should retain an invalid reference %p without checking case access', async (applicantCaseId, errorType) => {
     req = mockRequest({
       body: { applicantCaseId },

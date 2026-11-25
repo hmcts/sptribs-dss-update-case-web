@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn, isNotNumeric } from '../../../app/form/validation';
+import { containsInvalidCharacters, isFieldFilledIn, isMarkDownLinkIncluded } from '../../../app/form/validation';
 
 export const en = () => ({
   serviceName: 'Update an appeal to the First-tier Tribunal',
@@ -12,13 +12,10 @@ export const en = () => ({
   errorSummaryMessage: 'There is a problem',
   errors: {
     applicantCaseId: {
-      required: 'Please enter a reference number',
-      notNumeric:
-        'Please enter a valid reference number. The reference number should not include spaces or any characters - * ( ) & ! /  ;',
-      invalidCaseReference: 'Enter a 16-digit reference number',
-    },
-    'main-form-submit': {
-      caseLookupFailed: 'We could not check your appeal reference number. Please try again.',
+      required: 'Enter your HMCTS reference number',
+      containsMarkdownLink: 'HMCTS number must not include a link',
+      containsInvalidCharacters: 'HMCTS reference number must not include HTML',
+      invalidCaseReference: 'HMCTS reference number must be 16 digits long',
     },
   },
 });
@@ -33,13 +30,10 @@ export const cy = () => ({
   errorSummaryMessage: 'Mae yna broblem',
   errors: {
     applicantCaseId: {
-      required: 'Rhowch gyfeirnod',
-      notNumeric:
-        'Rhowch gyfeirnod dilys. Ni ddylai’r cyfeirnod gynnwys bylchau neu unrhyw un o’r nodau canlynol - * ( ) & ! /  ;',
-      invalidCaseReference: 'Nodwch gyfeirnod 16 digid',
-    },
-    'main-form-submit': {
-      caseLookupFailed: 'Nid oeddem yn gallu gwirio cyfeirnod eich apêl. Rhowch gynnig arall arni.',
+      required: 'Nodwch eich cyfeirnod GLlTEF',
+      containsMarkdownLink: 'Ni ddylai’r rhif GLlTEF gynnwys dolen',
+      containsInvalidCharacters: 'Ni ddylai cyfeirnod GLlTEF gynnwys HTML',
+      invalidCaseReference: 'Rhaid i gyfeirnod GLlTEF fod yn 16 digid o hyd',
     },
   },
 });
@@ -53,10 +47,13 @@ export const form: FormContent = {
       hint: l => l.caseNumberHint,
       validator: value => {
         if (value !== undefined && typeof value !== 'string') {
-          return 'notNumeric';
+          return 'invalidCaseReference';
         }
         return (
-          isFieldFilledIn(value) || isNotNumeric(value) || (value?.length !== 16 ? 'invalidCaseReference' : undefined)
+          isFieldFilledIn(value) ||
+          isMarkDownLinkIncluded(value) ||
+          (containsInvalidCharacters(value) ? 'containsInvalidCharacters' : undefined) ||
+          (value && /^\d{16}$/.test(value) ? undefined : 'invalidCaseReference')
         );
       },
     },

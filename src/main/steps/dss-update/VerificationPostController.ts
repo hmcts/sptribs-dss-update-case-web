@@ -30,19 +30,21 @@ export abstract class VerificationPostController extends PostController<AnyObjec
     };
 
     let nextUrl: PageLink = this.defaultUrl;
-    if (req.session.errors.length === 0) {
-      nextUrl = await this.handleVerification(req, formData);
-    }
-
-    if (req.session?.save) {
-      await new Promise<void>((resolve, reject) => {
-        req.session.save(err => {
-          if (err) {
-            return reject(err);
-          }
-          resolve();
+    try {
+      if (req.session.errors.length === 0) {
+        nextUrl = await this.handleVerification(req, formData);
+      }
+    } finally {
+      if (req.session?.save) {
+        await new Promise<void>((resolve, reject) => {
+          req.session.save(err => {
+            if (err) {
+              return reject(err);
+            }
+            resolve();
+          });
         });
-      });
+      }
     }
 
     res.redirect(nextUrl);

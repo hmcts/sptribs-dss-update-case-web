@@ -33,8 +33,6 @@ export default class CaseFinderController extends VerificationPostController {
       }
     }
 
-    // Link to the retry button rather than marking a well-formed reference invalid.
-    req.session.errors?.push({ propertyName: 'main-form-submit', errorType: 'caseLookupFailed' });
-    return this.defaultUrl;
+    throw new Error('Appeal access lookup failed');
   }
 }
