@@ -60,7 +60,7 @@ The Helm chart lists the secrets to mount from the `sptribs-<env>` Azure Key Vau
 |---|---|
 | `idam-dss-update-ui-secret` | `services.idam.clientSecret` |
 | `idam-systemupdate-username`, `idam-systemupdate-password` | `services.idam.systemUsername`, `services.idam.systemPassword` |
-| `redis-new` (mounted with the alias `redis-access-key`) | `session.redis.key` and `session.secret` |
+| `redis-new` (mounted with the alias `redis-access-key`) | `session.redis.key` |
 | `s2s-case-api-secret` | `services.authProvider.secret` |
 | `app-insights-instrumentation-key` (`app-insights-instrumentation-key-preview` in preview, aliased) | `appInsights.instrumentationKey` |
 | `sptribs-dss-update-case-dynatrace-url` | `dynatrace.dynatraceUrl` |
