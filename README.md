@@ -1,153 +1,119 @@
-## sptribs-dss-update-case-web
+# sptribs-dss-update-case-web
 
-This is a Web application for DSS Update case journey used for Uploading the Documents by Citizens/Legal Reps against a Case in CCD.
+Citizen web application for adding documents and information to an existing First-tier Tribunal (Special Tribunals) case in the Criminal Injuries Compensation (CIC) jurisdiction.
 
-## Getting Started -test
+It is used by appellants and their representatives after an appeal has been submitted. They find the case by its 16-digit reference, confirm the subject's name and date of birth, upload documents and add a note, and submit the update to the case.
 
-### Prerequisites
+Caseworkers do not use this app. They see the submitted documents on the case in Manage Case (ExUI).
 
-Running the application requires the following tools to be installed in your environment:
+The app is a Node.js/Express application rendered with Nunjucks and GOV.UK Frontend. It holds no case logic of its own. Case access, subject verification and the case update are handled by [sptribs-case-api](https://github.com/hmcts/sptribs-case-api), which owns the case type `CriminalInjuriesCompensation` in jurisdiction `ST_CIC`. Documents are stored through CCD Case Document Access Management (CDAM).
 
-- [Node.js](https://nodejs.org/) v22.23.4 or later
-- [yarn](https://yarnpkg.com/)
-- [Docker](https://www.docker.com)
+New appeals are made in the companion app [sptribs-frontend](https://github.com/hmcts/sptribs-frontend).
 
-### Running the application
+## Journey overview
 
-Install dependencies by executing the following command:
+1. The citizen opens the landing page (`/`) and signs in through IDAM (`/login`, then `/receiver`). Only users with the `citizen` role get past sign-in.
+2. **Case finder** (`/dss-update/casefinder`): they enter the 16-digit case reference, and the app checks access with `sptribs-case-api`.
+3. **Subject details** (`/dss-update/subject-details`): they enter the subject's full name and date of birth, which `sptribs-case-api` verifies against the case.
+4. **Upload documents** (`/upload-documents`): they upload files, which go to CDAM, and can add a description of the documents.
+5. **Check your answers** (`/dss-update/check-your-answers`): the app verifies the subject again, then sends the document references and description to `sptribs-case-api`, which applies the `citizen-cic-dss-update-case` event.
+6. **Confirmation** (`/dss-update/confirmation-page`).
 
-```bash
-$ yarn install
-```
+The details, including the session guards and the API calls, are in [docs/journey.md](docs/journey.md).
 
-Bundle:
+## Quick start
 
-```bash
-$ yarn webpack
-```
-
-Run:
+Prerequisites: Node.js 22, Yarn 4 through Corepack, the Azure CLI signed in with read access to the `sptribs-aat` Key Vault, and the HMCTS VPN for AAT services.
 
 ```bash
-$ yarn start
+corepack enable
+yarn install
+az login
+yarn start:dev
 ```
 
-The applications's home page will be available at https://localhost:3100
+Open <http://localhost:3100>. In development mode the app:
 
-### Running with Docker
+- listens on port 3100 over plain HTTP;
+- reads its secrets from the `sptribs-aat` Key Vault with `az`;
+- signs users in through AAT IDAM;
+- calls `sptribs-case-api` and CDAM in AAT, unless you set `CASE_API_URL` and `CASE_DOCUMENT_API_URL`.
 
-Create docker image:
+To run against a local `sptribs-case-api`, or with Docker, see [docs/running-and-testing.md](docs/running-and-testing.md).
 
-```bash
-  docker-compose build
-```
+## Configuration summary
 
-Run the application by executing the following command:
+Configuration uses [node-config](https://github.com/node-config/node-config): `config/default.yaml`, then `config/<NODE_ENV>.yaml`, then the environment variables mapped in `config/custom-environment-variables.yaml`.
 
-```bash
-  docker-compose up
-```
+| Setting | Environment variable | Notes |
+|---|---|---|
+| Case API | `CASE_API_URL` | `sptribs-case-api`: access check, subject verification and case update |
+| CDAM | `CASE_DOCUMENT_API_URL` | Document upload and delete |
+| IDAM | `IDAM_WEB_URL`, `IDAM_API_URL`, `IDAM_END_SESSION_URL`, `IDAM_SECRET` | OpenID Connect sign-in |
+| S2S | `RPE_API`, `SERVICE_AUTH_SECRET` | Service token lease; the app leases its token as `sptribs_case_api` |
+| Sessions | `REDIS_HOST`, `REDIS_PORT` | Redis when a host is set, otherwise a file store in `/tmp` |
+| Rate limiter | `RATE_LIMITER_DISABLED` | Any value turns off the global limit of 30 requests per 15 seconds |
 
-This will start the frontend container exposing the application's port
-(set to `3100` in this template app).
+In deployed environments secrets come from the `sptribs-<env>` Key Vault, mounted by the Helm chart and copied into config by `src/main/modules/properties-volume/index.ts`. The full list of keys, secrets and environments is in [docs/configuration.md](docs/configuration.md).
 
-In order to test if the application is up, you can visit https://localhost:3100 in your browser.
-You should get a very basic home page (no styles, etc.).
+## Tests
+
+| Command | What it runs |
+|---|---|
+| `yarn test` | Jest unit tests (`*.test.ts` under `src/main`), with coverage thresholds of 70% for branches and 80% for functions, lines and statements |
+| `yarn test:coverage` | Unit tests with a coverage report |
+| `yarn lint` | TypeScript type check and ESLint |
+| `yarn test:smoke`, `yarn test:functional`, `yarn test:a11y`, `yarn test:crossbrowser-e2e` | Print a message and exit. Browser, accessibility and cross-browser tests are in [hmcts/sptribs-e2etests](https://github.com/hmcts/sptribs-e2etests) |
+| `yarn cichecks` | Install, build, lint and unit test, as run by the GitHub `checks.yml` workflow |
+
+See [docs/running-and-testing.md](docs/running-and-testing.md) for how the end-to-end suite covers this app.
 
 ## Developing
 
 ### Code style
 
-We use [ESLint](https://github.com/typescript-eslint/typescript-eslint)
-alongside [sass-lint](https://github.com/sasstools/sass-lint)
-
-Running the linting with auto fix: (Prettier)
+The project uses [ESLint](https://github.com/typescript-eslint/typescript-eslint) with Prettier. To lint and fix:
 
 ```bash
-$ yarn lint --fix
+yarn lint --fix
 ```
 
-### Testing compatability with sptribs-case-api
+### Testing against a sptribs-case-api pull request
 
-To edit dependent or integrated services (e.g. CCD), update the reference URLs in default.yaml and values.yaml, to direct them away from the AAT default and point to a PR version (e.g. http://ccd-data-store-api-sptribs-case-api-pr-2226.preview.platform.hmcts.net).
+A `sptribs-case-api` pull request deploys its own preview environment. To point this app at it, set `CASE_API_URL` to the preview host (for example `http://sptribs-case-api-pr-<number>.preview.platform.hmcts.net`), either locally or in `charts/sptribs-dss-update-case-web/values.preview.template.yaml` on your own pull request.
 
-To keep a deployment in preview add the GitHub label enable_keep_helm. Then connect to the relevant kubernetes cluster using one of the commands on the https://tools.hmcts.net/confluence/display/DATS/AKS+kubectl+cheatsheet. You can then obtain the URL for your deployment using:
-
-`kubectl -n <namespace> get ingress | grep <PR-number>  e.g. kubectl -n sptribs get ingress | PR 2226`
-
-### Running the tests
-
-This template app uses [Jest](https://jestjs.io//) as the test engine. You can run unit tests by executing
-the following command:
+Add the `enable_keep_helm` label to a pull request to keep its preview release after the pipeline finishes. With cluster access you can then find its URL with:
 
 ```bash
-$ yarn test
+kubectl -n sptribs get ingress | grep <pr-number>
 ```
-
-Here's how to run functional tests (the template contains just one sample test):
-
-```bash
-$ yarn test:routes
-```
-
-Running accessibility tests:
-
-```bash
-$ yarn test:a11y
-```
-
-Make sure all the paths in your application are covered by accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)).
 
 ### Security
 
-#### CSRF prevention
-
-[Cross-Site Request Forgery](https://github.com/pillarjs/understanding-csrf) prevention has already been
-set up in this template, at the application level. However, you need to make sure that CSRF token
-is present in every HTML form that requires it. For that purpose you can use the `csrfProtection` macro,
-included in this template app. Your njk file would look like this:
-
-```
-{% from "macros/csrf.njk" import csrfProtection %}
-...
-<form ...>
-  ...
-    {{ csrfProtection(csrfToken) }}
-  ...
-</form>
-...
-```
-
 #### Helmet
 
-This application uses [Helmet](https://helmetjs.github.io/), which adds various security-related HTTP headers
-to the responses. Apart from default Helmet functions, following headers are set:
+The app uses [Helmet](https://helmetjs.github.io/) to set security-related HTTP headers, including `Referrer-Policy` and `Content-Security-Policy`. The referrer policy is set by `security.referrerPolicy` in `config/default.yaml`.
 
-- [Referrer-Policy](https://helmetjs.github.io/docs/referrer-policy/)
-- [Content-Security-Policy](https://helmetjs.github.io/docs/csp/)
+#### Rate limiting
 
-There is a configuration section related with those headers, where you can specify:
+Besides the global rate limiter, `POST /dss-update/subject-details` is limited to 10 attempts per 15 minutes for each user and case (`src/main/routes.ts`).
 
-- `referrerPolicy` - value of the `Referrer-Policy` header
+### Health check
 
-Here's an example setup:
+The app exposes `/health`, `/health/liveness` and `/health/readiness` through [nodejs-healthcheck](https://github.com/hmcts/nodejs-healthcheck), configured in `src/main/modules/health/index.ts`. `/health` reports a single static check and does not call the app's dependencies.
 
-```json
-    "security": {
-      "referrerPolicy": "origin",
-    }
-```
+## Documentation
 
-Make sure you have those values set correctly for your application.
+- [docs/journey.md](docs/journey.md): steps, routing, the case API calls, sessions, Welsh and uploads
+- [docs/configuration.md](docs/configuration.md): config keys, secrets, the Helm chart and environments
+- [docs/running-and-testing.md](docs/running-and-testing.md): running locally, unit tests and the end-to-end suite
 
-### Healthcheck
+Related repositories:
 
-The application exposes a health endpoint (https://localhost:3100/health), created with the use of
-[Nodejs Healthcheck](https://github.com/hmcts/nodejs-healthcheck) library. This endpoint is defined
-in [health.ts](src/main/routes/health.ts) file. Make sure you adjust it correctly in your application.
-In particular, remember to replace the sample check with checks specific to your frontend app,
-e.g. the ones verifying the state of each service it depends on.
+- [hmcts/sptribs-case-api](https://github.com/hmcts/sptribs-case-api): case type definition, callbacks and the `/cases/cica/...` endpoints
+- [hmcts/sptribs-frontend](https://github.com/hmcts/sptribs-frontend): the new appeal journey and the citizen dashboard
+- [hmcts/sptribs-e2etests](https://github.com/hmcts/sptribs-e2etests): Playwright end-to-end tests
 
-## License
+## Licence
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT Licence. See the [LICENSE](LICENSE) file for details.
